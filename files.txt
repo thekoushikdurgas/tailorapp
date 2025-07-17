@@ -1,0 +1,40 @@
+
+I'll examine your tailorapp Flutter project files to understand the purpose of each one:
+Now I'll summarize each dart file's purpose in one line:
+
+1. lib/app.dart: Main application configuration with theme, routing, and localization setup.
+2. lib/core/components/dots/dots_decoration.dart: Custom decoration for dots indicator in introduction screens.
+3. lib/core/components/dropdown/theme_change_dropdown.dart: Dropdown component for changing app theme.
+4. lib/core/components/lisstile/changer_listtile_with_dropdown.dart: ListTile component with dropdown for changing settings.
+5. lib/core/components/text/text_with_theme_color.dart: Text component with theme-aware coloring.
+6. lib/core/constants/icon/icon_constants.dart: Constants for app icons.
+7. lib/core/constants/onboarding/intro_constants.dart: Constants for onboarding/intro screens.
+8. lib/core/constants/string/string_constants.dart: String constants for the app.
+9. lib/core/constants/theme/dark_constants.dart: Constants for dark theme colors and properties.
+10. lib/core/constants/theme/light_constants.dart: Constants for light theme colors and properties.
+11. lib/core/extension/context/context_extension.dart: Extensions for BuildContext to simplify UI operations.
+12. lib/core/init/cache/onboarding/intro_caching.dart: Caching logic for introduction/onboarding screens.
+13. lib/core/init/cache/theme/theme_caching.dart: Caching logic for user theme preferences.
+14. lib/core/init/cubit/radio_cubit.dart: Cubit for managing radio button states.
+15. lib/core/init/cubit/theme_cubit.dart: Cubit for managing theme state changes.
+16. lib/core/init/localization/localization.dart: Localization setup and configuration.
+17. lib/core/init/localization/project_locales.dart: Supported locales configuration for the app.
+18. lib/core/init/navigation/navigation_route.dart: Navigation route configuration using Go Router.
+19. lib/core/init/navigation/navigation_routers.dart: Router configurations for different screens.
+20. lib/core/init/theme/build-material-color/build_color.dart: Utility for building material colors.
+21. lib/core/init/theme/dark/dark_theme_custom.dart: Custom dark theme implementation.
+22. lib/core/init/theme/light/light_theme_custom.dart: Custom light theme implementation.
+23. lib/cubit_observer.dart: Observer for monitoring state changes in Cubits.
+24. lib/main.dart: Application entry point with initialization of localization, theme, and caching.
+25. lib/product/enum/intro_enums.dart: Enums for intro/onboarding screens.
+26. lib/product/init/lang/locale_keys.g.dart: Generated localization keys.
+27. lib/product/widget/appbar/setting_appbar.dart: Custom AppBar for settings screen.
+28. lib/view/_product/enum/route_enum.dart: Enums for app routes.
+29. lib/view/home/view/home_page.dart: Home page with navigation to settings.
+30. lib/view/introduction/model/page_model.dart: Model for introduction pages.
+31. lib/view/introduction/view-model/intro_pages.dart: ViewModel for introduction pages.
+32. lib/view/introduction/view/introduction_screen.dart: Main introduction screen with onboarding flow.
+33. lib/view/introduction/view/pages/first_page.dart: First page of introduction flow.
+34. lib/view/introduction/view/pages/second_page.dart: Second page of introduction flow.
+35. lib/view/introduction/view/pages/third_page.dart: Third page of introduction flow.
+36. lib/view/settings/view/setting_view.dart: Settings page for theme and language configuration.
