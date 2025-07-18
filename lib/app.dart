@@ -1,5 +1,5 @@
 import 'package:tailorapp/core/init/cubit/theme_cubit.dart';
-import 'package:tailorapp/core/init/navigation/navigation_route.dart';
+import 'package:tailorapp/core/init/navigation/navigation_routers.dart';
 import 'package:tailorapp/core/init/theme/dark/dark_theme_custom.dart';
 import 'package:tailorapp/core/init/theme/light/light_theme_custom.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -20,8 +20,9 @@ class MyApp extends StatelessWidget {
           theme: LightThemeCustom().theme,
           darkTheme: DarkThemeCustom().theme,
           themeMode: themeState,
-          routerConfig: NavigationRoute.router,
+          routerConfig: NavigationRouters.router,
           debugShowCheckedModeBanner: false,
+          title: 'AI Tailoring',
         );
       },
     );

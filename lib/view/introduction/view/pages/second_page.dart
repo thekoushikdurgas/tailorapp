@@ -13,7 +13,7 @@ class SecondPage {
 }
 
 class PageContent extends StatelessWidget {
-  const PageContent({Key? key}) : super(key: key);
+  const PageContent({super.key});
 
   @override
   Widget build(BuildContext context) {

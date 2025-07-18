@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "168050874940",
+    "project_id": "tailor-ai-52640",
+    "storage_bucket": "tailor-ai-52640.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:168050874940:android:a43f7ebace16e0679b8139",
+        "android_client_info": {
+          "package_name": "com.durgas.tailorapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "168050874940-t8rljl3m1mbhqvqbbk4j08og02asnnkl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2Ntw7CpFyAVkbzlxTUaGoUJ_qjTxKsJg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "168050874940-t8rljl3m1mbhqvqbbk4j08og02asnnkl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
