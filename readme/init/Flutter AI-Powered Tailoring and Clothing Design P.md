@@ -32,7 +32,7 @@ The fitting room utilizes Flutter's camera package for image capture, ML Kit for
 
 The comprehensive order management system handles the entire custom-tailoring workflow from initial design to final delivery. The system manages customer information, design specifications, production timelines, and delivery tracking through an integrated dashboard. Key features include automated order processing, real-time production status updates, customer communication tools, and inventory management integration.
 
-![Flutter AI Tailoring App UI Design Mockup](https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/b78afd67-e50a-44e2-b63b-a40b4c2a9afd.png)
+![Flutter AI Tailoring App UI Design Mockup](..\images\Flutter-AI-Tailoring-App-UI-Design-Mockup-98ac2bd1.png)
 
 Flutter AI Tailoring App UI Design Mockup
 
@@ -44,7 +44,7 @@ The application implements a robust architectural foundation combining Model-Vie
 
 The architecture consists of three primary layers: the Presentation Layer containing UI components and ViewModels, the Domain Layer housing business logic and use cases, and the Data Layer managing external data sources and repositories. This layered approach enables independent development and testing of each component while maintaining clear boundaries between different aspects of the application.
 
-![Flutter AI Tailoring App - Clean Architecture with MVVM Pattern](https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/a9988e5d88cbddff1c0b77df51db1870/2bea37ab-e22a-460e-ba77-017960d3e579/55d98316.png)
+![Flutter AI Tailoring App - Clean Architecture with MVVM Pattern](..\images\Flutter-AI-Tailoring-App-Clean-Architecture-with-M-ae53445e.png)
 
 Flutter AI Tailoring App - Clean Architecture with MVVM Pattern
 
@@ -74,7 +74,7 @@ The virtual fitting room technology combines computer vision, machine learning, 
 
 The fitting process involves real-time body measurement extraction, AI-powered size recommendation algorithms, 3D garment visualization, and AR overlay rendering. This comprehensive approach provides users with confidence in their sizing decisions while reducing return rates for the business.
 
-![AI-Powered Garment Design Workflow in Flutter App](https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/a9988e5d88cbddff1c0b77df51db1870/29c224f3-2b19-4d8e-9ac4-bd937571afe6/5ed869f9.png)
+![AI-Powered Garment Design Workflow in Flutter App](..\images\AI-Powered-Garment-Design-Workflow-in-Flutter-App-86ef3d5c.png)
 
 AI-Powered Garment Design Workflow in Flutter App
 
@@ -86,7 +86,7 @@ The application is built on Flutter's latest stable release, providing cross-pla
 
 Key dependencies include state management solutions (Provider, Riverpod, GetX), AI integration packages (google_generative_ai, dart_openai, tflite_flutter), UI/UX components (camera, flutter_drawing_board, image_picker), and data storage solutions (Firebase, Hive, SQLite). The architecture also incorporates networking libraries (Dio, HTTP), dependency injection frameworks (GetIt), and comprehensive testing tools.
 
-![Flutter AI Tailoring App - Technical Stack and Package Dependencies](https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/a9988e5d88cbddff1c0b77df51db1870/223cd61f-d5bf-48f4-afef-d9b0f810ca9c/a214db72.png)
+![Flutter AI Tailoring App - Technical Stack and Package Dependencies](..\images\Flutter-AI-Tailoring-App-Technical-Stack-and-Packa-2b9edcc5.png)
 
 Flutter AI Tailoring App - Technical Stack and Package Dependencies
 
@@ -181,18 +181,14 @@ This comprehensive approach to AI-powered fashion design positions the platform 
 [11]: https://somniosoftware.com/our-work/case-studies/pronti
 
 [12]: https://laurapaez.com/en/fashion-design-app/
-
-[13]: https://github.com/MuhammadAligithub7/STITCHER
+[13]: ..\images\13-f6eff266.png
 
 [14]: https://www.ecommercesourcecode.com/flutter-fashion-app
-
-[15]: https://github.com/aymanattieh77/fashion-app
+[15]: ..\images\15-9544a0ae.png
 
 [16]: https://thefword.ai/top-free-apps-to-design-clothes-best-tools-for-mobile-fashion-designers/
-
-[17]: https://github.com/abdulbasit108/Flutter-Stitching-Service-Ecommerce-App
-
-[18]: https://github.com/topics/flutter-ecommerce
+[17]: ..\images\17-e0c7dad0.png
+[18]: ..\images\18-69b9f97f.png
 
 [19]: https://flutter.dev/showcase/romwe-fashion-shein
 
@@ -267,8 +263,7 @@ This comprehensive approach to AI-powered fashion design positions the platform 
 [54]: https://www.shopify.com/retail/virtual-fitting-rooms
 
 [55]: https://foundr.ai/tools/fashion-assistant
-
-[56]: https://github.com/sonu275981/Fashion-Recommender-system
+[56]: ..\images\56-5bead1ac.png
 
 [57]: https://thenewblack.ai
 
@@ -451,8 +446,7 @@ This comprehensive approach to AI-powered fashion design positions the platform 
 [146]: https://codecanyon.net/item/restaurant-app-order-management-flutter-uikit/34854713
 
 [147]: https://pub.dev/packages/flutter_ai_toolkit
-
-[148]: https://github.com/nateshmbhat/touchable
+[148]: ..\images\148-dc0c4868.png
 
 [149]: https://www.youtube.com/watch?v=g0JoDZmzlEk
 
@@ -479,8 +473,7 @@ This comprehensive approach to AI-powered fashion design positions the platform 
 [160]: https://journal.aritekin.or.id/index.php/Jupiter/article/view/155
 
 [161]: https://crm-masters.com/what-is-mvvm-architecture-in-flutter/
-
-[162]: https://github.com/guilherme-v/flutter-clean-architecture-example
+[162]: ..\images\162-694a4cc5.png
 
 [163]: https://reliasoftware.com/blog/state-management-in-flutter
 

@@ -1,4 +1,3 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" class="logo" width="120"/>
 
 # 🎨 AI-Powered Tailoring & Clothing Design App
 
@@ -109,6 +108,7 @@ flutter pub get
 ### 4. AI API Keys Setup
 
 Create environment variables or update `lib/core/services/service_locator.dart`:
+
 ```dart
 // Add your API keys
 const GEMINI_API_KEY = 'your_gemini_api_key';
@@ -127,7 +127,7 @@ flutter run --release
 
 ## 🏗️ Project Structure
 
-```
+```txt
 lib/
 ├── app.dart                          # Main app configuration
 ├── main.dart                         # Application entry point
@@ -275,6 +275,7 @@ flutter test integration_test/
 ## 🌍 Localization
 
 Supported Languages:
+
 - English (en-US)
 - Bengali (bn-IN)
 - Gujarati (gu-IN)
@@ -317,7 +318,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🆘 Support
 
 For support and questions:
-- 📧 Email: support@tailorapp.com
+
+- 📧 Email: <support@tailorapp.com>
 - 📱 GitHub Issues: [Create an issue](https://github.com/your-username/tailorapp/issues)
 - 📚 Documentation: [Wiki](https://github.com/your-username/tailorapp/wiki)
 
@@ -331,5 +333,4 @@ For support and questions:
 
 ---
 
-**Built with ❤️ using Flutter and AI technologies**
-
+<!-- **Built with ❤️ using Flutter and AI technologies** -->
