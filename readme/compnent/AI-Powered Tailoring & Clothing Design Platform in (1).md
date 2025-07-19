@@ -1,5 +1,4 @@
-
-# AI-Powered Tailoring \& Clothing Design Platform in Flutter: Complete Screen Design and Implementation Guide
+AI-Powered Tailoring \& Clothing Design Platform in Flutter: Complete Screen Design and Implementation Guide
 
 This comprehensive guide provides a complete technical specification for building an AI-powered tailoring and clothing design platform in Flutter. The platform combines intelligent design assistance, virtual fitting capabilities, and seamless order management to deliver a cutting-edge fashion technology experience.
 
@@ -7,7 +6,7 @@ This comprehensive guide provides a complete technical specification for buildin
 
 The AI-Powered Tailoring \& Clothing Design Platform is built on a robust Flutter architecture that integrates multiple advanced technologies including Firebase backend services, AI/ML capabilities, augmented reality features, and sophisticated state management patterns. The application consists of 21 interconnected screens organized into 6 main functional categories.
 
-![Technical Architecture Diagram for AI-Powered Tailoring \& Clothing Design Platform](..\images\Technical-Architecture-Diagram-for-AI-Powered-Tail-434b7360.png)
+![Technical Architecture Diagram for AI-Powered Tailoring \& Clothing Design Platform](https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/1e12c2fd63010ed0a69df476deb3ff42/41f837c8-0fc1-4687-a4a1-76b0a8bf3d3d/fe6dbf8c.png)
 
 Technical Architecture Diagram for AI-Powered Tailoring \& Clothing Design Platform
 
@@ -256,7 +255,7 @@ Technical Architecture Diagram for AI-Powered Tailoring \& Clothing Design Platf
 
 **Navigation**: Central hub connecting to all major app sections
 
-![Navigation Flow Diagram for AI-Powered Tailoring \& Clothing Design Platform](..\images\Navigation-Flow-Diagram-for-AI-Powered-Tailoring-C-51fbdf9a.png)
+![Navigation Flow Diagram for AI-Powered Tailoring \& Clothing Design Platform](https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/1e12c2fd63010ed0a69df476deb3ff42/2bd9ef27-eb13-43a1-8ce3-85fb20d7eb24/bad73eb1.png)
 
 Navigation Flow Diagram for AI-Powered Tailoring \& Clothing Design Platform
 
@@ -770,7 +769,7 @@ Navigation Flow Diagram for AI-Powered Tailoring \& Clothing Design Platform
 
 **Navigation**: From various screens → To Chat Support or Help Articles
 
-![Flutter Widget Hierarchy Diagram for AI-Powered Tailoring Platform](..\images\Flutter-Widget-Hierarchy-Diagram-for-AI-Powered-Ta-18d9126f.png)
+![Flutter Widget Hierarchy Diagram for AI-Powered Tailoring Platform](https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/1e12c2fd63010ed0a69df476deb3ff42/09d42caa-3291-477c-8abe-d2b16c6be180/cee97bc8.png)
 
 Flutter Widget Hierarchy Diagram for AI-Powered Tailoring Platform
 
@@ -778,7 +777,7 @@ Flutter Widget Hierarchy Diagram for AI-Powered Tailoring Platform
 
 The application employs a sophisticated state management architecture using the BLoC (Business Logic Component) pattern, ensuring clean separation of concerns and reactive programming principles.
 
-![BLoC State Management Architecture for AI-Powered Tailoring Platform](..\images\BLoC-State-Management-Architecture-for-AI-Powered--a5b3e580.png)
+![BLoC State Management Architecture for AI-Powered Tailoring Platform](https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/1e12c2fd63010ed0a69df476deb3ff42/ce1dbfc7-4b52-4a1a-978c-94f35e067236/ade1596f.png)
 
 BLoC State Management Architecture for AI-Powered Tailoring Platform
 
@@ -804,11 +803,12 @@ BLoC State Management Architecture for AI-Powered Tailoring Platform
 - Events: `UpdateProfile`, `LoadProfile`, `UpdateSettings`, `UploadAvatar`
 - States: `ProfileInitial`, `ProfileLoading`, `ProfileLoaded`, `ProfileError`, `ProfileUpdated`
 
+
 ## Firebase Integration Architecture
 
 The platform leverages Firebase as its primary backend infrastructure, providing scalable and secure cloud services.
 
-![Firebase Integration Architecture for AI-Powered Tailoring Platform](..\images\Firebase-Integration-Architecture-for-AI-Powered-T-38d5b9a4.png)
+![Firebase Integration Architecture for AI-Powered Tailoring Platform](https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/1e12c2fd63010ed0a69df476deb3ff42/461bca62-26e8-46e7-8ae2-e5e328c76064/dd59861b.png)
 
 Firebase Integration Architecture for AI-Powered Tailoring Platform
 
@@ -862,6 +862,7 @@ Firebase Integration Architecture for AI-Powered Tailoring Platform
 - Real-time alerts
 - User engagement notifications
 
+
 ## Implementation Requirements
 
 ### Development Dependencies
@@ -903,6 +904,7 @@ dependencies:
   permission_handler: ^11.0.1
 ```
 
+
 ### Asset Requirements
 
 The complete asset specification includes over 130 individual assets organized into categories:
@@ -930,6 +932,7 @@ The complete asset specification includes over 130 individual assets organized i
 - Progressive loading
 - Bandwidth optimization
 
+
 ## Security and Privacy
 
 **Data Protection**: Comprehensive security measures
@@ -946,6 +949,7 @@ The complete asset specification includes over 130 individual assets organized i
 - Fraud detection mechanisms
 - Transaction monitoring
 
+
 ## Testing Strategy
 
 **Unit Testing**: Component-level validation
@@ -961,6 +965,7 @@ The complete asset specification includes over 130 individual assets organized i
 - Accessibility testing compliance
 - Cross-platform consistency testing
 - User journey optimization
+
 
 ## Deployment and Maintenance
 
@@ -980,396 +985,401 @@ The complete asset specification includes over 130 individual assets organized i
 
 This comprehensive specification provides all the necessary components, integrations, and implementation details required to build a fully functional AI-powered tailoring and clothing design platform in Flutter. The modular architecture ensures scalability, maintainability, and extensibility for future feature additions.
 
-<!-- <div style="text-align: center">⁂</div>
+<div style="text-align: center">⁂</div>
 
-[1]: https://link.springer.com/10.1007/978-1-4842-9456-7
+[^1]: https://link.springer.com/10.1007/978-1-4842-9456-7
 
-[2]: https://dl.acm.org/doi/10.1145/3544548.3581258
+[^2]: https://dl.acm.org/doi/10.1145/3544548.3581258
 
-[3]: https://ieeexplore.ieee.org/document/10504316/
+[^3]: https://ieeexplore.ieee.org/document/10504316/
 
-[4]: https://ieeexplore.ieee.org/document/10183582/
+[^4]: https://ieeexplore.ieee.org/document/10183582/
 
-[5]: https://www.semanticscholar.org/paper/13a0490c8ca29c5840bd00b7e4a063a9990b43bb
+[^5]: https://www.semanticscholar.org/paper/13a0490c8ca29c5840bd00b7e4a063a9990b43bb
 
-[6]: https://arxiv.org/abs/2406.16177
+[^6]: https://arxiv.org/abs/2406.16177
 
-[7]: https://ieeexplore.ieee.org/document/10742990/
+[^7]: https://ieeexplore.ieee.org/document/10742990/
 
-[8]: https://www.ijsat.org/research-paper.php?id=5427
+[^8]: https://www.ijsat.org/research-paper.php?id=5427
 
-[9]: https://dl.acm.org/doi/10.1145/3647782.3647811
+[^9]: https://dl.acm.org/doi/10.1145/3647782.3647811
 
-[10]: https://www.semanticscholar.org/paper/aa98f75dc0d8a387932bf278289d9fb824e31fb3
+[^10]: https://www.semanticscholar.org/paper/aa98f75dc0d8a387932bf278289d9fb824e31fb3
 
-[11]: https://docs.flutter.dev/app-architecture/guide
+[^11]: https://docs.flutter.dev/app-architecture/guide
 
-[12]: https://stackoverflow.com/questions/54188895/how-to-implement-a-bottom-navigation-drawer-in-flutter
+[^12]: https://stackoverflow.com/questions/54188895/how-to-implement-a-bottom-navigation-drawer-in-flutter
 
-[13]: https://docs.flutter.dev/ui/layout
-[14]: ..\images\14-e920211d.png
+[^13]: https://docs.flutter.dev/ui/layout
 
-[15]: https://docs.flutter.dev/resources/architectural-overview
+[^14]: https://github.com/Flutterando/modular
 
-[16]: https://www.youtube.com/watch?v=17FLO6uHhHU
+[^15]: https://docs.flutter.dev/resources/architectural-overview
 
-[17]: https://docs.flutter.dev/ui
+[^16]: https://www.youtube.com/watch?v=17FLO6uHhHU
 
-[18]: https://pub.dev/packages/flutter_modular
+[^17]: https://docs.flutter.dev/ui
 
-[19]: https://www.f22labs.com/blogs/flutter-architecture-patterns-bloc-provider-riverpod-and-more/
+[^18]: https://pub.dev/packages/flutter_modular
 
-[20]: https://docs.flutter.dev/cookbook/design/drawer
+[^19]: https://www.f22labs.com/blogs/flutter-architecture-patterns-bloc-provider-riverpod-and-more/
 
-[21]: https://codewithandrea.com/articles/flutter-presentation-layer/
+[^20]: https://docs.flutter.dev/cookbook/design/drawer
 
-[22]: https://deep5.io/en/flutter-app-architecture-a-modular-approach/
+[^21]: https://codewithandrea.com/articles/flutter-presentation-layer/
 
-[23]: https://www.aalpha.net/articles/flutter-app-architecture-patterns/
+[^22]: https://deep5.io/en/flutter-app-architecture-a-modular-approach/
 
-[24]: https://www.geeksforgeeks.org/flutter/flutter-navigation-drawer/
+[^23]: https://www.aalpha.net/articles/flutter-app-architecture-patterns/
 
-[25]: https://www.youtube.com/watch?v=FCyoHclCqc8
+[^24]: https://www.geeksforgeeks.org/flutter/flutter-navigation-drawer/
 
-[26]: https://pub.dev/packages/modular_ui
+[^25]: https://www.youtube.com/watch?v=FCyoHclCqc8
 
-[27]: https://dev.to/aaronreddix/top-10-design-patterns-in-flutter-a-comprehensive-guide-50ca
+[^26]: https://pub.dev/packages/modular_ui
 
-[28]: https://fluttergems.dev/bottom-navigation-bar/
+[^27]: https://dev.to/aaronreddix/top-10-design-patterns-in-flutter-a-comprehensive-guide-50ca
 
-[29]: https://www.kodeco.com/22379941-building-complex-ui-in-flutter-magic-8-ball
+[^28]: https://fluttergems.dev/bottom-navigation-bar/
 
-[30]: https://www.youtube.com/watch?v=R-pc9xOpG04
+[^29]: https://www.kodeco.com/22379941-building-complex-ui-in-flutter-magic-8-ball
 
-[31]: https://ieeexplore.ieee.org/document/10292448/
+[^30]: https://www.youtube.com/watch?v=R-pc9xOpG04
 
-[32]: https://ijsrcseit.com/index.php/home/article/view/CSEIT241061229
+[^31]: https://ieeexplore.ieee.org/document/10292448/
 
-[33]: https://journals.uran.ua/eejet/article/view/305696
+[^32]: https://ijsrcseit.com/index.php/home/article/view/CSEIT241061229
 
-[34]: https://ieeexplore.ieee.org/document/10701240/
+[^33]: https://journals.uran.ua/eejet/article/view/305696
 
-[35]: https://journal.staiypiqbaubau.ac.id/index.php/Maslahah/article/view/1143
+[^34]: https://ieeexplore.ieee.org/document/10701240/
 
-[36]: https://www.ijfmr.com/research-paper.php?id=31498
+[^35]: https://journal.staiypiqbaubau.ac.id/index.php/Maslahah/article/view/1143
 
-[37]: https://www.jmaj.jp/detail.php?id=10.31662/jmaj.2024-0213
+[^36]: https://www.ijfmr.com/research-paper.php?id=31498
 
-[38]: https://ieeexplore.ieee.org/document/10459420/
+[^37]: https://www.jmaj.jp/detail.php?id=10.31662/jmaj.2024-0213
 
-[39]: https://www.mdpi.com/1999-4915/16/12/1868
+[^38]: https://ieeexplore.ieee.org/document/10459420/
 
-[40]: https://www.ssrn.com/abstract=4987149
+[^39]: https://www.mdpi.com/1999-4915/16/12/1868
 
-[41]: https://devvibe.com/flutter-ai-integration/
+[^40]: https://www.ssrn.com/abstract=4987149
 
-[42]: https://200oksolutions.com/blog/exploring-custom-paint-and-canvas-in-flutter/
-[43]: ..\images\43-cd237f36.png
+[^41]: https://devvibe.com/flutter-ai-integration/
 
-[44]: https://www.youtube.com/watch?v=aYjp_pvJBfg
+[^42]: https://200oksolutions.com/blog/exploring-custom-paint-and-canvas-in-flutter/
 
-[45]: https://www.prismetric.com/integrating-ai-with-flutter-apps/
+[^43]: https://github.com/shreyassai123/virtual-tryon
 
-[46]: https://codewithandrea.com/videos/flutter-custom-painting-do-not-fear-canvas/
+[^44]: https://www.youtube.com/watch?v=aYjp_pvJBfg
 
-[47]: https://pub.dev/packages/aiuta_flutter
+[^45]: https://www.prismetric.com/integrating-ai-with-flutter-apps/
 
-[48]: https://www.youtube.com/watch?v=gUeDE9V6mno
+[^46]: https://codewithandrea.com/videos/flutter-custom-painting-do-not-fear-canvas/
 
-[49]: https://vibe-studio.ai/in/insights/ai-integration-in-flutter-building-smarter-apps
+[^47]: https://pub.dev/packages/aiuta_flutter
 
-[50]: https://somniosoftware.com/blog/create-unique-designs-with-flutters-custom-painter-2
+[^48]: https://www.youtube.com/watch?v=gUeDE9V6mno
 
-[51]: https://www.dhiwise.com/post/try-before-you-buy-building-a-virtual-tyr-on-app-with-flutter
+[^49]: https://vibe-studio.ai/in/insights/ai-integration-in-flutter-building-smarter-apps
 
-[52]: https://www.youtube.com/watch?v=M9vn-i_9eJs
+[^50]: https://somniosoftware.com/blog/create-unique-designs-with-flutters-custom-painter-2
 
-[53]: https://flutter.dev/ai
+[^51]: https://www.dhiwise.com/post/try-before-you-buy-building-a-virtual-tyr-on-app-with-flutter
 
-[54]: https://blog.codemagic.io/flutter-custom-painter/
+[^52]: https://www.youtube.com/watch?v=M9vn-i_9eJs
 
-[55]: https://www.reddit.com/r/FlutterDev/comments/1dk4c6n/how_to_implement_an_ar_virtual_tryon_feature_in/
-[56]: ..\images\56-29187999.png
+[^53]: https://flutter.dev/ai
 
-[57]: https://docs.flutter.dev/ai-toolkit
+[^54]: https://blog.codemagic.io/flutter-custom-painter/
 
-[58]: https://www.youtube.com/watch?v=Z4-XLVRCRpA
+[^55]: https://www.reddit.com/r/FlutterDev/comments/1dk4c6n/how_to_implement_an_ar_virtual_tryon_feature_in/
 
-[59]: https://community.flutterflow.io/discussions/post/virtual-try-on-feature-tFrdsIhWTGKtIyD
+[^56]: https://github.com/abuanwar072/E-commerce-Complete-Flutter-UI
 
-[60]: https://codecanyon.net/category/mobile/flutter?term=order+management
+[^57]: https://docs.flutter.dev/ai-toolkit
 
-[61]: https://indjst.org/articles/a-mobile-app-uiux-design-for-the-gas-safety-workers
+[^58]: https://www.youtube.com/watch?v=Z4-XLVRCRpA
 
-[62]: https://ieeexplore.ieee.org/document/10431279/
+[^59]: https://community.flutterflow.io/discussions/post/virtual-try-on-feature-tFrdsIhWTGKtIyD
 
-[63]: https://peerj.com/articles/cs-2028
+[^60]: https://codecanyon.net/category/mobile/flutter?term=order+management
 
-[64]: https://ieeexplore.ieee.org/document/9740997/
+[^61]: https://indjst.org/articles/a-mobile-app-uiux-design-for-the-gas-safety-workers
 
-[65]: https://dl.acm.org/doi/10.1145/3126594.3126651
+[^62]: https://ieeexplore.ieee.org/document/10431279/
 
-[66]: https://www.tandfonline.com/doi/full/10.1080/10447318.2023.2301254
+[^63]: https://peerj.com/articles/cs-2028
 
-[67]: https://ieeexplore.ieee.org/document/10395866/
+[^64]: https://ieeexplore.ieee.org/document/9740997/
 
-[68]: https://ieeexplore.ieee.org/document/10638617/
+[^65]: https://dl.acm.org/doi/10.1145/3126594.3126651
 
-[69]: https://arxiv.org/abs/2409.07945
+[^66]: https://www.tandfonline.com/doi/full/10.1080/10447318.2023.2301254
 
-[70]: https://ieeexplore.ieee.org/document/10988951/
+[^67]: https://ieeexplore.ieee.org/document/10395866/
 
-[71]: https://dribbble.com/shots/18080225-Fashion-Design-App
+[^68]: https://ieeexplore.ieee.org/document/10638617/
 
-[72]: https://www.hiddenbrains.com/ecommerce-product-configurator.html
+[^69]: https://arxiv.org/abs/2409.07945
 
-[73]: https://muz.li/inspiration/mobile-app-design-inspiration/
+[^70]: https://ieeexplore.ieee.org/document/10988951/
 
-[74]: https://vibe-studio.ai/in/insights/fundamentals-of-navigation-and-routing-in-flutter
+[^71]: https://dribbble.com/shots/18080225-Fashion-Design-App
 
-[75]: https://uizard.io/templates/mobile-app-templates/sport-clothing-shopping-app/
+[^72]: https://www.hiddenbrains.com/ecommerce-product-configurator.html
 
-[76]: https://play.google.com/store/apps/details?id=com.elgabry.clothesdesigner
+[^73]: https://muz.li/inspiration/mobile-app-design-inspiration/
 
-[77]: https://developer.android.com/design/ui/mobile
+[^74]: https://vibe-studio.ai/in/insights/fundamentals-of-navigation-and-routing-in-flutter
 
-[78]: https://www.freecodecamp.org/news/routing-and-multi-screen-development-in-flutter-for-beginners/
+[^75]: https://uizard.io/templates/mobile-app-templates/sport-clothing-shopping-app/
 
-[79]: https://www.pinterest.com/ideas/fashion-app-ui-design/908135305858/
+[^76]: https://play.google.com/store/apps/details?id=com.elgabry.clothesdesigner
 
-[80]: https://fashinza.com/fashion-designs/design-tips/top-20-apps-for-designing-clothes-free-and-paid-options/
+[^77]: https://developer.android.com/design/ui/mobile
 
-[81]: https://www.figma.com/community/mobile-apps
+[^78]: https://www.freecodecamp.org/news/routing-and-multi-screen-development-in-flutter-for-beginners/
 
-[82]: https://docs.flutter.dev/ui/navigation
+[^79]: https://www.pinterest.com/ideas/fashion-app-ui-design/908135305858/
 
-[83]: https://www.behance.net/search/projects/clothing app
+[^80]: https://fashinza.com/fashion-designs/design-tips/top-20-apps-for-designing-clothes-free-and-paid-options/
 
-[84]: https://www.canva.com/print/custom-clothing/
+[^81]: https://www.figma.com/community/mobile-apps
 
-[85]: https://decode.agency/article/app-screens-design/
+[^82]: https://docs.flutter.dev/ui/navigation
 
-[86]: https://docs.flutter.dev/cookbook/navigation/navigation-basics
+[^83]: https://www.behance.net/search/projects/clothing app
 
-[87]: https://www.behance.net/search/projects/fashion app ui
+[^84]: https://www.canva.com/print/custom-clothing/
 
-[88]: https://browzwear.com/blog/must-have-fashion-designer-apps
+[^85]: https://decode.agency/article/app-screens-design/
 
-[89]: https://www.designstudiouiux.com/blog/mobile-app-ui-ux-design-trends/
+[^86]: https://docs.flutter.dev/cookbook/navigation/navigation-basics
 
-[90]: https://www.youtube.com/watch?v=Ty3j0bd2VDo
+[^87]: https://www.behance.net/search/projects/fashion app ui
 
-[91]: https://arxiv.org/abs/2305.06165
+[^88]: https://browzwear.com/blog/must-have-fashion-designer-apps
 
-[92]: https://journals-sol.sbc.org.br/index.php/jbcs/article/view/4321
+[^89]: https://www.designstudiouiux.com/blog/mobile-app-ui-ux-design-trends/
 
-[93]: https://dl.acm.org/doi/10.1145/3611643.3613100
+[^90]: https://www.youtube.com/watch?v=Ty3j0bd2VDo
 
-[94]: https://scholar.kyobobook.co.kr/article/detail/4010068152838
+[^91]: https://arxiv.org/abs/2305.06165
 
-[95]: https://www.mdpi.com/1424-8220/24/15/4948
+[^92]: https://journals-sol.sbc.org.br/index.php/jbcs/article/view/4321
 
-[96]: https://journals.sagepub.com/doi/10.1177/21582440241286300
+[^93]: https://dl.acm.org/doi/10.1145/3611643.3613100
 
-[97]: https://arxiv.org/abs/2207.04165
+[^94]: https://scholar.kyobobook.co.kr/article/detail/4010068152838
 
-[98]: https://ges.jvolsu.com/index.php/en/component/attachments/download/1848
+[^95]: https://www.mdpi.com/1424-8220/24/15/4948
 
-[99]: https://dl.acm.org/doi/10.1145/3506667
+[^96]: https://journals.sagepub.com/doi/10.1177/21582440241286300
 
-[100]: https://mhealth.jmir.org/2021/11/e29815
+[^97]: https://arxiv.org/abs/2207.04165
 
-[101]: https://www.appcues.com/blog/essential-guide-mobile-user-onboarding-ui-ux
+[^98]: https://ges.jvolsu.com/index.php/en/component/attachments/download/1848
 
-[102]: https://www.andacademy.com/resources/blog/ui-ux-design/profile-ui-design/
+[^99]: https://dl.acm.org/doi/10.1145/3506667
 
-[103]: https://www.youtube.com/watch?v=zgnBIpfPUZ0
+[^100]: https://mhealth.jmir.org/2021/11/e29815
 
-[104]: https://stripe.com/resources/more/mobile-checkout-ui
+[^101]: https://www.appcues.com/blog/essential-guide-mobile-user-onboarding-ui-ux
 
-[105]: https://www.figma.com/community/file/1291071397489216578/mobile-application-onboarding-screens
+[^102]: https://www.andacademy.com/resources/blog/ui-ux-design/profile-ui-design/
 
-[106]: https://www.youtube.com/watch?v=SQW-hEeH7Uo
+[^103]: https://www.youtube.com/watch?v=zgnBIpfPUZ0
 
-[107]: https://www.mediu.edu.my/wp-content/uploads/2013/03/lesson-10-form-and-input-design.docx
+[^104]: https://stripe.com/resources/more/mobile-checkout-ui
 
-[108]: https://designmodo.com/mobile-checkout-screens/
+[^105]: https://www.figma.com/community/file/1291071397489216578/mobile-application-onboarding-screens
 
-[109]: https://uxcam.com/blog/10-apps-with-great-user-onboarding/
+[^106]: https://www.youtube.com/watch?v=SQW-hEeH7Uo
 
-[110]: https://www.figma.com/community/website-templates/user-profile-page
+[^107]: https://www.mediu.edu.my/wp-content/uploads/2013/03/lesson-10-form-and-input-design.docx
 
-[111]: https://goodpractices.design/articles/designing-inputs
+[^108]: https://designmodo.com/mobile-checkout-screens/
 
-[112]: https://dribbble.com/tags/mobile-checkout
+[^109]: https://uxcam.com/blog/10-apps-with-great-user-onboarding/
 
-[113]: https://www.plotline.so/blog/mobile-app-onboarding-examples
+[^110]: https://www.figma.com/community/website-templates/user-profile-page
 
-[114]: https://www.pinterest.com/ideas/profile-settings/958462518787/
+[^111]: https://goodpractices.design/articles/designing-inputs
 
-[115]: https://www.eleken.co/blog-posts/input-field-design
+[^112]: https://dribbble.com/tags/mobile-checkout
 
-[116]: https://dribbble.com/tags/checkout-screen
+[^113]: https://www.plotline.so/blog/mobile-app-onboarding-examples
 
-[117]: https://dribbble.com/tags/mobile-onboarding
+[^114]: https://www.pinterest.com/ideas/profile-settings/958462518787/
 
-[118]: https://dribbble.com/tags/profile-settings
+[^115]: https://www.eleken.co/blog-posts/input-field-design
 
-[119]: https://dribbble.com/tags/scale-measurements-input
+[^116]: https://dribbble.com/tags/checkout-screen
 
-[120]: https://mobbin.com/explore/mobile/screens/checkout
+[^117]: https://dribbble.com/tags/mobile-onboarding
 
-[121]: https://aircconline.com/csit/papers/vol14/csit141605.pdf
+[^118]: https://dribbble.com/tags/profile-settings
 
-[122]: https://fdrpjournals.org/ijsreat/archives?paperid=4540592438546511660
+[^119]: https://dribbble.com/tags/scale-measurements-input
 
-[123]: https://www.ijraset.com/best-journal/a-systematic-exploration-of-a-privacy-focused-chat-application-build-using-flutter
+[^120]: https://mobbin.com/explore/mobile/screens/checkout
 
-[124]: https://www.ijraset.com/best-journal/a-privacy-focused-chat-application-build-using-flutter-846
+[^121]: https://aircconline.com/csit/papers/vol14/csit141605.pdf
 
-[125]: https://ijrpr.com/uploads/V6ISSUE5/IJRPR45255.pdf
+[^122]: https://fdrpjournals.org/ijsreat/archives?paperid=4540592438546511660
 
-[126]: https://omu.edu.ly/journals/index.php/mjsc/article/view/802
+[^123]: https://www.ijraset.com/best-journal/a-systematic-exploration-of-a-privacy-focused-chat-application-build-using-flutter
 
-[127]: https://journal.global.ac.id/index.php/AJCSR/article/view/10768
+[^124]: https://www.ijraset.com/best-journal/a-privacy-focused-chat-application-build-using-flutter-846
 
-[128]: https://www.ssrn.com/abstract=3867569
+[^125]: https://ijrpr.com/uploads/V6ISSUE5/IJRPR45255.pdf
 
-[129]: https://journal.umy.ac.id/index.php/eist/article/view/16859
+[^126]: https://omu.edu.ly/journals/index.php/mjsc/article/view/802
 
-[130]: https://ijsrem.com/download/quick-cart-a-cross-platform-application/
+[^127]: https://journal.global.ac.id/index.php/AJCSR/article/view/10768
 
-[131]: https://firebase.flutter.dev/docs/ui/auth/integrating-your-first-screen/
+[^128]: https://www.ssrn.com/abstract=3867569
 
-[132]: https://clouddevs.com/flutter/navigation-between-screens/
+[^129]: https://journal.umy.ac.id/index.php/eist/article/view/16859
 
-[133]: https://www.geeksforgeeks.org/flutter/how-to-manage-state-in-flutter-with-bloc-pattern/
+[^130]: https://ijsrem.com/download/quick-cart-a-cross-platform-application/
 
-[134]: https://www.browserstack.com/guide/make-flutter-app-responsive
+[^131]: https://firebase.flutter.dev/docs/ui/auth/integrating-your-first-screen/
 
-[135]: https://www.youtube.com/watch?v=QZDhLQjFniM
+[^132]: https://clouddevs.com/flutter/navigation-between-screens/
 
-[136]: https://docs.flutterflow.io/concepts/navigation/overview/
+[^133]: https://www.geeksforgeeks.org/flutter/how-to-manage-state-in-flutter-with-bloc-pattern/
 
-[137]: https://core.digit.org/guides/developer-guide/flutter-mobile-app-ui-developer-guide/state-management-with-provider-and-bloc/bloc-state-management
+[^134]: https://www.browserstack.com/guide/make-flutter-app-responsive
 
-[138]: https://www.youtube.com/watch?v=OU1pqgSZw2Q
+[^135]: https://www.youtube.com/watch?v=QZDhLQjFniM
 
-[139]: https://pub.dev/packages/firebase_ui_auth
+[^136]: https://docs.flutterflow.io/concepts/navigation/overview/
 
-[140]: https://www.dhiwise.com/post/flutter-bloc-tutorial-understanding-state-management
+[^137]: https://core.digit.org/guides/developer-guide/flutter-mobile-app-ui-developer-guide/state-management-with-provider-and-bloc/bloc-state-management
 
-[141]: https://pub.dev/packages/responsive_framework
+[^138]: https://www.youtube.com/watch?v=OU1pqgSZw2Q
 
-[142]: https://firebase.google.com/codelabs/firebase-auth-in-flutter-apps
+[^139]: https://pub.dev/packages/firebase_ui_auth
 
-[143]: https://dev.to/vishnucprasad/state-management-in-flutter-with-bloc-and-freezed-1k80
+[^140]: https://www.dhiwise.com/post/flutter-bloc-tutorial-understanding-state-management
 
-[144]: https://fluttergems.dev/responsive-ui/
+[^141]: https://pub.dev/packages/responsive_framework
 
-[145]: https://firebase.google.com/docs/auth/flutter/start
+[^142]: https://firebase.google.com/codelabs/firebase-auth-in-flutter-apps
 
-[146]: https://bloclibrary.dev
+[^143]: https://dev.to/vishnucprasad/state-management-in-flutter-with-bloc-and-freezed-1k80
 
-[147]: https://www.youtube.com/watch?v=V0_baZFor8U
+[^144]: https://fluttergems.dev/responsive-ui/
 
-[148]: http://arxiv.org/pdf/2502.11708.pdf
+[^145]: https://firebase.google.com/docs/auth/flutter/start
 
-[149]: https://arxiv.org/pdf/1803.08666.pdf
+[^146]: https://bloclibrary.dev
 
-[150]: https://www.mdpi.com/2078-2489/13/5/236/pdf?version=1653664375
+[^147]: https://www.youtube.com/watch?v=V0_baZFor8U
 
-[151]: https://arxiv.org/pdf/2006.04975.pdf
+[^148]: http://arxiv.org/pdf/2502.11708.pdf
 
-[152]: https://www.moderntechno.de/index.php/meit/article/download/meit29-01-056/6128
+[^149]: https://arxiv.org/pdf/1803.08666.pdf
 
-[153]: http://science-gate.com/IJAAS/Articles/2021/2021-8-8/1021833ijaas202108002.pdf
+[^150]: https://www.mdpi.com/2078-2489/13/5/236/pdf?version=1653664375
 
-[154]: https://astesj.com/?download_id=947\&smd_process_download=1
+[^151]: https://arxiv.org/pdf/2006.04975.pdf
 
-[155]: https://arxiv.org/ftp/arxiv/papers/2112/2112.01644.pdf
+[^152]: https://www.moderntechno.de/index.php/meit/article/download/meit29-01-056/6128
 
-[156]: https://arxiv.org/pdf/2003.04781.pdf
+[^153]: http://science-gate.com/IJAAS/Articles/2021/2021-8-8/1021833ijaas202108002.pdf
 
-[157]: https://res.mdpi.com/d_attachment/proceedings/proceedings-31-00019/article_deploy/proceedings-31-00019-v2.pdf
+[^154]: https://astesj.com/?download_id=947\&smd_process_download=1
 
-[158]: http://arxiv.org/pdf/2303.13173v1.pdf
+[^155]: https://arxiv.org/ftp/arxiv/papers/2112/2112.01644.pdf
 
-[159]: http://arxiv.org/pdf/2308.01285.pdf
+[^156]: https://arxiv.org/pdf/2003.04781.pdf
 
-[160]: https://arxiv.org/pdf/2102.11965.pdf
+[^157]: https://res.mdpi.com/d_attachment/proceedings/proceedings-31-00019/article_deploy/proceedings-31-00019-v2.pdf
 
-[161]: https://arxiv.org/pdf/2203.00905.pdf
+[^158]: http://arxiv.org/pdf/2303.13173v1.pdf
 
-[162]: http://arxiv.org/pdf/2007.05902.pdf
+[^159]: http://arxiv.org/pdf/2308.01285.pdf
 
-[163]: https://arxiv.org/pdf/2501.08774.pdf
+[^160]: https://arxiv.org/pdf/2102.11965.pdf
 
-[164]: https://arxiv.org/pdf/2504.03771.pdf
+[^161]: https://arxiv.org/pdf/2203.00905.pdf
 
-[165]: https://arxiv.org/pdf/2412.00239.pdf
+[^162]: http://arxiv.org/pdf/2007.05902.pdf
 
-[166]: http://arxiv.org/pdf/2405.01561.pdf
+[^163]: https://arxiv.org/pdf/2501.08774.pdf
 
-[167]: https://arxiv.org/pdf/2409.15910.pdf
+[^164]: https://arxiv.org/pdf/2504.03771.pdf
 
-[168]: https://arxiv.org/html/2406.16177v1
+[^165]: https://arxiv.org/pdf/2412.00239.pdf
 
-[169]: https://arxiv.org/html/2407.03901
+[^166]: http://arxiv.org/pdf/2405.01561.pdf
 
-[170]: https://arxiv.org/pdf/2207.01058.pdf
+[^167]: https://arxiv.org/pdf/2409.15910.pdf
 
-[171]: https://arxiv.org/html/2406.16386v1
+[^168]: https://arxiv.org/html/2406.16177v1
 
-[172]: https://arxiv.org/html/2407.11998v1
+[^169]: https://arxiv.org/html/2407.03901
 
-[173]: https://arxiv.org/html/2411.01606v1
+[^170]: https://arxiv.org/pdf/2207.01058.pdf
 
-[174]: https://arxiv.org/html/2406.13631
+[^171]: https://arxiv.org/html/2406.16386v1
 
-[175]: https://arxiv.org/html/2412.14168v1
+[^172]: https://arxiv.org/html/2407.11998v1
 
-[176]: https://arxiv.org/html/2408.00855v2
+[^173]: https://arxiv.org/html/2411.01606v1
 
-[177]: https://jurnal.unismabekasi.ac.id/index.php/piksel/article/download/7115/2800
+[^174]: https://arxiv.org/html/2406.13631
 
-[178]: https://arxiv.org/pdf/2203.11134.pdf
+[^175]: https://arxiv.org/html/2412.14168v1
 
-[179]: https://pmc.ncbi.nlm.nih.gov/articles/PMC8603164/
+[^176]: https://arxiv.org/html/2408.00855v2
 
-[180]: http://downloads.hindawi.com/journals/ahci/2017/6787504.pdf
+[^177]: https://jurnal.unismabekasi.ac.id/index.php/piksel/article/download/7115/2800
 
-[181]: https://arxiv.org/pdf/2310.13518.pdf
+[^178]: https://arxiv.org/pdf/2203.11134.pdf
 
-[182]: https://arxiv.org/pdf/2501.13407.pdf
+[^179]: https://pmc.ncbi.nlm.nih.gov/articles/PMC8603164/
 
-[183]: https://pmc.ncbi.nlm.nih.gov/articles/PMC9246170/
+[^180]: http://downloads.hindawi.com/journals/ahci/2017/6787504.pdf
 
-[184]: https://jmi.polban.ac.id/jmi/article/download/36/26
+[^181]: https://arxiv.org/pdf/2310.13518.pdf
 
-[185]: https://publications.eai.eu/index.php/sis/article/download/4959/2844
+[^182]: https://arxiv.org/pdf/2501.13407.pdf
 
-[186]: https://arxiv.org/html/2404.02706v1
+[^183]: https://pmc.ncbi.nlm.nih.gov/articles/PMC9246170/
 
-[187]: https://www.behance.net/search/projects/profile screen
+[^184]: https://jmi.polban.ac.id/jmi/article/download/36/26
 
-[188]: https://downloads.hindawi.com/journals/wcmc/2021/5677978.pdf
+[^185]: https://publications.eai.eu/index.php/sis/article/download/4959/2844
 
-[189]: https://res.mdpi.com/d_attachment/sensors/sensors-20-03876/article_deploy/sensors-20-03876-v2.pdf
+[^186]: https://arxiv.org/html/2404.02706v1
 
-[190]: https://dx.plos.org/10.1371/journal.pone.0315201
+[^187]: https://www.behance.net/search/projects/profile screen
 
-[191]: http://ijece.iaescore.com/index.php/IJECE/article/download/25234/15110
+[^188]: https://downloads.hindawi.com/journals/wcmc/2021/5677978.pdf
 
-[192]: http://arxiv.org/pdf/2412.12324.pdf
+[^189]: https://res.mdpi.com/d_attachment/sensors/sensors-20-03876/article_deploy/sensors-20-03876-v2.pdf
 
-[193]: https://pmc.ncbi.nlm.nih.gov/articles/PMC11620593/
+[^190]: https://dx.plos.org/10.1371/journal.pone.0315201
 
-[194]: https://arxiv.org/pdf/2305.16758.pdf
+[^191]: http://ijece.iaescore.com/index.php/IJECE/article/download/25234/15110
 
-[195]: https://www.mdpi.com/2079-9292/11/1/4/pdf
+[^192]: http://arxiv.org/pdf/2412.12324.pdf
 
-[196]: https://arxiv.org/pdf/2309.00744.pdf
-[197]: ..\images\197-a923c873.png
-[198]: ..\images\198-ba448308.png
- -->
+[^193]: https://pmc.ncbi.nlm.nih.gov/articles/PMC11620593/
+
+[^194]: https://arxiv.org/pdf/2305.16758.pdf
+
+[^195]: https://www.mdpi.com/2079-9292/11/1/4/pdf
+
+[^196]: https://arxiv.org/pdf/2309.00744.pdf
+
+[^197]: https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/1e12c2fd63010ed0a69df476deb3ff42/dd4ed079-e1f3-4037-9566-d8ae541f78d2/2023fb8a.json
+
+[^198]: https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/1e12c2fd63010ed0a69df476deb3ff42/407edda4-437b-4d31-b828-e45995f2ce2b/3b60185d.csv
+

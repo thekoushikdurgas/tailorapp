@@ -37,6 +37,7 @@ lib\core\services\production_gemini_service_impl.dart
 lib\core\services\production_openai_service_impl.dart
 lib\core\services\service_locator.dart
 lib\cubit_observer.dart
+lib\firebase_options.dart
 lib\main.dart
 lib\product\enum\intro_enums.dart
 lib\product\init\lang\locale_keys.g.dart
