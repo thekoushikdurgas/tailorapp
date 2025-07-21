@@ -47,6 +47,7 @@ lib\view\auth\auth_wrapper.dart
 lib\view\auth\forgot_password_page.dart
 lib\view\auth\login_page.dart
 lib\view\auth\register_page.dart
+lib\view\design\cubit\design_cubit.dart
 lib\view\design\design_canvas_page.dart
 lib\view\design\widgets\ai_suggestions_panel.dart
 lib\view\design\widgets\color_palette_widget.dart
@@ -60,8 +61,11 @@ lib\view\introduction\view\introduction_screen.dart
 lib\view\introduction\view\pages\first_page.dart
 lib\view\introduction\view\pages\second_page.dart
 lib\view\introduction\view\pages\third_page.dart
+lib\view\measurements\cubit\measurements_cubit.dart
 lib\view\measurements\measurements_page.dart
+lib\view\orders\cubit\order_cubit.dart
 lib\view\orders\orders_page.dart
+lib\view\profile\cubit\profile_cubit.dart
 lib\view\profile\profile_page.dart
 lib\view\settings\view\setting_view.dart
 lib\view\virtual_fitting\virtual_fitting_page.dart

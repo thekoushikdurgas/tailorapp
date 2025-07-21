@@ -65,7 +65,7 @@ class NavigationRouters {
       // Intro route
       GoRoute(
         path: RouteEnum.intro.rawValue,
-        builder: (context, state) => Introduction.intro,
+        builder: (context, state) => const Introduction(),
       ),
 
       // Main app routes (require authentication)

@@ -119,36 +119,36 @@ dev_dependencies:
   build_runner: ^2.4.15
   analyzer: ^7.4.5
 
-flutter_native_splash:
-  color: "#dcd5cd"
-  image: assets/icon/icon.png
-  color_dark: "#1b1106"
-  image_dark: assets/icon/icon.png
-  android_12:
-    image: assets/icon/icon.png
-    icon_background_color: "#dcd5cd"
-    image_dark: assets/icon/icon.png
-    icon_background_color_dark: "#1b1106"
-  web: false
+# flutter_native_splash:
+#   color: "#dcd5cd"
+#   image: assets/logo/logo.png
+#   color_dark: "#1b1106"
+#   image_dark: assets/logo/logo.png
+#   android_12:
+#     image: assets/logo/logo.png
+#     icon_background_color: "#dcd5cd"
+#     image_dark: assets/logo/logo.png
+#     icon_background_color_dark: "#1b1106"
+#   web: false
 
 flutter_launcher_icons:
-  image_path: "assets/icon/icon.png"
+  image_path: "assets/logo/logo.png"
   android: "launcher_icon"
   min_sdk_android: 21
   ios: true
   remove_alpha_channel_ios: true
   web:
     generate: true
-    image_path: "assets/icon/icon.png"
+    image_path: "assets/logo/logo.png"
     background_color: "#hexcode"
     theme_color: "#hexcode"
   windows:
     generate: true
-    image_path: "assets/icon/icon.png"
+    image_path: "assets/logo/logo.png"
     icon_size: 48 # min:48, max:256, default: 48
   macos:
     generate: true
-    image_path: "assets/icon/icon.png"
+    image_path: "assets/logo/logo.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

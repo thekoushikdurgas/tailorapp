@@ -13,6 +13,9 @@ abstract class OrderRepository {
       String orderId, OrderStatus status, String? message);
   Future<List<OrderModel>> searchOrders(String query);
   Future<List<OrderModel>> getOrdersInDateRange(DateTime start, DateTime end);
+  Future<void> updatePaymentStatus(
+      String orderId, PaymentStatus status, String? paymentId);
+  Future<void> requestRefund(String orderId, double amount, String reason);
   Stream<OrderModel> watchOrder(String id);
   Stream<List<OrderModel>> watchCustomerOrders(String customerId);
 }
@@ -255,6 +258,43 @@ class FirebaseOrderRepository implements OrderRepository {
       });
     } catch (e) {
       throw OrderRepositoryException('Failed to watch customer orders: $e');
+    }
+  }
+
+  @override
+  Future<void> updatePaymentStatus(
+      String orderId, PaymentStatus status, String? paymentId) async {
+    try {
+      final updateData = <String, dynamic>{
+        'paymentStatus': status.value,
+      };
+
+      if (paymentId != null) {
+        updateData['paymentId'] = paymentId;
+      }
+
+      await _firestore.collection(_collection).doc(orderId).update(updateData);
+    } catch (e) {
+      throw OrderRepositoryException('Failed to update payment status: $e');
+    }
+  }
+
+  @override
+  Future<void> requestRefund(
+      String orderId, double amount, String reason) async {
+    try {
+      final refundData = {
+        'refund': {
+          'amount': amount,
+          'reason': reason,
+          'requestedAt': DateTime.now().toIso8601String(),
+          'status': 'requested',
+        }
+      };
+
+      await _firestore.collection(_collection).doc(orderId).update(refundData);
+    } catch (e) {
+      throw OrderRepositoryException('Failed to request refund: $e');
     }
   }
 }

@@ -84,9 +84,9 @@ cd lib
 tree /f > tree.dart.txt
 
 
+dir /s /b lib\*.dart | sort > tree.dart.txt
 dart format .
 flutter analyze . > analysis.txt
-dir /s /b lib\*.dart | sort > tree.dart.txt
 
 
 dart analyze --format=json > analysis.json

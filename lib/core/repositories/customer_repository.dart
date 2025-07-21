@@ -13,6 +13,9 @@ abstract class CustomerRepository {
   Future<void> updateStylePreferences(
       String customerId, StylePreferences preferences);
   Future<List<CustomerModel>> getRecentCustomers(int limit);
+  Future<String> uploadProfileImage(String customerId, dynamic imageFile);
+  Future<void> sendEmailVerification(String email);
+  Future<Map<String, dynamic>> exportCustomerData(String customerId);
 }
 
 class FirebaseCustomerRepository implements CustomerRepository {
@@ -165,6 +168,80 @@ class FirebaseCustomerRepository implements CustomerRepository {
       }).toList();
     } catch (e) {
       throw CustomerRepositoryException('Failed to get recent customers: $e');
+    }
+  }
+
+  @override
+  Future<String> uploadProfileImage(
+      String customerId, dynamic imageFile) async {
+    try {
+      // In a real implementation, this would upload to Firebase Storage
+      // For now, we'll simulate the upload and return a mock URL
+      await Future.delayed(const Duration(seconds: 1));
+
+      final timestamp = DateTime.now().millisecondsSinceEpoch;
+      final imageUrl =
+          'https://mock-storage.com/profiles/$customerId/$timestamp.jpg';
+
+      // Update customer document with new image URL
+      await _firestore.collection(_collection).doc(customerId).update({
+        'profileImageUrl': imageUrl,
+        'updatedAt': DateTime.now().toIso8601String(),
+      });
+
+      return imageUrl;
+    } catch (e) {
+      throw CustomerRepositoryException('Failed to upload profile image: $e');
+    }
+  }
+
+  @override
+  Future<void> sendEmailVerification(String email) async {
+    try {
+      // In a real implementation, this would trigger an email verification service
+      // For now, we'll simulate the process
+      await Future.delayed(const Duration(milliseconds: 500));
+
+      // In production, this would integrate with Firebase Auth or email service
+      // to send verification email to the user
+    } catch (e) {
+      throw CustomerRepositoryException(
+          'Failed to send email verification: $e');
+    }
+  }
+
+  @override
+  Future<Map<String, dynamic>> exportCustomerData(String customerId) async {
+    try {
+      final customer = await getCustomer(customerId);
+
+      if (customer == null) {
+        throw CustomerRepositoryException('Customer not found for export');
+      }
+
+      // Create export data with privacy considerations
+      final exportData = {
+        'personalInfo': {
+          'name': customer.name,
+          'email': customer.email,
+          'phone': customer.phone,
+          'dateOfBirth': customer.dateOfBirth?.toIso8601String(),
+          'gender': customer.gender,
+        },
+        'measurements': customer.measurements?.toJson(),
+        'stylePreferences': customer.stylePreferences.toJson(),
+        'address': customer.address?.toJson(),
+        'accountInfo': {
+          'createdAt': customer.createdAt.toIso8601String(),
+          'updatedAt': customer.updatedAt.toIso8601String(),
+          'isVerified': customer.isVerified,
+        },
+        'exportedAt': DateTime.now().toIso8601String(),
+      };
+
+      return exportData;
+    } catch (e) {
+      throw CustomerRepositoryException('Failed to export customer data: $e');
     }
   }
 }
