@@ -19,15 +19,15 @@ class SettingView extends StatelessWidget {
           // theme listtile
           ChangerListtileWithDropdown(
             icon: IconConstants.themeIcon,
-            title: LocaleKeys.themeTheme.tr(),
-            alertTitle: LocaleKeys.themeThemeChoose.tr(),
+            title: LocaleKeys.theme_theme.tr(),
+            alertTitle: LocaleKeys.theme_themeChoose.tr(),
             child: const ThemeChangeDropdown(),
           ),
           // localiziton listtile
           ChangerListtileWithDropdown(
             icon: IconConstants.localizationIcon,
-            title: LocaleKeys.localizationAppLang.tr(),
-            alertTitle: LocaleKeys.localizationLangChoose.tr(),
+            title: LocaleKeys.localization_appLang.tr(),
+            alertTitle: LocaleKeys.localization_langChoose.tr(),
             child: changeLocalWithDropdown(context),
           ),
         ],

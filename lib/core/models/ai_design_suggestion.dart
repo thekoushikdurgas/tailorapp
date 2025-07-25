@@ -218,11 +218,13 @@ class DesignPrompt extends Equatable {
 
     if (bodyMeasurements != null && bodyMeasurements!.isNotEmpty) {
       buffer.write(
-          'Body measurements provided: ${bodyMeasurements!.keys.join(', ')}\n');
+        'Body measurements provided: ${bodyMeasurements!.keys.join(', ')}\n',
+      );
     }
 
     buffer.write(
-        '\nPlease provide detailed design suggestions including colors, patterns, and styling recommendations.');
+      '\nPlease provide detailed design suggestions including colors, patterns, and styling recommendations.',
+    );
 
     return buffer.toString();
   }

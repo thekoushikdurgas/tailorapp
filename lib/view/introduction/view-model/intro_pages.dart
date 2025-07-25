@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tailorapp/product/enum/intro_enums.dart';
 import 'package:tailorapp/view/introduction/model/page_model.dart';
-import 'package:tailorapp/view/introduction/view/pages/first_page.dart';
-import 'package:tailorapp/view/introduction/view/pages/second_page.dart';
-import 'package:tailorapp/view/introduction/view/pages/third_page.dart';
-import 'package:tailorapp/view/introduction/view/pages/fourth_page.dart';
-import 'package:tailorapp/view/introduction/view/pages/fifth_page.dart';
-import 'package:tailorapp/view/introduction/view/pages/sixth_page.dart';
-import 'package:introduction_screen/introduction_screen.dart';
 
 class IntroPages {
   const IntroPages._();
@@ -77,13 +70,4 @@ class IntroPages {
     secondaryColor: const Color(0xFFBA68C8),
     icon: Icons.local_shipping,
   );
-
-  static List<PageViewModel> pageList = [
-    FirstPage.page,
-    SecondPage.page,
-    ThirdPage.page,
-    FourthPage.page,
-    FifthPage.page,
-    SixthPage.page,
-  ];
 }

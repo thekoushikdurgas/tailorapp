@@ -1,22 +1,22 @@
-import 'package:tailorapp/core/init/cache/theme/theme_caching.dart';
+import 'package:tailorapp/core/services/hive_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ThemeCubit extends Cubit<ThemeMode> {
-  ThemeCubit() : super(ThemeCaching.initialTheme());
+  ThemeCubit() : super(HiveService.getInitialTheme());
 
   void makelight() {
-    ThemeCaching.makelight();
+    HiveService.setLightTheme();
     emit(ThemeMode.light);
   }
 
   void makeDark() {
-    ThemeCaching.makeDark();
+    HiveService.setDarkTheme();
     emit(ThemeMode.dark);
   }
 
   void makeSystem() {
-    ThemeCaching.makeSystem();
+    HiveService.setSystemTheme();
     emit(ThemeMode.system);
   }
 }

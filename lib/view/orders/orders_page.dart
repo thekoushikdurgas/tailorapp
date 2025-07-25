@@ -78,7 +78,7 @@ class _OrdersPageState extends State<OrdersPage> with TickerProviderStateMixin {
         customerId: 'CUST001',
         customerName: 'John Doe',
         customerEmail: 'john.doe@example.com',
-        items: [
+        items: const [
           OrderItem(
             id: 'ITEM001',
             garmentId: 'GAR001',
@@ -118,7 +118,7 @@ class _OrdersPageState extends State<OrdersPage> with TickerProviderStateMixin {
           postalCode: '10001',
           country: 'USA',
         ),
-        progressImages: [],
+        progressImages: const [],
         statusHistory: [
           OrderStatusUpdate(
             id: 'STATUS001',
@@ -145,7 +145,7 @@ class _OrdersPageState extends State<OrdersPage> with TickerProviderStateMixin {
         customerId: 'CUST001',
         customerName: 'Jane Smith',
         customerEmail: 'jane.smith@example.com',
-        items: [
+        items: const [
           OrderItem(
             id: 'ITEM002',
             garmentId: 'GAR002',
@@ -186,7 +186,7 @@ class _OrdersPageState extends State<OrdersPage> with TickerProviderStateMixin {
           postalCode: '10001',
           country: 'USA',
         ),
-        progressImages: ['progress1.jpg', 'progress2.jpg'],
+        progressImages: const ['progress1.jpg', 'progress2.jpg'],
         statusHistory: [
           OrderStatusUpdate(
             id: 'STATUS004',
@@ -219,7 +219,7 @@ class _OrdersPageState extends State<OrdersPage> with TickerProviderStateMixin {
             message: 'Package shipped via express delivery',
           ),
         ],
-        metadata: {'trackingNumber': 'TRK123456789'},
+        metadata: const {'trackingNumber': 'TRK123456789'},
       ),
     ];
   }
@@ -227,15 +227,17 @@ class _OrdersPageState extends State<OrdersPage> with TickerProviderStateMixin {
   void _filterOrders() {
     _filteredOrders = _orders.where((order) {
       // Apply status filter
-      bool statusMatch =
+      final bool statusMatch =
           _selectedFilter == 'all' || order.status.value == _selectedFilter;
 
       // Apply search filter
-      bool searchMatch = _searchQuery.isEmpty ||
+      final bool searchMatch = _searchQuery.isEmpty ||
           order.id.toLowerCase().contains(_searchQuery.toLowerCase()) ||
-          order.items.any((item) => item.garmentName
-              .toLowerCase()
-              .contains(_searchQuery.toLowerCase()));
+          order.items.any(
+            (item) => item.garmentName
+                .toLowerCase()
+                .contains(_searchQuery.toLowerCase()),
+          );
 
       return statusMatch && searchMatch;
     }).toList();
@@ -572,7 +574,8 @@ class _OrdersPageState extends State<OrdersPage> with TickerProviderStateMixin {
             Text('Date: ${_formatDate(order.orderDate)}'),
             if (order.estimatedCompletionDate != null)
               Text(
-                  'Est. Completion: ${_formatDate(order.estimatedCompletionDate!)}'),
+                'Est. Completion: ${_formatDate(order.estimatedCompletionDate!)}',
+              ),
           ],
         ),
         actions: [
@@ -601,33 +604,35 @@ class _OrdersPageState extends State<OrdersPage> with TickerProviderStateMixin {
             ],
             const Text('Status History:'),
             const SizedBox(height: 8),
-            ...order.statusHistory.map((history) => Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+            ...order.statusHistory.map(
+              (history) => Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      history.status.displayName,
+                      style: const TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                    if (history.message != null)
                       Text(
-                        history.status.displayName,
-                        style: const TextStyle(fontWeight: FontWeight.w500),
-                      ),
-                      if (history.message != null)
-                        Text(
-                          history.message!,
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey[600],
-                          ),
-                        ),
-                      Text(
-                        _formatDate(history.timestamp),
+                        history.message!,
                         style: TextStyle(
-                          fontSize: 10,
-                          color: Colors.grey[500],
+                          fontSize: 12,
+                          color: Colors.grey[600],
                         ),
                       ),
-                    ],
-                  ),
-                )),
+                    Text(
+                      _formatDate(history.timestamp),
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: Colors.grey[500],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
         actions: [

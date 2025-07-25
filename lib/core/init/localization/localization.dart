@@ -9,12 +9,14 @@ class LocaleVariables {
   static const Locale _fallBackLocale = Locale('en', 'US');
 
   static List<DropdownMenuItem> localItems() {
-    List<DropdownMenuItem> menuItems = [];
-    for (var element in _localesList) {
-      menuItems.add(DropdownMenuItem(
-        value: element,
-        child: Text(ProjectLocales.localesMap[element].toString()),
-      ));
+    final List<DropdownMenuItem> menuItems = [];
+    for (final element in _localesList) {
+      menuItems.add(
+        DropdownMenuItem(
+          value: element,
+          child: Text(ProjectLocales.localesMap[element].toString()),
+        ),
+      );
     }
     return menuItems;
   }

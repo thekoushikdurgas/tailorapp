@@ -144,10 +144,12 @@ class OrderCubit extends Cubit<OrderState> {
       final orders =
           await ServiceLocator.orderRepository.getCustomerOrders(customerId);
 
-      emit(OrdersLoaded(
-        orders: orders,
-        filteredOrders: orders,
-      ));
+      emit(
+        OrdersLoaded(
+          orders: orders,
+          filteredOrders: orders,
+        ),
+      );
     } catch (e) {
       emit(OrderError(message: 'Failed to load orders: ${e.toString()}'));
     }
@@ -162,10 +164,12 @@ class OrderCubit extends Cubit<OrderState> {
         currentState.searchQuery,
       );
 
-      emit(currentState.copyWith(
-        selectedFilter: filter,
-        filteredOrders: filteredOrders,
-      ));
+      emit(
+        currentState.copyWith(
+          selectedFilter: filter,
+          filteredOrders: filteredOrders,
+        ),
+      );
     }
   }
 
@@ -180,10 +184,12 @@ class OrderCubit extends Cubit<OrderState> {
           '',
         );
 
-        emit(currentState.copyWith(
-          searchQuery: '',
-          filteredOrders: filteredOrders,
-        ));
+        emit(
+          currentState.copyWith(
+            searchQuery: '',
+            filteredOrders: filteredOrders,
+          ),
+        );
         return;
       }
 
@@ -198,11 +204,13 @@ class OrderCubit extends Cubit<OrderState> {
           query,
         );
 
-        emit(currentState.copyWith(
-          orders: searchResults,
-          searchQuery: query,
-          filteredOrders: filteredOrders,
-        ));
+        emit(
+          currentState.copyWith(
+            orders: searchResults,
+            searchQuery: query,
+            filteredOrders: filteredOrders,
+          ),
+        );
       } catch (e) {
         emit(OrderError(message: 'Search failed: ${e.toString()}'));
       }
@@ -210,17 +218,22 @@ class OrderCubit extends Cubit<OrderState> {
   }
 
   List<OrderModel> _applyFilters(
-      List<OrderModel> orders, String filter, String searchQuery) {
-    var filteredOrders = orders.where((order) {
+    List<OrderModel> orders,
+    String filter,
+    String searchQuery,
+  ) {
+    final filteredOrders = orders.where((order) {
       // Apply status filter
-      bool statusMatch = filter == 'all' || order.status.value == filter;
+      final bool statusMatch = filter == 'all' || order.status.value == filter;
 
       // Apply search filter
-      bool searchMatch = searchQuery.isEmpty ||
+      final bool searchMatch = searchQuery.isEmpty ||
           order.id.toLowerCase().contains(searchQuery.toLowerCase()) ||
-          order.items.any((item) => item.garmentName
-              .toLowerCase()
-              .contains(searchQuery.toLowerCase()));
+          order.items.any(
+            (item) => item.garmentName
+                .toLowerCase()
+                .contains(searchQuery.toLowerCase()),
+          );
 
       return statusMatch && searchMatch;
     }).toList();
@@ -243,7 +256,8 @@ class OrderCubit extends Cubit<OrderState> {
       emit(OrderDetailsLoaded(order: order));
     } catch (e) {
       emit(
-          OrderError(message: 'Failed to load order details: ${e.toString()}'));
+        OrderError(message: 'Failed to load order details: ${e.toString()}'),
+      );
     }
   }
 
@@ -253,17 +267,22 @@ class OrderCubit extends Cubit<OrderState> {
     try {
       final createdOrder =
           await ServiceLocator.orderRepository.createOrder(order);
-      emit(OrderCreated(
-        order: createdOrder,
-        message: 'Order created successfully',
-      ));
+      emit(
+        OrderCreated(
+          order: createdOrder,
+          message: 'Order created successfully',
+        ),
+      );
     } catch (e) {
       emit(OrderError(message: 'Failed to create order: ${e.toString()}'));
     }
   }
 
   Future<void> updateOrderStatus(
-      String orderId, OrderStatus status, String? message) async {
+    String orderId,
+    OrderStatus status,
+    String? message,
+  ) async {
     try {
       await ServiceLocator.orderRepository
           .updateOrderStatus(orderId, status, message);
@@ -289,48 +308,60 @@ class OrderCubit extends Cubit<OrderState> {
           currentState.searchQuery,
         );
 
-        emit(currentState.copyWith(
-          orders: updatedOrders,
-          filteredOrders: filteredOrders,
-        ));
+        emit(
+          currentState.copyWith(
+            orders: updatedOrders,
+            filteredOrders: filteredOrders,
+          ),
+        );
       }
     } catch (e) {
-      emit(OrderError(
-          message: 'Failed to update order status: ${e.toString()}'));
+      emit(
+        OrderError(
+          message: 'Failed to update order status: ${e.toString()}',
+        ),
+      );
     }
   }
 
   Future<void> cancelOrder(String orderId) async {
     try {
       await updateOrderStatus(
-          orderId, OrderStatus.cancelled, 'Order cancelled by customer');
-      emit(OrderUpdated(
-        order: OrderModel(
-          id: '',
-          customerId: '',
-          customerName: '',
-          customerEmail: '',
-          items: [],
-          totalAmount: 0,
-          taxAmount: 0,
-          shippingAmount: 0,
-          discountAmount: 0,
-          finalAmount: 0,
-          status: OrderStatus.cancelled,
-          paymentStatus: PaymentStatus.pending,
-          orderDate: DateTime.now(),
-          progressImages: [],
-          statusHistory: [],
+        orderId,
+        OrderStatus.cancelled,
+        'Order cancelled by customer',
+      );
+      emit(
+        OrderUpdated(
+          order: OrderModel(
+            id: '',
+            customerId: '',
+            customerName: '',
+            customerEmail: '',
+            items: const [],
+            totalAmount: 0,
+            taxAmount: 0,
+            shippingAmount: 0,
+            discountAmount: 0,
+            finalAmount: 0,
+            status: OrderStatus.cancelled,
+            paymentStatus: PaymentStatus.pending,
+            orderDate: DateTime.now(),
+            progressImages: const [],
+            statusHistory: const [],
+          ),
+          message: 'Order cancelled successfully',
         ),
-        message: 'Order cancelled successfully',
-      ));
+      );
     } catch (e) {
       emit(OrderError(message: 'Failed to cancel order: ${e.toString()}'));
     }
   }
 
   Future<void> processPayment(
-      String orderId, Map<String, dynamic> paymentData) async {
+    String orderId,
+    Map<String, dynamic> paymentData,
+  ) async {
     emit(PaymentProcessing(orderId: orderId));
 
     try {
@@ -346,21 +377,28 @@ class OrderCubit extends Cubit<OrderState> {
         paymentId,
       );
 
-      emit(PaymentSuccess(
-        orderId: orderId,
-        paymentId: paymentId,
-        message: 'Payment processed successfully',
-      ));
+      emit(
+        PaymentSuccess(
+          orderId: orderId,
+          paymentId: paymentId,
+          message: 'Payment processed successfully',
+        ),
+      );
     } catch (e) {
-      emit(PaymentFailure(
-        orderId: orderId,
-        error: 'Payment failed: ${e.toString()}',
-      ));
+      emit(
+        PaymentFailure(
+          orderId: orderId,
+          error: 'Payment failed: ${e.toString()}',
+        ),
+      );
     }
   }
 
   Future<void> requestRefund(
-      String orderId, double amount, String reason) async {
+    String orderId,
+    double amount,
+    String reason,
+  ) async {
     emit(const OrderLoading());
 
     try {
@@ -374,26 +412,28 @@ class OrderCubit extends Cubit<OrderState> {
         null,
       );
 
-      emit(OrderUpdated(
-        order: OrderModel(
-          id: '',
-          customerId: '',
-          customerName: '',
-          customerEmail: '',
-          items: [],
-          totalAmount: 0,
-          taxAmount: 0,
-          shippingAmount: 0,
-          discountAmount: 0,
-          finalAmount: 0,
-          status: OrderStatus.refunded,
-          paymentStatus: PaymentStatus.refunded,
-          orderDate: DateTime.now(),
-          progressImages: [],
-          statusHistory: [],
+      emit(
+        OrderUpdated(
+          order: OrderModel(
+            id: '',
+            customerId: '',
+            customerName: '',
+            customerEmail: '',
+            items: const [],
+            totalAmount: 0,
+            taxAmount: 0,
+            shippingAmount: 0,
+            discountAmount: 0,
+            finalAmount: 0,
+            status: OrderStatus.refunded,
+            paymentStatus: PaymentStatus.refunded,
+            orderDate: DateTime.now(),
+            progressImages: const [],
+            statusHistory: const [],
+          ),
+          message: 'Refund requested successfully',
         ),
-        message: 'Refund requested successfully',
-      ));
+      );
     } catch (e) {
       emit(OrderError(message: 'Failed to request refund: ${e.toString()}'));
     }
@@ -431,18 +471,20 @@ class OrderCubit extends Cubit<OrderState> {
         customerEmail: originalOrder.customerEmail,
         customerPhone: originalOrder.customerPhone,
         items: originalOrder.items
-            .map((item) => OrderItem(
-                  id: DateTime.now().millisecondsSinceEpoch.toString(),
-                  garmentId: item.garmentId,
-                  garmentName: item.garmentName,
-                  garmentType: item.garmentType,
-                  quantity: item.quantity,
-                  unitPrice: item.unitPrice,
-                  totalPrice: item.totalPrice,
-                  measurements: item.measurements,
-                  customizations: item.customizations,
-                  imageUrl: item.imageUrl,
-                ))
+            .map(
+              (item) => OrderItem(
+                id: DateTime.now().millisecondsSinceEpoch.toString(),
+                garmentId: item.garmentId,
+                garmentName: item.garmentName,
+                garmentType: item.garmentType,
+                quantity: item.quantity,
+                unitPrice: item.unitPrice,
+                totalPrice: item.totalPrice,
+                measurements: item.measurements,
+                customizations: item.customizations,
+                imageUrl: item.imageUrl,
+              ),
+            )
             .toList(),
         totalAmount: originalOrder.totalAmount,
         taxAmount: originalOrder.taxAmount,
@@ -456,7 +498,7 @@ class OrderCubit extends Cubit<OrderState> {
         orderDate: DateTime.now(),
         estimatedCompletionDate: DateTime.now().add(const Duration(days: 14)),
         shippingAddress: originalOrder.shippingAddress,
-        progressImages: [],
+        progressImages: const [],
         statusHistory: [
           OrderStatusUpdate(
             id: DateTime.now().millisecondsSinceEpoch.toString(),
@@ -493,15 +535,19 @@ class OrderCubit extends Cubit<OrderState> {
           currentState.searchQuery,
         );
 
-        emit(currentState.copyWith(
-          orders: orders,
-          filteredOrders: filteredOrders,
-        ));
+        emit(
+          currentState.copyWith(
+            orders: orders,
+            filteredOrders: filteredOrders,
+          ),
+        );
       } else {
-        emit(OrdersLoaded(
-          orders: orders,
-          filteredOrders: orders,
-        ));
+        emit(
+          OrdersLoaded(
+            orders: orders,
+            filteredOrders: orders,
+          ),
+        );
       }
     } catch (e) {
       emit(OrderError(message: 'Failed to refresh orders: ${e.toString()}'));

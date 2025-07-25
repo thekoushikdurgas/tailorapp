@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 class ChangerListtileWithDropdown extends StatelessWidget {
-  const ChangerListtileWithDropdown(
-      {super.key,
-      required this.icon,
-      required this.title,
-      required this.alertTitle,
-      required this.child});
+  const ChangerListtileWithDropdown({
+    super.key,
+    required this.icon,
+    required this.title,
+    required this.alertTitle,
+    required this.child,
+  });
 
   final Icon icon;
   final String title;

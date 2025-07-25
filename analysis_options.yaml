@@ -9,6 +9,18 @@
 # packages, and plugins designed to encourage good coding practices.
 include: package:flutter_lints/flutter.yaml
 
+analyzer:
+  # Treat certain warnings as errors to enforce best practices
+  errors:
+    # Make BuildContext async gap usage an error (not just warning)
+    use_build_context_synchronously: error
+    # Make missing return types an error
+    always_declare_return_types: error
+    # Make print statements an error in production code
+    avoid_print: error
+    # Make empty catches an error
+    empty_catches: error
+
 linter:
   # The lint rules applied to this project can be customized in the
   # section below to disable rules from the `package:flutter_lints/flutter.yaml`
@@ -22,8 +34,64 @@ linter:
   # `// ignore_for_file: name_of_lint` syntax on the line or in the file
   # producing the lint.
   rules:
-    # avoid_print: false  # Uncomment to disable the `avoid_print` rule
-    # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
+    # =========== CRITICAL FLUTTER RULES ===========
+    # Prevent BuildContext usage across async gaps
+    use_build_context_synchronously: true
+    
+    # =========== CODE QUALITY RULES ===========
+    # Prefer single quotes for consistency
+    prefer_single_quotes: true
+    
+    # Avoid print statements in production code
+    avoid_print: true
+    
+    # Ensure proper return types
+    always_declare_return_types: true
+    
+    # Prefer const constructors
+    prefer_const_constructors: true
+    prefer_const_constructors_in_immutables: true
+    prefer_const_declarations: true
+    prefer_const_literals_to_create_immutables: true
+    
+    # =========== ASYNC/AWAIT RULES ===========
+    # Note: avoid_returning_null_for_future was removed in Dart 3.3.0
+    
+    # =========== ERROR PREVENTION RULES ===========
+    # Avoid empty catch blocks
+    empty_catches: true
+    
+    # Avoid relative imports for lib/ imports
+    avoid_relative_lib_imports: true
+    
+    # Require trailing commas for better diffs
+    require_trailing_commas: true
+    
+    # =========== FLUTTER SPECIFIC RULES ===========
+    # Prefer sized box for whitespace
+    sized_box_for_whitespace: true
+    
+    # Use key in widget constructors appropriately
+    use_key_in_widget_constructors: true
+    
+    # Avoid unnecessary containers
+    avoid_unnecessary_containers: true
+    
+    # Prefer generic function type aliases
+    prefer_generic_function_type_aliases: true
+    
+    # =========== STYLE RULES ===========
+    # Prefer final for local variables
+    prefer_final_locals: true
+    
+    # Prefer final in for-each
+    prefer_final_in_for_each: true
+    
+    # Sort child properties last
+    sort_child_properties_last: true
+    
+    # Use super parameters
+    use_super_parameters: true
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options

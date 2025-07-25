@@ -5,6 +5,7 @@ git remote add origin https://github.com/thekoushikdurgas/tailorapp.git
 git branch -M main
 git push -u origin main -f
 
+
 git init
 git remote add origin https://github.com/thekoushikdurgas/tailorapp.git
 git branch -M main
@@ -67,10 +68,6 @@ flutter config --jdk-dir "C:\Program Files\Java\jdk-17"
 flutter doctor --android-licenses
 flutter doctor –verbose
 
-
-flutter pub run easy_localization:generate -S assets/translations -O lib/generated -o codegen_loader.g.dart -f keys
-flutter pub run easy_localization:generate -S assets/translations -O lib/generated -o locale_keys.g.dart
-
 flutter pub run flutter_launcher_icons:main
 
 flutter packages upgrade
@@ -123,6 +120,7 @@ dart run build_runner build
 flutter pub run build_runner build
 dart pub run build_runner build
 flutter pub run build_runner build --delete-conflicting-outputs
+flutter packages pub run easy_localization:generate -S assets/translations -f keys -o locale_keys.g.dart
 flutter pub cache repair
 
 
@@ -148,8 +146,8 @@ flutter build apk --release
 dart run flutter_native_splash:create
 
 
-flutter pub run easy_localization:generate -S assets/translations -O lib/generated -o codegen_loader.g.dart -f keys
-flutter pub run easy_localization:generate -S assets/translations -O lib/generated -o locale_keys.g.dart
+flutter pub run easy_localization:generate -S assets/translations -O lib/product/init/lang -o codegen_loader.g.dart -f keys
+flutter pub run easy_localization:generate -S assets/translations -O lib/product/init/lang -o locale_keys.g.dart -f keys
 
 flutter clean
 flutter pub get

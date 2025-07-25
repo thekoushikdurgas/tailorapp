@@ -9,9 +9,13 @@ abstract class CustomerRepository {
   Future<List<CustomerModel>> searchCustomers(String query);
   Future<CustomerModel?> getCustomerByEmail(String email);
   Future<void> updateMeasurements(
-      String customerId, BodyMeasurements measurements);
+    String customerId,
+    BodyMeasurements measurements,
+  );
   Future<void> updateStylePreferences(
-      String customerId, StylePreferences preferences);
+    String customerId,
+    StylePreferences preferences,
+  );
   Future<List<CustomerModel>> getRecentCustomers(int limit);
   Future<String> uploadProfileImage(String customerId, dynamic imageFile);
   Future<void> sendEmailVerification(String email);
@@ -127,7 +131,9 @@ class FirebaseCustomerRepository implements CustomerRepository {
 
   @override
   Future<void> updateMeasurements(
-      String customerId, BodyMeasurements measurements) async {
+    String customerId,
+    BodyMeasurements measurements,
+  ) async {
     try {
       await _firestore.collection(_collection).doc(customerId).update({
         'measurements': measurements.toJson(),
@@ -140,7 +146,9 @@ class FirebaseCustomerRepository implements CustomerRepository {
 
   @override
   Future<void> updateStylePreferences(
-      String customerId, StylePreferences preferences) async {
+    String customerId,
+    StylePreferences preferences,
+  ) async {
     try {
       await _firestore.collection(_collection).doc(customerId).update({
         'stylePreferences': preferences.toJson(),
@@ -148,7 +156,8 @@ class FirebaseCustomerRepository implements CustomerRepository {
       });
     } catch (e) {
       throw CustomerRepositoryException(
-          'Failed to update style preferences: $e');
+        'Failed to update style preferences: $e',
+      );
     }
   }
 
@@ -173,7 +182,9 @@ class FirebaseCustomerRepository implements CustomerRepository {
 
   @override
   Future<String> uploadProfileImage(
-      String customerId, dynamic imageFile) async {
+    String customerId,
+    dynamic imageFile,
+  ) async {
     try {
       // In a real implementation, this would upload to Firebase Storage
       // For now, we'll simulate the upload and return a mock URL
@@ -206,7 +217,8 @@ class FirebaseCustomerRepository implements CustomerRepository {
       // to send verification email to the user
     } catch (e) {
       throw CustomerRepositoryException(
-          'Failed to send email verification: $e');
+        'Failed to send email verification: $e',
+      );
     }
   }
 
@@ -216,7 +228,9 @@ class FirebaseCustomerRepository implements CustomerRepository {
       final customer = await getCustomer(customerId);
 
       if (customer == null) {
-        throw CustomerRepositoryException('Customer not found for export');
+        throw const CustomerRepositoryException(
+          'Customer not found for export',
+        );
       }
 
       // Create export data with privacy considerations

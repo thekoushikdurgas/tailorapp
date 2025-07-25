@@ -247,11 +247,11 @@ class _ColorPaletteSelectorState extends State<ColorPaletteSelector> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Pick a Color'),
-          content: SingleChildScrollView(
+          content: const SingleChildScrollView(
             child: SizedBox(
               width: 300,
               height: 300,
-              child: const Center(
+              child: Center(
                 child: Text(
                   'Color Picker Coming Soon!',
                   style: TextStyle(

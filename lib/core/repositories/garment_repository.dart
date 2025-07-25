@@ -12,7 +12,9 @@ abstract class GarmentRepository {
   Future<List<GarmentModel>> getRecentGarments(int limit);
   Future<void> updateGarmentStatus(String garmentId, GarmentStatus status);
   Future<List<GarmentModel>> getGarmentsByPriceRange(
-      double minPrice, double maxPrice);
+    double minPrice,
+    double maxPrice,
+  );
   Future<List<GarmentModel>> getGarmentsByCustomer(String customerId);
   Stream<GarmentModel> watchGarment(String id);
 }
@@ -180,7 +182,9 @@ class FirebaseGarmentRepository implements GarmentRepository {
 
   @override
   Future<void> updateGarmentStatus(
-      String garmentId, GarmentStatus status) async {
+    String garmentId,
+    GarmentStatus status,
+  ) async {
     try {
       await _firestore.collection(_collection).doc(garmentId).update({
         'status': status.value,
@@ -193,7 +197,9 @@ class FirebaseGarmentRepository implements GarmentRepository {
 
   @override
   Future<List<GarmentModel>> getGarmentsByPriceRange(
-      double minPrice, double maxPrice) async {
+    double minPrice,
+    double maxPrice,
+  ) async {
     try {
       final querySnapshot = await _firestore
           .collection(_collection)
@@ -209,7 +215,8 @@ class FirebaseGarmentRepository implements GarmentRepository {
       }).toList();
     } catch (e) {
       throw GarmentRepositoryException(
-          'Failed to get garments by price range: $e');
+        'Failed to get garments by price range: $e',
+      );
     }
   }
 
@@ -229,7 +236,8 @@ class FirebaseGarmentRepository implements GarmentRepository {
       }).toList();
     } catch (e) {
       throw GarmentRepositoryException(
-          'Failed to get garments by customer: $e');
+        'Failed to get garments by customer: $e',
+      );
     }
   }
 

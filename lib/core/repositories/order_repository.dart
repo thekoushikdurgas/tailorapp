@@ -10,11 +10,17 @@ abstract class OrderRepository {
   Future<List<OrderModel>> getOrdersByStatus(OrderStatus status);
   Future<List<OrderModel>> getRecentOrders(int limit);
   Future<void> updateOrderStatus(
-      String orderId, OrderStatus status, String? message);
+    String orderId,
+    OrderStatus status,
+    String? message,
+  );
   Future<List<OrderModel>> searchOrders(String query);
   Future<List<OrderModel>> getOrdersInDateRange(DateTime start, DateTime end);
   Future<void> updatePaymentStatus(
-      String orderId, PaymentStatus status, String? paymentId);
+    String orderId,
+    PaymentStatus status,
+    String? paymentId,
+  );
   Future<void> requestRefund(String orderId, double amount, String reason);
   Stream<OrderModel> watchOrder(String id);
   Stream<List<OrderModel>> watchCustomerOrders(String customerId);
@@ -141,7 +147,10 @@ class FirebaseOrderRepository implements OrderRepository {
 
   @override
   Future<void> updateOrderStatus(
-      String orderId, OrderStatus status, String? message) async {
+    String orderId,
+    OrderStatus status,
+    String? message,
+  ) async {
     try {
       final statusUpdate = OrderStatusUpdate(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
@@ -205,7 +214,9 @@ class FirebaseOrderRepository implements OrderRepository {
 
   @override
   Future<List<OrderModel>> getOrdersInDateRange(
-      DateTime start, DateTime end) async {
+    DateTime start,
+    DateTime end,
+  ) async {
     try {
       final querySnapshot = await _firestore
           .collection(_collection)
@@ -263,7 +274,10 @@ class FirebaseOrderRepository implements OrderRepository {
 
   @override
   Future<void> updatePaymentStatus(
-      String orderId, PaymentStatus status, String? paymentId) async {
+    String orderId,
+    PaymentStatus status,
+    String? paymentId,
+  ) async {
     try {
       final updateData = <String, dynamic>{
         'paymentStatus': status.value,
@@ -281,7 +295,10 @@ class FirebaseOrderRepository implements OrderRepository {
 
   @override
   Future<void> requestRefund(
-      String orderId, double amount, String reason) async {
+    String orderId,
+    double amount,
+    String reason,
+  ) async {
     try {
       final refundData = {
         'refund': {
@@ -289,7 +306,7 @@ class FirebaseOrderRepository implements OrderRepository {
           'reason': reason,
           'requestedAt': DateTime.now().toIso8601String(),
           'status': 'requested',
-        }
+        },
       };
 
       await _firestore.collection(_collection).doc(orderId).update(refundData);

@@ -31,7 +31,7 @@ class ProductionOpenAIServiceImpl implements OpenAIService {
       final enhancedPrompt = _buildVariationPrompt(prompt, baseDesigns);
 
       final chatCompletion = await OpenAI.instance.chat.create(
-        model: "gpt-4",
+        model: 'gpt-4',
         messages: [
           OpenAIChatCompletionChoiceMessageModel(
             content: [
@@ -69,7 +69,7 @@ class ProductionOpenAIServiceImpl implements OpenAIService {
       final prompt = _buildDescriptionPrompt(designParameters);
 
       final chatCompletion = await OpenAI.instance.chat.create(
-        model: "gpt-4",
+        model: 'gpt-4',
         messages: [
           OpenAIChatCompletionChoiceMessageModel(
             content: [
@@ -147,7 +147,9 @@ class ProductionOpenAIServiceImpl implements OpenAIService {
   }
 
   String _buildVariationPrompt(
-      String userPrompt, List<Map<String, dynamic>> baseDesigns) {
+    String userPrompt,
+    List<Map<String, dynamic>> baseDesigns,
+  ) {
     final buffer = StringBuffer();
     buffer.write('Based on this user request: "$userPrompt"\n\n');
     buffer.write('And these existing design suggestions:\n');
@@ -158,16 +160,19 @@ class ProductionOpenAIServiceImpl implements OpenAIService {
     }
 
     buffer.write(
-        '\nCreate 2 additional design variations that complement these suggestions. ');
+      '\nCreate 2 additional design variations that complement these suggestions. ',
+    );
     buffer.write(
-        'Focus on different styles, colors, or approaches while maintaining quality and wearability.\n\n');
+      'Focus on different styles, colors, or approaches while maintaining quality and wearability.\n\n',
+    );
     buffer.write('Respond with ONLY a JSON array in this exact format:\n');
     buffer.write('[\n');
     buffer.write('  {\n');
     buffer.write('    "title": "Design Name",\n');
     buffer.write('    "description": "Detailed description",\n');
     buffer.write(
-        '    "garmentType": "shirt/dress/suit/jacket/trousers/skirt/blouse",\n');
+      '    "garmentType": "shirt/dress/suit/jacket/trousers/skirt/blouse",\n',
+    );
     buffer.write('    "colors": ["color1", "color2"],\n');
     buffer.write('    "fabrics": ["fabric1", "fabric2"],\n');
     buffer.write('    "patterns": ["pattern1", "pattern2"],\n');
@@ -188,16 +193,19 @@ class ProductionOpenAIServiceImpl implements OpenAIService {
   String _buildDescriptionPrompt(Map<String, dynamic> designParameters) {
     final buffer = StringBuffer();
     buffer.write(
-        'Write a compelling, professional description for a custom garment with these specifications:\n\n');
+      'Write a compelling, professional description for a custom garment with these specifications:\n\n',
+    );
 
     designParameters.forEach((key, value) {
       buffer.write('$key: $value\n');
     });
 
     buffer.write(
-        '\nThe description should be 2-3 sentences, highlighting the key features, ');
+      '\nThe description should be 2-3 sentences, highlighting the key features, ',
+    );
     buffer.write(
-        'quality, and style. Make it sound premium and desirable for potential customers. ');
+      'quality, and style. Make it sound premium and desirable for potential customers. ',
+    );
     buffer.write('Focus on craftsmanship, fit, and versatility.');
 
     return buffer.toString();
@@ -262,9 +270,9 @@ class ProductionOpenAIServiceImpl implements OpenAIService {
           'style': 'classic',
           'fit': 'regular',
           'occasion': 'versatile',
-          'features': ['Quality construction', 'Comfortable fit']
+          'features': ['Quality construction', 'Comfortable fit'],
         },
-        'imageUrls': []
+        'imageUrls': [],
       },
       {
         'title': 'Urban Modern',
@@ -279,9 +287,9 @@ class ProductionOpenAIServiceImpl implements OpenAIService {
           'style': 'modern',
           'fit': 'slim',
           'occasion': 'business',
-          'features': ['Wrinkle resistant', 'Moisture wicking']
+          'features': ['Wrinkle resistant', 'Moisture wicking'],
         },
-        'imageUrls': []
+        'imageUrls': [],
       }
     ];
   }

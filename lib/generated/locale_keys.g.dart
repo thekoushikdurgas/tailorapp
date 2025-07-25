@@ -2,7 +2,7 @@
 
 // ignore_for_file: constant_identifier_names
 
-abstract class LocaleKeys {
+abstract class  LocaleKeys {
   static const app_name = 'app.name';
   static const app_version = 'app.version';
   static const app_description = 'app.description';
@@ -26,28 +26,22 @@ abstract class LocaleKeys {
   static const intro_introTitleThird = 'intro.introTitleThird';
   static const intro_introDescriptionThird = 'intro.introDescriptionThird';
   static const intro_onboarding_page1_title = 'intro.onboarding.page1.title';
-  static const intro_onboarding_page1_subtitle =
-      'intro.onboarding.page1.subtitle';
+  static const intro_onboarding_page1_subtitle = 'intro.onboarding.page1.subtitle';
   static const intro_onboarding_page1 = 'intro.onboarding.page1';
   static const intro_onboarding_page2_title = 'intro.onboarding.page2.title';
-  static const intro_onboarding_page2_subtitle =
-      'intro.onboarding.page2.subtitle';
+  static const intro_onboarding_page2_subtitle = 'intro.onboarding.page2.subtitle';
   static const intro_onboarding_page2 = 'intro.onboarding.page2';
   static const intro_onboarding_page3_title = 'intro.onboarding.page3.title';
-  static const intro_onboarding_page3_subtitle =
-      'intro.onboarding.page3.subtitle';
+  static const intro_onboarding_page3_subtitle = 'intro.onboarding.page3.subtitle';
   static const intro_onboarding_page3 = 'intro.onboarding.page3';
   static const intro_onboarding_page4_title = 'intro.onboarding.page4.title';
-  static const intro_onboarding_page4_subtitle =
-      'intro.onboarding.page4.subtitle';
+  static const intro_onboarding_page4_subtitle = 'intro.onboarding.page4.subtitle';
   static const intro_onboarding_page4 = 'intro.onboarding.page4';
   static const intro_onboarding_page5_title = 'intro.onboarding.page5.title';
-  static const intro_onboarding_page5_subtitle =
-      'intro.onboarding.page5.subtitle';
+  static const intro_onboarding_page5_subtitle = 'intro.onboarding.page5.subtitle';
   static const intro_onboarding_page5 = 'intro.onboarding.page5';
   static const intro_onboarding_page6_title = 'intro.onboarding.page6.title';
-  static const intro_onboarding_page6_subtitle =
-      'intro.onboarding.page6.subtitle';
+  static const intro_onboarding_page6_subtitle = 'intro.onboarding.page6.subtitle';
   static const intro_onboarding_page6 = 'intro.onboarding.page6';
   static const intro_onboarding = 'intro.onboarding';
   static const intro_feature = 'intro.feature';
@@ -84,25 +78,17 @@ abstract class LocaleKeys {
   static const localization_langChoose = 'localization.langChoose';
   static const localization_languageSettings = 'localization.languageSettings';
   static const localization_currentLanguage = 'localization.currentLanguage';
-  static const localization_availableLanguages =
-      'localization.availableLanguages';
+  static const localization_availableLanguages = 'localization.availableLanguages';
   static const localization_languageChanged = 'localization.languageChanged';
   static const localization_languageError = 'localization.languageError';
   static const localization_selectLanguage = 'localization.selectLanguage';
-  static const localization_languageSelection_title =
-      'localization.languageSelection.title';
-  static const localization_languageSelection_subtitle =
-      'localization.languageSelection.subtitle';
-  static const localization_languageSelection_applyLanguage =
-      'localization.languageSelection.applyLanguage';
-  static const localization_languageSelection_skipSelection =
-      'localization.languageSelection.skipSelection';
-  static const localization_languageSelection_currentSelection =
-      'localization.languageSelection.currentSelection';
-  static const localization_languageSelection_changeLanguage =
-      'localization.languageSelection.changeLanguage';
-  static const localization_languageSelection =
-      'localization.languageSelection';
+  static const localization_languageSelection_title = 'localization.languageSelection.title';
+  static const localization_languageSelection_subtitle = 'localization.languageSelection.subtitle';
+  static const localization_languageSelection_applyLanguage = 'localization.languageSelection.applyLanguage';
+  static const localization_languageSelection_skipSelection = 'localization.languageSelection.skipSelection';
+  static const localization_languageSelection_currentSelection = 'localization.languageSelection.currentSelection';
+  static const localization_languageSelection_changeLanguage = 'localization.languageSelection.changeLanguage';
+  static const localization_languageSelection = 'localization.languageSelection';
   static const localization = 'localization';
   static const loading_loading = 'loading.loading';
   static const loading_pleaseWait = 'loading.pleaseWait';
@@ -211,4 +197,5 @@ abstract class LocaleKeys {
   static const footer_version = 'footer.version';
   static const footer = 'footer';
   static const settingTitle = 'settingTitle';
+
 }

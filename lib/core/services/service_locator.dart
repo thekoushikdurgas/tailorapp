@@ -213,7 +213,8 @@ class ServiceLocator {
 class MockGeminiService implements GeminiService {
   @override
   Future<List<Map<String, dynamic>>> generateDesignSuggestions(
-      String prompt) async {
+    String prompt,
+  ) async {
     await Future.delayed(const Duration(seconds: 1));
     return [
       {
@@ -229,9 +230,9 @@ class MockGeminiService implements GeminiService {
           'style': 'classic',
           'fit': 'regular',
           'occasion': 'business',
-          'features': ['Wrinkle resistant', 'Moisture wicking', 'Easy care']
+          'features': ['Wrinkle resistant', 'Moisture wicking', 'Easy care'],
         },
-        'imageUrls': []
+        'imageUrls': [],
       },
       {
         'title': 'Modern Casual Shirt',
@@ -246,9 +247,9 @@ class MockGeminiService implements GeminiService {
           'style': 'modern',
           'fit': 'relaxed',
           'occasion': 'casual',
-          'features': ['Breathable', 'Comfortable', 'Versatile']
+          'features': ['Breathable', 'Comfortable', 'Versatile'],
         },
-        'imageUrls': []
+        'imageUrls': [],
       }
     ];
   }
@@ -261,7 +262,7 @@ class MockGeminiService implements GeminiService {
       'Crisp White',
       'Sky Blue',
       'Charcoal Grey',
-      'Forest Green'
+      'Forest Green',
     ];
   }
 
@@ -277,14 +278,14 @@ class MockGeminiService implements GeminiService {
       'reasons': [
         'Excellent breathability for all-day comfort',
         'Durable construction for long-lasting wear',
-        'Easy care and maintenance'
+        'Easy care and maintenance',
       ],
       'alternatives': ['Cotton blend', 'Linen', 'Modal'],
       'care': [
         'Machine wash cold',
         'Tumble dry low',
-        'Iron on medium heat if needed'
-      ]
+        'Iron on medium heat if needed',
+      ],
     };
   }
 
@@ -322,10 +323,10 @@ class MockOpenAIService implements OpenAIService {
           'features': [
             'French cuffs',
             'Mother-of-pearl buttons',
-            'Reinforced collar'
-          ]
+            'Reinforced collar',
+          ],
         },
-        'imageUrls': []
+        'imageUrls': [],
       }
     ];
   }

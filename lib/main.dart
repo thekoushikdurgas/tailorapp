@@ -1,8 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:tailorapp/app.dart';
-import 'package:tailorapp/core/init/cache/onboarding/intro_caching.dart';
 import 'package:tailorapp/core/init/cubit/theme_cubit.dart';
-import 'package:tailorapp/core/init/cache/theme/theme_caching.dart';
+import 'package:tailorapp/core/services/hive_service.dart';
 import 'package:tailorapp/core/init/localization/project_locales.dart';
 import 'package:tailorapp/core/services/service_locator.dart';
 import 'package:tailorapp/core/cubit/auth_cubit.dart';
@@ -23,8 +22,8 @@ Future<void> main() async {
   await Firebase.initializeApp();
 
   await LocaleVariables._init();
-  await ThemeCaching.init();
-  await IntroCaching.init();
+  await HiveService
+      .init(); // This replaces ThemeCaching.init() and IntroCaching.init()
 
   // Setup production services with authentication
   await ServiceLocator.setupServiceLocator();

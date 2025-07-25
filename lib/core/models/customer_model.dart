@@ -51,10 +51,12 @@ class CustomerModel extends Equatable {
           : null,
       measurements: json['measurements'] != null
           ? BodyMeasurements.fromJson(
-              json['measurements'] as Map<String, dynamic>)
+              json['measurements'] as Map<String, dynamic>,
+            )
           : null,
       stylePreferences: StylePreferences.fromJson(
-          json['stylePreferences'] as Map<String, dynamic>),
+        json['stylePreferences'] as Map<String, dynamic>,
+      ),
       orderHistory: List<String>.from(json['orderHistory'] as List),
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),

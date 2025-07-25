@@ -2,6 +2,7 @@ enum RouteEnum {
   intro,
   setting,
   homePage,
+  languageSelection,
   // AI Tailoring Features
   designCanvas,
   virtualFitting,
@@ -24,6 +25,8 @@ extension RouteEnumString on RouteEnum {
         return '/setting';
       case RouteEnum.homePage:
         return '/home';
+      case RouteEnum.languageSelection:
+        return '/language-selection';
       // AI Tailoring Features
       case RouteEnum.designCanvas:
         return '/design-canvas';

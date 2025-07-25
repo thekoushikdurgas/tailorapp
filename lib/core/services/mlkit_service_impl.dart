@@ -252,7 +252,8 @@ class MLKitServiceImpl implements MLKitService {
 
   // Additional utility methods for body measurement analysis
   Future<Map<String, dynamic>> analyzeBodyProportions(
-      BodyMeasurements measurements) async {
+    BodyMeasurements measurements,
+  ) async {
     final analysis = <String, dynamic>{};
 
     if (measurements.chest != null &&
@@ -310,28 +311,28 @@ class MLKitServiceImpl implements MLKitService {
         recommendations.addAll([
           'Consider A-line cuts to balance proportions',
           'Empire waistlines work well',
-          'Avoid tight-fitting around the midsection'
+          'Avoid tight-fitting around the midsection',
         ]);
         break;
       case 'Pear':
         recommendations.addAll([
           'Emphasize the upper body with structured shoulders',
           'A-line skirts and dresses are flattering',
-          'Avoid tight-fitting bottoms'
+          'Avoid tight-fitting bottoms',
         ]);
         break;
       case 'Hourglass':
         recommendations.addAll([
           'Fitted garments that highlight the waist',
           'Wrap styles work beautifully',
-          'Avoid loose, shapeless clothing'
+          'Avoid loose, shapeless clothing',
         ]);
         break;
       case 'Rectangle':
         recommendations.addAll([
           'Create curves with fitted waists',
           'Layering adds dimension',
-          'Experiment with different silhouettes'
+          'Experiment with different silhouettes',
         ]);
         break;
       default:

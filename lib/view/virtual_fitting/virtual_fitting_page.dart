@@ -535,9 +535,9 @@ class _VirtualFittingPageState extends State<VirtualFittingPage>
                 _showMeasurementGuide = !_showMeasurementGuide;
               });
             },
-            icon: Icon(_showMeasurementGuide
-                ? Icons.visibility_off
-                : Icons.visibility),
+            icon: Icon(
+              _showMeasurementGuide ? Icons.visibility_off : Icons.visibility,
+            ),
             label: Text(_showMeasurementGuide ? 'Hide Guide' : 'Show Guide'),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.white.withValues(alpha: 0.2),
@@ -822,11 +822,20 @@ class _VirtualFittingPageState extends State<VirtualFittingPage>
           ),
           const SizedBox(height: 16),
           _buildSizeRecommendation(
-              'Shirt', 'Medium (M)', 'Perfect fit based on your measurements'),
+            'Shirt',
+            'Medium (M)',
+            'Perfect fit based on your measurements',
+          ),
           _buildSizeRecommendation(
-              'Dress', 'Size 8', 'Recommended for your body type'),
+            'Dress',
+            'Size 8',
+            'Recommended for your body type',
+          ),
           _buildSizeRecommendation(
-              'Suit', 'Large (L)', 'Consider slim fit for better appearance'),
+            'Suit',
+            'Large (L)',
+            'Consider slim fit for better appearance',
+          ),
         ],
       ),
     );
@@ -927,29 +936,31 @@ class _VirtualFittingPageState extends State<VirtualFittingPage>
             ],
           ),
           const SizedBox(height: 16),
-          ...measurements.entries.map((entry) => Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      entry.key,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: Colors.black87,
-                      ),
+          ...measurements.entries.map(
+            (entry) => Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    entry.key,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: Colors.black87,
                     ),
-                    Text(
-                      entry.value,
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.blue[600],
-                      ),
+                  ),
+                  Text(
+                    entry.value,
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.blue[600],
                     ),
-                  ],
-                ),
-              )),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );

@@ -99,14 +99,20 @@ class NavigationRoute {
 
   /// Navigate with parameters
   static void goWithParams(
-      BuildContext context, String route, Map<String, String> params) {
+    BuildContext context,
+    String route,
+    Map<String, String> params,
+  ) {
     final uri = Uri(path: route, queryParameters: params);
     context.go(uri.toString());
   }
 
   /// Push with parameters
   static void pushWithParams(
-      BuildContext context, String route, Map<String, String> params) {
+    BuildContext context,
+    String route,
+    Map<String, String> params,
+  ) {
     final uri = Uri(path: route, queryParameters: params);
     context.push(uri.toString());
   }

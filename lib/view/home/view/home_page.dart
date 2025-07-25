@@ -225,7 +225,7 @@ class HomePage extends StatelessWidget {
         Expanded(
           child: _buildStatCard(
             title: 'Saved',
-            value: "\$45",
+            value: '\$45',
             subtitle: 'This Month',
             icon: Icons.savings_outlined,
             color: Colors.green,

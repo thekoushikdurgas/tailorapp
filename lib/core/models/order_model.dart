@@ -81,13 +81,16 @@ class OrderModel extends Equatable {
           : null,
       shippingAddress: json['shippingAddress'] != null
           ? ShippingAddress.fromJson(
-              json['shippingAddress'] as Map<String, dynamic>)
+              json['shippingAddress'] as Map<String, dynamic>,
+            )
           : null,
       specialInstructions: json['specialInstructions'] as String?,
       progressImages: List<String>.from(json['progressImages'] as List),
       statusHistory: (json['statusHistory'] as List)
-          .map((update) =>
-              OrderStatusUpdate.fromJson(update as Map<String, dynamic>))
+          .map(
+            (update) =>
+                OrderStatusUpdate.fromJson(update as Map<String, dynamic>),
+          )
           .toList(),
       tailorId: json['tailorId'] as String?,
       tailorName: json['tailorName'] as String?,

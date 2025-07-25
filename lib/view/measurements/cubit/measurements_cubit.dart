@@ -112,18 +112,23 @@ class MeasurementsCubit extends Cubit<MeasurementsState> {
             await _calculateSizeRecommendations(customer!.measurements!);
         final analysis = _generateBodyAnalysis(customer.measurements!);
 
-        emit(MeasurementsLoaded(
-          measurements: customer.measurements,
-          sizeRecommendations: recommendations,
-          bodyAnalysis: analysis,
-          selectedUnit: customer.measurements!.unit,
-        ));
+        emit(
+          MeasurementsLoaded(
+            measurements: customer.measurements,
+            sizeRecommendations: recommendations,
+            bodyAnalysis: analysis,
+            selectedUnit: customer.measurements!.unit,
+          ),
+        );
       } else {
         emit(const MeasurementsLoaded());
       }
     } catch (e) {
-      emit(MeasurementsError(
-          message: 'Failed to load measurements: ${e.toString()}'));
+      emit(
+        MeasurementsError(
+          message: 'Failed to load measurements: ${e.toString()}',
+        ),
+      );
     }
   }
 
@@ -188,22 +193,29 @@ class MeasurementsCubit extends Cubit<MeasurementsState> {
       final recommendations = await _calculateSizeRecommendations(measurements);
       final analysis = _generateBodyAnalysis(measurements);
 
-      emit(MeasurementsSaved(
-        measurements: measurements,
-        message: 'Measurements saved successfully',
-      ));
+      emit(
+        MeasurementsSaved(
+          measurements: measurements,
+          message: 'Measurements saved successfully',
+        ),
+      );
 
       // Return to loaded state with new data
-      emit(MeasurementsLoaded(
-        measurements: measurements,
-        sizeRecommendations: recommendations,
-        bodyAnalysis: analysis,
-        isEditing: false,
-        selectedUnit: unit,
-      ));
+      emit(
+        MeasurementsLoaded(
+          measurements: measurements,
+          sizeRecommendations: recommendations,
+          bodyAnalysis: analysis,
+          isEditing: false,
+          selectedUnit: unit,
+        ),
+      );
     } catch (e) {
-      emit(MeasurementsError(
-          message: 'Failed to save measurements: ${e.toString()}'));
+      emit(
+        MeasurementsError(
+          message: 'Failed to save measurements: ${e.toString()}',
+        ),
+      );
     }
   }
 
@@ -221,21 +233,27 @@ class MeasurementsCubit extends Cubit<MeasurementsState> {
       final recommendations =
           await _calculateSizeRecommendations(currentState.measurements!);
 
-      emit(SizeRecommendationsGenerated(
-        recommendations: recommendations,
-        message: 'Size recommendations generated',
-      ));
+      emit(
+        SizeRecommendationsGenerated(
+          recommendations: recommendations,
+          message: 'Size recommendations generated',
+        ),
+      );
 
       // Return to loaded state with new recommendations
       emit(currentState.copyWith(sizeRecommendations: recommendations));
     } catch (e) {
-      emit(MeasurementsError(
-          message: 'Failed to generate recommendations: ${e.toString()}'));
+      emit(
+        MeasurementsError(
+          message: 'Failed to generate recommendations: ${e.toString()}',
+        ),
+      );
     }
   }
 
   Future<Map<String, double>> _calculateSizeRecommendations(
-      BodyMeasurements measurements) async {
+    BodyMeasurements measurements,
+  ) async {
     try {
       // Calculate recommendations for different garment types
       final shirtRecommendations =
@@ -382,7 +400,9 @@ class MeasurementsCubit extends Cubit<MeasurementsState> {
   }
 
   Future<void> importFromVirtualFitting(
-      Map<String, double> capturedMeasurements, String unit) async {
+    Map<String, double> capturedMeasurements,
+    String unit,
+  ) async {
     emit(const MeasurementsLoading());
 
     try {
@@ -399,15 +419,20 @@ class MeasurementsCubit extends Cubit<MeasurementsState> {
       final recommendations = await _calculateSizeRecommendations(measurements);
       final analysis = _generateBodyAnalysis(measurements);
 
-      emit(MeasurementsLoaded(
-        measurements: measurements,
-        sizeRecommendations: recommendations,
-        bodyAnalysis: analysis,
-        selectedUnit: unit,
-      ));
+      emit(
+        MeasurementsLoaded(
+          measurements: measurements,
+          sizeRecommendations: recommendations,
+          bodyAnalysis: analysis,
+          selectedUnit: unit,
+        ),
+      );
     } catch (e) {
-      emit(MeasurementsError(
-          message: 'Failed to import measurements: ${e.toString()}'));
+      emit(
+        MeasurementsError(
+          message: 'Failed to import measurements: ${e.toString()}',
+        ),
+      );
     }
   }
 
@@ -430,24 +455,31 @@ class MeasurementsCubit extends Cubit<MeasurementsState> {
 
         if (state is MeasurementsLoaded) {
           final currentState = state as MeasurementsLoaded;
-          emit(currentState.copyWith(
-            measurements: customer.measurements,
-            sizeRecommendations: recommendations,
-            bodyAnalysis: analysis,
-            selectedUnit: customer.measurements!.unit,
-          ));
+          emit(
+            currentState.copyWith(
+              measurements: customer.measurements,
+              sizeRecommendations: recommendations,
+              bodyAnalysis: analysis,
+              selectedUnit: customer.measurements!.unit,
+            ),
+          );
         } else {
-          emit(MeasurementsLoaded(
-            measurements: customer.measurements,
-            sizeRecommendations: recommendations,
-            bodyAnalysis: analysis,
-            selectedUnit: customer.measurements!.unit,
-          ));
+          emit(
+            MeasurementsLoaded(
+              measurements: customer.measurements,
+              sizeRecommendations: recommendations,
+              bodyAnalysis: analysis,
+              selectedUnit: customer.measurements!.unit,
+            ),
+          );
         }
       }
     } catch (e) {
-      emit(MeasurementsError(
-          message: 'Failed to refresh measurements: ${e.toString()}'));
+      emit(
+        MeasurementsError(
+          message: 'Failed to refresh measurements: ${e.toString()}',
+        ),
+      );
     }
   }
 }

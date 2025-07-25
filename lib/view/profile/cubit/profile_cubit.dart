@@ -165,10 +165,12 @@ class ProfileCubit extends Cubit<ProfileState> {
       final savedCustomer = await ServiceLocator.customerRepository
           .updateCustomer(updatedCustomer);
 
-      emit(ProfileUpdated(
-        customer: savedCustomer,
-        message: 'Profile updated successfully',
-      ));
+      emit(
+        ProfileUpdated(
+          customer: savedCustomer,
+          message: 'Profile updated successfully',
+        ),
+      );
 
       // Return to loaded state
       emit(ProfileLoaded(customer: savedCustomer, isEditing: false));
@@ -200,16 +202,21 @@ class ProfileCubit extends Cubit<ProfileState> {
       final savedCustomer = await ServiceLocator.customerRepository
           .updateCustomer(updatedCustomer);
 
-      emit(ProfileImageUpdated(
-        imageUrl: imageUrl,
-        message: 'Profile image updated successfully',
-      ));
+      emit(
+        ProfileImageUpdated(
+          imageUrl: imageUrl,
+          message: 'Profile image updated successfully',
+        ),
+      );
 
       // Return to loaded state
       emit(ProfileLoaded(customer: savedCustomer));
     } catch (e) {
-      emit(ProfileError(
-          message: 'Failed to update profile image: ${e.toString()}'));
+      emit(
+        ProfileError(
+          message: 'Failed to update profile image: ${e.toString()}',
+        ),
+      );
     }
   }
 
@@ -230,16 +237,21 @@ class ProfileCubit extends Cubit<ProfileState> {
         updatedAt: DateTime.now(),
       );
 
-      emit(MeasurementsUpdated(
-        measurements: measurements,
-        message: 'Measurements updated successfully',
-      ));
+      emit(
+        MeasurementsUpdated(
+          measurements: measurements,
+          message: 'Measurements updated successfully',
+        ),
+      );
 
       // Return to loaded state
       emit(ProfileLoaded(customer: updatedCustomer));
     } catch (e) {
-      emit(ProfileError(
-          message: 'Failed to update measurements: ${e.toString()}'));
+      emit(
+        ProfileError(
+          message: 'Failed to update measurements: ${e.toString()}',
+        ),
+      );
     }
   }
 
@@ -260,16 +272,21 @@ class ProfileCubit extends Cubit<ProfileState> {
         updatedAt: DateTime.now(),
       );
 
-      emit(StylePreferencesUpdated(
-        preferences: preferences,
-        message: 'Style preferences updated successfully',
-      ));
+      emit(
+        StylePreferencesUpdated(
+          preferences: preferences,
+          message: 'Style preferences updated successfully',
+        ),
+      );
 
       // Return to loaded state
       emit(ProfileLoaded(customer: updatedCustomer));
     } catch (e) {
-      emit(ProfileError(
-          message: 'Failed to update style preferences: ${e.toString()}'));
+      emit(
+        ProfileError(
+          message: 'Failed to update style preferences: ${e.toString()}',
+        ),
+      );
     }
   }
 
@@ -288,10 +305,12 @@ class ProfileCubit extends Cubit<ProfileState> {
       final savedCustomer = await ServiceLocator.customerRepository
           .updateCustomer(updatedCustomer);
 
-      emit(ProfileUpdated(
-        customer: savedCustomer,
-        message: 'Address updated successfully',
-      ));
+      emit(
+        ProfileUpdated(
+          customer: savedCustomer,
+          message: 'Address updated successfully',
+        ),
+      );
 
       // Return to loaded state
       emit(ProfileLoaded(customer: savedCustomer));
@@ -326,28 +345,33 @@ class ProfileCubit extends Cubit<ProfileState> {
 
       // In a real app, this would trigger an email verification flow
       // For now, we'll just show a success message
-      emit(ProfileUpdated(
-        customer: CustomerModel(
-          id: '',
-          name: '',
-          email: '',
-          stylePreferences: StylePreferences(
-            preferredStyles: [],
-            preferredColors: [],
-            preferredFabrics: [],
-            dislikedColors: [],
-            dislikedFabrics: [],
-            occasions: [],
+      emit(
+        ProfileUpdated(
+          customer: CustomerModel(
+            id: '',
+            name: '',
+            email: '',
+            stylePreferences: const StylePreferences(
+              preferredStyles: [],
+              preferredColors: [],
+              preferredFabrics: [],
+              dislikedColors: [],
+              dislikedFabrics: [],
+              occasions: [],
+            ),
+            orderHistory: const [],
+            createdAt: DateTime.now(),
+            updatedAt: DateTime.now(),
           ),
-          orderHistory: [],
-          createdAt: DateTime.now(),
-          updatedAt: DateTime.now(),
+          message: 'Verification email sent',
         ),
-        message: 'Verification email sent',
-      ));
+      );
     } catch (e) {
-      emit(ProfileError(
-          message: 'Failed to send verification email: ${e.toString()}'));
+      emit(
+        ProfileError(
+          message: 'Failed to send verification email: ${e.toString()}',
+        ),
+      );
     }
   }
 
@@ -357,25 +381,27 @@ class ProfileCubit extends Cubit<ProfileState> {
     try {
       await ServiceLocator.customerRepository.deleteCustomer(userId);
 
-      emit(ProfileUpdated(
-        customer: CustomerModel(
-          id: '',
-          name: '',
-          email: '',
-          stylePreferences: StylePreferences(
-            preferredStyles: [],
-            preferredColors: [],
-            preferredFabrics: [],
-            dislikedColors: [],
-            dislikedFabrics: [],
-            occasions: [],
+      emit(
+        ProfileUpdated(
+          customer: CustomerModel(
+            id: '',
+            name: '',
+            email: '',
+            stylePreferences: const StylePreferences(
+              preferredStyles: [],
+              preferredColors: [],
+              preferredFabrics: [],
+              dislikedColors: [],
+              dislikedFabrics: [],
+              occasions: [],
+            ),
+            orderHistory: const [],
+            createdAt: DateTime.now(),
+            updatedAt: DateTime.now(),
           ),
-          orderHistory: [],
-          createdAt: DateTime.now(),
-          updatedAt: DateTime.now(),
+          message: 'Account deleted successfully',
         ),
-        message: 'Account deleted successfully',
-      ));
+      );
     } catch (e) {
       emit(ProfileError(message: 'Failed to delete account: ${e.toString()}'));
     }
@@ -394,25 +420,27 @@ class ProfileCubit extends Cubit<ProfileState> {
       // final exportData = await ServiceLocator.customerRepository.exportCustomerData(userId);
 
       // In a real app, this would trigger a download or email with the data
-      emit(ProfileUpdated(
-        customer: CustomerModel(
-          id: '',
-          name: '',
-          email: '',
-          stylePreferences: StylePreferences(
-            preferredStyles: [],
-            preferredColors: [],
-            preferredFabrics: [],
-            dislikedColors: [],
-            dislikedFabrics: [],
-            occasions: [],
+      emit(
+        ProfileUpdated(
+          customer: CustomerModel(
+            id: '',
+            name: '',
+            email: '',
+            stylePreferences: const StylePreferences(
+              preferredStyles: [],
+              preferredColors: [],
+              preferredFabrics: [],
+              dislikedColors: [],
+              dislikedFabrics: [],
+              occasions: [],
+            ),
+            orderHistory: const [],
+            createdAt: DateTime.now(),
+            updatedAt: DateTime.now(),
           ),
-          orderHistory: [],
-          createdAt: DateTime.now(),
-          updatedAt: DateTime.now(),
+          message: 'Data export completed',
         ),
-        message: 'Data export completed',
-      ));
+      );
     } catch (e) {
       emit(ProfileError(message: 'Failed to export data: ${e.toString()}'));
     }

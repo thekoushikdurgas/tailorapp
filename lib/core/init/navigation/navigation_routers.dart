@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tailorapp/core/init/cache/onboarding/intro_caching.dart';
+import 'package:tailorapp/core/services/hive_service.dart';
 import 'package:tailorapp/core/cubit/auth_cubit.dart';
 import 'package:tailorapp/view/_product/enum/route_enum.dart';
 import 'package:tailorapp/view/home/view/home_page.dart';
@@ -16,20 +16,28 @@ import 'package:tailorapp/view/auth/forgot_password_page.dart';
 import 'package:tailorapp/view/auth/auth_wrapper.dart';
 import 'package:tailorapp/view/design/widgets/ai_suggestions_panel.dart';
 import 'package:tailorapp/view/measurements/measurements_page.dart';
+import 'package:tailorapp/view/language_selection/language_selection_screen.dart';
 import 'package:go_router/go_router.dart';
 
 class NavigationRouters {
   const NavigationRouters._();
 
   static final GoRouter router = GoRouter(
-    initialLocation: IntroCaching.initialIntro(),
+    initialLocation: HiveService.getInitialIntroRoute(),
     redirect: (context, state) {
       final authState = context.read<AuthCubit>().state;
       final isLoggedIn = authState is AuthAuthenticated;
       final isGoingToAuth = state.fullPath?.startsWith('/auth') ?? false;
       final isGoingToIntro = state.fullPath?.startsWith('/intro') ?? false;
+      final isGoingToLanguage =
+          state.fullPath?.startsWith('/language-selection') ?? false;
 
-      // If not logged in and not going to auth or intro, redirect to auth
+      // Allow access to language selection without restrictions
+      if (isGoingToLanguage) {
+        return null;
+      }
+
+      // If not logged in and not going to auth, intro, or language selection, redirect to auth
       if (!isLoggedIn && !isGoingToAuth && !isGoingToIntro) {
         return '/auth/login';
       }
@@ -60,6 +68,12 @@ class NavigationRouters {
             builder: (context, state) => const ForgotPasswordPage(),
           ),
         ],
+      ),
+
+      // Language Selection route
+      GoRoute(
+        path: RouteEnum.languageSelection.rawValue,
+        builder: (context, state) => const LanguageSelectionScreen(),
       ),
 
       // Intro route

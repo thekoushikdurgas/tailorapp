@@ -253,7 +253,8 @@ class AIServiceImpl implements AIService {
 
     if (preferredColors != null && preferredColors.isNotEmpty) {
       buffer.write(
-          'Consider these preferred colors: ${preferredColors.join(', ')}. ');
+        'Consider these preferred colors: ${preferredColors.join(', ')}. ',
+      );
     }
 
     buffer.write('Provide 5-7 complementary colors that work well together.');

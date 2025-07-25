@@ -89,7 +89,7 @@ class _ProfilePageState extends State<ProfilePage> {
           budgetRange: '\$50-\$150',
           occasions: ['Business', 'Casual', 'Formal'],
         ),
-        orderHistory: ['ORD001', 'ORD002', 'ORD003'],
+        orderHistory: const ['ORD001', 'ORD002', 'ORD003'],
         createdAt: DateTime.now().subtract(const Duration(days: 90)),
         updatedAt: DateTime.now().subtract(const Duration(days: 5)),
         isVerified: true,
@@ -400,13 +400,16 @@ class _ProfilePageState extends State<ProfilePage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               _buildStatCard(
-                  'Orders', _customer?.orderHistory.length.toString() ?? '0'),
+                'Orders',
+                _customer?.orderHistory.length.toString() ?? '0',
+              ),
               _buildStatCard('Designs', '8'),
               _buildStatCard(
-                  'Member Since',
-                  _customer != null
-                      ? '${DateTime.now().difference(_customer!.createdAt).inDays} days'
-                      : 'N/A'),
+                'Member Since',
+                _customer != null
+                    ? '${DateTime.now().difference(_customer!.createdAt).inDays} days'
+                    : 'N/A',
+              ),
             ],
           ),
         ],
@@ -461,16 +464,18 @@ class _ProfilePageState extends State<ProfilePage> {
           else ...[
             _buildInfoRow('Phone', _customer?.phone ?? 'Not provided'),
             _buildInfoRow(
-                'Date of Birth',
-                _customer?.dateOfBirth != null
-                    ? '${_customer!.dateOfBirth!.day}/${_customer!.dateOfBirth!.month}/${_customer!.dateOfBirth!.year}'
-                    : 'Not provided'),
+              'Date of Birth',
+              _customer?.dateOfBirth != null
+                  ? '${_customer!.dateOfBirth!.day}/${_customer!.dateOfBirth!.month}/${_customer!.dateOfBirth!.year}'
+                  : 'Not provided',
+            ),
             _buildInfoRow('Gender', _customer?.gender ?? 'Not specified'),
             _buildInfoRow(
-                'Member Since',
-                _customer?.createdAt != null
-                    ? '${_customer!.createdAt.day}/${_customer!.createdAt.month}/${_customer!.createdAt.year}'
-                    : 'Unknown'),
+              'Member Since',
+              _customer?.createdAt != null
+                  ? '${_customer!.createdAt.day}/${_customer!.createdAt.month}/${_customer!.createdAt.year}'
+                  : 'Unknown',
+            ),
           ],
         ],
       ),
@@ -556,12 +561,18 @@ class _ProfilePageState extends State<ProfilePage> {
                     children: [
                       Expanded(
                         child: _buildMeasurementItem(
-                            'Chest', measurements.chest, measurements.unit),
+                          'Chest',
+                          measurements.chest,
+                          measurements.unit,
+                        ),
                       ),
                       const SizedBox(width: 16),
                       Expanded(
                         child: _buildMeasurementItem(
-                            'Waist', measurements.waist, measurements.unit),
+                          'Waist',
+                          measurements.waist,
+                          measurements.unit,
+                        ),
                       ),
                     ],
                   ),
@@ -570,12 +581,18 @@ class _ProfilePageState extends State<ProfilePage> {
                     children: [
                       Expanded(
                         child: _buildMeasurementItem(
-                            'Hips', measurements.hips, measurements.unit),
+                          'Hips',
+                          measurements.hips,
+                          measurements.unit,
+                        ),
                       ),
                       const SizedBox(width: 16),
                       Expanded(
-                        child: _buildMeasurementItem('Shoulders',
-                            measurements.shoulders, measurements.unit),
+                        child: _buildMeasurementItem(
+                          'Shoulders',
+                          measurements.shoulders,
+                          measurements.unit,
+                        ),
                       ),
                     ],
                   ),
@@ -584,12 +601,18 @@ class _ProfilePageState extends State<ProfilePage> {
                     children: [
                       Expanded(
                         child: _buildMeasurementItem(
-                            'Height', measurements.height, measurements.unit),
+                          'Height',
+                          measurements.height,
+                          measurements.unit,
+                        ),
                       ),
                       const SizedBox(width: 16),
                       Expanded(
-                        child: _buildMeasurementItem('Arm Length',
-                            measurements.armLength, measurements.unit),
+                        child: _buildMeasurementItem(
+                          'Arm Length',
+                          measurements.armLength,
+                          measurements.unit,
+                        ),
                       ),
                     ],
                   ),
@@ -654,10 +677,14 @@ class _ProfilePageState extends State<ProfilePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _buildPreferenceChips(
-                      'Preferred Colors', preferences.preferredColors),
+                    'Preferred Colors',
+                    preferences.preferredColors,
+                  ),
                   const SizedBox(height: 12),
                   _buildPreferenceChips(
-                      'Preferred Fabrics', preferences.preferredFabrics),
+                    'Preferred Fabrics',
+                    preferences.preferredFabrics,
+                  ),
                   const SizedBox(height: 12),
                   _buildPreferenceChips('Occasions', preferences.occasions),
                   if (preferences.fitPreference != null) ...[
@@ -715,7 +742,8 @@ class _ProfilePageState extends State<ProfilePage> {
             onTap: () {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
-                    content: Text('Notification settings coming soon!')),
+                  content: Text('Notification settings coming soon!'),
+                ),
               );
             },
           ),
@@ -975,9 +1003,11 @@ class _ProfilePageState extends State<ProfilePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                      '${address.street}${address.apartment != null ? ', ${address.apartment}' : ''}'),
+                    '${address.street}${address.apartment != null ? ', ${address.apartment}' : ''}',
+                  ),
                   Text(
-                      '${address.city}, ${address.state} ${address.postalCode}'),
+                    '${address.city}, ${address.state} ${address.postalCode}',
+                  ),
                   Text(address.country),
                 ],
               )

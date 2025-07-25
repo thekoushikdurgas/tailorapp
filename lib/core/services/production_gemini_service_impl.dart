@@ -21,7 +21,8 @@ class ProductionGeminiServiceImpl implements GeminiService {
 
   @override
   Future<List<Map<String, dynamic>>> generateDesignSuggestions(
-      String prompt) async {
+    String prompt,
+  ) async {
     if (!_isApiKeyValid || _isApiKeyPlaceholder()) {
       return _fallbackService.generateDesignSuggestions(prompt);
     }
@@ -295,8 +296,9 @@ Ensure the response is valid JSON only, no additional text or explanations.
   List<String> _extractColorsFromText(String text) {
     final colors = <String>[];
     final colorRegex = RegExp(
-        r'\b(?:red|blue|green|yellow|black|white|gray|grey|brown|pink|purple|orange|navy|beige|cream|gold|silver|maroon|teal|olive|lime|aqua|fuchsia)\b',
-        caseSensitive: false);
+      r'\b(?:red|blue|green|yellow|black|white|gray|grey|brown|pink|purple|orange|navy|beige|cream|gold|silver|maroon|teal|olive|lime|aqua|fuchsia)\b',
+      caseSensitive: false,
+    );
 
     final matches = colorRegex.allMatches(text.toLowerCase());
     for (final match in matches) {
@@ -329,9 +331,9 @@ Ensure the response is valid JSON only, no additional text or explanations.
           'style': 'classic',
           'fit': 'regular',
           'occasion': 'business',
-          'features': ['Button-down collar', 'Chest pocket', 'French cuffs']
+          'features': ['Button-down collar', 'Chest pocket', 'French cuffs'],
         },
-        'imageUrls': []
+        'imageUrls': [],
       },
       {
         'title': 'Modern Casual Dress',
@@ -346,9 +348,9 @@ Ensure the response is valid JSON only, no additional text or explanations.
           'style': 'modern',
           'fit': 'regular',
           'occasion': 'casual',
-          'features': ['A-line cut', 'Knee length', 'Short sleeves']
+          'features': ['A-line cut', 'Knee length', 'Short sleeves'],
         },
-        'imageUrls': []
+        'imageUrls': [],
       }
     ];
   }
@@ -359,10 +361,10 @@ Ensure the response is valid JSON only, no additional text or explanations.
       'reasons': [
         'Good durability for everyday wear',
         'Easy to care for and maintain',
-        'Comfortable against skin'
+        'Comfortable against skin',
       ],
       'alternatives': ['Cotton blend', 'Linen', 'Modal'],
-      'care': ['Machine wash cold', 'Tumble dry low', 'Iron on medium heat']
+      'care': ['Machine wash cold', 'Tumble dry low', 'Iron on medium heat'],
     };
   }
 }

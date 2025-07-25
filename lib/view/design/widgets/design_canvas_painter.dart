@@ -210,54 +210,120 @@ class DesignCanvasPainter extends CustomPainter {
 
     switch (garmentType) {
       case 'shirt':
-        _drawEnhancedShirt(canvas, centerX, centerY, silhouettePaint,
-            outlinePaint, detailPaint);
+        _drawEnhancedShirt(
+          canvas,
+          centerX,
+          centerY,
+          silhouettePaint,
+          outlinePaint,
+          detailPaint,
+        );
         break;
       case 'dress':
-        _drawEnhancedDress(canvas, centerX, centerY, silhouettePaint,
-            outlinePaint, detailPaint);
+        _drawEnhancedDress(
+          canvas,
+          centerX,
+          centerY,
+          silhouettePaint,
+          outlinePaint,
+          detailPaint,
+        );
         break;
       case 'suit':
-        _drawEnhancedSuit(canvas, centerX, centerY, silhouettePaint,
-            outlinePaint, detailPaint);
+        _drawEnhancedSuit(
+          canvas,
+          centerX,
+          centerY,
+          silhouettePaint,
+          outlinePaint,
+          detailPaint,
+        );
         break;
       case 'jacket':
-        _drawEnhancedJacket(canvas, centerX, centerY, silhouettePaint,
-            outlinePaint, detailPaint);
+        _drawEnhancedJacket(
+          canvas,
+          centerX,
+          centerY,
+          silhouettePaint,
+          outlinePaint,
+          detailPaint,
+        );
         break;
       case 'trousers':
-        _drawEnhancedTrousers(canvas, centerX, centerY, silhouettePaint,
-            outlinePaint, detailPaint);
+        _drawEnhancedTrousers(
+          canvas,
+          centerX,
+          centerY,
+          silhouettePaint,
+          outlinePaint,
+          detailPaint,
+        );
         break;
       case 'skirt':
-        _drawEnhancedSkirt(canvas, centerX, centerY, silhouettePaint,
-            outlinePaint, detailPaint);
+        _drawEnhancedSkirt(
+          canvas,
+          centerX,
+          centerY,
+          silhouettePaint,
+          outlinePaint,
+          detailPaint,
+        );
         break;
     }
   }
 
-  void _drawEnhancedShirt(Canvas canvas, double centerX, double centerY,
-      Paint fillPaint, Paint outlinePaint, Paint detailPaint) {
+  void _drawEnhancedShirt(
+    Canvas canvas,
+    double centerX,
+    double centerY,
+    Paint fillPaint,
+    Paint outlinePaint,
+    Paint detailPaint,
+  ) {
     final path = Path();
 
     // Enhanced shirt body with curves
     path.moveTo(centerX - 80, centerY - 120); // Left shoulder
-    path.quadraticBezierTo(centerX - 105, centerY - 85, centerX - 100,
-        centerY - 80); // Left armpit curve
+    path.quadraticBezierTo(
+      centerX - 105,
+      centerY - 85,
+      centerX - 100,
+      centerY - 80,
+    ); // Left armpit curve
     path.lineTo(centerX - 85, centerY + 70); // Left side
-    path.quadraticBezierTo(centerX - 80, centerY + 85, centerX - 70,
-        centerY + 85); // Left hem curve
+    path.quadraticBezierTo(
+      centerX - 80,
+      centerY + 85,
+      centerX - 70,
+      centerY + 85,
+    ); // Left hem curve
     path.lineTo(centerX + 70, centerY + 85); // Bottom hem
-    path.quadraticBezierTo(centerX + 80, centerY + 85, centerX + 85,
-        centerY + 70); // Right hem curve
+    path.quadraticBezierTo(
+      centerX + 80,
+      centerY + 85,
+      centerX + 85,
+      centerY + 70,
+    ); // Right hem curve
     path.lineTo(centerX + 100, centerY - 80); // Right side
-    path.quadraticBezierTo(centerX + 105, centerY - 85, centerX + 80,
-        centerY - 120); // Right armpit curve
+    path.quadraticBezierTo(
+      centerX + 105,
+      centerY - 85,
+      centerX + 80,
+      centerY - 120,
+    ); // Right armpit curve
     path.lineTo(centerX + 45, centerY - 135); // Right neck
     path.quadraticBezierTo(
-        centerX + 20, centerY - 145, centerX, centerY - 145); // Neck curve
-    path.quadraticBezierTo(centerX - 20, centerY - 145, centerX - 45,
-        centerY - 135); // Left neck curve
+      centerX + 20,
+      centerY - 145,
+      centerX,
+      centerY - 145,
+    ); // Neck curve
+    path.quadraticBezierTo(
+      centerX - 20,
+      centerY - 145,
+      centerX - 45,
+      centerY - 135,
+    ); // Left neck curve
     path.close();
 
     canvas.drawPath(path, fillPaint);
@@ -274,14 +340,26 @@ class DesignCanvasPainter extends CustomPainter {
   }
 
   void _drawShirtCollar(
-      Canvas canvas, double centerX, double centerY, Paint paint) {
+    Canvas canvas,
+    double centerX,
+    double centerY,
+    Paint paint,
+  ) {
     final collarPath = Path();
     collarPath.moveTo(centerX - 35, centerY - 135);
     collarPath.quadraticBezierTo(
-        centerX - 25, centerY - 125, centerX - 15, centerY - 120);
+      centerX - 25,
+      centerY - 125,
+      centerX - 15,
+      centerY - 120,
+    );
     collarPath.lineTo(centerX + 15, centerY - 120);
     collarPath.quadraticBezierTo(
-        centerX + 25, centerY - 125, centerX + 35, centerY - 135);
+      centerX + 25,
+      centerY - 125,
+      centerX + 35,
+      centerY - 135,
+    );
 
     canvas.drawPath(collarPath, paint);
 
@@ -294,7 +372,11 @@ class DesignCanvasPainter extends CustomPainter {
   }
 
   void _drawShirtDetails(
-      Canvas canvas, double centerX, double centerY, Paint paint) {
+    Canvas canvas,
+    double centerX,
+    double centerY,
+    Paint paint,
+  ) {
     // Button placket
     for (int i = 0; i < 6; i++) {
       final buttonY = centerY - 120 + (i * 25);
@@ -303,26 +385,41 @@ class DesignCanvasPainter extends CustomPainter {
 
     // Pocket
     final pocketPath = Path();
-    pocketPath.addRRect(RRect.fromRectAndRadius(
-      Rect.fromCenter(
-        center: Offset(centerX - 40, centerY - 60),
-        width: 30,
-        height: 25,
+    pocketPath.addRRect(
+      RRect.fromRectAndRadius(
+        Rect.fromCenter(
+          center: Offset(centerX - 40, centerY - 60),
+          width: 30,
+          height: 25,
+        ),
+        const Radius.circular(3),
       ),
-      const Radius.circular(3),
-    ));
+    );
     canvas.drawPath(pocketPath, paint);
   }
 
-  void _drawEnhancedSleeves(Canvas canvas, double centerX, double centerY,
-      Paint fillPaint, Paint outlinePaint) {
+  void _drawEnhancedSleeves(
+    Canvas canvas,
+    double centerX,
+    double centerY,
+    Paint fillPaint,
+    Paint outlinePaint,
+  ) {
     // Left sleeve with proper volume
     final leftSleevePath = Path();
     leftSleevePath.moveTo(centerX - 80, centerY - 120);
     leftSleevePath.quadraticBezierTo(
-        centerX - 140, centerY - 105, centerX - 130, centerY - 85);
+      centerX - 140,
+      centerY - 105,
+      centerX - 130,
+      centerY - 85,
+    );
     leftSleevePath.quadraticBezierTo(
-        centerX - 125, centerY - 60, centerX - 115, centerY - 65);
+      centerX - 125,
+      centerY - 60,
+      centerX - 115,
+      centerY - 65,
+    );
     leftSleevePath.lineTo(centerX - 100, centerY - 80);
     leftSleevePath.close();
 
@@ -330,9 +427,17 @@ class DesignCanvasPainter extends CustomPainter {
     final rightSleevePath = Path();
     rightSleevePath.moveTo(centerX + 80, centerY - 120);
     rightSleevePath.quadraticBezierTo(
-        centerX + 140, centerY - 105, centerX + 130, centerY - 85);
+      centerX + 140,
+      centerY - 105,
+      centerX + 130,
+      centerY - 85,
+    );
     rightSleevePath.quadraticBezierTo(
-        centerX + 125, centerY - 60, centerX + 115, centerY - 65);
+      centerX + 125,
+      centerY - 60,
+      centerX + 115,
+      centerY - 65,
+    );
     rightSleevePath.lineTo(centerX + 100, centerY - 80);
     rightSleevePath.close();
 
@@ -342,28 +447,62 @@ class DesignCanvasPainter extends CustomPainter {
     canvas.drawPath(rightSleevePath, outlinePaint);
   }
 
-  void _drawEnhancedDress(Canvas canvas, double centerX, double centerY,
-      Paint fillPaint, Paint outlinePaint, Paint detailPaint) {
+  void _drawEnhancedDress(
+    Canvas canvas,
+    double centerX,
+    double centerY,
+    Paint fillPaint,
+    Paint outlinePaint,
+    Paint detailPaint,
+  ) {
     final path = Path();
 
     // Enhanced dress silhouette with curves
     path.moveTo(centerX - 65, centerY - 125); // Left shoulder
     path.quadraticBezierTo(
-        centerX - 85, centerY - 85, centerX - 80, centerY - 80); // Left armpit
+      centerX - 85,
+      centerY - 85,
+      centerX - 80,
+      centerY - 80,
+    ); // Left armpit
     path.quadraticBezierTo(
-        centerX - 75, centerY - 20, centerX - 70, centerY); // Waist curve
+      centerX - 75,
+      centerY - 20,
+      centerX - 70,
+      centerY,
+    ); // Waist curve
     path.quadraticBezierTo(
-        centerX - 90, centerY + 80, centerX - 130, centerY + 160); // Left hem
+      centerX - 90,
+      centerY + 80,
+      centerX - 130,
+      centerY + 160,
+    ); // Left hem
     path.lineTo(centerX + 130, centerY + 160); // Bottom hem
     path.quadraticBezierTo(
-        centerX + 90, centerY + 80, centerX + 70, centerY); // Right waist
+      centerX + 90,
+      centerY + 80,
+      centerX + 70,
+      centerY,
+    ); // Right waist
     path.quadraticBezierTo(
-        centerX + 75, centerY - 20, centerX + 80, centerY - 80); // Right side
-    path.quadraticBezierTo(centerX + 85, centerY - 85, centerX + 65,
-        centerY - 125); // Right armpit
+      centerX + 75,
+      centerY - 20,
+      centerX + 80,
+      centerY - 80,
+    ); // Right side
+    path.quadraticBezierTo(
+      centerX + 85,
+      centerY - 85,
+      centerX + 65,
+      centerY - 125,
+    ); // Right armpit
     path.lineTo(centerX + 35, centerY - 140); // Right neck
     path.quadraticBezierTo(
-        centerX, centerY - 150, centerX - 35, centerY - 140); // Neck curve
+      centerX,
+      centerY - 150,
+      centerX - 35,
+      centerY - 140,
+    ); // Neck curve
     path.close();
 
     canvas.drawPath(path, fillPaint);
@@ -381,38 +520,78 @@ class DesignCanvasPainter extends CustomPainter {
   }
 
   void _drawDressDetails(
-      Canvas canvas, double centerX, double centerY, Paint paint) {
+    Canvas canvas,
+    double centerX,
+    double centerY,
+    Paint paint,
+  ) {
     // Neckline detail
     final necklinePath = Path();
     necklinePath.moveTo(centerX - 25, centerY - 140);
     necklinePath.quadraticBezierTo(
-        centerX, centerY - 135, centerX + 25, centerY - 140);
+      centerX,
+      centerY - 135,
+      centerX + 25,
+      centerY - 140,
+    );
     canvas.drawPath(necklinePath, paint);
   }
 
   // Additional enhanced garment methods would go here...
-  void _drawEnhancedSuit(Canvas canvas, double centerX, double centerY,
-      Paint fillPaint, Paint outlinePaint, Paint detailPaint) {
+  void _drawEnhancedSuit(
+    Canvas canvas,
+    double centerX,
+    double centerY,
+    Paint fillPaint,
+    Paint outlinePaint,
+    Paint detailPaint,
+  ) {
     // Enhanced suit implementation
     _drawEnhancedJacket(
-        canvas, centerX, centerY - 40, fillPaint, outlinePaint, detailPaint);
+      canvas,
+      centerX,
+      centerY - 40,
+      fillPaint,
+      outlinePaint,
+      detailPaint,
+    );
     _drawEnhancedTrousers(
-        canvas, centerX, centerY + 100, fillPaint, outlinePaint, detailPaint);
+      canvas,
+      centerX,
+      centerY + 100,
+      fillPaint,
+      outlinePaint,
+      detailPaint,
+    );
   }
 
-  void _drawEnhancedJacket(Canvas canvas, double centerX, double centerY,
-      Paint fillPaint, Paint outlinePaint, Paint detailPaint) {
+  void _drawEnhancedJacket(
+    Canvas canvas,
+    double centerX,
+    double centerY,
+    Paint fillPaint,
+    Paint outlinePaint,
+    Paint detailPaint,
+  ) {
     // Enhanced jacket with lapels and construction details
     final path = Path();
 
     path.moveTo(centerX - 95, centerY - 125);
     path.quadraticBezierTo(
-        centerX - 120, centerY - 85, centerX - 115, centerY - 80);
+      centerX - 120,
+      centerY - 85,
+      centerX - 115,
+      centerY - 80,
+    );
     path.lineTo(centerX - 100, centerY + 65);
     path.lineTo(centerX + 100, centerY + 65);
     path.lineTo(centerX + 115, centerY - 80);
     path.quadraticBezierTo(
-        centerX + 120, centerY - 85, centerX + 95, centerY - 125);
+      centerX + 120,
+      centerY - 85,
+      centerX + 95,
+      centerY - 125,
+    );
     path.lineTo(centerX + 55, centerY - 145);
     path.quadraticBezierTo(centerX, centerY - 150, centerX - 55, centerY - 145);
     path.close();
@@ -426,12 +605,20 @@ class DesignCanvasPainter extends CustomPainter {
   }
 
   void _drawJacketLapels(
-      Canvas canvas, double centerX, double centerY, Paint paint) {
+    Canvas canvas,
+    double centerX,
+    double centerY,
+    Paint paint,
+  ) {
     // Left lapel
     final leftLapel = Path();
     leftLapel.moveTo(centerX - 55, centerY - 145);
     leftLapel.quadraticBezierTo(
-        centerX - 45, centerY - 120, centerX - 35, centerY - 100);
+      centerX - 45,
+      centerY - 120,
+      centerX - 35,
+      centerY - 100,
+    );
     leftLapel.lineTo(centerX - 15, centerY - 110);
     leftLapel.close();
 
@@ -439,7 +626,11 @@ class DesignCanvasPainter extends CustomPainter {
     final rightLapel = Path();
     rightLapel.moveTo(centerX + 55, centerY - 145);
     rightLapel.quadraticBezierTo(
-        centerX + 45, centerY - 120, centerX + 35, centerY - 100);
+      centerX + 45,
+      centerY - 120,
+      centerX + 35,
+      centerY - 100,
+    );
     rightLapel.lineTo(centerX + 15, centerY - 110);
     rightLapel.close();
 
@@ -448,7 +639,11 @@ class DesignCanvasPainter extends CustomPainter {
   }
 
   void _drawJacketButtons(
-      Canvas canvas, double centerX, double centerY, Paint paint) {
+    Canvas canvas,
+    double centerX,
+    double centerY,
+    Paint paint,
+  ) {
     // Double-breasted buttons
     for (int i = 0; i < 3; i++) {
       final buttonY = centerY - 90 + (i * 30);
@@ -457,13 +652,23 @@ class DesignCanvasPainter extends CustomPainter {
     }
   }
 
-  void _drawEnhancedTrousers(Canvas canvas, double centerX, double centerY,
-      Paint fillPaint, Paint outlinePaint, Paint detailPaint) {
+  void _drawEnhancedTrousers(
+    Canvas canvas,
+    double centerX,
+    double centerY,
+    Paint fillPaint,
+    Paint outlinePaint,
+    Paint detailPaint,
+  ) {
     // Enhanced trousers with realistic proportions
     final leftLeg = Path();
     leftLeg.moveTo(centerX - 65, centerY - 45);
     leftLeg.quadraticBezierTo(
-        centerX - 45, centerY + 20, centerX - 40, centerY + 80);
+      centerX - 45,
+      centerY + 20,
+      centerX - 40,
+      centerY + 80,
+    );
     leftLeg.lineTo(centerX - 35, centerY + 130);
     leftLeg.lineTo(centerX - 15, centerY + 130);
     leftLeg.lineTo(centerX - 5, centerY + 80);
@@ -473,12 +678,20 @@ class DesignCanvasPainter extends CustomPainter {
     final rightLeg = Path();
     rightLeg.moveTo(centerX, centerY - 45);
     rightLeg.quadraticBezierTo(
-        centerX, centerY + 20, centerX + 5, centerY + 80);
+      centerX,
+      centerY + 20,
+      centerX + 5,
+      centerY + 80,
+    );
     rightLeg.lineTo(centerX + 15, centerY + 130);
     rightLeg.lineTo(centerX + 35, centerY + 130);
     rightLeg.lineTo(centerX + 40, centerY + 80);
     rightLeg.quadraticBezierTo(
-        centerX + 45, centerY + 20, centerX + 65, centerY - 45);
+      centerX + 45,
+      centerY + 20,
+      centerX + 65,
+      centerY - 45,
+    );
     rightLeg.close();
 
     canvas.drawPath(leftLeg, fillPaint);
@@ -491,7 +704,11 @@ class DesignCanvasPainter extends CustomPainter {
   }
 
   void _drawTrouserDetails(
-      Canvas canvas, double centerX, double centerY, Paint paint) {
+    Canvas canvas,
+    double centerX,
+    double centerY,
+    Paint paint,
+  ) {
     // Waistband
     canvas.drawLine(
       Offset(centerX - 65, centerY - 45),
@@ -512,17 +729,31 @@ class DesignCanvasPainter extends CustomPainter {
     );
   }
 
-  void _drawEnhancedSkirt(Canvas canvas, double centerX, double centerY,
-      Paint fillPaint, Paint outlinePaint, Paint detailPaint) {
+  void _drawEnhancedSkirt(
+    Canvas canvas,
+    double centerX,
+    double centerY,
+    Paint fillPaint,
+    Paint outlinePaint,
+    Paint detailPaint,
+  ) {
     final path = Path();
 
     // Enhanced skirt with realistic curves
     path.moveTo(centerX - 75, centerY - 45); // Left waist
     path.quadraticBezierTo(
-        centerX - 85, centerY + 20, centerX - 110, centerY + 85); // Left curve
+      centerX - 85,
+      centerY + 20,
+      centerX - 110,
+      centerY + 85,
+    ); // Left curve
     path.lineTo(centerX + 110, centerY + 85); // Bottom hem
     path.quadraticBezierTo(
-        centerX + 85, centerY + 20, centerX + 75, centerY - 45); // Right curve
+      centerX + 85,
+      centerY + 20,
+      centerX + 75,
+      centerY - 45,
+    ); // Right curve
     path.close();
 
     canvas.drawPath(path, fillPaint);

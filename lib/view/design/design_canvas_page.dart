@@ -38,7 +38,7 @@ class _DesignCanvasPageState extends State<DesignCanvasPage> {
     'suit',
     'jacket',
     'trousers',
-    'skirt'
+    'skirt',
   ];
 
   final List<String> drawingTools = [
@@ -46,7 +46,7 @@ class _DesignCanvasPageState extends State<DesignCanvasPage> {
     'brush',
     'pencil',
     'marker',
-    'eraser'
+    'eraser',
   ];
 
   final List<Color> colorPalette = [
@@ -883,7 +883,7 @@ class _DesignCanvasPageState extends State<DesignCanvasPage> {
       mainAxisSize: MainAxisSize.min,
       children: [
         FloatingActionButton(
-          heroTag: "undo",
+          heroTag: 'undo',
           onPressed: _undoStroke,
           backgroundColor: Colors.orange[600],
           tooltip: 'Undo',
@@ -891,7 +891,7 @@ class _DesignCanvasPageState extends State<DesignCanvasPage> {
         ),
         const SizedBox(height: 12),
         FloatingActionButton(
-          heroTag: "clear",
+          heroTag: 'clear',
           onPressed: _clearCanvas,
           backgroundColor: Colors.red[600],
           tooltip: 'Clear Canvas',
@@ -899,7 +899,7 @@ class _DesignCanvasPageState extends State<DesignCanvasPage> {
         ),
         const SizedBox(height: 12),
         FloatingActionButton(
-          heroTag: "try_on",
+          heroTag: 'try_on',
           onPressed: _tryOnVirtually,
           backgroundColor: Colors.purple[600],
           tooltip: 'Virtual Try-On',
@@ -953,7 +953,8 @@ class _DesignCanvasPageState extends State<DesignCanvasPage> {
         scaffoldMessenger.showSnackBar(
           SnackBar(
             content: Text(
-                '${suggestions.length} AI suggestions generated for $selectedGarmentType'),
+              '${suggestions.length} AI suggestions generated for $selectedGarmentType',
+            ),
             backgroundColor: Colors.green[600],
             behavior: SnackBarBehavior.floating,
           ),
@@ -1057,7 +1058,7 @@ class _DesignCanvasPageState extends State<DesignCanvasPage> {
 
         // Rebuild design points from stroke history
         designPoints.clear();
-        for (var stroke in strokeHistory) {
+        for (final stroke in strokeHistory) {
           designPoints.addAll(stroke);
           if (stroke.isNotEmpty) {
             designPoints.add(Offset.infinite); // Stroke separator

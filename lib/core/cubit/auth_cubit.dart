@@ -74,10 +74,12 @@ class AuthCubit extends Cubit<AuthState> {
         }
       },
       onError: (error) {
-        emit(AuthError(
-          message: 'Authentication stream error: ${error.toString()}',
-          type: AuthErrorType.unknown,
-        ));
+        emit(
+          AuthError(
+            message: 'Authentication stream error: ${error.toString()}',
+            type: AuthErrorType.unknown,
+          ),
+        );
       },
     );
   }
@@ -85,10 +87,12 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> _handleUserAuthenticated(User user) async {
     try {
       final customerProfile = await _authService.getCurrentCustomerProfile();
-      emit(AuthAuthenticated(
-        user: user,
-        customerProfile: customerProfile,
-      ));
+      emit(
+        AuthAuthenticated(
+          user: user,
+          customerProfile: customerProfile,
+        ),
+      );
     } catch (e) {
       // Still emit authenticated state even if customer profile fails
       emit(AuthAuthenticated(user: user));
@@ -103,26 +107,36 @@ class AuthCubit extends Cubit<AuthState> {
         await _authService.signInWithEmailAndPassword(email, password);
 
     if (!result.isSuccess && result.error != null) {
-      emit(AuthError(
-        message: result.error!.message,
-        type: result.error!.type,
-      ));
+      emit(
+        AuthError(
+          message: result.error!.message,
+          type: result.error!.type,
+        ),
+      );
     }
     // Success case is handled by the auth state stream
   }
 
   Future<void> createUserWithEmailAndPassword(
-      String email, String password, String name) async {
+    String email,
+    String password,
+    String name,
+  ) async {
     emit(const AuthLoading());
 
     final result = await _authService.createUserWithEmailAndPassword(
-        email, password, name);
+      email,
+      password,
+      name,
+    );
 
     if (!result.isSuccess && result.error != null) {
-      emit(AuthError(
-        message: result.error!.message,
-        type: result.error!.type,
-      ));
+      emit(
+        AuthError(
+          message: result.error!.message,
+          type: result.error!.type,
+        ),
+      );
     }
     // Success case is handled by the auth state stream
   }
@@ -133,10 +147,12 @@ class AuthCubit extends Cubit<AuthState> {
     final result = await _authService.signInWithGoogle();
 
     if (!result.isSuccess && result.error != null) {
-      emit(AuthError(
-        message: result.error!.message,
-        type: result.error!.type,
-      ));
+      emit(
+        AuthError(
+          message: result.error!.message,
+          type: result.error!.type,
+        ),
+      );
     }
   }
 
@@ -146,10 +162,12 @@ class AuthCubit extends Cubit<AuthState> {
     final result = await _authService.signInAnonymously();
 
     if (!result.isSuccess && result.error != null) {
-      emit(AuthError(
-        message: result.error!.message,
-        type: result.error!.type,
-      ));
+      emit(
+        AuthError(
+          message: result.error!.message,
+          type: result.error!.type,
+        ),
+      );
     }
   }
 
@@ -166,10 +184,12 @@ class AuthCubit extends Cubit<AuthState> {
       await _authService.deleteAccount();
       // Unauthenticated state will be emitted by the stream
     } catch (e) {
-      emit(AuthError(
-        message: 'Failed to delete account: ${e.toString()}',
-        type: AuthErrorType.unknown,
-      ));
+      emit(
+        AuthError(
+          message: 'Failed to delete account: ${e.toString()}',
+          type: AuthErrorType.unknown,
+        ),
+      );
     }
   }
 
@@ -179,10 +199,12 @@ class AuthCubit extends Cubit<AuthState> {
       await _authService.sendPasswordResetEmail(email);
       // Could emit a success state if needed
     } catch (e) {
-      emit(AuthError(
-        message: 'Failed to send password reset email: ${e.toString()}',
-        type: AuthErrorType.unknown,
-      ));
+      emit(
+        AuthError(
+          message: 'Failed to send password reset email: ${e.toString()}',
+          type: AuthErrorType.unknown,
+        ),
+      );
     }
   }
 
@@ -191,12 +213,14 @@ class AuthCubit extends Cubit<AuthState> {
       await _authService.updatePassword(newPassword);
       // Password updated successfully
     } catch (e) {
-      emit(AuthError(
-        message: 'Failed to update password: ${e.toString()}',
-        type: e.toString().contains('requires-recent-login')
-            ? AuthErrorType.requiresRecentLogin
-            : AuthErrorType.unknown,
-      ));
+      emit(
+        AuthError(
+          message: 'Failed to update password: ${e.toString()}',
+          type: e.toString().contains('requires-recent-login')
+              ? AuthErrorType.requiresRecentLogin
+              : AuthErrorType.unknown,
+        ),
+      );
     }
   }
 
@@ -206,10 +230,12 @@ class AuthCubit extends Cubit<AuthState> {
       await _authService.sendEmailVerification();
       // Could emit a success state if needed
     } catch (e) {
-      emit(AuthError(
-        message: 'Failed to send email verification: ${e.toString()}',
-        type: AuthErrorType.unknown,
-      ));
+      emit(
+        AuthError(
+          message: 'Failed to send email verification: ${e.toString()}',
+          type: AuthErrorType.unknown,
+        ),
+      );
     }
   }
 
@@ -223,10 +249,12 @@ class AuthCubit extends Cubit<AuthState> {
         await _handleUserAuthenticated(user);
       }
     } catch (e) {
-      emit(AuthError(
-        message: 'Failed to reload user: ${e.toString()}',
-        type: AuthErrorType.unknown,
-      ));
+      emit(
+        AuthError(
+          message: 'Failed to reload user: ${e.toString()}',
+          type: AuthErrorType.unknown,
+        ),
+      );
     }
   }
 
@@ -241,10 +269,12 @@ class AuthCubit extends Cubit<AuthState> {
       // Reload to get updated info
       await reloadUser();
     } catch (e) {
-      emit(AuthError(
-        message: 'Failed to update profile: ${e.toString()}',
-        type: AuthErrorType.unknown,
-      ));
+      emit(
+        AuthError(
+          message: 'Failed to update profile: ${e.toString()}',
+          type: AuthErrorType.unknown,
+        ),
+      );
     }
   }
 
@@ -255,16 +285,20 @@ class AuthCubit extends Cubit<AuthState> {
       // Update the current state with new customer profile
       final currentState = state;
       if (currentState is AuthAuthenticated) {
-        emit(AuthAuthenticated(
-          user: currentState.user,
-          customerProfile: customer,
-        ));
+        emit(
+          AuthAuthenticated(
+            user: currentState.user,
+            customerProfile: customer,
+          ),
+        );
       }
     } catch (e) {
-      emit(AuthError(
-        message: 'Failed to update customer profile: ${e.toString()}',
-        type: AuthErrorType.unknown,
-      ));
+      emit(
+        AuthError(
+          message: 'Failed to update customer profile: ${e.toString()}',
+          type: AuthErrorType.unknown,
+        ),
+      );
     }
   }
 

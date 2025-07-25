@@ -11,7 +11,10 @@ abstract class AuthService {
   // Authentication methods
   Future<AuthResult> signInWithEmailAndPassword(String email, String password);
   Future<AuthResult> createUserWithEmailAndPassword(
-      String email, String password, String name);
+    String email,
+    String password,
+    String name,
+  );
   Future<AuthResult> signInWithGoogle();
   Future<AuthResult> signInAnonymously();
   Future<void> signOut();
@@ -55,7 +58,9 @@ class FirebaseAuthService implements AuthService {
 
   @override
   Future<AuthResult> signInWithEmailAndPassword(
-      String email, String password) async {
+    String email,
+    String password,
+  ) async {
     try {
       final credential = await _firebaseAuth.signInWithEmailAndPassword(
         email: email,
@@ -72,7 +77,10 @@ class FirebaseAuthService implements AuthService {
 
   @override
   Future<AuthResult> createUserWithEmailAndPassword(
-      String email, String password, String name) async {
+    String email,
+    String password,
+    String name,
+  ) async {
     try {
       final credential = await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
@@ -96,7 +104,7 @@ class FirebaseAuthService implements AuthService {
             dislikedFabrics: [],
             occasions: [],
           ),
-          orderHistory: [],
+          orderHistory: const [],
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
           isVerified: false,
@@ -121,7 +129,8 @@ class FirebaseAuthService implements AuthService {
       // Note: Google Sign-In implementation would require google_sign_in package
       // For now, return not implemented
       return AuthResult.failure(
-          AuthError.notImplemented('Google Sign-In not implemented yet'));
+        AuthError.notImplemented('Google Sign-In not implemented yet'),
+      );
     } catch (e) {
       return AuthResult.failure(AuthError.unknown(e.toString()));
     }
@@ -167,7 +176,7 @@ class FirebaseAuthService implements AuthService {
     if (user != null) {
       await user.updatePassword(newPassword);
     } else {
-      throw AuthException('No authenticated user');
+      throw const AuthException('No authenticated user');
     }
   }
 

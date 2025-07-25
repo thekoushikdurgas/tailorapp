@@ -121,17 +121,19 @@ class DesignCubit extends Cubit<DesignState> {
   }
 
   void _initializeDesign() {
-    emit(const DesignLoaded(
-      selectedGarmentType: 'shirt',
-      selectedColor: Colors.blue,
-      selectedFabric: 'Cotton',
-      selectedPattern: 'Solid',
-      designPoints: [],
-      strokeHistory: [],
-      selectedTool: 'pen',
-      brushSize: 3.0,
-      aiSuggestions: [],
-    ));
+    emit(
+      const DesignLoaded(
+        selectedGarmentType: 'shirt',
+        selectedColor: Colors.blue,
+        selectedFabric: 'Cotton',
+        selectedPattern: 'Solid',
+        designPoints: [],
+        strokeHistory: [],
+        selectedTool: 'pen',
+        brushSize: 3.0,
+        aiSuggestions: [],
+      ),
+    );
   }
 
   void selectGarmentType(String garmentType) {
@@ -210,10 +212,12 @@ class DesignCubit extends Cubit<DesignState> {
           }
         }
 
-        emit(currentState.copyWith(
-          strokeHistory: updatedStrokes,
-          designPoints: updatedPoints,
-        ));
+        emit(
+          currentState.copyWith(
+            strokeHistory: updatedStrokes,
+            designPoints: updatedPoints,
+          ),
+        );
       }
     }
   }
@@ -221,19 +225,23 @@ class DesignCubit extends Cubit<DesignState> {
   void clearCanvas() {
     if (state is DesignLoaded) {
       final currentState = state as DesignLoaded;
-      emit(currentState.copyWith(
-        designPoints: [],
-        strokeHistory: [],
-      ));
+      emit(
+        currentState.copyWith(
+          designPoints: [],
+          strokeHistory: [],
+        ),
+      );
     }
   }
 
   void toggleAISuggestions() {
     if (state is DesignLoaded) {
       final currentState = state as DesignLoaded;
-      emit(currentState.copyWith(
-        showAISuggestions: !currentState.showAISuggestions,
-      ));
+      emit(
+        currentState.copyWith(
+          showAISuggestions: !currentState.showAISuggestions,
+        ),
+      );
     }
   }
 
@@ -250,7 +258,7 @@ class DesignCubit extends Cubit<DesignState> {
             'Create a ${currentState.selectedGarmentType} in ${currentState.selectedFabric} with ${currentState.selectedPattern} pattern',
         stylePreferences: [
           currentState.selectedPattern,
-          currentState.selectedGarmentType
+          currentState.selectedGarmentType,
         ],
         preferredColors: [_getColorName(currentState.selectedColor)],
         preferredFabric: currentState.selectedFabric,
@@ -265,10 +273,12 @@ class DesignCubit extends Cubit<DesignState> {
         userId: userId,
       );
 
-      emit(currentState.copyWith(
-        isGeneratingAI: false,
-        aiSuggestions: suggestions,
-      ));
+      emit(
+        currentState.copyWith(
+          isGeneratingAI: false,
+          aiSuggestions: suggestions,
+        ),
+      );
     } catch (e) {
       emit(currentState.copyWith(isGeneratingAI: false));
       emit(DesignError(message: 'AI generation failed: ${e.toString()}'));
@@ -282,19 +292,21 @@ class DesignCubit extends Cubit<DesignState> {
     if (state is DesignLoaded) {
       final currentState = state as DesignLoaded;
 
-      emit(currentState.copyWith(
-        selectedColor: suggestion.suggestedColors.isNotEmpty
-            ? _parseColor(suggestion.suggestedColors.first)
-            : currentState.selectedColor,
-        selectedFabric: suggestion.suggestedFabrics.isNotEmpty
-            ? suggestion.suggestedFabrics.first
-            : currentState.selectedFabric,
-        selectedPattern: suggestion.suggestedPatterns.isNotEmpty
-            ? suggestion.suggestedPatterns.first
-            : currentState.selectedPattern,
-        selectedGarmentType:
-            suggestion.garmentType ?? currentState.selectedGarmentType,
-      ));
+      emit(
+        currentState.copyWith(
+          selectedColor: suggestion.suggestedColors.isNotEmpty
+              ? _parseColor(suggestion.suggestedColors.first)
+              : currentState.selectedColor,
+          selectedFabric: suggestion.suggestedFabrics.isNotEmpty
+              ? suggestion.suggestedFabrics.first
+              : currentState.selectedFabric,
+          selectedPattern: suggestion.suggestedPatterns.isNotEmpty
+              ? suggestion.suggestedPatterns.first
+              : currentState.selectedPattern,
+          selectedGarmentType:
+              suggestion.garmentType ?? currentState.selectedGarmentType,
+        ),
+      );
     }
   }
 
@@ -315,7 +327,7 @@ class DesignCubit extends Cubit<DesignState> {
         colors: [_getColorName(currentState.selectedColor)],
         fabric: currentState.selectedFabric,
         pattern: currentState.selectedPattern,
-        measurements: {},
+        measurements: const {},
         price: 0.0,
         status: GarmentStatus.draft,
         createdAt: DateTime.now(),
@@ -325,10 +337,12 @@ class DesignCubit extends Cubit<DesignState> {
       // Save to repository
       await ServiceLocator.garmentRepository.createGarment(garment);
 
-      emit(DesignSaved(
-        designId: garment.id,
-        message: 'Design saved successfully',
-      ));
+      emit(
+        DesignSaved(
+          designId: garment.id,
+          message: 'Design saved successfully',
+        ),
+      );
 
       // Return to design state
       emit(currentState);

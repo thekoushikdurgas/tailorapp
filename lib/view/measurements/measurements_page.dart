@@ -50,8 +50,8 @@ class _MeasurementsPageState extends State<MeasurementsPage>
       'tips': [
         'Wear a well-fitting bra if measuring bust',
         'Don\'t pull the tape too tight',
-        'Take measurement at the end of a normal exhale'
-      ]
+        'Take measurement at the end of a normal exhale',
+      ],
     },
     {
       'name': 'Waist',
@@ -61,8 +61,8 @@ class _MeasurementsPageState extends State<MeasurementsPage>
       'tips': [
         'Stand naturally, don\'t suck in',
         'The tape should be snug but not tight',
-        'Measure at your natural waist, not your belt line'
-      ]
+        'Measure at your natural waist, not your belt line',
+      ],
     },
     {
       'name': 'Hips',
@@ -72,8 +72,8 @@ class _MeasurementsPageState extends State<MeasurementsPage>
       'tips': [
         'Include your buttocks in the measurement',
         'Keep feet together',
-        'Ensure tape is parallel to the floor'
-      ]
+        'Ensure tape is parallel to the floor',
+      ],
     },
     {
       'name': 'Shoulders',
@@ -84,8 +84,8 @@ class _MeasurementsPageState extends State<MeasurementsPage>
       'tips': [
         'Have someone help with this measurement',
         'Stand naturally with arms at your sides',
-        'Measure across the back, not the front'
-      ]
+        'Measure across the back, not the front',
+      ],
     },
     {
       'name': 'Arm Length',
@@ -96,8 +96,8 @@ class _MeasurementsPageState extends State<MeasurementsPage>
       'tips': [
         'Bend your arm slightly at the elbow',
         'Measure the outside of your arm',
-        'End at the wrist bone, not the hand'
-      ]
+        'End at the wrist bone, not the hand',
+      ],
     }
   ];
 
@@ -191,8 +191,8 @@ class _MeasurementsPageState extends State<MeasurementsPage>
           'recommendations': [
             'Well-proportioned measurements',
             'Most garment styles will suit you well',
-            'Consider fitted styles to highlight your balanced proportions'
-          ]
+            'Consider fitted styles to highlight your balanced proportions',
+          ],
         };
       });
     } catch (e) {
@@ -441,29 +441,29 @@ class _MeasurementsPageState extends State<MeasurementsPage>
       {
         'label': 'Height',
         'value': measurements.height,
-        'unit': measurements.unit
+        'unit': measurements.unit,
       },
       {'label': 'Weight', 'value': measurements.weight, 'unit': 'kg'},
       {
         'label': 'Chest',
         'value': measurements.chest,
-        'unit': measurements.unit
+        'unit': measurements.unit,
       },
       {
         'label': 'Waist',
         'value': measurements.waist,
-        'unit': measurements.unit
+        'unit': measurements.unit,
       },
       {'label': 'Hips', 'value': measurements.hips, 'unit': measurements.unit},
       {
         'label': 'Shoulders',
         'value': measurements.shoulders,
-        'unit': measurements.unit
+        'unit': measurements.unit,
       },
       {
         'label': 'Arm Length',
         'value': measurements.armLength,
-        'unit': measurements.unit
+        'unit': measurements.unit,
       },
       {'label': 'Neck', 'value': measurements.neck, 'unit': measurements.unit},
     ];
@@ -715,7 +715,7 @@ class _MeasurementsPageState extends State<MeasurementsPage>
       {
         'key': 'weight',
         'label': 'Weight (kg)',
-        'hint': 'Enter your weight in kg'
+        'hint': 'Enter your weight in kg',
       },
       {'key': 'chest', 'label': 'Chest/Bust', 'hint': 'Around fullest part'},
       {'key': 'waist', 'label': 'Waist', 'hint': 'Natural waistline'},
@@ -723,7 +723,7 @@ class _MeasurementsPageState extends State<MeasurementsPage>
       {
         'key': 'shoulders',
         'label': 'Shoulders',
-        'hint': 'Shoulder to shoulder'
+        'hint': 'Shoulder to shoulder',
       },
       {'key': 'armLength', 'label': 'Arm Length', 'hint': 'Shoulder to wrist'},
       {'key': 'neck', 'label': 'Neck', 'hint': 'Around neck base'},
@@ -893,7 +893,9 @@ class _MeasurementsPageState extends State<MeasurementsPage>
             _buildAnalysisRow('BMI', _bodyAnalysis['bmi'].toStringAsFixed(1)),
           if (_bodyAnalysis.containsKey('weightCategory'))
             _buildAnalysisRow(
-                'Weight Category', _bodyAnalysis['weightCategory']),
+              'Weight Category',
+              _bodyAnalysis['weightCategory'],
+            ),
         ],
       ),
     );
@@ -980,7 +982,10 @@ class _MeasurementsPageState extends State<MeasurementsPage>
   }
 
   Widget _buildDetailedRecommendationRow(
-      String key, double value, String unit) {
+    String key,
+    double value,
+    String unit,
+  ) {
     String label = key
         .replaceAll('recommended', '')
         .replaceAll('min', 'Min ')
@@ -1245,7 +1250,7 @@ class _MeasurementsPageState extends State<MeasurementsPage>
       mainAxisSize: MainAxisSize.min,
       children: [
         FloatingActionButton(
-          heroTag: "virtual_measure",
+          heroTag: 'virtual_measure',
           onPressed: () => NavigationRoute.openVirtualFitting(context),
           backgroundColor: Colors.purple[600],
           tooltip: 'Virtual Measuring',
@@ -1254,7 +1259,7 @@ class _MeasurementsPageState extends State<MeasurementsPage>
         if (_currentMeasurements != null) ...[
           const SizedBox(height: 12),
           FloatingActionButton(
-            heroTag: "edit_measurements",
+            heroTag: 'edit_measurements',
             onPressed: () {
               setState(() => _isEditing = true);
               _tabController.animateTo(1);
