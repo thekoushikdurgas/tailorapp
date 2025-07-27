@@ -1,7 +1,7 @@
-import 'package:tailorapp/core/init/cubit/theme_cubit.dart';
-import 'package:tailorapp/core/init/navigation/navigation_routers.dart';
-import 'package:tailorapp/core/init/theme/dark/dark_theme_custom.dart';
-import 'package:tailorapp/core/init/theme/light/light_theme_custom.dart';
+import 'package:tailorapp/core/cubit/theme_cubit.dart';
+import 'package:tailorapp/core/navigation/navigation_routers.dart';
+import 'package:tailorapp/core/theme/dark/dark_theme_custom.dart';
+import 'package:tailorapp/core/theme/light/light_theme_custom.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

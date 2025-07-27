@@ -10,7 +10,7 @@ import 'package:tailorapp/core/mixins/theme_aware_mixin.dart';
 import 'package:tailorapp/core/services/debug_logger.dart';
 import 'package:tailorapp/core/services/hive_service.dart';
 import 'package:tailorapp/core/services/theme_manager.dart';
-import 'package:tailorapp/view/_product/enum/route_enum.dart';
+import 'package:tailorapp/product/enum/route_enum.dart';
 
 /// ====================================================================
 /// TAILOR APP INTRODUCTION SCREEN - 6 STEPS FLOW
@@ -830,7 +830,6 @@ class _IntroductionScreenState extends ConsumerState<IntroductionScreen>
                     child: Center(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
                         children: [
                           Icon(
                             Prbal.arrowUp,
@@ -838,13 +837,17 @@ class _IntroductionScreenState extends ConsumerState<IntroductionScreen>
                             color: currentPageData.color,
                           ),
                           SizedBox(width: 8.w),
-                          Text(
-                            'intro.previous'.tr(),
-                            style: TextStyle(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w600,
-                              color: currentPageData.color,
-                              letterSpacing: 0.3,
+                          Flexible(
+                            child: Text(
+                              'intro.previous'.tr(),
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w600,
+                                color: currentPageData.color,
+                                letterSpacing: 0.3,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
                             ),
                           ),
                         ],
@@ -880,18 +883,21 @@ class _IntroductionScreenState extends ConsumerState<IntroductionScreen>
                   child: Center(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(
-                          currentPage == pages.length - 1
-                              ? 'intro.getStarted'.tr()
-                              : 'button.next'.tr(),
-                          style: TextStyle(
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.w700,
-                            color: ThemeManager.of(context)
-                                .getContrastingColor(currentPageData.color),
-                            letterSpacing: 0.5,
+                        Flexible(
+                          child: Text(
+                            currentPage == pages.length - 1
+                                ? 'intro.getStarted'.tr()
+                                : 'button.next'.tr(),
+                            style: TextStyle(
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.w700,
+                              color: ThemeManager.of(context)
+                                  .getContrastingColor(currentPageData.color),
+                              letterSpacing: 0.5,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
                           ),
                         ),
                         SizedBox(width: 8.w),

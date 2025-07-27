@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:tailorapp/core/services/debug_logger.dart';
 import 'package:tailorapp/core/models/customer_model.dart';
-import 'package:tailorapp/view/_product/enum/route_enum.dart';
+import 'package:tailorapp/product/enum/route_enum.dart';
 
 /// Comprehensive HiveService for all local storage operations
 ///
@@ -179,6 +179,7 @@ class HiveService {
 
   /// Check if intro was watched
   static bool isIntroWatched() {
+    DebugLogger.info('Checking if intro has been watched');
     try {
       return _introBox.get('introWatched', defaultValue: false);
     } catch (e) {
@@ -461,11 +462,58 @@ class HiveService {
     }
   }
 
+  /// Check if storage is healthy and functioning properly
+  static bool isStorageHealthy() {
+    try {
+      // Check if service is initialized
+      if (!_isInitialized) {
+        DebugLogger.warning('HiveService not initialized');
+        return false;
+      }
+
+      // Check if all boxes are accessible and functional
+      final boxes = _getAllBoxes();
+      for (final box in boxes) {
+        if (!box.isOpen) {
+          DebugLogger.warning('Box ${box.name} is not open');
+          return false;
+        }
+
+        // Test basic read/write operations
+        try {
+          box.get('_health_check_key');
+          // No exception means box is readable
+        } catch (e) {
+          DebugLogger.warning('Box ${box.name} failed read test: $e');
+          return false;
+        }
+      }
+
+      // Test a simple write operation on preferences box (least critical)
+      try {
+        _preferencesBox.put(
+          '_health_check_timestamp',
+          DateTime.now().millisecondsSinceEpoch,
+        );
+      } catch (e) {
+        DebugLogger.warning('Failed health check write test: $e');
+        return false;
+      }
+
+      DebugLogger.debug('Storage health check passed');
+      return true;
+    } catch (e) {
+      DebugLogger.error('Storage health check failed: $e');
+      return false;
+    }
+  }
+
   /// Get storage info for debugging
   static Map<String, dynamic> getStorageInfo() {
     try {
       return {
         'isInitialized': _isInitialized,
+        'isHealthy': isStorageHealthy(),
         'themeItems': _themeBox.length,
         'introItems': _introBox.length,
         'authItems': _authBox.length,

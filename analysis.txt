@@ -1,2 +1,37 @@
 Analyzing tailorapp...                                          
-No issues found! (ran in 17.5s)
+
+  error - Target of URI doesn't exist: 'package:tailorapp/view/admin/platform_analytics_insights_screen.dart' - lib\core\navigation\navigation_routers.dart:36:8 - uri_does_not_exist
+  error - The name 'PlatformAnalyticsInsightsScreen' isn't a class - lib\core\navigation\navigation_routers.dart:167:44 - creation_with_non_type
+warning - The value of the field '_userGrowthData' isn't used - lib\view\admin\view\platform_analytics_insights_screen.dart:26:19 - unused_field
+warning - The value of the field '_orderVolumeData' isn't used - lib\view\admin\view\platform_analytics_insights_screen.dart:27:19 - unused_field
+warning - The value of the field '_selectedTimeRange' isn't used - lib\view\admin\view\super_admin_dashboard_screen.dart:20:10 - unused_field
+warning - Unused import: 'package:tailorapp/core/navigation/navigation_route.dart' - lib\view\customer\view\customer_home_screen.dart:4:8 - unused_import
+warning - Unused import: 'package:flutter_bloc/flutter_bloc.dart' - lib\view\customer\view\design_collaboration_hub_screen.dart:2:8 - unused_import
+warning - Unused import: 'package:tailorapp/core/cubit/auth_cubit.dart' - lib\view\customer\view\design_collaboration_hub_screen.dart:3:8 - unused_import
+warning - The value of the field '_isCollaborating' isn't used - lib\view\customer\view\design_collaboration_hub_screen.dart:29:14 - unused_field
+warning - Unused import: 'package:flutter_bloc/flutter_bloc.dart' - lib\view\customer\view\design_wishlist_screen.dart:2:8 - unused_import
+warning - Unused import: 'package:tailorapp/core/cubit/auth_cubit.dart' - lib\view\customer\view\design_wishlist_screen.dart:3:8 - unused_import
+warning - Unused import: 'package:flutter_bloc/flutter_bloc.dart' - lib\view\customer\view\fabric_selection_studio_screen.dart:2:8 - unused_import
+warning - Unused import: 'package:tailorapp/core/cubit/auth_cubit.dart' - lib\view\customer\view\fabric_selection_studio_screen.dart:3:8 - unused_import
+warning - Unused import: 'package:tailorapp/product/enum/route_enum.dart' - lib\view\customer\view\fabric_selection_studio_screen.dart:4:8 - unused_import
+warning - The value of the field '_priceRanges' isn't used - lib\view\customer\view\fabric_selection_studio_screen.dart:52:22 - unused_field
+warning - Unused import: 'package:flutter_bloc/flutter_bloc.dart' - lib\view\customer\view\size_profile_management_screen.dart:2:8 - unused_import
+warning - Unused import: 'package:tailorapp/core/cubit/auth_cubit.dart' - lib\view\customer\view\size_profile_management_screen.dart:3:8 - unused_import
+warning - Unused import: 'package:tailorapp/product/enum/route_enum.dart' - lib\view\customer\view\size_profile_management_screen.dart:4:8 - unused_import
+warning - Unused import: 'package:flutter_bloc/flutter_bloc.dart' - lib\view\customer\view\style_preference_setup_screen.dart:2:8 - unused_import
+warning - Unused import: 'package:tailorapp/core/cubit/auth_cubit.dart' - lib\view\customer\view\style_preference_setup_screen.dart:3:8 - unused_import
+warning - Unused import: 'package:flutter_bloc/flutter_bloc.dart' - lib\view\customer\view\virtual_wardrobe_screen.dart:2:8 - unused_import
+warning - Unused import: 'package:tailorapp/core/cubit/auth_cubit.dart' - lib\view\customer\view\virtual_wardrobe_screen.dart:3:8 - unused_import
+warning - Unused import: 'package:flutter_bloc/flutter_bloc.dart' - lib\view\tailor\view\customer_communication_hub_screen.dart:2:8 - unused_import
+warning - Unused import: 'package:tailorapp/core/cubit/auth_cubit.dart' - lib\view\tailor\view\customer_communication_hub_screen.dart:3:8 - unused_import
+warning - Unused import: 'package:flutter_bloc/flutter_bloc.dart' - lib\view\tailor\view\order_management_screen.dart:2:8 - unused_import
+warning - Unused import: 'package:tailorapp/core/cubit/auth_cubit.dart' - lib\view\tailor\view\order_management_screen.dart:3:8 - unused_import
+warning - The value of the field '_selectedStatus' isn't used - lib\view\tailor\view\order_management_screen.dart:22:16 - unused_field
+warning - The value of the field '_selectedPriority' isn't used - lib\view\tailor\view\order_management_screen.dart:23:16 - unused_field
+warning - The value of the field '_selectedOrder' isn't used - lib\view\tailor\view\order_management_screen.dart:26:16 - unused_field
+warning - The value of the field '_statusOptions' isn't used - lib\view\tailor\view\order_management_screen.dart:37:22 - unused_field
+warning - The value of the field '_priorityOptions' isn't used - lib\view\tailor\view\order_management_screen.dart:46:22 - unused_field
+warning - The value of the field '_selectedPattern' isn't used - lib\view\tailor\view\pattern_creation_management_screen.dart:25:19 - unused_field
+warning - The value of the field '_selectedSize' isn't used - lib\view\tailor\view\pattern_creation_management_screen.dart:28:16 - unused_field
+warning - The value of the field '_sizeOptions' isn't used - lib\view\tailor\view\pattern_creation_management_screen.dart:41:22 - unused_field
+

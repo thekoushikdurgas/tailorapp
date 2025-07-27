@@ -1,4 +1,4 @@
-part of '../../init/theme/dark/dark_theme_custom.dart';
+part of '../../theme/dark/dark_theme_custom.dart';
 
 class DarkThemeColors {
   const DarkThemeColors._();

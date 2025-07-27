@@ -55,6 +55,12 @@ class DebugLogger {
     _log('🎨 THEME', message, _white);
   }
 
+  /// Log UI-related operations
+  static void ui(String message) {
+    if (!_debugMode) return;
+    _log('🖥️ UI', message, _blue);
+  }
+
   /// Log general information
   static void info(String message) {
     if (!_debugMode) return;
@@ -144,16 +150,20 @@ class DebugLogger {
     }
   }
 
-  /// Log performance timing
-  static void performance(String operation, Duration duration) {
+  /// Log performance timing - can accept just operation name or operation + duration
+  static void performance(String operation, [Duration? duration]) {
     if (!_debugMode) return;
-    final ms = duration.inMilliseconds;
-    final color = ms > 1000
-        ? _red
-        : ms > 500
-            ? _yellow
-            : _green;
-    _log('⏱️ PERF', '$operation took ${ms}ms', color);
+    if (duration != null) {
+      final ms = duration.inMilliseconds;
+      final color = ms > 1000
+          ? _red
+          : ms > 500
+              ? _yellow
+              : _green;
+      _log('⏱️ PERF', '$operation took ${ms}ms', color);
+    } else {
+      _log('⏱️ PERF', operation, _green);
+    }
   }
 
   /// Start a performance timer
