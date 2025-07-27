@@ -1,5 +1,6 @@
 enum RouteEnum {
   // Common screens (accessible by all roles)
+  splash,
   intro,
   setting,
   languageSelection,
@@ -60,6 +61,8 @@ extension RouteEnumString on RouteEnum {
   String get rawValue {
     switch (this) {
       // Common screens
+      case RouteEnum.splash:
+        return '/splash';
       case RouteEnum.intro:
         return '/intro';
       case RouteEnum.setting:

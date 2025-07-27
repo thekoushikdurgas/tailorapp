@@ -2,7 +2,7 @@ import 'package:tailorapp/core/theme/build-material-color/build_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-part '../../constants/theme/light_constants.dart';
+part 'light_constants.dart';
 
 class LightThemeCustom {
   late ThemeData theme;

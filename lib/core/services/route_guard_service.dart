@@ -100,10 +100,11 @@ class RouteGuardService {
 
   /// Check if route requires authentication
   static bool requiresAuth(String route) {
-    // Auth routes don't require authentication
+    // Routes that don't require authentication
     if (route.startsWith('/auth') ||
         route == '/intro' ||
-        route == '/language-selection') {
+        route == '/language-selection' ||
+        route == '/splash') {
       return false;
     }
 

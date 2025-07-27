@@ -1,267 +1,277 @@
 {
   "app": {
+    "description": "AI-Powered Tailoring & Clothing Design Platform",
     "name": "TailorAI",
-    "version": "1.0.0",
-    "description": "AI-Powered Tailoring & Clothing Design Platform"
-  },
-  "welcome": {
-    "title": "Welcome to TailorAI",
-    "features": {
-      "verified": "AI-Powered\nDesign",
-      "secure": "Virtual\nFitting",
-      "support": "Custom\nTailoring"
-    },
-    "getStarted": "Get Started",
-    "termsAgreement": "By continuing, you agree to our ",
-    "termsOfService": "Terms of Service",
-    "and": " and ",
-    "privacyPolicy": "Privacy Policy",
-    "period": "."
-  },
-  "intro": {
-    "introTitleFirst": "AI-Powered Design Studio",
-    "introDescriptionFirst": "Create stunning custom garments with our AI design assistant. From concept to reality, let artificial intelligence help you design the perfect outfit tailored to your style and preferences.",
-    "introTitleSecond": "Virtual Fitting Experience",
-    "introDescriptionSecond": "Try on your designs virtually with our advanced AR technology. Get precise measurements and see how your custom garments will look and fit before ordering.",
-    "introTitleThird": "Expert Custom Tailoring",
-    "introDescriptionThird": "Order your AI-designed garments with confidence. Our network of expert tailors brings your digital designs to life with premium craftsmanship and perfect fit guarantee.",
-    "onboarding": {
-      "page1": {
-        "title": "Perfect Body Measurements",
-        "subtitle": "Get precise body measurements using our advanced AI technology. Capture your exact dimensions from your phone for a perfect fit every time."
-      },
-      "page2": {
-        "title": "AI-Powered Design Studio",
-        "subtitle": "Create stunning custom garments with our intelligent design assistant. From concept to reality, design unique outfits tailored to your style."
-      },
-      "page3": {
-        "title": "Virtual Fitting Experience",
-        "subtitle": "Try on your designs virtually before ordering. See exactly how your custom garments will look and fit using advanced AR technology."
-      },
-      "page4": {
-        "title": "Sell Your Designs",
-        "subtitle": "Turn your creativity into income. Publish and sell your unique designs to customers worldwide through our marketplace platform."
-      },
-      "page5": {
-        "title": "Expert Tailor Assignment",
-        "subtitle": "Your designs are crafted by verified master tailors. We match you with skilled professionals who bring your vision to life with precision."
-      },
-      "page6": {
-        "title": "Doorstep Delivery",
-        "subtitle": "Skip the fashion stores entirely. We deliver your custom-made garments directly to your doorstep with premium packaging and quality guarantee."
-      }
-    },
-    "feature": "Feature",
-    "previous": "Previous",
-    "getStarted": "Start Designing"
-  },
-  "button": {
-    "skip": "Skip",
-    "done": "Get Started",
-    "cancel": "Cancel",
-    "ok": "OK",
-    "save": "Save",
-    "apply": "Apply",
-    "confirm": "Confirm",
-    "delete": "Delete",
-    "edit": "Edit",
-    "back": "Back",
-    "next": "Next",
-    "retry": "Retry",
-    "refresh": "Refresh",
-    "close": "Close",
-    "continue": "Continue"
-  },
-  "theme": {
-    "theme": "Theme",
-    "default": "System Default",
-    "light": "Light",
-    "dark": "Dark",
-    "themeChoose": "Choose Theme",
-    "themeDescription": "Select your preferred app appearance",
-    "systemTheme": "Follow system settings",
-    "lightTheme": "Light mode always",
-    "darkTheme": "Dark mode always"
-  },
-  "localization": {
-    "appLang": "App Language",
-    "langChoose": "Choose Language",
-    "languageSettings": "Language Settings",
-    "currentLanguage": "Current Language",
-    "availableLanguages": "Available Languages",
-    "languageChanged": "Language changed successfully",
-    "languageError": "Failed to change language",
-    "selectLanguage": "Select your preferred language",
-    "languageSelection": {
-      "title": "Choose Language",
-      "subtitle": "Select your preferred language for the best experience",
-      "applyLanguage": "Apply Language",
-      "skipSelection": "Skip",
-      "currentSelection": "Current Selection",
-      "changeLanguage": "Change Language"
-    }
-  },
-  "loading": {
-    "loading": "Loading...",
-    "pleaseWait": "Please wait",
-    "processing": "Processing",
-    "savingData": "Saving data",
-    "loadingProfile": "Loading profile",
-    "updatingSettings": "Updating settings",
-    "preparingApp": "Preparing app",
-    "processingImage": "Processing image",
-    "uploadingImage": "Uploading image",
-    "refreshingData": "Refreshing data",
-    "initializingApp": "Initializing app...",
-    "checkingStorage": "Checking local storage...",
-    "recoveringStorage": "Recovering local storage...",
-    "settingUpPerformance": "Setting up performance monitoring...",
-    "optimizingStartup": "Optimizing app startup...",
-    "optimizingImageLoading": "Optimizing image loading...",
-    "initializingHealth": "Initializing health monitoring...",
-    "checkingConnectivity": "Checking network connectivity...",
-    "checkingSystemHealth": "Checking system health...",
-    "usingCachedHealth": "Using cached health status...",
-    "performingHealthCheck": "Performing health check...",
-    "offlineMode": "Working in offline mode...",
-    "offlineReady": "Offline mode - Ready to launch!",
-    "systemHealthy": "System healthy - Ready to launch!",
-    "systemStatus": "System status",
-    "loadingPreferences": "Loading user preferences...",
-    "finalizingSetup": "Finalizing setup...",
-    "ready": "Ready!",
-    "initializationWarnings": "Initialization completed with warnings"
-  },
-  "navigation": {
-    "home": "Home",
-    "explore": "Explore",
-    "bookings": "My Orders",
-    "messages": "Messages",
-    "profile": "Profile",
-    "settings": "Settings",
-    "dashboard": "Dashboard",
-    "search": "Search",
-    "notifications": "Notifications",
-    "help": "Help",
-    "about": "About"
-  },
-  "settings": {
-    "title": "Settings",
-    "account": "Account Settings",
-    "profile": "Profile Information",
-    "security": "Security",
-    "privacy": "Privacy",
-    "notifications": "Notifications",
-    "appearance": "Appearance",
-    "language": "Language",
-    "support": "Support",
-    "legal": "Legal",
-    "logout": "Logout",
-    "version": "App Version",
-    "cache": "Cache",
-    "storage": "Storage",
-    "data": "Data Management"
-  },
-  "profile": {
-    "title": "Profile",
-    "name": "Name",
-    "email": "Email",
-    "phone": "Phone",
-    "bio": "Bio",
-    "location": "Location",
-    "profilePicture": "Profile Picture",
-    "editProfile": "Edit Profile",
-    "viewProfile": "View Profile",
-    "updateProfile": "Update Profile",
-    "profileUpdated": "Profile updated successfully",
-    "profileError": "Failed to update profile",
-    "loginToUpdatePicture": "Please login to update profile picture",
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "username": "Username"
+    "version": "1.0.0"
   },
   "auth": {
-    "login": "Login",
-    "logout": "Logout",
-    "register": "Register",
-    "forgotPassword": "Forgot Password",
-    "resetPassword": "Reset Password",
+    "authRequired": "Authentication required",
     "confirmPassword": "Confirm Password",
+    "createPin": "Create PIN",
     "enterPhone": "Enter phone number",
     "enterPin": "Enter PIN",
-    "verifyPin": "Verify PIN",
-    "createPin": "Create PIN",
-    "authRequired": "Authentication required",
+    "forgotPassword": "Forgot Password",
+    "login": "Login",
     "loginRequired": "Please login to continue",
+    "logout": "Logout",
     "logoutConfirm": "Are you sure you want to logout?",
-    "sessionExpired": "Your session has expired",
     "phoneLogin": {
-      "title": "Enter your phone number to continue",
-      "phoneHint": "1234567890",
       "continue": "Continue",
+      "countryPicker": {
+        "noResults": "No countries found",
+        "searchHint": "Search countries...",
+        "searchTip": "Try searching with a different term",
+        "title": "Select Country"
+      },
       "or": "or",
+      "phoneHint": "1234567890",
       "socialLogin": {
-        "google": "Google",
         "apple": "Apple",
         "comingSoon": "Social login coming soon!",
-        "failed": "Social login failed. Please try again."
+        "failed": "Social login failed. Please try again.",
+        "google": "Google"
       },
       "terms": {
-        "prefix": "By continuing, you agree to our ",
-        "termsOfService": "Terms of Service",
         "and": " and ",
+        "prefix": "By continuing, you agree to our ",
         "privacyPolicy": "Privacy Policy",
-        "suffix": "."
+        "suffix": ".",
+        "termsOfService": "Terms of Service"
       },
-      "countryPicker": {
-        "title": "Select Country",
-        "searchHint": "Search countries...",
-        "noResults": "No countries found",
-        "searchTip": "Try searching with a different term"
-      },
+      "title": "Enter your phone number to continue",
       "validation": {
         "invalidPhone": "Please enter a valid phone number (10-15 digits)",
         "networkError": "Unable to verify phone number. Please check your connection and try again."
       }
-    }
+    },
+    "register": "Register",
+    "resetPassword": "Reset Password",
+    "sessionExpired": "Your session has expired",
+    "verifyPin": "Verify PIN"
+  },
+  "button": {
+    "apply": "Apply",
+    "back": "Back",
+    "cancel": "Cancel",
+    "close": "Close",
+    "confirm": "Confirm",
+    "continue": "Continue",
+    "delete": "Delete",
+    "done": "Get Started",
+    "edit": "Edit",
+    "next": "Next",
+    "ok": "OK",
+    "refresh": "Refresh",
+    "retry": "Retry",
+    "save": "Save",
+    "skip": "Skip"
   },
   "error": {
+    "connectionError": "Connection failed",
+    "contactSupport": "Contact support if the problem persists",
+    "critical": "Critical Error",
+    "forbidden": "Access forbidden",
     "general": "Something went wrong",
     "network": "Network error",
-    "timeout": "Request timeout",
-    "unauthorized": "Unauthorized access",
-    "forbidden": "Access forbidden",
     "notFound": "Not found",
     "serverError": "Server error",
-    "validationError": "Validation error",
-    "connectionError": "Connection failed",
+    "timeout": "Request timeout",
     "tryAgain": "Please try again",
-    "contactSupport": "Contact support if the problem persists"
-  },
-  "success": {
-    "saved": "Saved successfully",
-    "updated": "Updated successfully",
-    "deleted": "Deleted successfully",
-    "sent": "Sent successfully",
-    "uploaded": "Uploaded successfully",
-    "completed": "Completed successfully",
-    "applied": "Applied successfully",
-    "confirmed": "Confirmed successfully"
-  },
-  "validation": {
-    "required": "This field is required",
-    "email": "Please enter a valid email",
-    "phone": "Please enter a valid phone number",
-    "minLength": "Minimum {count} characters required",
-    "maxLength": "Maximum {count} characters allowed",
-    "invalidFormat": "Invalid format",
-    "passwordMismatch": "Passwords do not match",
-    "weakPassword": "Password is too weak"
+    "unauthorized": "Unauthorized access",
+    "validationError": "Validation error"
   },
   "footer": {
     "copyright": "© 2024 TailorAI",
     "secure": "Secure",
     "version": "v1.0.0"
   },
-  "settingTitle": "Settings"
+  "intro": {
+    "appTagline": "AI-Powered Tailoring & Design Platform",
+    "feature": "Feature",
+    "getStarted": "Start Designing",
+    "onboarding": {
+      "page1": {
+        "subtitle": "Get precise body measurements using our advanced AI technology. Capture your exact dimensions from your phone for a perfect fit every time.",
+        "title": "Perfect Body Measurements"
+      },
+      "page2": {
+        "subtitle": "Create stunning custom garments with our intelligent design assistant. From concept to reality, design unique outfits tailored to your style.",
+        "title": "AI-Powered Design Studio"
+      },
+      "page3": {
+        "subtitle": "Try on your designs virtually before ordering. See exactly how your custom garments will look and fit using advanced AR technology.",
+        "title": "Virtual Fitting Experience"
+      },
+      "page4": {
+        "subtitle": "Turn your creativity into income. Publish and sell your unique designs to customers worldwide through our marketplace platform.",
+        "title": "Sell Your Designs"
+      },
+      "page5": {
+        "subtitle": "Your designs are crafted by verified master tailors. We match you with skilled professionals who bring your vision to life with precision.",
+        "title": "Expert Tailor Assignment"
+      },
+      "page6": {
+        "subtitle": "Skip the fashion stores entirely. We deliver your custom-made garments directly to your doorstep with premium packaging and quality guarantee.",
+        "title": "Doorstep Delivery"
+      }
+    },
+    "previous": "Previous"
+  },
+  "loading": {
+    "checkingAuthentication": "Checking authentication...",
+    "checkingConnectivity": "Checking network connectivity...",
+    "checkingStorage": "Checking local storage...",
+    "checkingSystemHealth": "Checking system health...",
+    "finalizingSetup": "Finalizing setup...",
+    "initializationWarnings": "Initialization completed with warnings",
+    "initializingApp": "Initializing app...",
+    "initializingHealth": "Initializing health monitoring...",
+    "loading": "Loading...",
+    "loadingPreferences": "Loading user preferences...",
+    "loadingProfile": "Loading profile",
+    "offlineMode": "Working in offline mode...",
+    "offlineReady": "Offline mode - Ready to launch!",
+    "optimizingImageLoading": "Optimizing image loading...",
+    "optimizingStartup": "Optimizing app startup...",
+    "performingHealthCheck": "Performing health check...",
+    "pleaseWait": "Please wait",
+    "preparingApp": "Preparing app",
+    "processing": "Processing",
+    "processingImage": "Processing image",
+    "ready": "Ready!",
+    "recoveringStorage": "Recovering local storage...",
+    "refreshingData": "Refreshing data",
+    "savingData": "Saving data",
+    "settingUpPerformance": "Setting up performance monitoring...",
+    "systemHealthy": "System healthy - Ready to launch!",
+    "systemStatus": "System status",
+    "updatingSettings": "Updating settings",
+    "uploadingImage": "Uploading image",
+    "usingCachedHealth": "Using cached health status...",
+    "validatingTokens": "Validating tokens..."
+  },
+  "localization": {
+    "appLang": "App Language",
+    "availableLanguages": "Available Languages",
+    "currentLanguage": "Current Language",
+    "langChoose": "Choose Language",
+    "languageChanged": "Language changed successfully",
+    "languageError": "Failed to change language",
+    "languageSelection": {
+      "applyLanguage": "Apply Language",
+      "changeLanguage": "Change Language",
+      "currentSelection": "Current Selection",
+      "skipSelection": "Skip",
+      "subtitle": "Select your preferred language for the best experience",
+      "title": "Choose Language"
+    },
+    "languageSettings": "Language Settings",
+    "selectLanguage": "Select your preferred language"
+  },
+  "navigation": {
+    "about": "About",
+    "bookings": "My Orders",
+    "dashboard": "Dashboard",
+    "explore": "Explore",
+    "help": "Help",
+    "home": "Home",
+    "messages": "Messages",
+    "notifications": "Notifications",
+    "profile": "Profile",
+    "search": "Search",
+    "settings": "Settings"
+  },
+  "phase": {
+    "authentication": "Authentication",
+    "connectivity": "Connectivity",
+    "error": "Error",
+    "finalization": "Finalizing",
+    "health": "Health Check",
+    "initializing": "Initializing",
+    "performance": "Performance",
+    "preferences": "Preferences",
+    "ready": "Ready",
+    "storage": "Storage Setup"
+  },
+  "profile": {
+    "bio": "Bio",
+    "editProfile": "Edit Profile",
+    "email": "Email",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "location": "Location",
+    "loginToUpdatePicture": "Please login to update profile picture",
+    "name": "Name",
+    "phone": "Phone",
+    "profileError": "Failed to update profile",
+    "profilePicture": "Profile Picture",
+    "profileUpdated": "Profile updated successfully",
+    "title": "Profile",
+    "updateProfile": "Update Profile",
+    "username": "Username",
+    "viewProfile": "View Profile"
+  },
+  "settingTitle": "Settings",
+  "settings": {
+    "account": "Account Settings",
+    "appearance": "Appearance",
+    "cache": "Cache",
+    "data": "Data Management",
+    "language": "Language",
+    "legal": "Legal",
+    "logout": "Logout",
+    "notifications": "Notifications",
+    "privacy": "Privacy",
+    "profile": "Profile Information",
+    "security": "Security",
+    "storage": "Storage",
+    "support": "Support",
+    "title": "Settings",
+    "version": "App Version"
+  },
+  "success": {
+    "applied": "Applied successfully",
+    "completed": "Completed successfully",
+    "confirmed": "Confirmed successfully",
+    "deleted": "Deleted successfully",
+    "saved": "Saved successfully",
+    "sent": "Sent successfully",
+    "updated": "Updated successfully",
+    "uploaded": "Uploaded successfully"
+  },
+  "theme": {
+    "dark": "Dark",
+    "darkTheme": "Dark mode always",
+    "default": "System Default",
+    "light": "Light",
+    "lightTheme": "Light mode always",
+    "systemTheme": "Follow system settings",
+    "theme": "Theme",
+    "themeChoose": "Choose Theme",
+    "themeDescription": "Select your preferred app appearance"
+  },
+  "validation": {
+    "email": "Please enter a valid email",
+    "invalidFormat": "Invalid format",
+    "maxLength": "Maximum {count} characters allowed",
+    "minLength": "Minimum {count} characters required",
+    "passwordMismatch": "Passwords do not match",
+    "phone": "Please enter a valid phone number",
+    "required": "This field is required",
+    "weakPassword": "Password is too weak"
+  },
+  "welcome": {
+    "and": " and ",
+    "features": {
+      "secure": "Virtual\nFitting",
+      "support": "Custom\nTailoring",
+      "verified": "AI-Powered\nDesign"
+    },
+    "getStarted": "Get Started",
+    "period": ".",
+    "privacyPolicy": "Privacy Policy",
+    "termsAgreement": "By continuing, you agree to our ",
+    "termsOfService": "Terms of Service",
+    "title": "Welcome to TailorAI"
+  }
 }

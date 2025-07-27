@@ -1,0 +1,145 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "flutter: clean",
+            "type": "shell",
+            "command": "flutter",
+            "args": ["clean"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "delete: pubspec.lock",
+            "type": "shell",
+            "command": "del",
+            "args": ["pubspec.lock"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "options": {
+                "shell": {
+                    "executable": "cmd.exe",
+                    "args": ["/c"]
+                }
+            }
+        },
+        {
+            "label": "flutter: pub get",
+            "type": "shell",
+            "command": "flutter",
+            "args": ["pub", "get"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "flutter: launcher icons",
+            "type": "shell",
+            "command": "flutter",
+            "args": ["pub", "run", "flutter_launcher_icons"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "dart: build_runner clean",
+            "type": "shell",
+            "command": "dart",
+            "args": ["run", "build_runner", "clean"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "flutter: build_runner build",
+            "type": "shell",
+            "command": "flutter",
+            "args": ["pub", "run", "build_runner", "build", "--delete-conflicting-outputs"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "flutter: cache repair",
+            "type": "shell",
+            "command": "flutter",
+            "args": ["pub", "cache", "repair"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "dart: activate flutterfire_cli",
+            "type": "shell",
+            "command": "dart",
+            "args": ["pub", "global", "activate", "flutterfire_cli"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "flutter: clean and get",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "flutter: clean",
+                "flutter: pub get"
+            ]
+        },
+        {
+            "label": "flutter: full setup and build",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "flutter: clean",
+                "delete: pubspec.lock",
+                "flutter: pub get",
+                "flutter: launcher icons",
+                "dart: build_runner clean",
+                "flutter: build_runner build",
+                "flutter: cache repair",
+                "dart: activate flutterfire_cli"
+            ]
+        }
+    ]
+} 

@@ -19,6 +19,7 @@
     "period": " ਨਾਲ ਸਹਿਮਤ ਹੋ।"
   },
   "intro": {
+    "appTagline": "ਏਆਈ-ਸੰਚਾਲਿਤ ਟੇਲਰਿੰਗ ਅਤੇ ਡਿਜ਼ਾਈਨ ਪਲੇਟਫਾਰਮ",
     "introTitleFirst": "ਏਆਈ-ਸੰਚਾਲਿਤ ਡਿਜ਼ਾਈਨ ਸਟੂਡੀਓ",
     "introDescriptionFirst": "ਸਾਡੇ ਏਆਈ ਡਿਜ਼ਾਈਨ ਸਹਾਇਕ ਨਾਲ ਸ਼ਾਨਦਾਰ ਕਸਟਮ ਕੱਪੜੇ ਬਣਾਓ। ਸੰਕਲਪ ਤੋਂ ਹਕੀਕਤ ਤੱਕ, ਤੁਸੀਂ ਆਪਣੀ ਸ਼ੈਲੀ ਅਤੇ ਪਸੰਦਾਂ ਦੇ ਅਨੁਕੂਲ ਸੰਪੂਰਨ ਪਹਿਰਾਵਾ ਡਿਜ਼ਾਈਨ ਕਰਨ ਵਿੱਚ ਮਦਦ ਕਰਨ ਲਈ ਆਰਟੀਫਿਸ਼ੀਅਲ ਇੰਤਜ਼ਾਰ ਦਿਓ।",
     "introTitleSecond": "ਵਰਚੁਅਲ ਫਿਟਿੰਗ ਅਨੁਭਵ",
@@ -113,6 +114,25 @@
     "uploadingImage": "ਇਮੇਜ ਅਪਲੋਡ ਹੋ ਰਹੀ ਹੈ",
     "refreshingData": "ਡੇਟਾ ਰਿਫ੍ਰੈਸ਼ ਹੋ ਰਿਹਾ ਹੈ",
     "initializingApp": "ਐਪ ਸ਼ੁਰੂ ਹੋ ਰਹੀ ਹੈ...",
+    "checkingAuthentication": "ਪ੍ਰਮਾਣੀਕਰਣ ਜਾਂਚ ਰਹੇ ਹਾਂ...",
+    "checkingConnectivity": "ਨੈਟਵਰਕ ਕਨੈਕਟਿਵਿਟੀ ਜਾਂਚ ਰਹੇ ਹਾਂ...",
+    "checkingStorage": "ਲੋਕਲ ਸਟੋਰੇਜ ਜਾਂਚ ਰਹੇ ਹਾਂ...",
+    "checkingSystemHealth": "ਸਿਸਟਮ ਹੈਲਥ ਜਾਂਚ ਰਹੇ ਹਾਂ...",
+    "finalizingSetup": "ਸੈਟਅਪ ਪੂਰਾ ਕਰ ਰਹੇ ਹਾਂ...",
+    "initializationWarnings": "ਚੇਤਾਵਨੀਆਂ ਨਾਲ ਸ਼ੁਰੂਆਤ ਪੂਰੀ ਹੋਈ",
+    "initializingHealth": "ਹੈਲਥ ਮਾਨੀਟਰਿੰਗ ਸ਼ੁਰੂ ਕਰ ਰਹੇ ਹਾਂ...",
+    "loadingPreferences": "ਯੂਜ਼ਰ ਪਸੰਦਾਂ ਲੋਡ ਕਰ ਰਹੇ ਹਾਂ...",
+    "offlineMode": "ਆਫਲਾਈਨ ਮੋਡ ਵਿੱਚ ਕੰਮ ਕਰ ਰਹੇ ਹਾਂ...",
+    "offlineReady": "ਆਫਲਾਈਨ ਮੋਡ - ਲਾਂਚ ਕਰਨ ਲਈ ਤਿਆਰ!",
+    "optimizingImageLoading": "ਇਮੇਜ ਲੋਡਿੰਗ ਅਨੁਕੂਲ ਬਣਾ ਰਹੇ ਹਾਂ...",
+    "optimizingStartup": "ਐਪ ਸਟਾਰਟਅਪ ਅਨੁਕੂਲ ਬਣਾ ਰਹੇ ਹਾਂ...",
+    "performingHealthCheck": "ਹੈਲਥ ਚੈੱਕ ਕਰ ਰਹੇ ਹਾਂ...",
+    "recoveringStorage": "ਲੋਕਲ ਸਟੋਰੇਜ ਰਿਕਵਰ ਕਰ ਰਹੇ ਹਾਂ...",
+    "settingUpPerformance": "ਪਰਫਾਰਮੈਂਸ ਮਾਨੀਟਰਿੰਗ ਸੈਟਅਪ ਕਰ ਰਹੇ ਹਾਂ...",
+    "systemHealthy": "ਸਿਸਟਮ ਸਿਹਤਮੰਦ ਹੈ - ਲਾਂਚ ਕਰਨ ਲਈ ਤਿਆਰ!",
+    "systemStatus": "ਸਿਸਟਮ ਸਟੇਟਸ",
+    "usingCachedHealth": "ਕੈਸ਼ਡ ਹੈਲਥ ਸਟੇਟਸ ਵਰਤ ਰਹੇ ਹਾਂ...",
+    "validatingTokens": "ਟੋਕਨ ਵੈਲੀਡੇਟ ਕਰ ਰਹੇ ਹਾਂ...",
     "ready": "ਤਿਆਰ!"
   },
   "navigation": {
@@ -189,7 +209,8 @@
     "validationError": "ਤਸਦੀਕ ਗਲਤੀ",
     "connectionError": "ਕੁਨੈਕਸ਼ਨ ਅਸਫਲ",
     "tryAgain": "ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ",
-    "contactSupport": "ਜੇ ਸਮੱਸਿਆ ਜਾਰੀ ਰਹਿੰਦੀ ਹੈ ਤਾਂ ਸਹਾਇਤਾ ਨਾਲ ਸੰਪਰਕ ਕਰੋ"
+    "contactSupport": "ਜੇ ਸਮੱਸਿਆ ਜਾਰੀ ਰਹਿੰਦੀ ਹੈ ਤਾਂ ਸਹਾਇਤਾ ਨਾਲ ਸੰਪਰਕ ਕਰੋ",
+    "critical": "ਗੰਭੀਰ ਗਲਤੀ"
   },
   "success": {
     "saved": "ਸਫਲਤਾਪੂਰਵਕ ਸੇਵ ਹੋਇਆ",
@@ -216,5 +237,17 @@
     "secure": "ਸੁਰੱਖਿਅਤ",
     "version": "v1.0.0"
   },
-  "settingTitle": "ਸੈਟਿੰਗਾਂ"
+  "settingTitle": "ਸੈਟਿੰਗਾਂ",
+  "phase": {
+    "authentication": "ਪ੍ਰਮਾਣੀਕਰਣ",
+    "connectivity": "ਕਨੈਕਟਿਵਿਟੀ",
+    "error": "ਗਲਤੀ",
+    "finalization": "ਫਾਈਨਲਾਈਜ਼ੇਸ਼ਨ",
+    "health": "ਹੈਲਥ ਚੈੱਕ",
+    "initializing": "ਸ਼ੁਰੂ ਕਰ ਰਿਹਾ ਹੈ",
+    "performance": "ਪਰਫਾਰਮੈਂਸ",
+    "preferences": "ਪਸੰਦਾਂ",
+    "ready": "ਤਿਆਰ",
+    "storage": "ਸਟੋਰੇਜ ਸੈਟਅਪ"
+  }
 }

@@ -70,7 +70,7 @@ flutter doctor –verbose
 
 flutter pub run flutter_launcher_icons:main
 
-flutter packages upgrade
+flutter upgrade
 gradlew assembleDebug --stacktrace
 dir /s /b tailorapp-backend\*.py | sort
 dir /s /b lib\*.dart | sort > tree.dart.txt
@@ -89,6 +89,7 @@ flutter analyze . > analysis.txt
 dart analyze --format=json > analysis.json
 dart analyze --format=json | findstr /I "error"
 
+flutter run --dart-define=locale=hi-IN
 
 cd android
 gradlew clean
@@ -120,7 +121,7 @@ dart run build_runner build
 flutter pub run build_runner build
 dart pub run build_runner build
 flutter pub run build_runner build --delete-conflicting-outputs
-flutter packages pub run easy_localization:generate -S assets/translations -f keys -o locale_keys.g.dart
+flutter pub run easy_localization:generate -S D:\durgas\Tailorapp\assets\translations\en-US.json -f keys -o D:\durgas\Tailorapp\lib\product\lang\locale_keys.g.dart
 flutter pub cache repair
 
 

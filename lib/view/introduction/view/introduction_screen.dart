@@ -11,6 +11,7 @@ import 'package:tailorapp/core/services/debug_logger.dart';
 import 'package:tailorapp/core/services/hive_service.dart';
 import 'package:tailorapp/core/services/theme_manager.dart';
 import 'package:tailorapp/product/enum/route_enum.dart';
+import 'package:tailorapp/product/lang/locale_keys.g.dart';
 
 /// ====================================================================
 /// TAILOR APP INTRODUCTION SCREEN - 6 STEPS FLOW
@@ -124,8 +125,8 @@ class _IntroductionScreenState extends ConsumerState<IntroductionScreen>
     return [
       // 1. BODY MEASUREMENTS
       OnboardingPage(
-        title: 'intro.onboarding.page1.title'.tr(),
-        subtitle: 'intro.onboarding.page1.subtitle'.tr(),
+        title: LocaleKeys.intro_onboarding_page1_title.tr(),
+        subtitle: LocaleKeys.intro_onboarding_page1_subtitle.tr(),
         animationPath: 'assets/intro/body_measurement.json',
         color: ThemeManager.of(context).primaryColor,
         gradientColors: [
@@ -141,8 +142,8 @@ class _IntroductionScreenState extends ConsumerState<IntroductionScreen>
       ),
       // 2. AI DESIGN STUDIO
       OnboardingPage(
-        title: 'intro.onboarding.page2.title'.tr(),
-        subtitle: 'intro.onboarding.page2.subtitle'.tr(),
+        title: LocaleKeys.intro_onboarding_page2_title.tr(),
+        subtitle: LocaleKeys.intro_onboarding_page2_subtitle.tr(),
         animationPath: 'assets/intro/design_studio.json',
         color: ThemeManager.of(context).successColor,
         gradientColors: [
@@ -158,8 +159,8 @@ class _IntroductionScreenState extends ConsumerState<IntroductionScreen>
       ),
       // 3. VIRTUAL FITTING
       OnboardingPage(
-        title: 'intro.onboarding.page3.title'.tr(),
-        subtitle: 'intro.onboarding.page3.subtitle'.tr(),
+        title: LocaleKeys.intro_onboarding_page3_title.tr(),
+        subtitle: LocaleKeys.intro_onboarding_page3_subtitle.tr(),
         animationPath: 'assets/intro/virtually_fitting.json',
         color: ThemeManager.of(context).infoColor,
         gradientColors: [
@@ -175,8 +176,8 @@ class _IntroductionScreenState extends ConsumerState<IntroductionScreen>
       ),
       // 4. DESIGN MARKETPLACE/SELLING
       OnboardingPage(
-        title: 'intro.onboarding.page4.title'.tr(),
-        subtitle: 'intro.onboarding.page4.subtitle'.tr(),
+        title: LocaleKeys.intro_onboarding_page4_title.tr(),
+        subtitle: LocaleKeys.intro_onboarding_page4_subtitle.tr(),
         animationPath: 'assets/intro/design_marketing.json',
         color: ThemeManager.of(context).warningColor,
         gradientColors: [
@@ -192,8 +193,8 @@ class _IntroductionScreenState extends ConsumerState<IntroductionScreen>
       ),
       // 5. EXPERT TAILOR ASSIGNMENT
       OnboardingPage(
-        title: 'intro.onboarding.page5.title'.tr(),
-        subtitle: 'intro.onboarding.page5.subtitle'.tr(),
+        title: LocaleKeys.intro_onboarding_page5_title.tr(),
+        subtitle: LocaleKeys.intro_onboarding_page5_subtitle.tr(),
         animationPath: 'assets/intro/hard_working_tailor.json',
         color: ThemeManager.of(context).errorColor,
         gradientColors: [
@@ -209,8 +210,8 @@ class _IntroductionScreenState extends ConsumerState<IntroductionScreen>
       ),
       // 6. DOORSTEP DELIVERY
       OnboardingPage(
-        title: 'intro.onboarding.page6.title'.tr(),
-        subtitle: 'intro.onboarding.page6.subtitle'.tr(),
+        title: LocaleKeys.intro_onboarding_page6_title.tr(),
+        subtitle: LocaleKeys.intro_onboarding_page6_subtitle.tr(),
         animationPath: 'assets/intro/warehouse_delivery.json',
         color: ThemeManager.of(context).accent2,
         gradientColors: [
@@ -423,7 +424,7 @@ class _IntroductionScreenState extends ConsumerState<IntroductionScreen>
                       ),
                     ),
                     child: Text(
-                      'button.skip'.tr(),
+                      LocaleKeys.button_skip.tr(),
                       style: TextStyle(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w600,
@@ -654,7 +655,7 @@ class _IntroductionScreenState extends ConsumerState<IntroductionScreen>
                               ),
                               SizedBox(width: 6.w),
                               Text(
-                                '${'intro.feature'.tr()} ${currentPage + 1}',
+                                '${LocaleKeys.intro_feature.tr()} ${currentPage + 1}',
                                 style: TextStyle(
                                   fontSize: 11.sp,
                                   fontWeight: FontWeight.w600,
@@ -839,7 +840,7 @@ class _IntroductionScreenState extends ConsumerState<IntroductionScreen>
                           SizedBox(width: 8.w),
                           Flexible(
                             child: Text(
-                              'intro.previous'.tr(),
+                              LocaleKeys.intro_previous.tr(),
                               style: TextStyle(
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.w600,
@@ -887,8 +888,8 @@ class _IntroductionScreenState extends ConsumerState<IntroductionScreen>
                         Flexible(
                           child: Text(
                             currentPage == pages.length - 1
-                                ? 'intro.getStarted'.tr()
-                                : 'button.next'.tr(),
+                                ? LocaleKeys.intro_getStarted.tr()
+                                : LocaleKeys.button_next.tr(),
                             style: TextStyle(
                               fontSize: 15.sp,
                               fontWeight: FontWeight.w700,

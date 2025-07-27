@@ -3,9 +3,9 @@ import 'package:tailorapp/core/services/debug_logger.dart';
 
 /// Enhanced ProjectLocales with comprehensive Indian language support
 ///
-/// Supports 10 languages total:
+/// Supports 23 languages total:
 /// - English (en-US) - Primary/Default
-/// - 9 Indian regional languages with native script display
+/// - 22 Indian official languages with native script display
 class ProjectLocales {
   const ProjectLocales._();
 
@@ -14,7 +14,7 @@ class ProjectLocales {
     // English - Primary/Default
     const Locale('en', 'US'): 'English',
 
-    // Indian Languages with native script names
+    // Indian Languages with native script names (23 official languages)
     const Locale('hi', 'IN'): 'हिन्दी (Hindi)',
     const Locale('bn', 'IN'): 'বাংলা (Bengali)',
     const Locale('te', 'IN'): 'తెలుగు (Telugu)',
@@ -24,6 +24,19 @@ class ProjectLocales {
     const Locale('kn', 'IN'): 'ಕನ್ನಡ (Kannada)',
     const Locale('ml', 'IN'): 'മലയാളം (Malayalam)',
     const Locale('pa', 'IN'): 'ਪੰਜਾਬੀ (Punjabi)',
+    const Locale('as', 'IN'): 'অসমীয়া (Assamese)',
+    const Locale('brx', 'IN'): 'बड़ो (Bodo)',
+    const Locale('doi', 'IN'): 'डोगरी (Dogri)',
+    const Locale('ks', 'IN'): 'کٲشُر (Kashmiri)',
+    const Locale('kok', 'IN'): 'कोंकणी (Konkani)',
+    const Locale('mai', 'IN'): 'मैथिली (Maithili)',
+    const Locale('mni', 'IN'): 'ꯃꯤꯇꯩ (Meitei)',
+    const Locale('ne', 'IN'): 'नेपाली (Nepali)',
+    const Locale('or', 'IN'): 'ଓଡ଼ିଆ (Odia)',
+    const Locale('sa', 'IN'): 'संस्कृतम् (Sanskrit)',
+    const Locale('sat', 'IN'): 'ᱥᱟᱱᱛᱟᱲᱤ (Santali)',
+    const Locale('sd', 'IN'): 'سنڌي (Sindhi)',
+    const Locale('ur', 'IN'): 'اردو (Urdu)',
   };
 
   /// Get list of supported locales
@@ -78,6 +91,19 @@ class ProjectLocales {
       case 'kn':
       case 'ml':
       case 'pa':
+      case 'as':
+      case 'brx':
+      case 'doi':
+      case 'ks':
+      case 'kok':
+      case 'mai':
+      case 'mni':
+      case 'ne':
+      case 'or':
+      case 'sa':
+      case 'sat':
+      case 'sd':
+      case 'ur':
         return '🇮🇳';
       default:
         return '🌐';
@@ -93,14 +119,31 @@ class ProjectLocales {
       case 'mr':
       case 'gu':
       case 'pa':
-        return 'Indo-Aryan';
+      case 'as':
       case 'bn':
-        return 'Indo-Aryan (Eastern)';
+      case 'kok':
+      case 'mai':
+      case 'ne':
+      case 'or':
+      case 'sa':
+      case 'sd':
+      case 'ur':
+        return 'Indo-Aryan';
       case 'te':
       case 'kn':
       case 'ta':
       case 'ml':
         return 'Dravidian';
+      case 'brx':
+        return 'Sino-Tibetan';
+      case 'doi':
+        return 'Indo-Aryan (Western Pahari)';
+      case 'ks':
+        return 'Indo-Aryan (Dardic)';
+      case 'mni':
+        return 'Sino-Tibetan (Tibeto-Burman)';
+      case 'sat':
+        return 'Austroasiatic';
       default:
         return 'Unknown';
     }
@@ -114,7 +157,7 @@ class ProjectLocales {
       case 'hi':
         return 'National (India)';
       case 'bn':
-        return 'West Bengal';
+        return 'West Bengal/Bangladesh';
       case 'te':
         return 'Andhra Pradesh/Telangana';
       case 'mr':
@@ -129,6 +172,32 @@ class ProjectLocales {
         return 'Kerala';
       case 'pa':
         return 'Punjab';
+      case 'as':
+        return 'Assam';
+      case 'brx':
+        return 'Assam/BTAD';
+      case 'doi':
+        return 'Jammu & Kashmir';
+      case 'ks':
+        return 'Kashmir Valley';
+      case 'kok':
+        return 'Goa/Karnataka/Maharashtra';
+      case 'mai':
+        return 'Bihar/Jharkhand/Nepal';
+      case 'mni':
+        return 'Manipur';
+      case 'ne':
+        return 'Sikkim/Darjeeling/Nepal';
+      case 'or':
+        return 'Odisha';
+      case 'sa':
+        return 'Pan-Indian (Classical)';
+      case 'sat':
+        return 'Jharkhand/Odisha/West Bengal';
+      case 'sd':
+        return 'Sindhi Communities';
+      case 'ur':
+        return 'Pan-Indian (Muslim Communities)';
       default:
         return 'Unknown';
     }
@@ -141,9 +210,16 @@ class ProjectLocales {
         return 'Latin';
       case 'hi':
       case 'mr':
+      case 'brx':
+      case 'doi':
+      case 'kok':
+      case 'mai':
+      case 'ne':
+      case 'sa':
         return 'Devanagari';
       case 'bn':
-        return 'Bengali';
+      case 'as':
+        return 'Bengali-Assamese';
       case 'te':
         return 'Telugu';
       case 'ta':
@@ -156,6 +232,16 @@ class ProjectLocales {
         return 'Malayalam';
       case 'pa':
         return 'Gurmukhi';
+      case 'or':
+        return 'Odia';
+      case 'ur':
+      case 'ks':
+      case 'sd':
+        return 'Arabic-Persian';
+      case 'mni':
+        return 'Meitei Mayek';
+      case 'sat':
+        return 'Ol Chiki';
       default:
         return 'Unknown';
     }
@@ -199,24 +285,51 @@ class ProjectLocales {
       'languageFamilies': {
         'Indo-Aryan': getIndianLanguages()
             .where(
-              (l) => ['hi', 'bn', 'mr', 'gu', 'pa'].contains(l.languageCode),
+              (l) => [
+                'hi',
+                'bn',
+                'mr',
+                'gu',
+                'pa',
+                'as',
+                'kok',
+                'mai',
+                'ne',
+                'or',
+                'sa',
+                'sd',
+                'ur',
+                'doi',
+                'ks'
+              ].contains(l.languageCode),
             )
             .length,
         'Dravidian': getIndianLanguages()
             .where((l) => ['te', 'kn', 'ta', 'ml'].contains(l.languageCode))
             .length,
+        'Sino-Tibetan': getIndianLanguages()
+            .where((l) => ['brx', 'mni'].contains(l.languageCode))
+            .length,
+        'Austroasiatic': getIndianLanguages()
+            .where((l) => ['sat'].contains(l.languageCode))
+            .length,
         'Germanic': 1,
       },
       'scripts': {
-        'Devanagari': 2, // Hindi, Marathi
-        'Bengali': 1,
+        'Devanagari':
+            8, // Hindi, Marathi, Bodo, Dogri, Konkani, Maithili, Nepali, Sanskrit
+        'Bengali-Assamese': 2, // Bengali, Assamese
         'Telugu': 1,
         'Tamil': 1,
         'Gujarati': 1,
         'Kannada': 1,
         'Malayalam': 1,
-        'Gurmukhi': 1,
-        'Latin': 1,
+        'Gurmukhi': 1, // Punjabi
+        'Odia': 1,
+        'Arabic-Persian': 3, // Urdu, Kashmiri, Sindhi
+        'Meitei Mayek': 1, // Meitei
+        'Ol Chiki': 1, // Santali
+        'Latin': 1, // English
       },
     };
   }

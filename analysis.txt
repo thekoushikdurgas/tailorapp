@@ -1,7 +1,6 @@
 Analyzing tailorapp...                                          
 
-  error - Target of URI doesn't exist: 'package:tailorapp/view/admin/platform_analytics_insights_screen.dart' - lib\core\navigation\navigation_routers.dart:36:8 - uri_does_not_exist
-  error - The name 'PlatformAnalyticsInsightsScreen' isn't a class - lib\core\navigation\navigation_routers.dart:167:44 - creation_with_non_type
+   info - Missing a required trailing comma - lib\core\localization\project_locales.dart:304:15 - require_trailing_commas
 warning - The value of the field '_userGrowthData' isn't used - lib\view\admin\view\platform_analytics_insights_screen.dart:26:19 - unused_field
 warning - The value of the field '_orderVolumeData' isn't used - lib\view\admin\view\platform_analytics_insights_screen.dart:27:19 - unused_field
 warning - The value of the field '_selectedTimeRange' isn't used - lib\view\admin\view\super_admin_dashboard_screen.dart:20:10 - unused_field
@@ -22,6 +21,57 @@ warning - Unused import: 'package:flutter_bloc/flutter_bloc.dart' - lib\view\cus
 warning - Unused import: 'package:tailorapp/core/cubit/auth_cubit.dart' - lib\view\customer\view\style_preference_setup_screen.dart:3:8 - unused_import
 warning - Unused import: 'package:flutter_bloc/flutter_bloc.dart' - lib\view\customer\view\virtual_wardrobe_screen.dart:2:8 - unused_import
 warning - Unused import: 'package:tailorapp/core/cubit/auth_cubit.dart' - lib\view\customer\view\virtual_wardrobe_screen.dart:3:8 - unused_import
+warning - Unused import: 'package:easy_localization/easy_localization.dart' - lib\view\introduction\view\introduction_screen.dart:7:8 - unused_import
+  error - The getter 'intro_onboarding_page1_title' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:128:27 - undefined_getter
+  error - The getter 'intro_onboarding_page1_subtitle' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:129:30 - undefined_getter
+  error - The getter 'intro_onboarding_page2_title' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:145:27 - undefined_getter
+  error - The getter 'intro_onboarding_page2_subtitle' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:146:30 - undefined_getter
+  error - The getter 'intro_onboarding_page3_title' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:162:27 - undefined_getter
+  error - The getter 'intro_onboarding_page3_subtitle' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:163:30 - undefined_getter
+  error - The getter 'intro_onboarding_page4_title' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:179:27 - undefined_getter
+  error - The getter 'intro_onboarding_page4_subtitle' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:180:30 - undefined_getter
+  error - The getter 'intro_onboarding_page5_title' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:196:27 - undefined_getter
+  error - The getter 'intro_onboarding_page5_subtitle' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:197:30 - undefined_getter
+  error - The getter 'intro_onboarding_page6_title' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:213:27 - undefined_getter
+  error - The getter 'intro_onboarding_page6_subtitle' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:214:30 - undefined_getter
+  error - The getter 'button_skip' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:427:34 - undefined_getter
+  error - The getter 'intro_feature' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:658:47 - undefined_getter
+  error - The getter 'intro_previous' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:843:42 - undefined_getter
+  error - The getter 'intro_getStarted' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:891:46 - undefined_getter
+  error - The getter 'button_next' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:892:46 - undefined_getter
+  error - The getter 'localization_languageSelection_title' isn't defined for the type 'LocaleKeys' - lib\view\language_selection\view\language_selection_screen.dart:531:32 - undefined_getter
+  error - The getter 'localization_languageSelection_subtitle' isn't defined for the type 'LocaleKeys' - lib\view\language_selection\view\language_selection_screen.dart:541:32 - undefined_getter
+  error - The getter 'localization_availableLanguages' isn't defined for the type 'LocaleKeys' - lib\view\language_selection\view\language_selection_screen.dart:580:34 - undefined_getter
+  error - The getter 'localization_languageSelection_applyLanguage' isn't defined for the type 'LocaleKeys' - lib\view\language_selection\view\language_selection_screen.dart:880:32 - undefined_getter
+  error - The getter 'localization_languageSelection_skipSelection' isn't defined for the type 'LocaleKeys' - lib\view\language_selection\view\language_selection_screen.dart:940:32 - undefined_getter
+  error - The getter 'localization_languageChanged' isn't defined for the type 'LocaleKeys' - lib\view\language_selection\view\language_selection_screen.dart:1052:32 - undefined_getter
+  error - The getter 'localization_languageError' isn't defined for the type 'LocaleKeys' - lib\view\language_selection\view\language_selection_screen.dart:1121:32 - undefined_getter
+  error - The getter 'theme_theme' isn't defined for the type 'LocaleKeys' - lib\view\settings\view\setting_view.dart:22:31 - undefined_getter
+  error - The getter 'theme_themeChoose' isn't defined for the type 'LocaleKeys' - lib\view\settings\view\setting_view.dart:23:36 - undefined_getter
+  error - The getter 'localization_appLang' isn't defined for the type 'LocaleKeys' - lib\view\settings\view\setting_view.dart:29:31 - undefined_getter
+  error - The getter 'localization_langChoose' isn't defined for the type 'LocaleKeys' - lib\view\settings\view\setting_view.dart:30:36 - undefined_getter
+warning - Unused import: 'package:easy_localization/easy_localization.dart' - lib\view\settings\widgets\setting_appbar.dart:2:8 - unused_import
+  error - The getter 'settingTitle' isn't defined for the type 'LocaleKeys' - lib\view\settings\widgets\setting_appbar.dart:12:20 - undefined_getter
+  error - The getter 'theme_dark' isn't defined for the type 'LocaleKeys' - lib\view\settings\widgets\theme_change_dropdown.dart:42:20 - undefined_getter
+  error - The getter 'theme_light' isn't defined for the type 'LocaleKeys' - lib\view\settings\widgets\theme_change_dropdown.dart:58:20 - undefined_getter
+  error - The getter 'theme_default' isn't defined for the type 'LocaleKeys' - lib\view\settings\widgets\theme_change_dropdown.dart:74:20 - undefined_getter
+  error - The getter 'button_ok' isn't defined for the type 'LocaleKeys' - lib\view\settings\widgets\theme_change_dropdown.dart:106:20 - undefined_getter
+  error - The getter 'button_cancel' isn't defined for the type 'LocaleKeys' - lib\view\settings\widgets\theme_change_dropdown.dart:118:20 - undefined_getter
+warning - The value of the local variable 'refreshToken' isn't used - lib\view\splash\view-model\splash_view_model.dart:208:13 - unused_local_variable
+warning - Dead code - lib\view\splash\view-model\splash_view_model.dart:242:14 - dead_code
+warning - Unused import: 'package:easy_localization/easy_localization.dart' - lib\view\splash\view\splash_view.dart:4:8 - unused_import
+  error - The getter 'intro_appTagline' isn't defined for the type 'LocaleKeys' - lib\view\splash\view\splash_view.dart:247:22 - undefined_getter
+  error - The getter 'button_retry' isn't defined for the type 'LocaleKeys' - lib\view\splash\view\splash_view.dart:373:20 - undefined_getter
+  error - The getter 'error_critical' isn't defined for the type 'LocaleKeys' - lib\view\splash\view\splash_view.dart:400:34 - undefined_getter
+  error - The getter 'button_continue' isn't defined for the type 'LocaleKeys' - lib\view\splash\view\splash_view.dart:407:38 - undefined_getter
+warning - Unused import: 'package:easy_localization/easy_localization.dart' - lib\view\splash\widgets\splash_footer.dart:3:8 - unused_import
+  error - The getter 'footer_copyright' isn't defined for the type 'LocaleKeys' - lib\view\splash\widgets\splash_footer.dart:93:20 - undefined_getter
+  error - The getter 'footer_secure' isn't defined for the type 'LocaleKeys' - lib\view\splash\widgets\splash_footer.dart:126:18 - undefined_getter
+  error - The getter 'footer_version' isn't defined for the type 'LocaleKeys' - lib\view\splash\widgets\splash_footer.dart:161:37 - undefined_getter
+  error - The getter 'footer_copyright' isn't defined for the type 'LocaleKeys' - lib\view\splash\widgets\splash_footer.dart:220:31 - undefined_getter
+warning - The value of the field '_previousMessage' isn't used - lib\view\splash\widgets\splash_loading_text.dart:44:10 - unused_field
+  error - The getter 'loading_ready' isn't defined for the type 'LocaleKeys' - lib\view\splash\widgets\splash_loading_text.dart:256:29 - undefined_getter
+  error - The getter 'loading_initializingApp' isn't defined for the type 'LocaleKeys' - lib\view\splash\widgets\splash_loading_text.dart:261:29 - undefined_getter
 warning - Unused import: 'package:flutter_bloc/flutter_bloc.dart' - lib\view\tailor\view\customer_communication_hub_screen.dart:2:8 - unused_import
 warning - Unused import: 'package:tailorapp/core/cubit/auth_cubit.dart' - lib\view\tailor\view\customer_communication_hub_screen.dart:3:8 - unused_import
 warning - Unused import: 'package:flutter_bloc/flutter_bloc.dart' - lib\view\tailor\view\order_management_screen.dart:2:8 - unused_import

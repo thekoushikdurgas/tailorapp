@@ -11,6 +11,7 @@ import 'package:tailorapp/product/enum/route_enum.dart';
 import 'package:tailorapp/core/services/theme_manager.dart';
 import 'package:tailorapp/core/services/debug_logger.dart';
 import 'package:tailorapp/core/mixins/theme_aware_mixin.dart';
+import 'package:tailorapp/product/lang/locale_keys.g.dart';
 
 /// ====================================================================
 /// TAILOR APP LANGUAGE SELECTION SCREEN
@@ -527,7 +528,7 @@ class _LanguageSelectionScreenState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'localization.languageSelection.title'.tr(),
+                    LocaleKeys.localization_languageSelection_title.tr(),
                     style: TextStyle(
                       fontSize: 24.sp,
                       fontWeight: FontWeight.bold,
@@ -537,7 +538,7 @@ class _LanguageSelectionScreenState
                   ),
                   SizedBox(height: 4.h),
                   Text(
-                    'localization.languageSelection.subtitle'.tr(),
+                    LocaleKeys.localization_languageSelection_subtitle.tr(),
                     style: TextStyle(
                       fontSize: 14.sp,
                       color: ThemeManager.of(context).textSecondary,
@@ -576,7 +577,7 @@ class _LanguageSelectionScreenState
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'localization.availableLanguages'.tr(),
+                      LocaleKeys.localization_availableLanguages.tr(),
                       style: TextStyle(
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w600,
@@ -876,7 +877,8 @@ class _LanguageSelectionScreenState
                 SizedBox(width: 12.w),
                 Flexible(
                   child: Text(
-                    'localization.languageSelection.applyLanguage'.tr(),
+                    LocaleKeys.localization_languageSelection_applyLanguage
+                        .tr(),
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w600,
@@ -935,7 +937,8 @@ class _LanguageSelectionScreenState
                 SizedBox(width: 12.w),
                 Flexible(
                   child: Text(
-                    'localization.languageSelection.skipSelection'.tr(),
+                    LocaleKeys.localization_languageSelection_skipSelection
+                        .tr(),
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w600,
@@ -1046,7 +1049,7 @@ class _LanguageSelectionScreenState
                 SizedBox(width: 12.w),
                 Flexible(
                   child: Text(
-                    'localization.languageChanged'.tr(),
+                    LocaleKeys.localization_languageChanged.tr(),
                     style: TextStyle(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w500,
@@ -1115,7 +1118,7 @@ class _LanguageSelectionScreenState
                 SizedBox(width: 12.w),
                 Flexible(
                   child: Text(
-                    'localization.languageError'.tr(),
+                    LocaleKeys.localization_languageError.tr(),
                     style: TextStyle(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w500,

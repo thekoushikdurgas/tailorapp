@@ -19,6 +19,7 @@
     "period": " शी सहमत आहात."
   },
   "intro": {
+    "appTagline": "एआय-चालित दर्जी आणि डिझाइन प्लॅटफॉर्म",
     "introTitleFirst": "एआय-चालित डिझाइन स्टुडिओ",
     "introDescriptionFirst": "आमच्या एआय डिझाइन सहाय्यकासह आश्चर्यकारक कस्टम कपडे तयार करा. संकल्पनेपासून वास्तवापर्यंत, तुमच्या शैली आणि प्राधान्यांसाठी योग्य असलेला परिपूर्ण पोशाख डिझाइन करण्यात कृत्रिम बुद्धिमत्तेला मदत करू द्या.",
     "introTitleSecond": "व्हर्च्युअल फिटिंग अनुभव",
@@ -113,6 +114,25 @@
     "uploadingImage": "इमेज अपलोड करत आहे",
     "refreshingData": "डेटा रिफ्रेश करत आहे",
     "initializingApp": "अॅप सुरू करत आहे...",
+    "checkingAuthentication": "प्रमाणीकरण तपासत आहे...",
+    "checkingConnectivity": "नेटवर्क कनेक्टिविटी तपासत आहे...",
+    "checkingStorage": "स्थानिक स्टोरेज तपासत आहे...",
+    "checkingSystemHealth": "सिस्टम हेल्थ तपासत आहे...",
+    "finalizingSetup": "सेटअप पूर्ण करत आहे...",
+    "initializationWarnings": "चेतावणींसह सुरुवात पूर्ण झाली",
+    "initializingHealth": "हेल्थ मॉनिटरिंग सुरू करत आहे...",
+    "loadingPreferences": "वापरकर्ता प्राधान्ये लोड करत आहे...",
+    "offlineMode": "ऑफलाइन मोडमध्ये काम करत आहे...",
+    "offlineReady": "ऑफलाइन मोड - लॉन्च करण्यासाठी तयार!",
+    "optimizingImageLoading": "इमेज लोडिंग ऑप्टिमाइझ करत आहे...",
+    "optimizingStartup": "अॅप स्टार्टअप ऑप्टिमाइझ करत आहे...",
+    "performingHealthCheck": "हेल्थ चेक करत आहे...",
+    "recoveringStorage": "स्थानिक स्टोरेज रिकव्हर करत आहे...",
+    "settingUpPerformance": "परफॉर्मन्स मॉनिटरिंग सेट करत आहे...",
+    "systemHealthy": "सिस्टम निरोगी आहे - लॉन्च करण्यासाठी तयार!",
+    "systemStatus": "सिस्टम स्टेटस",
+    "usingCachedHealth": "कॅश केलेला हेल्थ स्टेटस वापरत आहे...",
+    "validatingTokens": "टोकन्स व्हॅलिडेट करत आहे...",
     "ready": "तयार!"
   },
   "navigation": {
@@ -189,7 +209,8 @@
     "validationError": "सत्यापन त्रुटी",
     "connectionError": "कनेक्शन अयशस्वी",
     "tryAgain": "कृपया पुन्हा प्रयत्न करा",
-    "contactSupport": "समस्या चालू राहिल्यास सहाय्याशी संपर्क साधा"
+    "contactSupport": "समस्या चालू राहिल्यास सहाय्याशी संपर्क साधा",
+    "critical": "गंभीर त्रुटी"
   },
   "success": {
     "saved": "यशस्वीरित्या सेव्ह झाले",
@@ -216,5 +237,17 @@
     "secure": "सुरक्षित",
     "version": "v1.0.0"
   },
-  "settingTitle": "सेटिंग्ज"
+  "settingTitle": "सेटिंग्ज",
+  "phase": {
+    "authentication": "प्रमाणीकरण",
+    "connectivity": "कनेक्टिविटी",
+    "error": "त्रुटी",
+    "finalization": "अंतिमीकरण",
+    "health": "हेल्थ चेक",
+    "initializing": "सुरू करत आहे",
+    "performance": "परफॉर्मन्स",
+    "preferences": "प्राधान्ये",
+    "ready": "तयार",
+    "storage": "स्टोरेज सेटअप"
+  }
 }

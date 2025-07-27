@@ -1,0 +1,12 @@
+# Requirements for Translation Manager AI Agent
+# This script uses only Python standard library modules
+# No external dependencies required!
+
+# Python 3.8+ recommended for optimal performance
+# Standard library modules used:
+# - json (JSON parsing and writing)
+# - pathlib (File path handling)
+# - argparse (Command line interface)
+# - datetime (Timestamps)
+# - typing (Type hints)
+# - collections (defaultdict) 

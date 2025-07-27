@@ -1,6 +1,6 @@
 import 'package:tailorapp/core/cubit/radio_cubit.dart';
 import 'package:tailorapp/core/cubit/theme_cubit.dart';
-import 'package:tailorapp/core/constants/string/string_constants.dart';
+import 'package:tailorapp/view/settings/cubit/string_constants.dart';
 import 'package:tailorapp/product/lang/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';

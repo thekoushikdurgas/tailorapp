@@ -1,6 +1,6 @@
 import 'package:tailorapp/view/settings/widgets/changer_listtile_with_dropdown.dart';
 import 'package:tailorapp/view/settings/widgets/theme_change_dropdown.dart';
-import 'package:tailorapp/core/constants/icon/icon_constants.dart';
+import 'package:tailorapp/core/icons/icon_constants.dart';
 import 'package:tailorapp/main.dart';
 import 'package:tailorapp/product/lang/locale_keys.g.dart';
 import 'package:tailorapp/view/settings/widgets/setting_appbar.dart';

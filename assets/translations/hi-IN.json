@@ -19,6 +19,7 @@
     "period": " से सहमत हैं।"
   },
   "intro": {
+    "appTagline": "एआई-संचालित दर्जी और डिज़ाइन प्लेटफॉर्म",
     "introTitleFirst": "एआई-संचालित डिज़ाइन स्टूडियो",
     "introDescriptionFirst": "हमारे एआई डिज़ाइन सहायक के साथ शानदार कस्टम कपड़े बनाएं। विचार से वास्तविकता तक, कृत्रिम बुद्धिमत्ता को आपकी शैली और प्राथमिकताओं के अनुकूल पूर्ण पोशाक डिज़ाइन करने में मदद करने दें।",
     "introTitleSecond": "वर्चुअल फिटिंग अनुभव",
@@ -113,6 +114,25 @@
     "uploadingImage": "इमेज अपलोड हो रही है",
     "refreshingData": "डेटा रीफ्रेश हो रहा है",
     "initializingApp": "ऐप इनिशियलाइज़ हो रहा है...",
+    "checkingAuthentication": "प्रमाणीकरण जांच रहे हैं...",
+    "checkingConnectivity": "नेटवर्क कनेक्टिविटी जांच रहे हैं...",
+    "checkingStorage": "स्थानीय स्टोरेज जांच रहे हैं...",
+    "checkingSystemHealth": "सिस्टम स्वास्थ्य जांच रहे हैं...",
+    "finalizingSetup": "सेटअप पूरा कर रहे हैं...",
+    "initializationWarnings": "चेतावनियों के साथ इनिशियलाइज़ेशन पूरा हुआ",
+    "initializingHealth": "स्वास्थ्य मॉनिटरिंग शुरू कर रहे हैं...",
+    "loadingPreferences": "उपयोगकर्ता प्राथमिकताएं लोड कर रहे हैं...",
+    "offlineMode": "ऑफलाइन मोड में काम कर रहे हैं...",
+    "offlineReady": "ऑफलाइन मोड - लॉन्च के लिए तैयार!",
+    "optimizingImageLoading": "इमेज लोडिंग अनुकूलित कर रहे हैं...",
+    "optimizingStartup": "ऐप स्टार्टअप अनुकूलित कर रहे हैं...",
+    "performingHealthCheck": "स्वास्थ्य जांच कर रहे हैं...",
+    "recoveringStorage": "स्थानीय स्टोरेज रिकवर कर रहे हैं...",
+    "settingUpPerformance": "परफॉर्मेंस मॉनिटरिंग सेटअप कर रहे हैं...",
+    "systemHealthy": "सिस्टम स्वस्थ है - लॉन्च के लिए तैयार!",
+    "systemStatus": "सिस्टम स्थिति",
+    "usingCachedHealth": "कैश्ड स्वास्थ्य स्थिति का उपयोग कर रहे हैं...",
+    "validatingTokens": "टोकन सत्यापित कर रहे हैं...",
     "ready": "तैयार!"
   },
   "navigation": {
@@ -160,7 +180,8 @@
     "profileError": "प्रोफाइल अपडेट करने में विफल",
     "firstName": "पहला नाम",
     "lastName": "अंतिम नाम",
-    "username": "उपयोगकर्ता नाम"
+    "username": "उपयोगकर्ता नाम",
+    "loginToUpdatePicture": "प्रोफाइल फोटो अपडेट करने के लिए कृपया लॉगिन करें"
   },
   "auth": {
     "login": "लॉगिन",
@@ -176,7 +197,36 @@
     "authRequired": "प्रमाणीकरण आवश्यक",
     "loginRequired": "जारी रखने के लिए कृपया लॉगिन करें",
     "logoutConfirm": "क्या आप वाकई लॉगआउट करना चाहते हैं?",
-    "sessionExpired": "आपका सत्र समाप्त हो गया है"
+    "sessionExpired": "आपका सत्र समाप्त हो गया है",
+    "phoneLogin": {
+      "continue": "जारी रखें",
+      "countryPicker": {
+        "noResults": "कोई देश नहीं मिला",
+        "searchHint": "देश खोजें...",
+        "searchTip": "एक अलग शब्द के साथ खोजने की कोशिश करें",
+        "title": "देश का चयन करें"
+      },
+      "or": "या",
+      "phoneHint": "1234567890",
+      "socialLogin": {
+        "apple": "एप्पल",
+        "comingSoon": "सामाजिक लॉगिन जल्द आ रहा है!",
+        "failed": "सामाजिक लॉगिन विफल। कृपया पुनः प्रयास करें।",
+        "google": "गूगल"
+      },
+      "terms": {
+        "and": " और ",
+        "prefix": "जारी रखकर आप हमारी ",
+        "privacyPolicy": "गोपनीयता नीति",
+        "suffix": " से सहमत हैं।",
+        "termsOfService": "सेवा की शर्तें"
+      },
+      "title": "जारी रखने के लिए अपना फोन नंबर दर्ज करें",
+      "validation": {
+        "invalidPhone": "कृपया एक वैध फोन नंबर दर्ज करें (10-15 अंक)",
+        "networkError": "फोन नंबर सत्यापित करने में असमर्थ। कृपया अपना कनेक्शन जांचें और पुनः प्रयास करें।"
+      }
+    }
   },
   "error": {
     "general": "कुछ गलत हुआ",
@@ -189,7 +239,8 @@
     "validationError": "सत्यापन त्रुटि",
     "connectionError": "कनेक्शन विफल",
     "tryAgain": "कृपया पुनः प्रयास करें",
-    "contactSupport": "यदि समस्या बनी रहती है तो सहायता से संपर्क करें"
+    "contactSupport": "यदि समस्या बनी रहती है तो सहायता से संपर्क करें",
+    "critical": "गंभीर त्रुटि"
   },
   "success": {
     "saved": "सफलतापूर्वक सेव हो गया",
@@ -216,5 +267,17 @@
     "secure": "सुरक्षित",
     "version": "v1.0.0"
   },
-  "settingTitle": "सेटिंग्स"
+  "settingTitle": "सेटिंग्स",
+  "phase": {
+    "authentication": "प्रमाणीकरण",
+    "connectivity": "कनेक्टिविटी",
+    "error": "त्रुटि",
+    "finalization": "अंतिमीकरण",
+    "health": "स्वास्थ्य जांच",
+    "initializing": "इनिशियलाइज़ कर रहे हैं",
+    "performance": "परफॉर्मेंस",
+    "preferences": "प्राथमिकताएं",
+    "ready": "तैयार",
+    "storage": "स्टोरेज सेटअप"
+  }
 }

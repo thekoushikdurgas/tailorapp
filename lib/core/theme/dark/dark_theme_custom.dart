@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-part '../../constants/theme/dark_constants.dart';
+part 'dark_constants.dart';
 
 class DarkThemeCustom {
   late ThemeData theme;

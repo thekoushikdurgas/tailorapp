@@ -1,4 +1,4 @@
-part of '../../theme/light/light_theme_custom.dart';
+part of 'light_theme_custom.dart';
 
 class LightThemeColors {
   const LightThemeColors._();

@@ -1,4 +1,4 @@
-import 'package:tailorapp/core/constants/onboarding/intro_constants.dart';
+import 'package:tailorapp/view/introduction/cubit/intro_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 

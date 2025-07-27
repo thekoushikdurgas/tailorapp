@@ -1,8 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tailorapp/core/services/hive_service.dart';
 import 'package:tailorapp/core/cubit/auth_cubit.dart';
 import 'package:tailorapp/core/services/route_guard_service.dart';
-import 'package:tailorapp/view/admin/platform_analytics_insights_screen.dart';
+import 'package:tailorapp/view/admin/view/platform_analytics_insights_screen.dart';
 import 'package:tailorapp/view/admin/view/super_admin_dashboard_screen.dart';
 import 'package:tailorapp/view/admin/view/user_management_roles_screen.dart';
 import 'package:tailorapp/view/ai_suggestions/view/ai_suggestions_page.dart';
@@ -39,19 +38,26 @@ import 'package:tailorapp/view/tailor/view/customer_communication_hub_screen.dar
 import 'package:tailorapp/view/tailor/view/inventory_materials_screen.dart';
 import 'package:tailorapp/view/tailor/view/order_management_screen.dart';
 import 'package:tailorapp/view/tailor/view/pattern_creation_management_screen.dart';
+import 'package:tailorapp/view/splash/view/splash_view.dart';
 
 class NavigationRouters {
   const NavigationRouters._();
 
   static final GoRouter router = GoRouter(
-    initialLocation: HiveService.getInitialIntroRoute(),
+    // Start with splash screen instead of bypassing it
+    initialLocation: RouteEnum.splash.rawValue,
     redirect: (context, state) {
       final authState = context.read<AuthCubit>().state;
       final isAuthenticated = authState is AuthAuthenticated;
       final userRole = isAuthenticated ? authState.userRole : null;
       final currentPath = state.fullPath ?? '/';
 
-      // Use RouteGuardService to validate access
+      // Allow splash screen to always load first
+      if (currentPath == RouteEnum.splash.rawValue) {
+        return null; // No redirect needed for splash
+      }
+
+      // Use RouteGuardService to validate access for other routes
       final guardResult = RouteGuardService.validateRouteAccess(
         route: currentPath,
         isAuthenticated: isAuthenticated,
@@ -65,6 +71,12 @@ class NavigationRouters {
       return null; // No redirect needed
     },
     routes: [
+      // Splash route - entry point for the app
+      GoRoute(
+        path: RouteEnum.splash.rawValue,
+        builder: (context, state) => const SplashView(),
+      ),
+
       // Auth routes
       GoRoute(
         path: RouteEnum.auth.rawValue,
