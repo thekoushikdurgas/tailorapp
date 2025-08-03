@@ -226,8 +226,7 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
       children: [
         // App name with gradient text effect
         ShaderMask(
-          shaderCallback: (bounds) =>
-              ThemeManager.of(context).primaryGradient.createShader(bounds),
+          shaderCallback: (bounds) => ThemeManager.of(context).primaryGradient.createShader(bounds),
           child: Text(
             'Prbal',
             style: TextStyle(

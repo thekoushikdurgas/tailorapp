@@ -82,5 +82,4 @@ service cloud.firestore {
     }
   }
 }
-//
-/
+// End of rules

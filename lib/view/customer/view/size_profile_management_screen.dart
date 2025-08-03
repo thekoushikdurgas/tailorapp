@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tailorapp/core/cubit/auth_cubit.dart';
-import 'package:tailorapp/product/enum/route_enum.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:tailorapp/core/cubit/auth_cubit.dart';
+// import 'package:tailorapp/product/enum/route_enum.dart';
 import 'package:go_router/go_router.dart';
 
 class SizeProfileManagementScreen extends StatefulWidget {
   const SizeProfileManagementScreen({super.key});
 
   @override
-  State<SizeProfileManagementScreen> createState() =>
-      _SizeProfileManagementScreenState();
+  State<SizeProfileManagementScreen> createState() => _SizeProfileManagementScreenState();
 }
 
-class _SizeProfileManagementScreenState
-    extends State<SizeProfileManagementScreen> with TickerProviderStateMixin {
+class _SizeProfileManagementScreenState extends State<SizeProfileManagementScreen> with TickerProviderStateMixin {
   late TabController _tabController;
   late AnimationController _scanController;
   late AnimationController _pulseController;
@@ -209,8 +207,7 @@ class _SizeProfileManagementScreenState
                     Center(
                       child: CustomPaint(
                         size: const Size(60, 100),
-                        painter:
-                            BodySilhouettePainter(_currentProfile!.bodyType),
+                        painter: BodySilhouettePainter(_currentProfile!.bodyType),
                       ),
                     ),
                     if (_hasBodyScan)
@@ -258,9 +255,7 @@ class _SizeProfileManagementScreenState
                             value: _currentProfile!.confidenceScore,
                             backgroundColor: Colors.grey[200],
                             valueColor: AlwaysStoppedAnimation<Color>(
-                              _currentProfile!.confidenceScore > 0.8
-                                  ? Colors.green[600]!
-                                  : Colors.orange[600]!,
+                              _currentProfile!.confidenceScore > 0.8 ? Colors.green[600]! : Colors.orange[600]!,
                             ),
                           ),
                         ),
@@ -418,8 +413,7 @@ class _SizeProfileManagementScreenState
                 value: _selectedMeasurementSystem,
                 items: _measurementSystems
                     .map(
-                      (system) =>
-                          DropdownMenuItem(value: system, child: Text(system)),
+                      (system) => DropdownMenuItem(value: system, child: Text(system)),
                     )
                     .toList(),
                 onChanged: (value) {
@@ -444,8 +438,7 @@ class _SizeProfileManagementScreenState
           ),
           const SizedBox(height: 16),
 
-          ..._currentProfile!.measurements.entries
-              .map((entry) => _buildMeasurementItem(entry.key, entry.value)),
+          ..._currentProfile!.measurements.entries.map((entry) => _buildMeasurementItem(entry.key, entry.value)),
 
           const SizedBox(height: 24),
 
@@ -481,13 +474,11 @@ class _SizeProfileManagementScreenState
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    contentPadding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   ),
                   items: _bodyTypes
                       .map(
-                        (type) =>
-                            DropdownMenuItem(value: type, child: Text(type)),
+                        (type) => DropdownMenuItem(value: type, child: Text(type)),
                       )
                       .toList(),
                   onChanged: (value) {
@@ -736,8 +727,7 @@ class _SizeProfileManagementScreenState
             child: ElevatedButton.icon(
               onPressed: _isScanning ? _stopBodyScan : _startBodyScan,
               style: ElevatedButton.styleFrom(
-                backgroundColor:
-                    _isScanning ? Colors.red[600] : Colors.blue[600],
+                backgroundColor: _isScanning ? Colors.red[600] : Colors.blue[600],
                 padding: const EdgeInsets.all(16),
               ),
               icon: Icon(
@@ -1289,8 +1279,7 @@ class _SizeProfileManagementScreenState
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Measurement Settings'),
-        content:
-            const Text('Configure your measurement preferences and units.'),
+        content: const Text('Configure your measurement preferences and units.'),
         actions: [
           TextButton(
             onPressed: () => context.pop(),

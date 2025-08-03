@@ -49,8 +49,7 @@ class FirebaseAdminRepository implements AdminRepository {
   final FirebaseFirestore _firestore;
   final String _collection = 'admins';
 
-  FirebaseAdminRepository({FirebaseFirestore? firestore})
-      : _firestore = firestore ?? FirebaseFirestore.instance;
+  FirebaseAdminRepository({FirebaseFirestore? firestore}) : _firestore = firestore ?? FirebaseFirestore.instance;
 
   @override
   Future<AdminModel?> getAdmin(String id) async {
@@ -132,11 +131,7 @@ class FirebaseAdminRepository implements AdminRepository {
   @override
   Future<AdminModel?> getAdminByEmail(String email) async {
     try {
-      final querySnapshot = await _firestore
-          .collection(_collection)
-          .where('email', isEqualTo: email)
-          .limit(1)
-          .get();
+      final querySnapshot = await _firestore.collection(_collection).where('email', isEqualTo: email).limit(1).get();
 
       if (querySnapshot.docs.isEmpty) {
         return null;
@@ -219,10 +214,7 @@ class FirebaseAdminRepository implements AdminRepository {
   @override
   Future<List<AdminModel>> getActiveAdmins() async {
     try {
-      final querySnapshot = await _firestore
-          .collection(_collection)
-          .where('isActive', isEqualTo: true)
-          .get();
+      final querySnapshot = await _firestore.collection(_collection).where('isActive', isEqualTo: true).get();
 
       return querySnapshot.docs.map((doc) {
         final data = doc.data();
@@ -326,8 +318,7 @@ class FirebaseAdminRepository implements AdminRepository {
       await Future.delayed(const Duration(seconds: 1));
 
       final timestamp = DateTime.now().millisecondsSinceEpoch;
-      final imageUrl =
-          'https://mock-storage.com/admins/$adminId/$timestamp.jpg';
+      final imageUrl = 'https://mock-storage.com/admins/$adminId/$timestamp.jpg';
 
       // Update admin document with new image URL
       await _firestore.collection(_collection).doc(adminId).update({
@@ -370,11 +361,8 @@ class FirebaseAdminRepository implements AdminRepository {
   @override
   Future<List<AdminModel>> getRecentAdmins(int limit) async {
     try {
-      final querySnapshot = await _firestore
-          .collection(_collection)
-          .orderBy('createdAt', descending: true)
-          .limit(limit)
-          .get();
+      final querySnapshot =
+          await _firestore.collection(_collection).orderBy('createdAt', descending: true).limit(limit).get();
 
       return querySnapshot.docs.map((doc) {
         final data = doc.data();
@@ -389,23 +377,15 @@ class FirebaseAdminRepository implements AdminRepository {
   @override
   Future<Map<String, dynamic>> getAdminStats() async {
     try {
-      final totalAdminsSnapshot =
-          await _firestore.collection(_collection).get();
-      final activeAdminsSnapshot = await _firestore
-          .collection(_collection)
-          .where('isActive', isEqualTo: true)
-          .get();
-      final superAdminsSnapshot = await _firestore
-          .collection(_collection)
-          .where('isSuperAdmin', isEqualTo: true)
-          .get();
+      final totalAdminsSnapshot = await _firestore.collection(_collection).get();
+      final activeAdminsSnapshot = await _firestore.collection(_collection).where('isActive', isEqualTo: true).get();
+      final superAdminsSnapshot = await _firestore.collection(_collection).where('isSuperAdmin', isEqualTo: true).get();
 
       return {
         'totalAdmins': totalAdminsSnapshot.docs.length,
         'activeAdmins': activeAdminsSnapshot.docs.length,
         'superAdmins': superAdminsSnapshot.docs.length,
-        'inactiveAdmins':
-            totalAdminsSnapshot.docs.length - activeAdminsSnapshot.docs.length,
+        'inactiveAdmins': totalAdminsSnapshot.docs.length - activeAdminsSnapshot.docs.length,
       };
     } catch (e) {
       throw AdminRepositoryException('Failed to get admin stats: $e');
@@ -448,7 +428,9 @@ class FirebaseAdminRepository implements AdminRepository {
 
   @override
   Future<void> revokePermission(
-      String adminId, AdminPermission permission) async {
+    String adminId,
+    AdminPermission permission,
+  ) async {
     try {
       await _firestore.collection(_collection).doc(adminId).update({
         'permissions': FieldValue.arrayRemove([permission.name]),
@@ -467,7 +449,9 @@ class FirebaseAdminRepository implements AdminRepository {
 
   @override
   Future<void> grantPermission(
-      String adminId, AdminPermission permission) async {
+    String adminId,
+    AdminPermission permission,
+  ) async {
     try {
       await _firestore.collection(_collection).doc(adminId).update({
         'permissions': FieldValue.arrayUnion([permission.name]),

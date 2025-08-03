@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tailorapp/core/cubit/auth_cubit.dart';
-import 'package:tailorapp/product/enum/route_enum.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:tailorapp/core/cubit/auth_cubit.dart';
+// import 'package:tailorapp/product/enum/route_enum.dart';
 import 'package:go_router/go_router.dart';
 
 class FabricSelectionStudioScreen extends StatefulWidget {
   const FabricSelectionStudioScreen({super.key});
 
   @override
-  State<FabricSelectionStudioScreen> createState() =>
-      _FabricSelectionStudioScreenState();
+  State<FabricSelectionStudioScreen> createState() => _FabricSelectionStudioScreenState();
 }
 
-class _FabricSelectionStudioScreenState
-    extends State<FabricSelectionStudioScreen> with TickerProviderStateMixin {
+class _FabricSelectionStudioScreenState extends State<FabricSelectionStudioScreen> with TickerProviderStateMixin {
   late TabController _tabController;
   late AnimationController _arController;
   late AnimationController _shimmerController;
@@ -108,8 +106,7 @@ class _FabricSelectionStudioScreenState
       (index) => FabricMaterial(
         id: 'FAB${(index + 1).toString().padLeft(3, '0')}',
         name: '${_getFabricName(index)} Premium',
-        description:
-            'High-quality ${_getFabricName(index).toLowerCase()} fabric with excellent drape and comfort',
+        description: 'High-quality ${_getFabricName(index).toLowerCase()} fabric with excellent drape and comfort',
         category: _categories[(index % (_categories.length - 1)) + 1],
         subcategory: _getSubcategory(index),
         price: 25.0 + (index * 8.5),
@@ -139,8 +136,7 @@ class _FabricSelectionStudioScreenState
         occasion: _getOccasion(index),
         drape: FabricDrape.values[index % FabricDrape.values.length],
         stretch: index % 4 == 0,
-        transparency:
-            FabricTransparency.values[index % FabricTransparency.values.length],
+        transparency: FabricTransparency.values[index % FabricTransparency.values.length],
         shrinkage: (index % 5) * 0.5,
         colorOptions: List.generate(
           (index % 8) + 3,
@@ -326,8 +322,7 @@ class _FabricSelectionStudioScreenState
   void _applyFilters() {
     _filteredFabrics = _fabrics.where((fabric) {
       // Category filter
-      final categoryMatch =
-          _selectedCategory == 'All' || fabric.category == _selectedCategory;
+      final categoryMatch = _selectedCategory == 'All' || fabric.category == _selectedCategory;
 
       // Price filter
       bool priceMatch = true;
@@ -347,17 +342,13 @@ class _FabricSelectionStudioScreenState
       }
 
       // Sustainability filter
-      final sustainabilityMatch = _selectedSustainability == 'All' ||
-          fabric.sustainability.contains(_selectedSustainability);
+      final sustainabilityMatch =
+          _selectedSustainability == 'All' || fabric.sustainability.contains(_selectedSustainability);
 
       // Custom price range
-      final customPriceMatch =
-          fabric.price >= _priceRange.start && fabric.price <= _priceRange.end;
+      final customPriceMatch = fabric.price >= _priceRange.start && fabric.price <= _priceRange.end;
 
-      return categoryMatch &&
-          priceMatch &&
-          sustainabilityMatch &&
-          customPriceMatch;
+      return categoryMatch && priceMatch && sustainabilityMatch && customPriceMatch;
     }).toList();
 
     // Apply sorting
@@ -401,8 +392,7 @@ class _FabricSelectionStudioScreenState
         ],
       ),
       floatingActionButton: _buildFloatingActionButtons(),
-      bottomNavigationBar:
-          _selectedFabric != null ? _buildFabricDetailsBottomSheet() : null,
+      bottomNavigationBar: _selectedFabric != null ? _buildFabricDetailsBottomSheet() : null,
     );
   }
 
@@ -521,8 +511,7 @@ class _FabricSelectionStudioScreenState
                       hintText: 'Search fabrics by name, material, or style...',
                       prefixIcon: Icon(Icons.search, color: Colors.grey),
                       border: InputBorder.none,
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     ),
                     onChanged: _searchFabrics,
                   ),
@@ -573,8 +562,7 @@ class _FabricSelectionStudioScreenState
                 value: _selectedCategory,
                 decoration: InputDecoration(
                   labelText: 'Category',
-                  contentPadding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -601,8 +589,7 @@ class _FabricSelectionStudioScreenState
                 value: _sortBy,
                 decoration: InputDecoration(
                   labelText: 'Sort By',
-                  contentPadding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -636,8 +623,7 @@ class _FabricSelectionStudioScreenState
                 value: _selectedSustainability,
                 decoration: InputDecoration(
                   labelText: 'Sustainability',
-                  contentPadding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -646,8 +632,7 @@ class _FabricSelectionStudioScreenState
                     .map(
                       (option) => DropdownMenuItem(
                         value: option,
-                        child:
-                            Text(option, style: const TextStyle(fontSize: 12)),
+                        child: Text(option, style: const TextStyle(fontSize: 12)),
                       ),
                     )
                     .toList(),
@@ -757,11 +742,8 @@ class _FabricSelectionStudioScreenState
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    Colors.primaries[
-                        collection.hashCode % Colors.primaries.length],
-                    Colors.primaries[
-                            collection.hashCode % Colors.primaries.length]
-                        .withValues(alpha: 0.7),
+                    Colors.primaries[collection.hashCode % Colors.primaries.length],
+                    Colors.primaries[collection.hashCode % Colors.primaries.length].withValues(alpha: 0.7),
                   ],
                 ),
               ),
@@ -812,8 +794,7 @@ class _FabricSelectionStudioScreenState
                 top: 8,
                 right: 8,
                 child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
                     color: Colors.red[600],
                     borderRadius: BorderRadius.circular(8),
@@ -967,8 +948,7 @@ class _FabricSelectionStudioScreenState
               child: Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  borderRadius:
-                      const BorderRadius.vertical(top: Radius.circular(12)),
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
                   gradient: LinearGradient(
                     colors: [
                       fabric.colorOptions.first,
@@ -1000,8 +980,7 @@ class _FabricSelectionStudioScreenState
                               colors: [
                                 fabric.colorOptions.first,
                                 fabric.colorOptions.first,
-                                fabric.colorOptions.first
-                                    .withValues(alpha: 0.5),
+                                fabric.colorOptions.first.withValues(alpha: 0.5),
                                 fabric.colorOptions.first,
                                 fabric.colorOptions.first,
                               ],
@@ -1077,12 +1056,8 @@ class _FabricSelectionStudioScreenState
                             shape: BoxShape.circle,
                           ),
                           child: Icon(
-                            fabric.isFavorite
-                                ? Icons.favorite
-                                : Icons.favorite_border,
-                            color: fabric.isFavorite
-                                ? Colors.red[600]
-                                : Colors.grey[600],
+                            fabric.isFavorite ? Icons.favorite : Icons.favorite_border,
+                            color: fabric.isFavorite ? Colors.red[600] : Colors.grey[600],
                             size: 16,
                           ),
                         ),
@@ -1149,8 +1124,7 @@ class _FabricSelectionStudioScreenState
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              if (fabric.isOnSale &&
-                                  fabric.salePrice != null) ...[
+                              if (fabric.isOnSale && fabric.salePrice != null) ...[
                                 Text(
                                   '\$${fabric.salePrice!.toStringAsFixed(2)}',
                                   style: TextStyle(
@@ -1433,18 +1407,13 @@ class _FabricSelectionStudioScreenState
                   IconButton(
                     onPressed: () => _toggleFavorite(fabric),
                     icon: Icon(
-                      fabric.isFavorite
-                          ? Icons.favorite
-                          : Icons.favorite_border,
-                      color: fabric.isFavorite
-                          ? Colors.red[600]
-                          : Colors.grey[600],
+                      fabric.isFavorite ? Icons.favorite : Icons.favorite_border,
+                      color: fabric.isFavorite ? Colors.red[600] : Colors.grey[600],
                     ),
                   ),
                   IconButton(
                     onPressed: () => _addToCart(fabric),
-                    icon:
-                        Icon(Icons.add_shopping_cart, color: Colors.blue[600]),
+                    icon: Icon(Icons.add_shopping_cart, color: Colors.blue[600]),
                   ),
                 ],
               ),
@@ -1557,8 +1526,7 @@ class _FabricSelectionStudioScreenState
                 onPressed: () => _orderSample(sample),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue[600],
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 ),
                 child: const Text(
                   'Order',
@@ -1573,8 +1541,7 @@ class _FabricSelectionStudioScreenState
   }
 
   Widget _buildFavoritesTab() {
-    final favoriteFabrics =
-        _fabrics.where((fabric) => fabric.isFavorite).toList();
+    final favoriteFabrics = _fabrics.where((fabric) => fabric.isFavorite).toList();
 
     if (favoriteFabrics.isEmpty) {
       return Center(
@@ -1683,8 +1650,7 @@ class _FabricSelectionStudioScreenState
   }
 
   Widget _buildSustainabilityTab() {
-    final sustainableFabrics =
-        _fabrics.where((fabric) => fabric.sustainability.isNotEmpty).toList();
+    final sustainableFabrics = _fabrics.where((fabric) => fabric.sustainability.isNotEmpty).toList();
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
@@ -1917,8 +1883,7 @@ class _FabricSelectionStudioScreenState
               onPressed: () => _addToCart(_selectedFabric!),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue[600],
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               ),
               icon: const Icon(
                 Icons.add_shopping_cart,
@@ -2013,9 +1978,7 @@ class _FabricSelectionStudioScreenState
               (fabric) =>
                   fabric.name.toLowerCase().contains(query.toLowerCase()) ||
                   fabric.category.toLowerCase().contains(query.toLowerCase()) ||
-                  fabric.description
-                      .toLowerCase()
-                      .contains(query.toLowerCase()),
+                  fabric.description.toLowerCase().contains(query.toLowerCase()),
             )
             .toList();
       }
@@ -2185,8 +2148,7 @@ class _FabricSelectionStudioScreenState
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Purchase History'),
-        content:
-            const Text('Your fabric purchase history will be displayed here.'),
+        content: const Text('Your fabric purchase history will be displayed here.'),
         actions: [
           TextButton(
             onPressed: () => context.pop(),
@@ -2300,10 +2262,7 @@ class FabricMaterial {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FabricMaterial &&
-          runtimeType == other.runtimeType &&
-          id == other.id;
+      identical(this, other) || other is FabricMaterial && runtimeType == other.runtimeType && id == other.id;
 
   @override
   int get hashCode => id.hashCode;
@@ -2332,10 +2291,7 @@ class FabricCollection {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FabricCollection &&
-          runtimeType == other.runtimeType &&
-          id == other.id;
+      identical(this, other) || other is FabricCollection && runtimeType == other.runtimeType && id == other.id;
 
   @override
   int get hashCode => id.hashCode;

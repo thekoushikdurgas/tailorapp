@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tailorapp/core/cubit/auth_cubit.dart';
-import 'package:tailorapp/core/navigation/navigation_route.dart';
+// import 'package:tailorapp/core/navigation/navigation_route.dart';
 import 'package:tailorapp/product/enum/route_enum.dart';
 import 'package:go_router/go_router.dart';
 
@@ -171,8 +171,7 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
                       color: Colors.blue[100],
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: state is AuthAuthenticated &&
-                            state.user.photoURL != null
+                    child: state is AuthAuthenticated && state.user.photoURL != null
                         ? ClipRRect(
                             borderRadius: BorderRadius.circular(12),
                             child: Image.network(
@@ -222,9 +221,7 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
       builder: (context, state) {
         String userName = 'there';
         if (state is AuthAuthenticated) {
-          userName = state.user.displayName?.split(' ').first ??
-              state.userProfile?.name.split(' ').first ??
-              'there';
+          userName = state.user.displayName?.split(' ').first ?? state.userProfile.name.split(' ').first;
         }
 
         return Container(
@@ -523,8 +520,7 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
                     end: Alignment.bottomRight,
                     colors: [
                       Colors.primaries[index % Colors.primaries.length],
-                      Colors.primaries[index % Colors.primaries.length]
-                          .withValues(alpha: 0.7),
+                      Colors.primaries[index % Colors.primaries.length].withValues(alpha: 0.7),
                     ],
                   ),
                 ),
@@ -572,9 +568,7 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
               margin: const EdgeInsets.symmetric(horizontal: 4),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: _currentStyleIndex == index
-                    ? Colors.purple[600]
-                    : Colors.grey[300],
+                color: _currentStyleIndex == index ? Colors.purple[600] : Colors.grey[300],
               ),
             ),
           ),
@@ -791,8 +785,7 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
                 ),
               ),
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
                   color: Colors.amber[100],
                   borderRadius: BorderRadius.circular(20),

@@ -43,8 +43,7 @@ class FirebaseTailorRepository implements TailorRepository {
   final FirebaseFirestore _firestore;
   final String _collection = 'tailors';
 
-  FirebaseTailorRepository({FirebaseFirestore? firestore})
-      : _firestore = firestore ?? FirebaseFirestore.instance;
+  FirebaseTailorRepository({FirebaseFirestore? firestore}) : _firestore = firestore ?? FirebaseFirestore.instance;
 
   @override
   Future<TailorModel?> getTailor(String id) async {
@@ -126,11 +125,7 @@ class FirebaseTailorRepository implements TailorRepository {
   @override
   Future<TailorModel?> getTailorByEmail(String email) async {
     try {
-      final querySnapshot = await _firestore
-          .collection(_collection)
-          .where('email', isEqualTo: email)
-          .limit(1)
-          .get();
+      final querySnapshot = await _firestore.collection(_collection).where('email', isEqualTo: email).limit(1).get();
 
       if (querySnapshot.docs.isEmpty) {
         return null;
@@ -208,7 +203,8 @@ class FirebaseTailorRepository implements TailorRepository {
 
   @override
   Future<List<TailorModel>> getTailorsBySpecialization(
-      String specialization) async {
+    String specialization,
+  ) async {
     try {
       final querySnapshot = await _firestore
           .collection(_collection)
@@ -223,18 +219,16 @@ class FirebaseTailorRepository implements TailorRepository {
       }).toList();
     } catch (e) {
       throw TailorRepositoryException(
-          'Failed to get tailors by specialization: $e');
+        'Failed to get tailors by specialization: $e',
+      );
     }
   }
 
   @override
   Future<List<TailorModel>> getRecentTailors(int limit) async {
     try {
-      final querySnapshot = await _firestore
-          .collection(_collection)
-          .orderBy('createdAt', descending: true)
-          .limit(limit)
-          .get();
+      final querySnapshot =
+          await _firestore.collection(_collection).orderBy('createdAt', descending: true).limit(limit).get();
 
       return querySnapshot.docs.map((doc) {
         final data = doc.data();
@@ -249,10 +243,7 @@ class FirebaseTailorRepository implements TailorRepository {
   @override
   Future<List<TailorModel>> getActiveTailors() async {
     try {
-      final querySnapshot = await _firestore
-          .collection(_collection)
-          .where('isActive', isEqualTo: true)
-          .get();
+      final querySnapshot = await _firestore.collection(_collection).where('isActive', isEqualTo: true).get();
 
       return querySnapshot.docs.map((doc) {
         final data = doc.data();
@@ -330,8 +321,7 @@ class FirebaseTailorRepository implements TailorRepository {
       await Future.delayed(const Duration(seconds: 1));
 
       final timestamp = DateTime.now().millisecondsSinceEpoch;
-      final imageUrl =
-          'https://mock-storage.com/tailors/$tailorId/$timestamp.jpg';
+      final imageUrl = 'https://mock-storage.com/tailors/$tailorId/$timestamp.jpg';
 
       // Update tailor document with new image URL
       await _firestore.collection(_collection).doc(tailorId).update({
@@ -359,7 +349,9 @@ class FirebaseTailorRepository implements TailorRepository {
 
   @override
   Future<void> removeCertification(
-      String tailorId, String certification) async {
+    String tailorId,
+    String certification,
+  ) async {
     try {
       await _firestore.collection(_collection).doc(tailorId).update({
         'certifications': FieldValue.arrayRemove([certification]),

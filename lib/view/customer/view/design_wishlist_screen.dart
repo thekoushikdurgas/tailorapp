@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tailorapp/core/cubit/auth_cubit.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:tailorapp/core/cubit/auth_cubit.dart';
 import 'package:tailorapp/product/enum/route_enum.dart';
 import 'package:go_router/go_router.dart';
 
@@ -87,8 +87,7 @@ class _DesignWishlistScreenState extends State<DesignWishlistScreen> {
   }
 
   void _onScroll() {
-    if (_scrollController.position.pixels ==
-        _scrollController.position.maxScrollExtent) {
+    if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
       _loadMoreItems();
     }
   }
@@ -103,9 +102,7 @@ class _DesignWishlistScreenState extends State<DesignWishlistScreen> {
         title: 'Design ${startIndex + index + 1}',
         designer: 'Designer ${((startIndex + index) % 5) + 1}',
         price: 100 + ((startIndex + index) * 25),
-        originalPrice: (startIndex + index) % 3 == 0
-            ? 150 + ((startIndex + index) * 25)
-            : null,
+        originalPrice: (startIndex + index) % 3 == 0 ? 150 + ((startIndex + index) * 25) : null,
         imageUrl: 'https://picsum.photos/300/400?random=${startIndex + index}',
         category: _categories[(startIndex + index) % _categories.length],
         isOnSale: (startIndex + index) % 3 == 0,
@@ -166,8 +163,7 @@ class _DesignWishlistScreenState extends State<DesignWishlistScreen> {
             )
           : const Text(
               'My Wishlist',
-              style:
-                  TextStyle(color: Colors.black87, fontWeight: FontWeight.w600),
+              style: TextStyle(color: Colors.black87, fontWeight: FontWeight.w600),
             ),
       actions: [
         if (_isSelectionMode)
@@ -225,8 +221,7 @@ class _DesignWishlistScreenState extends State<DesignWishlistScreen> {
                   hintText: 'Search designs...',
                   prefixIcon: Icon(Icons.search, color: Colors.grey),
                   border: InputBorder.none,
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 ),
                 onChanged: _onSearchChanged,
               ),
@@ -302,8 +297,7 @@ class _DesignWishlistScreenState extends State<DesignWishlistScreen> {
                   children: [
                     const Text(
                       'Price Range',
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                     ),
                     const SizedBox(height: 8),
                     DropdownButton<String>(
@@ -332,8 +326,7 @@ class _DesignWishlistScreenState extends State<DesignWishlistScreen> {
                   children: [
                     const Text(
                       'Sort By',
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                     ),
                     const SizedBox(height: 8),
                     DropdownButton<String>(
@@ -454,8 +447,7 @@ class _DesignWishlistScreenState extends State<DesignWishlistScreen> {
             ),
             child: const Text(
               'Explore Designs',
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
             ),
           ),
         ],
@@ -505,9 +497,7 @@ class _DesignWishlistScreenState extends State<DesignWishlistScreen> {
     final isSelected = _selectedItems.contains(item);
 
     return GestureDetector(
-      onTap: () => _isSelectionMode
-          ? _toggleItemSelection(item)
-          : _viewDesignDetails(item),
+      onTap: () => _isSelectionMode ? _toggleItemSelection(item) : _viewDesignDetails(item),
       onLongPress: () => _startSelectionMode(item),
       child: Container(
         decoration: BoxDecoration(
@@ -531,8 +521,7 @@ class _DesignWishlistScreenState extends State<DesignWishlistScreen> {
                   flex: 3,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius:
-                          const BorderRadius.vertical(top: Radius.circular(12)),
+                      borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
                       color: Colors.grey[200],
                     ),
                     child: Stack(
@@ -547,11 +536,8 @@ class _DesignWishlistScreenState extends State<DesignWishlistScreen> {
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                               colors: [
-                                Colors.primaries[
-                                    item.hashCode % Colors.primaries.length],
-                                Colors.primaries[
-                                        item.hashCode % Colors.primaries.length]
-                                    .withValues(alpha: 0.7),
+                                Colors.primaries[item.hashCode % Colors.primaries.length],
+                                Colors.primaries[item.hashCode % Colors.primaries.length].withValues(alpha: 0.7),
                               ],
                             ),
                           ),
@@ -598,12 +584,8 @@ class _DesignWishlistScreenState extends State<DesignWishlistScreen> {
                                 shape: BoxShape.circle,
                               ),
                               child: Icon(
-                                item.isFavorite
-                                    ? Icons.favorite
-                                    : Icons.favorite_border,
-                                color: item.isFavorite
-                                    ? Colors.red[600]
-                                    : Colors.grey[600],
+                                item.isFavorite ? Icons.favorite : Icons.favorite_border,
+                                color: item.isFavorite ? Colors.red[600] : Colors.grey[600],
                                 size: 16,
                               ),
                             ),
@@ -661,9 +643,7 @@ class _DesignWishlistScreenState extends State<DesignWishlistScreen> {
                               style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
-                                color: item.isOnSale
-                                    ? Colors.red[600]
-                                    : Colors.black87,
+                                color: item.isOnSale ? Colors.red[600] : Colors.black87,
                               ),
                             ),
                           ],
@@ -691,9 +671,7 @@ class _DesignWishlistScreenState extends State<DesignWishlistScreen> {
                     ),
                     shape: BoxShape.circle,
                   ),
-                  child: isSelected
-                      ? const Icon(Icons.check, color: Colors.white, size: 16)
-                      : null,
+                  child: isSelected ? const Icon(Icons.check, color: Colors.white, size: 16) : null,
                 ),
               ),
           ],
@@ -719,9 +697,7 @@ class _DesignWishlistScreenState extends State<DesignWishlistScreen> {
         ],
       ),
       child: InkWell(
-        onTap: () => _isSelectionMode
-            ? _toggleItemSelection(item)
-            : _viewDesignDetails(item),
+        onTap: () => _isSelectionMode ? _toggleItemSelection(item) : _viewDesignDetails(item),
         onLongPress: () => _startSelectionMode(item),
         borderRadius: BorderRadius.circular(12),
         child: Padding(
@@ -741,9 +717,7 @@ class _DesignWishlistScreenState extends State<DesignWishlistScreen> {
                     ),
                     shape: BoxShape.circle,
                   ),
-                  child: isSelected
-                      ? const Icon(Icons.check, color: Colors.white, size: 16)
-                      : null,
+                  child: isSelected ? const Icon(Icons.check, color: Colors.white, size: 16) : null,
                 ),
                 const SizedBox(width: 16),
               ],
@@ -759,8 +733,7 @@ class _DesignWishlistScreenState extends State<DesignWishlistScreen> {
                     end: Alignment.bottomRight,
                     colors: [
                       Colors.primaries[item.hashCode % Colors.primaries.length],
-                      Colors.primaries[item.hashCode % Colors.primaries.length]
-                          .withValues(alpha: 0.7),
+                      Colors.primaries[item.hashCode % Colors.primaries.length].withValues(alpha: 0.7),
                     ],
                   ),
                 ),
@@ -810,9 +783,7 @@ class _DesignWishlistScreenState extends State<DesignWishlistScreen> {
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
-                            color: item.isOnSale
-                                ? Colors.red[600]
-                                : Colors.black87,
+                            color: item.isOnSale ? Colors.red[600] : Colors.black87,
                           ),
                         ),
                       ],
@@ -836,8 +807,7 @@ class _DesignWishlistScreenState extends State<DesignWishlistScreen> {
                     onPressed: () => _toggleFavorite(item),
                     icon: Icon(
                       item.isFavorite ? Icons.favorite : Icons.favorite_border,
-                      color:
-                          item.isFavorite ? Colors.red[600] : Colors.grey[600],
+                      color: item.isFavorite ? Colors.red[600] : Colors.grey[600],
                     ),
                   ),
                   IconButton(
@@ -892,8 +862,7 @@ class _DesignWishlistScreenState extends State<DesignWishlistScreen> {
                   backgroundColor: Colors.red[600],
                 ),
                 icon: const Icon(Icons.delete, color: Colors.white),
-                label:
-                    const Text('Remove', style: TextStyle(color: Colors.white)),
+                label: const Text('Remove', style: TextStyle(color: Colors.white)),
               ),
             ),
           ],
@@ -1094,10 +1063,7 @@ class WishlistItem {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is WishlistItem &&
-          runtimeType == other.runtimeType &&
-          id == other.id;
+      identical(this, other) || other is WishlistItem && runtimeType == other.runtimeType && id == other.id;
 
   @override
   int get hashCode => id.hashCode;

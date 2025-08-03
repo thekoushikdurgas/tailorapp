@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tailorapp/core/cubit/auth_cubit.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:tailorapp/core/cubit/auth_cubit.dart';
 import 'package:tailorapp/product/enum/route_enum.dart';
 import 'package:go_router/go_router.dart';
 
@@ -8,13 +8,10 @@ class CustomerCommunicationHubScreen extends StatefulWidget {
   const CustomerCommunicationHubScreen({super.key});
 
   @override
-  State<CustomerCommunicationHubScreen> createState() =>
-      _CustomerCommunicationHubScreenState();
+  State<CustomerCommunicationHubScreen> createState() => _CustomerCommunicationHubScreenState();
 }
 
-class _CustomerCommunicationHubScreenState
-    extends State<CustomerCommunicationHubScreen>
-    with TickerProviderStateMixin {
+class _CustomerCommunicationHubScreenState extends State<CustomerCommunicationHubScreen> with TickerProviderStateMixin {
   late TabController _tabController;
   late AnimationController _typingController;
 
@@ -70,9 +67,7 @@ class _CustomerCommunicationHubScreenState
         phone: '+1-555-${(1000 + index).toString()}',
         avatar: null,
         isOnline: index % 3 == 0,
-        lastSeen: index % 3 == 0
-            ? DateTime.now()
-            : DateTime.now().subtract(Duration(hours: index)),
+        lastSeen: index % 3 == 0 ? DateTime.now() : DateTime.now().subtract(Duration(hours: index)),
         activeProjects: [
           'ORD${(index + 1).toString().padLeft(3, '0')}',
           if (index % 2 == 0) 'ORD${(index + 2).toString().padLeft(3, '0')}',
@@ -80,11 +75,9 @@ class _CustomerCommunicationHubScreenState
         unreadCount: index % 4 == 0 ? index + 1 : 0,
         lastMessage: 'Last message from customer ${index + 1}...',
         lastMessageTime: DateTime.now().subtract(Duration(minutes: index * 15)),
-        priority:
-            CustomerPriority.values[index % CustomerPriority.values.length],
+        priority: CustomerPriority.values[index % CustomerPriority.values.length],
         isFavorite: index % 5 == 0,
-        communicationPreference: CommunicationPreference
-            .values[index % CommunicationPreference.values.length],
+        communicationPreference: CommunicationPreference.values[index % CommunicationPreference.values.length],
         timezone: 'UTC${index % 12 - 6}',
         tags: ['VIP', 'Regular', 'New Client'][index % 3],
       ),
@@ -108,9 +101,7 @@ class _CustomerCommunicationHubScreenState
         id: 'MSG$index',
         senderId: index % 2 == 0 ? 'tailor' : _selectedCustomer!.id,
         senderName: index % 2 == 0 ? 'You' : _selectedCustomer!.name,
-        content: index % 2 == 0
-            ? 'Message from tailor ${index + 1}'
-            : 'Message from customer ${index + 1}',
+        content: index % 2 == 0 ? 'Message from tailor ${index + 1}' : 'Message from customer ${index + 1}',
         timestamp: DateTime.now().subtract(Duration(minutes: index * 10)),
         type: MessageType.values[index % MessageType.values.length],
         status: MessageStatus.values[index % MessageStatus.values.length],
@@ -147,9 +138,7 @@ class _CustomerCommunicationHubScreenState
 
           // Chat area
           Expanded(
-            child: _selectedCustomer != null
-                ? _buildChatArea()
-                : _buildEmptyState(),
+            child: _selectedCustomer != null ? _buildChatArea() : _buildEmptyState(),
           ),
         ],
       ),
@@ -242,8 +231,7 @@ class _CustomerCommunicationHubScreenState
                     hintText: 'Search customers...',
                     prefixIcon: Icon(Icons.search, color: Colors.grey),
                     border: InputBorder.none,
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   ),
                   onChanged: _searchCustomers,
                 ),
@@ -255,8 +243,7 @@ class _CustomerCommunicationHubScreenState
               DropdownButtonFormField<String>(
                 value: _selectedFilter,
                 decoration: InputDecoration(
-                  contentPadding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                     borderSide: BorderSide(color: Colors.grey[300]!),
@@ -264,8 +251,7 @@ class _CustomerCommunicationHubScreenState
                 ),
                 items: _filterOptions
                     .map(
-                      (filter) =>
-                          DropdownMenuItem(value: filter, child: Text(filter)),
+                      (filter) => DropdownMenuItem(value: filter, child: Text(filter)),
                     )
                     .toList(),
                 onChanged: (value) {
@@ -407,11 +393,9 @@ class _CustomerCommunicationHubScreenState
                 ),
                 const SizedBox(width: 8),
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+                  padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
                   decoration: BoxDecoration(
-                    color: _getPriorityColor(customer.priority)
-                        .withValues(alpha: 0.1),
+                    color: _getPriorityColor(customer.priority).withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Text(
@@ -555,19 +539,14 @@ class _CustomerCommunicationHubScreenState
                       ),
                     ),
                     const SizedBox(width: 8),
-                    if (_selectedCustomer!.isFavorite)
-                      Icon(Icons.star, color: Colors.orange[600], size: 16),
+                    if (_selectedCustomer!.isFavorite) Icon(Icons.star, color: Colors.orange[600], size: 16),
                   ],
                 ),
                 Text(
-                  _selectedCustomer!.isOnline
-                      ? 'Online now'
-                      : 'Last seen ${_formatTime(_selectedCustomer!.lastSeen)}',
+                  _selectedCustomer!.isOnline ? 'Online now' : 'Last seen ${_formatTime(_selectedCustomer!.lastSeen)}',
                   style: TextStyle(
                     fontSize: 12,
-                    color: _selectedCustomer!.isOnline
-                        ? Colors.green[600]
-                        : Colors.grey[600],
+                    color: _selectedCustomer!.isOnline ? Colors.green[600] : Colors.grey[600],
                   ),
                 ),
                 if (_selectedCustomer!.activeProjects.isNotEmpty)
@@ -590,8 +569,7 @@ class _CustomerCommunicationHubScreenState
                 onPressed: _startVideoCall,
                 icon: Icon(
                   Icons.video_call,
-                  color:
-                      _isVideoCallActive ? Colors.green[600] : Colors.grey[600],
+                  color: _isVideoCallActive ? Colors.green[600] : Colors.grey[600],
                 ),
               ),
               IconButton(
@@ -663,8 +641,7 @@ class _CustomerCommunicationHubScreenState
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       child: Row(
-        mainAxisAlignment:
-            isFromTailor ? MainAxisAlignment.end : MainAxisAlignment.start,
+        mainAxisAlignment: isFromTailor ? MainAxisAlignment.end : MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (!isFromTailor) ...[
@@ -693,12 +670,8 @@ class _CustomerCommunicationHubScreenState
               decoration: BoxDecoration(
                 color: isFromTailor ? Colors.blue[600] : Colors.grey[100],
                 borderRadius: BorderRadius.circular(16).copyWith(
-                  bottomLeft: isFromTailor
-                      ? const Radius.circular(16)
-                      : const Radius.circular(4),
-                  bottomRight: isFromTailor
-                      ? const Radius.circular(4)
-                      : const Radius.circular(16),
+                  bottomLeft: isFromTailor ? const Radius.circular(16) : const Radius.circular(4),
+                  bottomRight: isFromTailor ? const Radius.circular(4) : const Radius.circular(16),
                 ),
               ),
               child: Column(
@@ -724,9 +697,7 @@ class _CustomerCommunicationHubScreenState
                         ),
                         margin: const EdgeInsets.only(bottom: 4),
                         decoration: BoxDecoration(
-                          color: isFromTailor
-                              ? Colors.blue[500]
-                              : Colors.grey[200],
+                          color: isFromTailor ? Colors.blue[500] : Colors.grey[200],
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Row(
@@ -735,18 +706,14 @@ class _CustomerCommunicationHubScreenState
                             Icon(
                               _getFileIcon(attachment),
                               size: 16,
-                              color: isFromTailor
-                                  ? Colors.white
-                                  : Colors.grey[600],
+                              color: isFromTailor ? Colors.white : Colors.grey[600],
                             ),
                             const SizedBox(width: 4),
                             Text(
                               attachment,
                               style: TextStyle(
                                 fontSize: 12,
-                                color: isFromTailor
-                                    ? Colors.white
-                                    : Colors.grey[600],
+                                color: isFromTailor ? Colors.white : Colors.grey[600],
                               ),
                             ),
                           ],
@@ -764,9 +731,7 @@ class _CustomerCommunicationHubScreenState
                         _formatTime(message.timestamp),
                         style: TextStyle(
                           fontSize: 10,
-                          color: isFromTailor
-                              ? Colors.blue[100]
-                              : Colors.grey[500],
+                          color: isFromTailor ? Colors.blue[100] : Colors.grey[500],
                         ),
                       ),
                       if (isFromTailor) ...[
@@ -817,8 +782,7 @@ class _CustomerCommunicationHubScreenState
               ),
             ),
             const SizedBox(height: 16),
-            ..._selectedCustomer!.activeProjects
-                .map((projectId) => _buildProjectCard(projectId)),
+            ..._selectedCustomer!.activeProjects.map((projectId) => _buildProjectCard(projectId)),
           ] else
             const Center(
               child: Text(
@@ -1150,9 +1114,7 @@ class _CustomerCommunicationHubScreenState
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          _isVideoCallActive
-              ? 'Started video call with ${_selectedCustomer?.name}'
-              : 'Ended video call',
+          _isVideoCallActive ? 'Started video call with ${_selectedCustomer?.name}' : 'Ended video call',
         ),
       ),
     );
@@ -1337,8 +1299,7 @@ class _CustomerCommunicationHubScreenState
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Auto Replies'),
-        content:
-            const Text('Configure automatic responses for common questions.'),
+        content: const Text('Configure automatic responses for common questions.'),
         actions: [
           TextButton(
             onPressed: () => context.pop(),

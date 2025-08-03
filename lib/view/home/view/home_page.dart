@@ -113,8 +113,7 @@ class HomePage extends StatelessWidget {
                       color: Colors.blue[100],
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: state is AuthAuthenticated &&
-                            state.user.photoURL != null
+                    child: state is AuthAuthenticated && state.user.photoURL != null
                         ? ClipRRect(
                             borderRadius: BorderRadius.circular(12),
                             child: Image.network(
@@ -159,9 +158,7 @@ class HomePage extends StatelessWidget {
       builder: (context, state) {
         String userName = 'there';
         if (state is AuthAuthenticated) {
-          userName = state.user.displayName?.split(' ').first ??
-              state.userProfile?.name.split(' ').first ??
-              'there';
+          userName = state.user.displayName?.split(' ').first ?? state.userProfile.name.split(' ').first;
         }
 
         return Column(

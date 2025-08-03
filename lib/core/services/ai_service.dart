@@ -2,7 +2,7 @@
 import 'dart:typed_data';
 import 'package:tailorapp/core/models/ai_design_suggestion.dart';
 import 'package:tailorapp/core/models/shared_models.dart';
-import 'package:tailorapp/core/models/user_model.dart';
+// import 'package:tailorapp/core/models/user_model.dart';
 import 'package:tailorapp/core/models/garment_model.dart';
 
 abstract class AIService {
@@ -96,8 +96,7 @@ class AIServiceImpl implements AIService {
       }
 
       // Sort by confidence score
-      suggestions
-          .sort((a, b) => b.confidenceScore.compareTo(a.confidenceScore));
+      suggestions.sort((a, b) => b.confidenceScore.compareTo(a.confidenceScore));
 
       return suggestions;
     } catch (e) {

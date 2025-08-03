@@ -5,7 +5,7 @@ import 'package:tailorapp/core/cubit/auth_cubit.dart';
 import 'package:tailorapp/core/models/shared_models.dart';
 import 'package:tailorapp/core/models/ai_design_suggestion.dart';
 import 'package:tailorapp/core/models/garment_model.dart';
-import 'package:tailorapp/core/services/ai_service.dart';
+// import 'package:tailorapp/core/services/ai_service.dart';
 import 'package:tailorapp/core/services/debug_logger.dart';
 import 'package:tailorapp/core/services/service_locator.dart';
 import 'package:tailorapp/product/enum/route_enum.dart';
@@ -14,12 +14,10 @@ class StylePreferenceSetupScreen extends StatefulWidget {
   const StylePreferenceSetupScreen({super.key});
 
   @override
-  State<StylePreferenceSetupScreen> createState() =>
-      _StylePreferenceSetupScreenState();
+  State<StylePreferenceSetupScreen> createState() => _StylePreferenceSetupScreenState();
 }
 
-class _StylePreferenceSetupScreenState
-    extends State<StylePreferenceSetupScreen> {
+class _StylePreferenceSetupScreenState extends State<StylePreferenceSetupScreen> {
   int _currentStep = 0;
   final PageController _pageController = PageController();
   bool _isLoading = false;
@@ -185,9 +183,7 @@ class _StylePreferenceSetupScreenState
                   height: 4,
                   margin: EdgeInsets.only(right: index < 5 ? 8 : 0),
                   decoration: BoxDecoration(
-                    color: index <= _currentStep
-                        ? Colors.blue[600]
-                        : Colors.grey[300],
+                    color: index <= _currentStep ? Colors.blue[600] : Colors.grey[300],
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -259,8 +255,7 @@ class _StylePreferenceSetupScreenState
                       color: isSelected ? Colors.blue[600] : Colors.white,
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                        color:
-                            isSelected ? Colors.blue[600]! : Colors.grey[300]!,
+                        color: isSelected ? Colors.blue[600]! : Colors.grey[300]!,
                         width: 2,
                       ),
                     ),
@@ -323,13 +318,25 @@ class _StylePreferenceSetupScreenState
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _buildSilhouettePreview(
-                    'Slim', Icons.person, Colors.blue[400]!),
+                  'Slim',
+                  Icons.person,
+                  Colors.blue[400]!,
+                ),
                 _buildSilhouettePreview(
-                    'Athletic', Icons.fitness_center, Colors.green[400]!),
+                  'Athletic',
+                  Icons.fitness_center,
+                  Colors.green[400]!,
+                ),
                 _buildSilhouettePreview(
-                    'Curvy', Icons.woman, Colors.purple[400]!),
+                  'Curvy',
+                  Icons.woman,
+                  Colors.purple[400]!,
+                ),
                 _buildSilhouettePreview(
-                    'Plus Size', Icons.person, Colors.orange[400]!),
+                  'Plus Size',
+                  Icons.person,
+                  Colors.orange[400]!,
+                ),
               ],
             ),
           ),
@@ -363,21 +370,20 @@ class _StylePreferenceSetupScreenState
                       color: isSelected ? Colors.blue[50] : Colors.white,
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
-                        color:
-                            isSelected ? Colors.blue[600]! : Colors.grey[300]!,
+                        color: isSelected ? Colors.blue[600]! : Colors.grey[300]!,
                         width: isSelected ? 2 : 1,
                       ),
                       boxShadow: isSelected
                           ? [
                               BoxShadow(
-                                color: Colors.blue[200]!.withOpacity(0.5),
+                                color: Colors.blue[200]!.withValues(alpha: 0.5),
                                 blurRadius: 8,
                                 spreadRadius: 2,
                               ),
                             ]
                           : [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.05),
+                                color: Colors.black.withValues(alpha: 0.05),
                                 blurRadius: 4,
                                 offset: const Offset(0, 2),
                               ),
@@ -393,13 +399,11 @@ class _StylePreferenceSetupScreenState
                               width: 48,
                               height: 48,
                               decoration: BoxDecoration(
-                                color: isSelected
-                                    ? Colors.blue[600]
-                                    : Colors.grey[100],
+                                color: isSelected ? Colors.blue[600] : Colors.grey[100],
                                 borderRadius: BorderRadius.circular(12),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.black.withOpacity(0.1),
+                                    color: Colors.black.withValues(alpha: 0.1),
                                     blurRadius: 4,
                                     offset: const Offset(0, 1),
                                   ),
@@ -407,9 +411,7 @@ class _StylePreferenceSetupScreenState
                               ),
                               child: Icon(
                                 _getBodyTypeIcon(bodyType),
-                                color: isSelected
-                                    ? Colors.white
-                                    : Colors.grey[600],
+                                color: isSelected ? Colors.white : Colors.grey[600],
                                 size: 24,
                               ),
                             ),
@@ -443,8 +445,7 @@ class _StylePreferenceSetupScreenState
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
-                            color:
-                                isSelected ? Colors.blue[800] : Colors.black87,
+                            color: isSelected ? Colors.blue[800] : Colors.black87,
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -479,7 +480,7 @@ class _StylePreferenceSetupScreenState
           width: 40,
           height: 60,
           decoration: BoxDecoration(
-            color: color.withOpacity(0.2),
+            color: color.withValues(alpha: 0.2),
             borderRadius: BorderRadius.circular(20),
             border: Border.all(color: color, width: 2),
           ),
@@ -594,7 +595,7 @@ class _StylePreferenceSetupScreenState
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
+                          color: Colors.black.withValues(alpha: 0.1),
                           blurRadius: 10,
                           spreadRadius: 2,
                         ),
@@ -612,7 +613,7 @@ class _StylePreferenceSetupScreenState
                       color: Colors.white,
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
+                          color: Colors.black.withValues(alpha: 0.1),
                           blurRadius: 8,
                           spreadRadius: 1,
                         ),
@@ -662,8 +663,7 @@ class _StylePreferenceSetupScreenState
                 const SizedBox(height: 12),
                 Expanded(
                   child: GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 4,
                       crossAxisSpacing: 12,
                       mainAxisSpacing: 12,
@@ -689,21 +689,20 @@ class _StylePreferenceSetupScreenState
                             color: color,
                             borderRadius: BorderRadius.circular(16),
                             border: Border.all(
-                              color:
-                                  isSelected ? Colors.black : Colors.grey[300]!,
+                              color: isSelected ? Colors.black : Colors.grey[300]!,
                               width: isSelected ? 3 : 1,
                             ),
                             boxShadow: isSelected
                                 ? [
                                     BoxShadow(
-                                      color: color.withOpacity(0.4),
+                                      color: color.withValues(alpha: 0.4),
                                       blurRadius: 8,
                                       spreadRadius: 2,
                                     ),
                                   ]
                                 : [
                                     BoxShadow(
-                                      color: Colors.black.withOpacity(0.1),
+                                      color: Colors.black.withValues(alpha: 0.1),
                                       blurRadius: 4,
                                       offset: const Offset(0, 2),
                                     ),
@@ -717,7 +716,7 @@ class _StylePreferenceSetupScreenState
                                     width: 32,
                                     height: 32,
                                     decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.9),
+                                      color: Colors.white.withValues(alpha: 0.9),
                                       shape: BoxShape.circle,
                                     ),
                                     child: const Icon(
@@ -738,7 +737,7 @@ class _StylePreferenceSetupScreenState
                                     vertical: 2,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: Colors.black.withOpacity(0.6),
+                                    color: Colors.black.withValues(alpha: 0.6),
                                     borderRadius: BorderRadius.circular(4),
                                   ),
                                   child: Text(
@@ -880,9 +879,7 @@ class _StylePreferenceSetupScreenState
                         color: isSelected ? Colors.purple[50] : Colors.white,
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
-                          color: isSelected
-                              ? Colors.purple[600]!
-                              : Colors.grey[300]!,
+                          color: isSelected ? Colors.purple[600]! : Colors.grey[300]!,
                           width: 2,
                         ),
                       ),
@@ -890,9 +887,7 @@ class _StylePreferenceSetupScreenState
                         children: [
                           Icon(
                             _getOccasionIcon(occasion),
-                            color: isSelected
-                                ? Colors.purple[600]
-                                : Colors.grey[600],
+                            color: isSelected ? Colors.purple[600] : Colors.grey[600],
                             size: 24,
                           ),
                           const SizedBox(width: 16),
@@ -902,9 +897,7 @@ class _StylePreferenceSetupScreenState
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
-                                color: isSelected
-                                    ? Colors.purple[800]
-                                    : Colors.black87,
+                                color: isSelected ? Colors.purple[800] : Colors.black87,
                               ),
                             ),
                           ),
@@ -959,10 +952,16 @@ class _StylePreferenceSetupScreenState
                 _buildFabricCategory('Natural', Icons.eco, Colors.green[400]!),
                 const SizedBox(width: 12),
                 _buildFabricCategory(
-                    'Synthetic', Icons.science, Colors.blue[400]!),
+                  'Synthetic',
+                  Icons.science,
+                  Colors.blue[400]!,
+                ),
                 const SizedBox(width: 12),
                 _buildFabricCategory(
-                    'Blends', Icons.merge_type, Colors.purple[400]!),
+                  'Blends',
+                  Icons.merge_type,
+                  Colors.purple[400]!,
+                ),
               ],
             ),
           ),
@@ -999,21 +998,20 @@ class _StylePreferenceSetupScreenState
                       color: isSelected ? Colors.green[600] : Colors.white,
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
-                        color:
-                            isSelected ? Colors.green[600]! : Colors.grey[300]!,
+                        color: isSelected ? Colors.green[600]! : Colors.grey[300]!,
                         width: isSelected ? 2 : 1,
                       ),
                       boxShadow: isSelected
                           ? [
                               BoxShadow(
-                                color: Colors.green[200]!.withOpacity(0.5),
+                                color: Colors.green[200]!.withValues(alpha: 0.5),
                                 blurRadius: 8,
                                 spreadRadius: 2,
                               ),
                             ]
                           : [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.05),
+                                color: Colors.black.withValues(alpha: 0.05),
                                 blurRadius: 4,
                                 offset: const Offset(0, 2),
                               ),
@@ -1034,8 +1032,8 @@ class _StylePreferenceSetupScreenState
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(16),
                             color: isSelected
-                                ? Colors.green[600]!.withOpacity(0.9)
-                                : Colors.white.withOpacity(0.9),
+                                ? Colors.green[600]!.withValues(alpha: 0.9)
+                                : Colors.white.withValues(alpha: 0.9),
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(12),
@@ -1044,9 +1042,7 @@ class _StylePreferenceSetupScreenState
                               children: [
                                 Icon(
                                   _getFabricIcon(fabric),
-                                  color: isSelected
-                                      ? Colors.white
-                                      : Colors.grey[700],
+                                  color: isSelected ? Colors.white : Colors.grey[700],
                                   size: 32,
                                 ),
                                 const SizedBox(height: 8),
@@ -1055,9 +1051,7 @@ class _StylePreferenceSetupScreenState
                                   style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w600,
-                                    color: isSelected
-                                        ? Colors.white
-                                        : Colors.black87,
+                                    color: isSelected ? Colors.white : Colors.black87,
                                   ),
                                   textAlign: TextAlign.center,
                                 ),
@@ -1066,9 +1060,7 @@ class _StylePreferenceSetupScreenState
                                   _getFabricDescription(fabric),
                                   style: TextStyle(
                                     fontSize: 10,
-                                    color: isSelected
-                                        ? Colors.white.withOpacity(0.9)
-                                        : Colors.grey[600],
+                                    color: isSelected ? Colors.white.withValues(alpha: 0.9) : Colors.grey[600],
                                   ),
                                   textAlign: TextAlign.center,
                                   maxLines: 2,
@@ -1110,9 +1102,9 @@ class _StylePreferenceSetupScreenState
     return Expanded(
       child: Container(
         decoration: BoxDecoration(
-          color: color.withOpacity(0.1),
+          color: color.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: color.withOpacity(0.3)),
+          border: Border.all(color: color.withValues(alpha: 0.3)),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -1501,9 +1493,7 @@ class _StylePreferenceSetupScreenState
       final userId = authState.user.uid;
 
       // Convert color selections to hex strings for storage
-      final colorStrings = _selectedColors
-          .map((color) => '#${color.value.toRadixString(16).substring(2)}')
-          .toList();
+      final colorStrings = _selectedColors.map((color) => '#${color.value.toRadixString(16).substring(2)}').toList();
 
       // Create style preferences object
       final stylePreferences = StylePreferences(
@@ -1570,7 +1560,8 @@ class _StylePreferenceSetupScreenState
 
       if (mounted) {
         _showErrorDialog(
-            'Failed to save your style preferences. Please try again.');
+          'Failed to save your style preferences. Please try again.',
+        );
       }
     }
   }
@@ -1583,14 +1574,13 @@ class _StylePreferenceSetupScreenState
       if (_selectedColors.isNotEmpty) {
         final colorAnalysis = await aiService.generateColorPalette(
           garmentType: 'general',
-          occasion: _selectedOccasions.isNotEmpty
-              ? _selectedOccasions.first
-              : 'casual',
+          occasion: _selectedOccasions.isNotEmpty ? _selectedOccasions.first : 'casual',
           preferredColors: preferences.preferredColors,
         );
 
         DebugLogger.info(
-            'AI Color Analysis completed: ${colorAnalysis.length} colors suggested');
+          'AI Color Analysis completed: ${colorAnalysis.length} colors suggested',
+        );
       }
 
       // Analyze fabric suitability
@@ -1603,7 +1593,8 @@ class _StylePreferenceSetupScreenState
           );
 
           DebugLogger.info(
-              'Fabric analysis for $fabric: Score ${fabricAnalysis['suitabilityScore']}');
+            'Fabric analysis for $fabric: Score ${fabricAnalysis['suitabilityScore']}',
+          );
         }
       }
 
@@ -1655,16 +1646,10 @@ class _StylePreferenceSetupScreenState
 
     // Analyze color preferences
     final hasNeutrals = _selectedColors.any(
-      (color) =>
-          color == Colors.black ||
-          color == Colors.white ||
-          color == Colors.grey[600],
+      (color) => color == Colors.black || color == Colors.white || color == Colors.grey[600],
     );
     final hasBrights = _selectedColors.any(
-      (color) =>
-          color == Colors.red[600] ||
-          color == Colors.blue[600] ||
-          color == Colors.green[600],
+      (color) => color == Colors.red[600] || color == Colors.blue[600] || color == Colors.green[600],
     );
 
     if (hasNeutrals) dnaComponents.add('NT');
@@ -1684,9 +1669,7 @@ class _StylePreferenceSetupScreenState
     }
 
     // Create final DNA string
-    return dnaComponents.isEmpty
-        ? 'VERSATILE-CLASSIC'
-        : dnaComponents.join('-');
+    return dnaComponents.isEmpty ? 'VERSATILE-CLASSIC' : dnaComponents.join('-');
   }
 
   Future<void> _generateInitialRecommendations(
@@ -1698,14 +1681,11 @@ class _StylePreferenceSetupScreenState
 
       // Create a design prompt based on preferences
       final prompt = DesignPrompt(
-        userInput:
-            'Create personalized designs based on style preferences setup',
+        userInput: 'Create personalized designs based on style preferences setup',
         stylePreferences: _selectedStyles,
         preferredColors: preferences.preferredColors,
-        occasion:
-            _selectedOccasions.isNotEmpty ? _selectedOccasions.first : 'casual',
-        bodyMeasurements:
-            null, // Will be filled later when measurements are taken
+        occasion: _selectedOccasions.isNotEmpty ? _selectedOccasions.first : 'casual',
+        bodyMeasurements: null, // Will be filled later when measurements are taken
         budget: _budgetRange ?? 'medium',
         additionalRequirements: {
           'bodyType': _selectedBodyType,
@@ -1721,7 +1701,8 @@ class _StylePreferenceSetupScreenState
       );
 
       DebugLogger.info(
-          'Generated ${suggestions.length} initial design recommendations');
+        'Generated ${suggestions.length} initial design recommendations',
+      );
 
       // Store suggestions for later use (could be saved to preferences)
       if (suggestions.isNotEmpty) {
@@ -1754,10 +1735,13 @@ class _StylePreferenceSetupScreenState
       // For now, we'll save directly. In future iterations, we can add encryption
       final customerRepository = ServiceLocator.customerRepository;
       await customerRepository.updateStylePreferences(
-          userId, enhancedPreferences);
+        userId,
+        enhancedPreferences,
+      );
 
       DebugLogger.info(
-          'Enhanced style preferences saved successfully for user: $userId');
+        'Enhanced style preferences saved successfully for user: $userId',
+      );
     } catch (e) {
       DebugLogger.error('Failed to save style preferences: $e');
       rethrow;

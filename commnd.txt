@@ -262,9 +262,9 @@ dart format . > format.txt
 dart run test
 
 
-dart pub global activate flutterfire_cli
 dart pub global deactivate flutterfire_cli
-flutterfire configure --project=tailorapp-7e40a
+dart pub global activate flutterfire_cli
+D:\pub-cache\bin\flutterfire.bat configure --project=tailorapp-7e40a
  
 flutter run --verbose
 

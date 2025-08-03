@@ -1,7 +1,7 @@
 // import 'dart:typed_data';
 import 'package:tailorapp/core/models/shared_models.dart';
 import 'package:tailorapp/core/services/ai_service.dart';
-import 'package:tailorapp/core/models/user_model.dart';
+// import 'package:tailorapp/core/models/user_model.dart';
 import 'package:tailorapp/core/models/garment_model.dart';
 
 class MLKitServiceImpl implements MLKitService {
@@ -68,8 +68,7 @@ class MLKitServiceImpl implements MLKitService {
     }
 
     if (measurements.armLength != null) {
-      recommendations['recommendedSleeveLength'] =
-          measurements.armLength! - 1.0;
+      recommendations['recommendedSleeveLength'] = measurements.armLength! - 1.0;
       recommendations['minSleeveLength'] = measurements.armLength! - 2.0;
       recommendations['maxSleeveLength'] = measurements.armLength!;
     }
@@ -158,8 +157,7 @@ class MLKitServiceImpl implements MLKitService {
     }
 
     if (measurements.armLength != null) {
-      recommendations['recommendedSleeveLength'] =
-          measurements.armLength! - 2.0;
+      recommendations['recommendedSleeveLength'] = measurements.armLength! - 2.0;
       recommendations['minSleeveLength'] = measurements.armLength! - 3.0;
       recommendations['maxSleeveLength'] = measurements.armLength! - 1.0;
     }
@@ -257,21 +255,17 @@ class MLKitServiceImpl implements MLKitService {
   ) async {
     final analysis = <String, dynamic>{};
 
-    if (measurements.chest != null &&
-        measurements.waist != null &&
-        measurements.hips != null) {
+    if (measurements.chest != null && measurements.waist != null && measurements.hips != null) {
       final chestWaistRatio = measurements.chest! / measurements.waist!;
       final waistHipRatio = measurements.waist! / measurements.hips!;
 
-      analysis['bodyShape'] =
-          _determineBodyShape(chestWaistRatio, waistHipRatio);
+      analysis['bodyShape'] = _determineBodyShape(chestWaistRatio, waistHipRatio);
       analysis['chestWaistRatio'] = chestWaistRatio;
       analysis['waistHipRatio'] = waistHipRatio;
     }
 
     if (measurements.height != null && measurements.weight != null) {
-      final bmi = measurements.weight! /
-          ((measurements.height! / 100) * (measurements.height! / 100));
+      final bmi = measurements.weight! / ((measurements.height! / 100) * (measurements.height! / 100));
       analysis['bmi'] = bmi;
       analysis['weightCategory'] = _categorizeWeight(bmi);
     }
@@ -286,10 +280,7 @@ class MLKitServiceImpl implements MLKitService {
       return 'Apple';
     } else if (chestWaistRatio < 1.1 && waistHipRatio > 0.85) {
       return 'Pear';
-    } else if (chestWaistRatio >= 1.1 &&
-        chestWaistRatio <= 1.3 &&
-        waistHipRatio >= 0.8 &&
-        waistHipRatio <= 0.9) {
+    } else if (chestWaistRatio >= 1.1 && chestWaistRatio <= 1.3 && waistHipRatio >= 0.8 && waistHipRatio <= 0.9) {
       return 'Hourglass';
     } else {
       return 'Rectangle';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tailorapp/core/cubit/auth_cubit.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:tailorapp/core/cubit/auth_cubit.dart';
 import 'package:tailorapp/product/enum/route_enum.dart';
 import 'package:go_router/go_router.dart';
 
@@ -11,8 +11,7 @@ class OrderManagementScreen extends StatefulWidget {
   State<OrderManagementScreen> createState() => _OrderManagementScreenState();
 }
 
-class _OrderManagementScreenState extends State<OrderManagementScreen>
-    with TickerProviderStateMixin {
+class _OrderManagementScreenState extends State<OrderManagementScreen> with TickerProviderStateMixin {
   late TabController _tabController;
   late AnimationController _refreshController;
 
@@ -90,12 +89,10 @@ class _OrderManagementScreenState extends State<OrderManagementScreen>
         orderDate: DateTime.now().subtract(Duration(days: index * 2)),
         dueDate: DateTime.now().add(Duration(days: 14 - index)),
         totalAmount: 150 + (index * 25),
-        paidAmount:
-            index % 3 == 0 ? 150 + (index * 25) : (150 + (index * 25)) * 0.5,
+        paidAmount: index % 3 == 0 ? 150 + (index * 25) : (150 + (index * 25)) * 0.5,
         progress: 0.2 + (index * 0.1),
         measurements: OrderMeasurements(),
-        specialInstructions:
-            index % 3 == 0 ? 'Special fabric requirements' : null,
+        specialInstructions: index % 3 == 0 ? 'Special fabric requirements' : null,
         attachments: index % 4 == 0 ? ['design1.jpg', 'reference2.png'] : [],
         communicationHistory: [],
         workflowSteps: _generateWorkflowSteps(index),
@@ -114,44 +111,32 @@ class _OrderManagementScreenState extends State<OrderManagementScreen>
       WorkflowStep(
         'Measurements Confirmed',
         orderIndex < 10,
-        orderIndex < 10
-            ? DateTime.now().subtract(Duration(days: orderIndex * 2 - 1))
-            : null,
+        orderIndex < 10 ? DateTime.now().subtract(Duration(days: orderIndex * 2 - 1)) : null,
       ),
       WorkflowStep(
         'Cutting',
         orderIndex < 8,
-        orderIndex < 8
-            ? DateTime.now().subtract(Duration(days: orderIndex * 2 - 2))
-            : null,
+        orderIndex < 8 ? DateTime.now().subtract(Duration(days: orderIndex * 2 - 2)) : null,
       ),
       WorkflowStep(
         'Stitching',
         orderIndex < 6,
-        orderIndex < 6
-            ? DateTime.now().subtract(Duration(days: orderIndex * 2 - 3))
-            : null,
+        orderIndex < 6 ? DateTime.now().subtract(Duration(days: orderIndex * 2 - 3)) : null,
       ),
       WorkflowStep(
         'First Fitting',
         orderIndex < 4,
-        orderIndex < 4
-            ? DateTime.now().subtract(Duration(days: orderIndex * 2 - 4))
-            : null,
+        orderIndex < 4 ? DateTime.now().subtract(Duration(days: orderIndex * 2 - 4)) : null,
       ),
       WorkflowStep(
         'Final Touches',
         orderIndex < 2,
-        orderIndex < 2
-            ? DateTime.now().subtract(Duration(days: orderIndex * 2 - 5))
-            : null,
+        orderIndex < 2 ? DateTime.now().subtract(Duration(days: orderIndex * 2 - 5)) : null,
       ),
       WorkflowStep(
         'Quality Check',
         orderIndex == 0,
-        orderIndex == 0
-            ? DateTime.now().subtract(const Duration(days: 1))
-            : null,
+        orderIndex == 0 ? DateTime.now().subtract(const Duration(days: 1)) : null,
       ),
       WorkflowStep('Ready for Delivery', false, null),
     ];
@@ -280,8 +265,7 @@ class _OrderManagementScreenState extends State<OrderManagementScreen>
                       hintText: 'Search orders, customers...',
                       prefixIcon: Icon(Icons.search, color: Colors.grey),
                       border: InputBorder.none,
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     ),
                     onChanged: _searchOrders,
                   ),
@@ -454,9 +438,7 @@ class _OrderManagementScreenState extends State<OrderManagementScreen>
       onRefresh: () async {
         _loadOrders();
       },
-      child: _isGridView
-          ? _buildGridView(filteredOrders)
-          : _buildListView(filteredOrders),
+      child: _isGridView ? _buildGridView(filteredOrders) : _buildListView(filteredOrders),
     );
   }
 
@@ -489,8 +471,7 @@ class _OrderManagementScreenState extends State<OrderManagementScreen>
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color:
-              _isOverdue(order.dueDate) ? Colors.red[200]! : Colors.grey[200]!,
+          color: _isOverdue(order.dueDate) ? Colors.red[200]! : Colors.grey[200]!,
           width: _isOverdue(order.dueDate) ? 2 : 1,
         ),
         boxShadow: [
@@ -547,11 +528,9 @@ class _OrderManagementScreenState extends State<OrderManagementScreen>
                     ),
                   ),
                   Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
-                      color:
-                          _getStatusColor(order.status).withValues(alpha: 0.1),
+                      color: _getStatusColor(order.status).withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
@@ -588,12 +567,8 @@ class _OrderManagementScreenState extends State<OrderManagementScreen>
                           'Due: ${_formatDate(order.dueDate)}',
                           style: TextStyle(
                             fontSize: 12,
-                            color: _isOverdue(order.dueDate)
-                                ? Colors.red[600]
-                                : Colors.grey[600],
-                            fontWeight: _isOverdue(order.dueDate)
-                                ? FontWeight.w600
-                                : FontWeight.normal,
+                            color: _isOverdue(order.dueDate) ? Colors.red[600] : Colors.grey[600],
+                            fontWeight: _isOverdue(order.dueDate) ? FontWeight.w600 : FontWeight.normal,
                           ),
                         ),
                       ],
@@ -712,8 +687,7 @@ class _OrderManagementScreenState extends State<OrderManagementScreen>
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color:
-              _isOverdue(order.dueDate) ? Colors.red[200]! : Colors.grey[200]!,
+          color: _isOverdue(order.dueDate) ? Colors.red[200]! : Colors.grey[200]!,
         ),
         boxShadow: [
           BoxShadow(
@@ -748,11 +722,9 @@ class _OrderManagementScreenState extends State<OrderManagementScreen>
                   ),
                   const Spacer(),
                   Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                     decoration: BoxDecoration(
-                      color: _getPriorityColor(order.priority)
-                          .withValues(alpha: 0.1),
+                      color: _getPriorityColor(order.priority).withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(6),
                     ),
                     child: Text(
@@ -815,9 +787,7 @@ class _OrderManagementScreenState extends State<OrderManagementScreen>
                     _formatDate(order.dueDate),
                     style: TextStyle(
                       fontSize: 10,
-                      color: _isOverdue(order.dueDate)
-                          ? Colors.red[600]
-                          : Colors.grey[600],
+                      color: _isOverdue(order.dueDate) ? Colors.red[600] : Colors.grey[600],
                     ),
                   ),
                 ],
@@ -830,9 +800,7 @@ class _OrderManagementScreenState extends State<OrderManagementScreen>
   }
 
   Widget _buildActiveOrdersTab() {
-    final activeOrders = _orders
-        .where((order) => order.status != OrderStatus.delivered)
-        .toList();
+    final activeOrders = _orders.where((order) => order.status != OrderStatus.delivered).toList();
     return _buildListView(activeOrders);
   }
 
@@ -914,9 +882,7 @@ class _OrderManagementScreenState extends State<OrderManagementScreen>
 
   bool _isDueToday(DateTime dueDate) {
     final today = DateTime.now();
-    return dueDate.year == today.year &&
-        dueDate.month == today.month &&
-        dueDate.day == today.day;
+    return dueDate.year == today.year && dueDate.month == today.month && dueDate.day == today.day;
   }
 
   bool _isOverdue(DateTime dueDate) {
@@ -982,8 +948,7 @@ class _OrderManagementScreenState extends State<OrderManagementScreen>
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Advanced Filters'),
-        content:
-            const Text('Advanced filtering options will be implemented here.'),
+        content: const Text('Advanced filtering options will be implemented here.'),
         actions: [
           TextButton(
             onPressed: () => context.pop(),
@@ -1008,8 +973,7 @@ class _OrderManagementScreenState extends State<OrderManagementScreen>
       isScrollControlled: true,
       builder: (context) => DraggableScrollableSheet(
         expand: false,
-        builder: (context, scrollController) =>
-            _buildOrderDetailsSheet(order, scrollController),
+        builder: (context, scrollController) => _buildOrderDetailsSheet(order, scrollController),
       ),
     );
   }
@@ -1120,9 +1084,7 @@ class _OrderManagementScreenState extends State<OrderManagementScreen>
               color: step.isCompleted ? Colors.green[600] : Colors.grey[300],
               shape: BoxShape.circle,
             ),
-            child: step.isCompleted
-                ? const Icon(Icons.check, color: Colors.white, size: 14)
-                : null,
+            child: step.isCompleted ? const Icon(Icons.check, color: Colors.white, size: 14) : null,
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -1239,8 +1201,7 @@ class _OrderManagementScreenState extends State<OrderManagementScreen>
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Create New Order'),
-        content:
-            const Text('New order creation form will be implemented here.'),
+        content: const Text('New order creation form will be implemented here.'),
         actions: [
           TextButton(
             onPressed: () => context.pop(),

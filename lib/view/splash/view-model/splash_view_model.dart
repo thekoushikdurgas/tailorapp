@@ -205,7 +205,7 @@ class SplashViewModel {
       DebugLogger.auth('SplashViewModel: Validating authentication tokens...');
 
       final accessToken = HiveService.getAccessToken();
-      final refreshToken = HiveService.getRefreshToken();
+      // final refreshToken = HiveService.getRefreshToken();
 
       if (accessToken != null) {
         DebugLogger.auth('SplashViewModel: Access token found');
