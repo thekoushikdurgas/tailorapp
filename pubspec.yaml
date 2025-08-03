@@ -80,19 +80,19 @@ dependencies:
   http_parser: ^4.1.2
   connectivity_plus: 6.1.4
   flutter_plugin_android_lifecycle: ^2.0.28
-  
+
   # AI Integration packages
   google_generative_ai: ^0.4.6
   dart_openai: ^5.1.0
   tflite_flutter: ^0.11.0
   camera: ^0.11.0+2
   google_ml_kit: ^0.20.0
-  
+
   # Drawing and Canvas packages
   flutter_drawing_board: ^0.9.8
   flutter_colorpicker: ^1.1.0
   signature: ^6.3.0
-  
+
   # Additional UI/UX packages for AI features
   flutter_staggered_animations: ^1.1.1
   shimmer: ^3.0.0
@@ -158,7 +158,7 @@ flutter:
   assets:
     - assets/logo/
     - assets/icon/
-    - assets/translations/
+    - assets/translations/json/
     - assets/animations/
     - assets/intro/
 

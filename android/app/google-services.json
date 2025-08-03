@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "168050874940-9mhfckllsmure950cv2grnjt6iaepq83.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.durgas.tailorapp",
+            "certificate_hash": "465840f4083b91645e3c0bd83262413eeffb5c1d"
+          }
+        },
+        {
           "client_id": "168050874940-t8rljl3m1mbhqvqbbk4j08og02asnnkl.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +37,13 @@
             {
               "client_id": "168050874940-t8rljl3m1mbhqvqbbk4j08og02asnnkl.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "168050874940-58kjj9etom3bqranh077blbq9447dcc9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.durgas.basicRequirementsPackage"
+              }
             }
           ]
         }

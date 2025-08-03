@@ -10,6 +10,9 @@ import 'package:tailorapp/core/services/production_gemini_service_impl.dart';
 import 'package:tailorapp/core/services/production_openai_service_impl.dart';
 import 'package:tailorapp/core/services/auth_service.dart';
 import 'package:tailorapp/core/repositories/customer_repository.dart';
+import 'package:tailorapp/core/repositories/tailor_repository.dart';
+import 'package:tailorapp/core/repositories/admin_repository.dart';
+import 'package:tailorapp/core/repositories/user_repository.dart';
 import 'package:tailorapp/core/repositories/order_repository.dart';
 import 'package:tailorapp/core/repositories/garment_repository.dart';
 
@@ -29,8 +32,20 @@ class ServiceLocator {
 
   static void _setupRepositories() {
     // Register repository implementations
+    serviceLocator.registerLazySingleton<UserRepository>(
+      () => FirebaseUserRepository(),
+    );
+
     serviceLocator.registerLazySingleton<CustomerRepository>(
       () => FirebaseCustomerRepository(),
+    );
+
+    serviceLocator.registerLazySingleton<TailorRepository>(
+      () => FirebaseTailorRepository(),
+    );
+
+    serviceLocator.registerLazySingleton<AdminRepository>(
+      () => FirebaseAdminRepository(),
     );
 
     serviceLocator.registerLazySingleton<OrderRepository>(
@@ -52,7 +67,7 @@ class ServiceLocator {
     serviceLocator.registerLazySingleton<AuthService>(
       () => FirebaseAuthService(
         firebaseAuth: serviceLocator<FirebaseAuth>(),
-        customerRepository: serviceLocator<CustomerRepository>(),
+        userRepository: serviceLocator<UserRepository>(),
       ),
     );
   }
@@ -115,8 +130,13 @@ class ServiceLocator {
   static MLKitService get mlKitService => serviceLocator<MLKitService>();
 
   // Helper methods to get repositories
+  static UserRepository get userRepository => serviceLocator<UserRepository>();
   static CustomerRepository get customerRepository =>
       serviceLocator<CustomerRepository>();
+  static TailorRepository get tailorRepository =>
+      serviceLocator<TailorRepository>();
+  static AdminRepository get adminRepository =>
+      serviceLocator<AdminRepository>();
   static OrderRepository get orderRepository =>
       serviceLocator<OrderRepository>();
   static GarmentRepository get garmentRepository =>

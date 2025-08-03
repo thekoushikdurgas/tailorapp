@@ -1,0 +1,68 @@
+{
+  "phase": {
+    "error": "",
+    "connectivity": "",
+    "ready": "",
+    "validatingTokens": "",
+    "checkingAuth": "",
+    "initializingHealth": "",
+    "optimizingImages": "",
+    "finalization": "",
+    "health": "",
+    "checkingConnectivity": "",
+    "authentication": "",
+    "storage": ""
+  },
+  "intro": {
+    "onboarding": {
+      "page5": {
+        "subtitle": ""
+      },
+      "page2": {
+        "title": ""
+      },
+      "page1": {
+        "subtitle": ""
+      },
+      "page6": {
+        "subtitle": ""
+      },
+      "page4": {
+        "subtitle": ""
+      },
+      "page3": {
+        "subtitle": ""
+      }
+    },
+    "previous": "",
+    "getStarted": "",
+    "appTagline": ""
+  },
+  "localization": "",
+  "button": {
+    "ok": "",
+    "retry": "",
+    "cancel": "",
+    "skip": "",
+    "continue": ""
+  },
+  "theme": {
+    "themeChoose": "",
+    "dark": "",
+    "default": "",
+    "light": ""
+  },
+  "app": {
+    "version": ""
+  },
+  "loading": "",
+  "footer": {
+    "version": "",
+    "secure": "",
+    "copyright": ""
+  },
+  "settingTitle": "",
+  "error": {
+    "critical": ""
+  }
+}

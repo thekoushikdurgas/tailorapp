@@ -1,0 +1,133 @@
+{
+  "app": {
+    "description": "",
+    "name": ""
+  },
+  "auth": {
+    "createPin": "",
+    "phoneLogin": {
+      "countryPicker": "",
+      "socialLogin": "",
+      "validation": ""
+    }
+  },
+  "button": {
+    "apply": "",
+    "back": "",
+    "close": "",
+    "continue": "",
+    "next": ""
+  },
+  "error": {
+    "connectionError": "",
+    "critical": "",
+    "general": "",
+    "notFound": "",
+    "serverError": "",
+    "tryAgain": "",
+    "validationError": ""
+  },
+  "feature": "",
+  "footer": "",
+  "getStarted": "",
+  "intro": {
+    "feature": "",
+    "introDescriptionThird": "",
+    "introTitleSecond": "",
+    "onboarding": {
+      "page4": ""
+    },
+    "previous": ""
+  },
+  "loading": {
+    "checkingConnectivity": "",
+    "checkingStorage": "",
+    "initializationWarnings": "",
+    "initializingApp": "",
+    "initializingHealth": "",
+    "loading": "",
+    "loadingPreferences": "",
+    "loadingProfile": "",
+    "offlineReady": "",
+    "optimizingImageLoading": "",
+    "performingHealthCheck": "",
+    "pleaseWait": "",
+    "preparingApp": "",
+    "processing": "",
+    "refreshingData": "",
+    "systemHealthy": "",
+    "uploadingImage": ""
+  },
+  "localization": {
+    "availableLanguages": "",
+    "currentLanguage": "",
+    "langChoose": "",
+    "languageChanged": "",
+    "languageSelection": {
+      "applyLanguage": "",
+      "changeLanguage": "",
+      "skipSelection": "",
+      "title": ""
+    },
+    "selectLanguage": ""
+  },
+  "navigation": {
+    "help": "",
+    "notifications": ""
+  },
+  "onboarding": "",
+  "phase": {
+    "authentication": "",
+    "checkingAuth": "",
+    "checkingConnectivity": "",
+    "checkingStorage": "",
+    "finalization": "",
+    "finalizingSetup": "",
+    "health": "",
+    "initializingHealth": "",
+    "loadingPreferences": "",
+    "optimizingImages": "",
+    "performance": "",
+    "preferences": "",
+    "ready": "",
+    "setupPerformance": "",
+    "storage": "",
+    "validatingTokens": ""
+  },
+  "previous": "",
+  "profile": {
+    "lastName": ""
+  },
+  "settingTitle": "",
+  "settings": {
+    "account": "",
+    "appearance": "",
+    "data": "",
+    "legal": "",
+    "logout": "",
+    "notifications": "",
+    "privacy": "",
+    "profile": "",
+    "security": "",
+    "storage": "",
+    "title": ""
+  },
+  "success": {
+    "uploaded": ""
+  },
+  "theme": {
+    "themeChoose": ""
+  },
+  "validation": {
+    "email": "",
+    "invalidFormat": "",
+    "passwordMismatch": "",
+    "phone": "",
+    "weakPassword": ""
+  },
+  "welcome": {
+    "features": "",
+    "getStarted": "",
+    "title": ""
+  }
+}

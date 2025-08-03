@@ -96,6 +96,7 @@ gradlew clean
 gradlew assembleDebug --stacktrace
 gradlew signingReport --warning-mode all --stacktrace
 
+python assets\translations\translation_manager.py
 
 dart fix --dry-run
 dart fix --apply
@@ -121,7 +122,7 @@ dart run build_runner build
 flutter pub run build_runner build
 dart pub run build_runner build
 flutter pub run build_runner build --delete-conflicting-outputs
-flutter pub run easy_localization:generate -S D:\durgas\Tailorapp\assets\translations\en-US.json -f keys -o D:\durgas\Tailorapp\lib\product\lang\locale_keys.g.dart
+flutter pub run easy_localization:generate -S assets\translations\json -f keys -o D:\durgas\Tailorapp\lib\product\lang\locale_keys.g.dart
 flutter pub cache repair
 
 
@@ -320,6 +321,7 @@ flutterfire configure --project=tailor-ai-52640
 D:\pub-cache\bin\flutterfire.bat configure --project=tailor-ai-52640
 C:\Users\Admin\AppData\Local\Pub\Cache\bin\flutterfire.bat configure --project=tailor-ai-52640
 D:/Durgas/flutter/flutterfire/flutterfire.bat configure --project=tailor-ai-52640
+
 flutter pub add firebase_analytics	
 	
 flutter pub add firebase_core	

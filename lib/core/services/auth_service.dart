@@ -1,9 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:tailorapp/core/models/customer_model.dart';
+import 'package:tailorapp/core/models/user_model.dart';
 import 'package:tailorapp/core/models/user_role.dart';
-import 'package:tailorapp/core/models/tailor_model.dart';
-import 'package:tailorapp/core/models/admin_model.dart';
-import 'package:tailorapp/core/repositories/customer_repository.dart';
+import 'package:tailorapp/core/repositories/user_repository.dart';
 import 'package:tailorapp/core/services/debug_logger.dart';
 
 abstract class AuthService {
@@ -24,6 +22,26 @@ abstract class AuthService {
   Future<void> signOut();
   Future<void> deleteAccount();
 
+  // Phone authentication methods
+  Future<PhoneAuthResult> verifyPhoneNumber(String phoneNumber);
+  Future<AuthResult> signInWithPhoneAndPin(String phoneNumber, String pin);
+
+  // User existence check
+  Future<bool> checkUserExistsByPhone(String phoneNumber);
+
+  // Simplified phone authentication (no OTP)
+  Future<UserModel?> getUserByPhone(String phoneNumber);
+  Future<AuthResult> signInWithPhoneAndPinDirect(String phoneNumber, String pin);
+
+  // User creation with phone
+  Future<AuthResult> createUserWithPhoneAndPin({
+    required String phoneNumber,
+    required String name,
+    required String email,
+    required String pin,
+    required UserRole role,
+  });
+
   // PIN management
   Future<void> sendPinResetEmail(String email);
   Future<void> updatePin(String newPin);
@@ -35,33 +53,24 @@ abstract class AuthService {
   // Profile management
   Future<void> updateProfile({String? displayName, String? photoURL});
 
+  // User profile management (unified)
+  Future<UserModel?> getCurrentUserProfile();
+  Future<void> updateUserProfile(UserModel userProfile);
+
   // Role management
   Future<UserRole> getUserRole(String uid);
   Future<void> setUserRole(String uid, UserRole role);
-
-  // Profile integration by role
-  Future<CustomerModel?> getCurrentCustomerProfile();
-  Future<TailorModel?> getCurrentTailorProfile();
-  Future<AdminModel?> getCurrentAdminProfile();
-
-  Future<void> createCustomerProfile(CustomerModel customer);
-  Future<void> createTailorProfile(TailorModel tailor);
-  Future<void> createAdminProfile(AdminModel admin);
-
-  Future<void> updateCustomerProfile(CustomerModel customer);
-  Future<void> updateTailorProfile(TailorModel tailor);
-  Future<void> updateAdminProfile(AdminModel admin);
 }
 
 class FirebaseAuthService implements AuthService {
   final FirebaseAuth _firebaseAuth;
-  final CustomerRepository _customerRepository;
+  final UserRepository _userRepository;
 
   FirebaseAuthService({
     FirebaseAuth? firebaseAuth,
-    required CustomerRepository customerRepository,
+    required UserRepository userRepository,
   })  : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
-        _customerRepository = customerRepository;
+        _userRepository = userRepository;
 
   @override
   Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
@@ -109,26 +118,16 @@ class FirebaseAuthService implements AuthService {
         // Update display name
         await credential.user!.updateDisplayName(name);
 
-        // Create customer profile
-        final customer = CustomerModel(
+        // Create user profile with customer role
+        final userProfile = UserModel.customer(
           id: credential.user!.uid,
           name: name,
           email: email,
-          stylePreferences: const StylePreferences(
-            preferredStyles: [],
-            preferredColors: [],
-            preferredFabrics: [],
-            dislikedColors: [],
-            dislikedFabrics: [],
-            occasions: [],
-          ),
-          orderHistory: const [],
-          createdAt: DateTime.now(),
-          updatedAt: DateTime.now(),
+          phone: credential.user!.phoneNumber ?? '',
           isVerified: false,
         );
 
-        await _customerRepository.createCustomer(customer);
+        await _userRepository.createUser(userProfile);
 
         return AuthResult.success(credential.user);
       }
@@ -175,8 +174,8 @@ class FirebaseAuthService implements AuthService {
   Future<void> deleteAccount() async {
     final user = currentUser;
     if (user != null) {
-      // Delete customer profile first
-      await _customerRepository.deleteCustomer(user.uid);
+      // Delete user profile first
+      await _userRepository.deleteUser(user.uid);
 
       // Delete Firebase user
       await user.delete();
@@ -267,68 +266,287 @@ class FirebaseAuthService implements AuthService {
   }
 
   @override
-  Future<CustomerModel?> getCurrentCustomerProfile() async {
+  Future<UserModel?> getCurrentUserProfile() async {
     final user = currentUser;
     if (user != null) {
-      return await _customerRepository.getCustomer(user.uid);
+      try {
+        return await _userRepository.getUser(user.uid);
+      } catch (e) {
+        DebugLogger.auth('Error getting user profile: $e');
+      }
     }
     return null;
   }
 
   @override
-  Future<TailorModel?> getCurrentTailorProfile() async {
-    final user = currentUser;
-    if (user != null) {
-      // TODO: Implement TailorRepository and get tailor profile
-      // For now, return null
+  Future<void> updateUserProfile(UserModel userProfile) async {
+    try {
+      await _userRepository.updateUser(userProfile);
+    } catch (e) {
+      DebugLogger.user('Failed to update user profile: $e');
+      rethrow;
+    }
+  }
+
+  @override
+  Future<bool> checkUserExistsByPhone(String phoneNumber) async {
+    try {
+      final user = await _userRepository.getUserByPhone(phoneNumber);
+      return user != null;
+    } catch (e) {
+      DebugLogger.auth('Error checking user existence: $e');
+      return false;
+    }
+  }
+
+  @override
+  Future<UserModel?> getUserByPhone(String phoneNumber) async {
+    try {
+      return await _userRepository.getUserByPhone(phoneNumber);
+    } catch (e) {
+      DebugLogger.auth('Error getting user by phone: $e');
       return null;
     }
-    return null;
   }
 
   @override
-  Future<AdminModel?> getCurrentAdminProfile() async {
-    final user = currentUser;
-    if (user != null) {
-      // TODO: Implement AdminRepository and get admin profile
-      // For now, return null
-      return null;
+  Future<AuthResult> signInWithPhoneAndPinDirect(String phoneNumber, String pin) async {
+    try {
+      // Get user from Firestore first to verify they exist
+      final userProfile = await _userRepository.getUserByPhone(phoneNumber);
+      if (userProfile == null) {
+        return AuthResult.failure(
+          const AuthError(
+            type: AuthErrorType.userNotFound,
+            message: 'User not found with this phone number',
+          ),
+        );
+      }
+
+      // Use phone number as email for Firebase Auth
+      final phoneEmail = '${phoneNumber.replaceAll('+', '')}@phone.auth';
+
+      final credential = await _firebaseAuth.signInWithEmailAndPassword(
+        email: phoneEmail,
+        password: pin,
+      );
+
+      if (credential.user != null) {
+        DebugLogger.auth('Direct phone sign-in successful for: $phoneNumber');
+        return AuthResult.success(credential.user!);
+      } else {
+        return AuthResult.failure(
+          const AuthError(
+            type: AuthErrorType.unknown,
+            message: 'Authentication failed',
+          ),
+        );
+      }
+    } on FirebaseAuthException catch (e) {
+      DebugLogger.auth('Direct phone sign-in error: ${e.message}');
+
+      AuthErrorType errorType;
+      String message;
+
+      switch (e.code) {
+        case 'user-not-found':
+          errorType = AuthErrorType.userNotFound;
+          message = 'No account found with this phone number';
+          break;
+        case 'wrong-password':
+          errorType = AuthErrorType.wrongPassword;
+          message = 'Incorrect PIN';
+          break;
+        case 'invalid-email':
+          errorType = AuthErrorType.invalidEmail;
+          message = 'Invalid phone number format';
+          break;
+        case 'user-disabled':
+          errorType = AuthErrorType.userDisabled;
+          message = 'This account has been disabled';
+          break;
+        default:
+          errorType = AuthErrorType.unknown;
+          message = e.message ?? 'Authentication failed';
+      }
+
+      return AuthResult.failure(
+        AuthError(
+          type: errorType,
+          message: message,
+        ),
+      );
+    } catch (e) {
+      DebugLogger.auth('Unexpected error during direct phone sign-in: $e');
+      return AuthResult.failure(
+        AuthError(
+          type: AuthErrorType.unknown,
+          message: 'Authentication failed: ${e.toString()}',
+        ),
+      );
     }
-    return null;
   }
 
   @override
-  Future<void> createCustomerProfile(CustomerModel customer) async {
-    await _customerRepository.createCustomer(customer);
+  Future<AuthResult> createUserWithPhoneAndPin({
+    required String phoneNumber,
+    required String name,
+    required String email,
+    required String pin,
+    required UserRole role,
+  }) async {
+    try {
+      // For simplified auth, use phone number as email
+      final phoneEmail = '${phoneNumber.replaceAll('+', '')}@phone.auth';
+
+      final credential = await _firebaseAuth.createUserWithEmailAndPassword(
+        email: phoneEmail,
+        password: pin,
+      );
+
+      if (credential.user != null) {
+        // Update display name
+        await credential.user!.updateDisplayName(name);
+
+        // Create user profile based on role
+        UserModel userProfile;
+
+        switch (role) {
+          case UserRole.customer:
+            userProfile = UserModel.customer(
+              id: credential.user!.uid,
+              name: name,
+              email: email,
+              phone: phoneNumber,
+              isVerified: true, // Phone authenticated
+            );
+            break;
+          case UserRole.tailor:
+            userProfile = UserModel.tailor(
+              id: credential.user!.uid,
+              name: name,
+              email: email,
+              phone: phoneNumber,
+              isVerified: true, // Phone authenticated
+            );
+            break;
+          case UserRole.admin:
+            userProfile = UserModel.admin(
+              id: credential.user!.uid,
+              name: name,
+              email: email,
+              phone: phoneNumber,
+              isVerified: true, // Phone authenticated
+            );
+            break;
+        }
+
+        await _userRepository.createUser(userProfile);
+
+        // Set user role (TODO: implement properly with cloud functions)
+        await setUserRole(credential.user!.uid, role);
+
+        return AuthResult.success(credential.user);
+      }
+
+      return AuthResult.failure(AuthError.unknown('Failed to create user'));
+    } on FirebaseAuthException catch (e) {
+      return AuthResult.failure(_mapFirebaseError(e));
+    } catch (e) {
+      return AuthResult.failure(AuthError.unknown(e.toString()));
+    }
   }
 
   @override
-  Future<void> createTailorProfile(TailorModel tailor) async {
-    // TODO: Implement TailorRepository and create tailor profile
-    DebugLogger.user('Creating tailor profile for ${tailor.name}');
+  Future<PhoneAuthResult> verifyPhoneNumber(String phoneNumber) async {
+    try {
+      String? verificationId;
+      String? errorMessage;
+
+      await _firebaseAuth.verifyPhoneNumber(
+        phoneNumber: phoneNumber,
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          // Auto-resolution of verification code (Android only)
+          // This will not be used in our PIN flow but Firebase requires it
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          errorMessage = e.message ?? 'Phone verification failed';
+        },
+        codeSent: (String verId, int? resendToken) {
+          verificationId = verId;
+        },
+        codeAutoRetrievalTimeout: (String verId) {
+          // Called when auto-retrieval times out
+        },
+        timeout: const Duration(seconds: 60),
+      );
+
+      // Wait a bit for the callback to be processed
+      await Future.delayed(const Duration(milliseconds: 500));
+
+      if (errorMessage != null) {
+        return PhoneAuthResult.failure(errorMessage!);
+      }
+
+      if (verificationId != null) {
+        return PhoneAuthResult.success(verificationId!);
+      }
+
+      return PhoneAuthResult.failure('Phone verification failed');
+    } catch (e) {
+      return PhoneAuthResult.failure(
+        'Phone verification error: ${e.toString()}',
+      );
+    }
   }
 
   @override
-  Future<void> createAdminProfile(AdminModel admin) async {
-    // TODO: Implement AdminRepository and create admin profile
-    DebugLogger.user('Creating admin profile for ${admin.name}');
-  }
+  Future<AuthResult> signInWithPhoneAndPin(
+    String phoneNumber,
+    String pin,
+  ) async {
+    try {
+      // For simplified auth, use email/password with phone number as email
+      // In production, you'd implement proper phone + PIN authentication
+      final email = '${phoneNumber.replaceAll('+', '')}@phone.auth';
 
-  @override
-  Future<void> updateCustomerProfile(CustomerModel customer) async {
-    await _customerRepository.updateCustomer(customer);
-  }
+      try {
+        // Try to sign in first
+        final credential = await _firebaseAuth.signInWithEmailAndPassword(
+          email: email,
+          password: pin,
+        );
+        return AuthResult.success(credential.user);
+      } catch (signInError) {
+        // If sign in fails, try to create new user
+        final credential = await _firebaseAuth.createUserWithEmailAndPassword(
+          email: email,
+          password: pin,
+        );
 
-  @override
-  Future<void> updateTailorProfile(TailorModel tailor) async {
-    // TODO: Implement TailorRepository and update tailor profile
-    DebugLogger.user('Updating tailor profile for ${tailor.name}');
-  }
+        if (credential.user != null) {
+          // Update display name to show phone number
+          await credential.user!.updateDisplayName(phoneNumber);
 
-  @override
-  Future<void> updateAdminProfile(AdminModel admin) async {
-    // TODO: Implement AdminRepository and update admin profile
-    DebugLogger.user('Updating admin profile for ${admin.name}');
+          // Create customer profile (this shouldn't happen in new flow)
+          final userProfile = UserModel.customer(
+            id: credential.user!.uid,
+            name: 'User', // Default name, can be updated later
+            email: email,
+            phone: phoneNumber,
+            isVerified: true, // Phone authenticated
+          );
+
+          await _userRepository.createUser(userProfile);
+        }
+
+        return AuthResult.success(credential.user);
+      }
+    } on FirebaseAuthException catch (e) {
+      return AuthResult.failure(_mapFirebaseError(e));
+    } catch (e) {
+      return AuthResult.failure(AuthError.unknown(e.toString()));
+    }
   }
 
   AuthError _mapFirebaseError(FirebaseAuthException e) {
@@ -483,4 +701,25 @@ class AuthException implements Exception {
 
   @override
   String toString() => 'AuthException: $message';
+}
+
+// Phone Auth Result classes
+class PhoneAuthResult {
+  final bool isSuccess;
+  final String? verificationId;
+  final String? error;
+
+  const PhoneAuthResult._({
+    required this.isSuccess,
+    this.verificationId,
+    this.error,
+  });
+
+  factory PhoneAuthResult.success(String verificationId) {
+    return PhoneAuthResult._(isSuccess: true, verificationId: verificationId);
+  }
+
+  factory PhoneAuthResult.failure(String error) {
+    return PhoneAuthResult._(isSuccess: false, error: error);
+  }
 }

@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:tailorapp/core/services/service_locator.dart';
-import 'package:tailorapp/core/models/customer_model.dart';
+import 'package:tailorapp/core/models/user_model.dart';
 import 'package:tailorapp/core/models/garment_model.dart';
+import 'package:tailorapp/core/models/shared_models.dart';
 
 class VirtualFittingPage extends StatefulWidget {
   const VirtualFittingPage({super.key});

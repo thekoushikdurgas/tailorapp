@@ -1,0 +1,14 @@
+# TailorAI Translation Manager Requirements
+# Python version: 3.7+
+
+# Core dependencies
+# (All standard library modules - no external dependencies required)
+
+# Optional dependencies for enhanced functionality
+colorama>=0.4.4  # For colored terminal output (optional)
+tabulate>=0.9.0  # For better table formatting in reports (optional)
+
+# Development dependencies (optional)
+pytest>=7.0.0    # For testing (optional)
+black>=22.0.0    # For code formatting (optional)
+flake8>=4.0.0    # For linting (optional) 

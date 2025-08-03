@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tailorapp/core/navigation/navigation_route.dart';
-import 'package:tailorapp/core/models/customer_model.dart';
+import 'package:tailorapp/core/models/user_model.dart';
+import 'package:tailorapp/core/models/shared_models.dart';
 import 'package:tailorapp/core/cubit/auth_cubit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -14,7 +15,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  CustomerModel? _customer;
+  UserModel? _user;
   bool _isLoading = true;
   bool _isEditing = false;
   File? _selectedImage;
@@ -28,7 +29,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-    _loadCustomerProfile();
+    _loadUserProfile();
   }
 
   @override
@@ -39,7 +40,7 @@ class _ProfilePageState extends State<ProfilePage> {
     super.dispose();
   }
 
-  Future<void> _loadCustomerProfile() async {
+  Future<void> _loadUserProfile() async {
     setState(() => _isLoading = true);
 
     // Store scaffold messenger before async call
@@ -50,7 +51,7 @@ class _ProfilePageState extends State<ProfilePage> {
       await Future.delayed(const Duration(milliseconds: 800));
 
       // Mock customer data - in real app, this would come from auth service
-      _customer = CustomerModel(
+      _user = UserModel.customer(
         id: 'CUST001',
         name: 'John Doe',
         email: 'john.doe@example.com',
@@ -58,7 +59,7 @@ class _ProfilePageState extends State<ProfilePage> {
         profileImageUrl: null,
         dateOfBirth: DateTime(1990, 5, 15),
         gender: 'Male',
-        address: const CustomerAddress(
+        address: const UserAddress(
           street: '123 Main Street',
           apartment: 'Apt 4B',
           city: 'New York',
@@ -67,37 +68,39 @@ class _ProfilePageState extends State<ProfilePage> {
           country: 'USA',
           isDefault: true,
         ),
-        measurements: BodyMeasurements(
-          height: 175.0,
-          weight: 70.0,
-          chest: 42.0,
-          waist: 34.0,
-          hips: 40.0,
-          shoulders: 18.0,
-          armLength: 24.0,
-          neck: 16.0,
-          unit: 'cm',
-          lastUpdated: DateTime.now().subtract(const Duration(days: 30)),
+        customerData: CustomerData(
+          measurements: BodyMeasurements(
+            height: 175.0,
+            weight: 70.0,
+            chest: 42.0,
+            waist: 34.0,
+            hips: 40.0,
+            shoulders: 18.0,
+            armLength: 24.0,
+            neck: 16.0,
+            unit: 'cm',
+            lastUpdated: DateTime.now().subtract(const Duration(days: 30)),
+          ),
+          stylePreferences: const StylePreferences(
+            preferredStyles: ['Modern', 'Classic', 'Casual'],
+            preferredColors: ['Navy', 'White', 'Light Blue', 'Gray'],
+            preferredFabrics: ['Cotton', 'Linen', 'Wool'],
+            dislikedColors: ['Orange', 'Pink'],
+            dislikedFabrics: ['Polyester'],
+            fitPreference: 'slim',
+            budgetRange: '\$50-\$150',
+            occasions: ['Business', 'Casual', 'Formal'],
+          ),
+          orderHistory: const ['ORD001', 'ORD002', 'ORD003'],
         ),
-        stylePreferences: const StylePreferences(
-          preferredStyles: ['Modern', 'Classic', 'Casual'],
-          preferredColors: ['Navy', 'White', 'Light Blue', 'Gray'],
-          preferredFabrics: ['Cotton', 'Linen', 'Wool'],
-          dislikedColors: ['Orange', 'Pink'],
-          dislikedFabrics: ['Polyester'],
-          fitPreference: 'slim',
-          budgetRange: '\$50-\$150',
-          occasions: ['Business', 'Casual', 'Formal'],
-        ),
-        orderHistory: const ['ORD001', 'ORD002', 'ORD003'],
         createdAt: DateTime.now().subtract(const Duration(days: 90)),
         updatedAt: DateTime.now().subtract(const Duration(days: 5)),
         isVerified: true,
       );
 
-      _nameController.text = _customer!.name;
-      _emailController.text = _customer!.email;
-      _phoneController.text = _customer!.phone ?? '';
+      _nameController.text = _user!.name;
+      _emailController.text = _user!.email;
+      _phoneController.text = _user!.phone ?? '';
     } catch (e) {
       if (mounted) {
         scaffoldMessenger.showSnackBar(
@@ -152,13 +155,13 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Future<void> _saveProfile() async {
-    if (_customer == null) return;
+    if (_user == null) return;
 
     // Store scaffold messenger before async call
     final scaffoldMessenger = ScaffoldMessenger.of(context);
 
     try {
-      final updatedCustomer = _customer!.copyWith(
+      final updatedCustomer = _user!.copyWith(
         name: _nameController.text.trim(),
         email: _emailController.text.trim(),
         phone: _phoneController.text.trim().isNotEmpty
@@ -172,7 +175,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
       if (mounted) {
         setState(() {
-          _customer = updatedCustomer;
+          _user = updatedCustomer;
           _isEditing = false;
         });
 
@@ -220,9 +223,9 @@ class _ProfilePageState extends State<ProfilePage> {
               onPressed: () {
                 setState(() {
                   _isEditing = false;
-                  _nameController.text = _customer?.name ?? '';
-                  _emailController.text = _customer?.email ?? '';
-                  _phoneController.text = _customer?.phone ?? '';
+                  _nameController.text = _user?.name ?? '';
+                  _emailController.text = _user?.email ?? '';
+                  _phoneController.text = _user?.phone ?? '';
                 });
               },
               child: const Text('Cancel'),
@@ -248,7 +251,7 @@ class _ProfilePageState extends State<ProfilePage> {
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : RefreshIndicator(
-              onRefresh: _loadCustomerProfile,
+              onRefresh: _loadUserProfile,
               child: SingleChildScrollView(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
@@ -307,18 +310,16 @@ class _ProfilePageState extends State<ProfilePage> {
                 backgroundColor: Colors.blue[100],
                 backgroundImage: _selectedImage != null
                     ? FileImage(_selectedImage!) as ImageProvider
-                    : _customer?.profileImageUrl != null
-                        ? NetworkImage(_customer!.profileImageUrl!)
-                            as ImageProvider
+                    : _user?.profileImageUrl != null
+                        ? NetworkImage(_user!.profileImageUrl!) as ImageProvider
                         : null,
-                child:
-                    _selectedImage == null && _customer?.profileImageUrl == null
-                        ? Icon(
-                            Icons.person,
-                            size: 60,
-                            color: Colors.blue[600],
-                          )
-                        : null,
+                child: _selectedImage == null && _user?.profileImageUrl == null
+                    ? Icon(
+                        Icons.person,
+                        size: 60,
+                        color: Colors.blue[600],
+                      )
+                    : null,
               ),
               if (_isEditing)
                 Positioned(
@@ -376,7 +377,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ] else ...[
             Text(
-              _customer?.name ?? 'No Name',
+              _user?.name ?? 'No Name',
               style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -385,7 +386,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             const SizedBox(height: 4),
             Text(
-              _customer?.email ?? 'No Email',
+              _user?.email ?? 'No Email',
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.grey[600],
@@ -401,13 +402,13 @@ class _ProfilePageState extends State<ProfilePage> {
             children: [
               _buildStatCard(
                 'Orders',
-                _customer?.orderHistory.length.toString() ?? '0',
+                _user?.customerData?.orderHistory.length.toString() ?? '0',
               ),
               _buildStatCard('Designs', '8'),
               _buildStatCard(
                 'Member Since',
-                _customer != null
-                    ? '${DateTime.now().difference(_customer!.createdAt).inDays} days'
+                _user != null
+                    ? '${DateTime.now().difference(_user!.createdAt).inDays} days'
                     : 'N/A',
               ),
             ],
@@ -462,18 +463,18 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             )
           else ...[
-            _buildInfoRow('Phone', _customer?.phone ?? 'Not provided'),
+            _buildInfoRow('Phone', _user?.phone ?? 'Not provided'),
             _buildInfoRow(
               'Date of Birth',
-              _customer?.dateOfBirth != null
-                  ? '${_customer!.dateOfBirth!.day}/${_customer!.dateOfBirth!.month}/${_customer!.dateOfBirth!.year}'
+              _user?.dateOfBirth != null
+                  ? '${_user!.dateOfBirth!.day}/${_user!.dateOfBirth!.month}/${_user!.dateOfBirth!.year}'
                   : 'Not provided',
             ),
-            _buildInfoRow('Gender', _customer?.gender ?? 'Not specified'),
+            _buildInfoRow('Gender', _user?.gender ?? 'Not specified'),
             _buildInfoRow(
               'Member Since',
-              _customer?.createdAt != null
-                  ? '${_customer!.createdAt.day}/${_customer!.createdAt.month}/${_customer!.createdAt.year}'
+              _user?.createdAt != null
+                  ? '${_user!.createdAt.day}/${_user!.createdAt.month}/${_user!.createdAt.year}'
                   : 'Unknown',
             ),
           ],
@@ -483,7 +484,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget _buildMeasurementsSection() {
-    final measurements = _customer?.measurements;
+    final measurements = _user?.customerData?.measurements;
 
     return Container(
       decoration: BoxDecoration(
@@ -637,7 +638,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget _buildStylePreferencesSection() {
-    final preferences = _customer?.stylePreferences;
+    final preferences = _user?.customerData?.stylePreferences;
 
     return Container(
       decoration: BoxDecoration(
@@ -991,7 +992,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   void _showAddressDialog() {
-    final address = _customer?.address;
+    final address = _user?.address;
 
     showDialog(
       context: context,

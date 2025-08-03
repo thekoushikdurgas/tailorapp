@@ -4,6 +4,7 @@ import 'package:tailorapp/core/cubit/auth_cubit.dart';
 import 'package:tailorapp/core/navigation/navigation_route.dart';
 import 'package:tailorapp/view/auth/view/forgot_password_page.dart';
 import 'package:tailorapp/view/auth/view/register_page.dart';
+import 'package:tailorapp/view/auth/widgets/phone_auth_modals.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -13,19 +14,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final _pinController = TextEditingController();
-  bool _isPinVisible = false;
-  bool _rememberMe = false;
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _pinController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,25 +51,17 @@ class _LoginPageState extends State<LoginPage> {
                   _buildWelcomeText(),
                   const SizedBox(height: 32),
 
-                  // Login Form
-                  _buildLoginForm(isLoading),
+                  // Phone Login
+                  _buildPhoneLoginSection(isLoading),
                   const SizedBox(height: 24),
-
-                  // Login Button
-                  _buildLoginButton(isLoading),
-                  const SizedBox(height: 16),
-
-                  // Forgot PIN
-                  _buildForgotPasswordLink(),
-                  const SizedBox(height: 32),
 
                   // Divider
                   _buildDivider(),
                   const SizedBox(height: 24),
 
-                  // Social Login Options (placeholder)
-                  _buildSocialLoginSection(),
-                  const SizedBox(height: 32),
+                  // Alternative Email Login
+                  _buildEmailLoginOption(),
+                  const SizedBox(height: 16),
 
                   // Sign Up Link
                   _buildSignUpLink(),
@@ -146,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
         const SizedBox(height: 8),
         Text(
-          'Sign in to continue your custom tailoring journey',
+          'Continue your custom tailoring journey',
           style: TextStyle(
             fontSize: 16,
             color: Colors.grey[600],
@@ -157,194 +137,79 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _buildLoginForm(bool isLoading) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        children: [
-          // Email Field
-          TextFormField(
-            controller: _emailController,
-            keyboardType: TextInputType.emailAddress,
-            enabled: !isLoading,
-            decoration: InputDecoration(
-              labelText: 'Email Address',
-              hintText: 'Enter your email',
-              prefixIcon: const Icon(Icons.email_outlined),
-              filled: true,
-              fillColor: Colors.white,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: Colors.grey[300]!),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: Colors.grey[300]!),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: Colors.blue[600]!, width: 2),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: Colors.red[400]!),
-              ),
-            ),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter your email';
-              }
-              if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                  .hasMatch(value)) {
-                return 'Please enter a valid email';
-              }
-              return null;
-            },
-          ),
-          const SizedBox(height: 16),
-
-          // PIN Field
-          TextFormField(
-            controller: _pinController,
-            obscureText: !_isPinVisible,
-            enabled: !isLoading,
-            keyboardType: TextInputType.number,
-            maxLength: 6,
-            decoration: InputDecoration(
-              labelText: 'PIN',
-              hintText: 'Enter your 4-6 digit PIN',
-              prefixIcon: const Icon(Icons.pin_outlined),
-              suffixIcon: IconButton(
-                icon: Icon(
-                  _isPinVisible ? Icons.visibility : Icons.visibility_off,
-                ),
-                onPressed: () {
-                  setState(() {
-                    _isPinVisible = !_isPinVisible;
-                  });
-                },
-              ),
-              filled: true,
-              fillColor: Colors.white,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: Colors.grey[300]!),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: Colors.grey[300]!),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: Colors.blue[600]!, width: 2),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: Colors.red[400]!),
-              ),
-              counterText: '', // Hide character counter
-            ),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter your PIN';
-              }
-              if (value.length < 4 || value.length > 6) {
-                return 'PIN must be 4-6 digits';
-              }
-              if (!RegExp(r'^\d+$').hasMatch(value)) {
-                return 'PIN must contain only numbers';
-              }
-              return null;
-            },
-          ),
-          const SizedBox(height: 16),
-
-          // Remember Me Checkbox
-          Row(
-            children: [
-              Checkbox(
-                value: _rememberMe,
-                onChanged: isLoading
-                    ? null
-                    : (value) {
-                        setState(() {
-                          _rememberMe = value ?? false;
-                        });
-                      },
-                activeColor: Colors.blue[600],
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4),
-                ),
-              ),
-              Text(
-                'Remember me',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.grey[700],
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildLoginButton(bool isLoading) {
-    return SizedBox(
-      width: double.infinity,
-      child: ElevatedButton(
-        onPressed: isLoading ? null : _handleLogin,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.blue[600],
-          foregroundColor: Colors.white,
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          elevation: 0,
-          disabledBackgroundColor: Colors.grey[400],
-        ),
-        child: isLoading
-            ? const SizedBox(
-                width: 20,
-                height: 20,
-                child: CircularProgressIndicator(
-                  strokeWidth: 2,
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                ),
-              )
-            : const Text(
-                'Sign In',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-      ),
-    );
-  }
-
-  Widget _buildForgotPasswordLink() {
-    return Center(
-      child: TextButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const ForgotPasswordPage(),
-            ),
-          );
-        },
-        child: Text(
-          'Forgot your PIN?',
+  Widget _buildPhoneLoginSection(bool isLoading) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          'Sign in with your phone number to continue',
           style: TextStyle(
-            fontSize: 14,
-            color: Colors.blue[600],
+            fontSize: 16,
+            color: Colors.grey[600],
             fontWeight: FontWeight.w500,
           ),
+          textAlign: TextAlign.center,
         ),
-      ),
+        const SizedBox(height: 24),
+
+        // Phone Login Button
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton.icon(
+            onPressed: isLoading ? null : _handlePhoneLogin,
+            icon: const Icon(Icons.phone, size: 20),
+            label: const Text(
+              'Send Verification Code',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blue[600],
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              elevation: 0,
+              disabledBackgroundColor: Colors.grey[300],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildEmailLoginOption() {
+    return Column(
+      children: [
+        Text(
+          'or sign in with email',
+          style: TextStyle(
+            fontSize: 14,
+            color: Colors.grey[600],
+          ),
+        ),
+        const SizedBox(height: 16),
+        OutlinedButton.icon(
+          onPressed: () {
+            // Navigate to email login form (could be a separate page or show a modal)
+            _showEmailLoginModal();
+          },
+          icon: const Icon(Icons.email_outlined, size: 18),
+          label: const Text('Email Sign In'),
+          style: OutlinedButton.styleFrom(
+            foregroundColor: Colors.grey[700],
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            side: BorderSide(color: Colors.grey[300]!),
+            minimumSize: const Size(double.infinity, 48),
+          ),
+        ),
+      ],
     );
   }
 
@@ -364,64 +229,6 @@ class _LoginPageState extends State<LoginPage> {
         ),
         Expanded(child: Divider(color: Colors.grey[300])),
       ],
-    );
-  }
-
-  Widget _buildSocialLoginSection() {
-    return Row(
-      children: [
-        Expanded(
-          child: _buildSocialButton(
-            icon: Icons.g_mobiledata,
-            label: 'Google',
-            onPressed: () {
-              // TODO: Implement Google sign in
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Google sign in - Coming soon'),
-                  behavior: SnackBarBehavior.floating,
-                ),
-              );
-            },
-          ),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: _buildSocialButton(
-            icon: Icons.apple,
-            label: 'Apple',
-            onPressed: () {
-              // TODO: Implement Apple sign in
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Apple sign in - Coming soon'),
-                  behavior: SnackBarBehavior.floating,
-                ),
-              );
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildSocialButton({
-    required IconData icon,
-    required String label,
-    required VoidCallback onPressed,
-  }) {
-    return OutlinedButton.icon(
-      onPressed: onPressed,
-      icon: Icon(icon, size: 20),
-      label: Text(label),
-      style: OutlinedButton.styleFrom(
-        foregroundColor: Colors.grey[700],
-        padding: const EdgeInsets.symmetric(vertical: 12),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
-        side: BorderSide(color: Colors.grey[300]!),
-      ),
     );
   }
 
@@ -461,8 +268,335 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void _handleLogin() {
-    if (_formKey.currentState?.validate() ?? false) {
+  void _handlePhoneLogin() {
+    // Show phone authentication modal
+    PhoneAuthModals.showPhoneNumberModal(context);
+  }
+
+  void _showEmailLoginModal() {
+    // Show email login modal with email/PIN form
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => const EmailLoginModal(),
+    );
+  }
+}
+
+// Email Login Modal for alternative authentication
+class EmailLoginModal extends StatefulWidget {
+  const EmailLoginModal({super.key});
+
+  @override
+  State<EmailLoginModal> createState() => _EmailLoginModalState();
+}
+
+class _EmailLoginModalState extends State<EmailLoginModal> {
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _pinController = TextEditingController();
+  bool _isPinVisible = false;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _pinController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+      ),
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Form(
+            key: _formKey,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Handle bar
+                  Center(
+                    child: Container(
+                      width: 40,
+                      height: 4,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+
+                  // Header
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () => Navigator.of(context).pop(),
+                        child: Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: Colors.grey[100],
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: const Icon(
+                            Icons.arrow_back,
+                            color: Colors.black87,
+                            size: 20,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      const Expanded(
+                        child: Text(
+                          'Email Sign In',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+
+                  Text(
+                    'Sign in with your email address and PIN',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey[600],
+                      height: 1.4,
+                    ),
+                  ),
+                  const SizedBox(height: 32),
+
+                  // Email Field
+                  const Text(
+                    'Email Address',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  TextFormField(
+                    controller: _emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      hintText: 'Enter your email',
+                      hintStyle: TextStyle(color: Colors.grey[400]),
+                      filled: true,
+                      fillColor: Colors.grey[50],
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: Colors.grey[200]!),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: Colors.grey[200]!),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: Colors.blue[600]!),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: const BorderSide(color: Colors.red),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 16,
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your email';
+                      }
+                      if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                          .hasMatch(value)) {
+                        return 'Please enter a valid email';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 24),
+
+                  // PIN Field
+                  const Text(
+                    'PIN',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  TextFormField(
+                    controller: _pinController,
+                    obscureText: !_isPinVisible,
+                    keyboardType: TextInputType.number,
+                    maxLength: 6,
+                    decoration: InputDecoration(
+                      hintText: 'Enter your 4-6 digit PIN',
+                      hintStyle: TextStyle(color: Colors.grey[400]),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _isPinVisible
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _isPinVisible = !_isPinVisible;
+                          });
+                        },
+                      ),
+                      filled: true,
+                      fillColor: Colors.grey[50],
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: Colors.grey[200]!),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: Colors.grey[200]!),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: Colors.blue[600]!),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: const BorderSide(color: Colors.red),
+                      ),
+                      counterText: '',
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 16,
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your PIN';
+                      }
+                      if (value.length < 4 || value.length > 6) {
+                        return 'PIN must be 4-6 digits';
+                      }
+                      if (!RegExp(r'^\d+$').hasMatch(value)) {
+                        return 'PIN must contain only numbers';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 16),
+
+                  // Forgot PIN link
+                  Center(
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ForgotPasswordPage(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        'Forgot your PIN?',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.blue[600],
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+
+                  // Sign In button
+                  BlocConsumer<AuthCubit, AuthState>(
+                    listener: (context, state) {
+                      if (state is AuthError) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(state.message),
+                            backgroundColor: Colors.red[600],
+                            behavior: SnackBarBehavior.floating,
+                          ),
+                        );
+                      } else if (state is AuthAuthenticated) {
+                        Navigator.of(context).pop();
+                        NavigationRoute.goHome(context);
+                      }
+                    },
+                    builder: (context, state) {
+                      final isLoading = state is AuthLoading;
+
+                      return SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: isLoading ? null : _handleEmailLogin,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blue[600],
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            elevation: 0,
+                            disabledBackgroundColor: Colors.grey[300],
+                          ),
+                          child: isLoading
+                              ? const SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      Colors.white,
+                                    ),
+                                  ),
+                                )
+                              : const Text(
+                                  'Sign In',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _handleEmailLogin() {
+    if (_formKey.currentState!.validate()) {
       context.read<AuthCubit>().signInWithEmailAndPin(
             _emailController.text.trim(),
             _pinController.text,

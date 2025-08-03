@@ -1,0 +1,101 @@
+{
+  "app": {
+    "description": "AI-Powered Tailoring & Clothing Design Platform",
+    "name": "TailorAI",
+    "version": "1.0.0"
+  },
+  "button": {
+    "cancel": "Cancel",
+    "continue": "Continue",
+    "next": "Next",
+    "ok": "OK",
+    "retry": "Retry",
+    "skip": "Skip"
+  },
+  "error": {
+    "critical": "Critical Error"
+  },
+  "footer": {
+    "copyright": "© 2024 TailorAI",
+    "secure": "Secure",
+    "version": "v1.0.0"
+  },
+  "intro": {
+    "appTagline": "AI-Powered Tailoring & Design Platform",
+    "feature": "Feature",
+    "getStarted": "Start Designing",
+    "onboarding": {
+      "page1": {
+        "subtitle": "Get precise body measurements using our advanced AI technology. Capture your exact dimensions from your phone for a perfect fit every time.",
+        "title": "Perfect Body Measurements"
+      },
+      "page2": {
+        "subtitle": "Create stunning custom garments with our intelligent design assistant. From concept to reality, design unique outfits tailored to your style.",
+        "title": "AI-Powered Design Studio"
+      },
+      "page3": {
+        "subtitle": "Try on your designs virtually before ordering. See exactly how your custom garments will look and fit using advanced AR technology.",
+        "title": "Virtual Fitting Experience"
+      },
+      "page4": {
+        "subtitle": "Turn your creativity into income. Publish and sell your unique designs to customers worldwide through our marketplace platform.",
+        "title": "Sell Your Designs"
+      },
+      "page5": {
+        "subtitle": "Your designs are crafted by verified master tailors. We match you with skilled professionals who bring your vision to life with precision.",
+        "title": "Expert Tailor Assignment"
+      },
+      "page6": {
+        "subtitle": "Skip the fashion stores entirely. We deliver your custom-made garments directly to your doorstep with premium packaging and quality guarantee.",
+        "title": "Doorstep Delivery"
+      }
+    },
+    "previous": "Previous"
+  },
+  "loading": {
+    "initializingApp": "Initializing app...",
+    "ready": "Ready!"
+  },
+  "localization": {
+    "appLang": "App Language",
+    "availableLanguages": "Available Languages",
+    "langChoose": "Choose Language",
+    "languageChanged": "Language changed successfully",
+    "languageError": "Failed to change language",
+    "languageSelection": {
+      "applyLanguage": "Apply Language",
+      "skipSelection": "Skip",
+      "subtitle": "Select your preferred language for the best experience",
+      "title": "Choose Language"
+    }
+  },
+  "phase": {
+    "authentication": "Authentication",
+    "checkingAuth": "Checking Authentication",
+    "checkingConnectivity": "Checking Connectivity",
+    "checkingStorage": "Checking Storage",
+    "connectivity": "Connectivity",
+    "error": "Error",
+    "finalization": "Finalizing",
+    "finalizingSetup": "Finalizing Setup",
+    "health": "Health Check",
+    "initializing": "Initializing",
+    "initializingHealth": "Initializing Health",
+    "loadingPreferences": "Loading Preferences",
+    "optimizingImages": "Optimizing Images",
+    "performance": "Performance",
+    "preferences": "Preferences",
+    "ready": "Ready",
+    "setupPerformance": "Setup Performance",
+    "storage": "Storage Setup",
+    "validatingTokens": "Validating Tokens"
+  },
+  "settingTitle": "Settings",
+  "theme": {
+    "dark": "Dark",
+    "default": "System Default",
+    "light": "Light",
+    "theme": "Theme",
+    "themeChoose": "Choose Theme"
+  }
+}

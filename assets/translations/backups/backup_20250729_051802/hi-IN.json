@@ -1,0 +1,252 @@
+{
+  "app": {
+    "description": "",
+    "name": "",
+    "version": ""
+  },
+  "auth": {
+    "createPin": "",
+    "enterPin": "",
+    "phoneLogin": {
+      "countryPicker": "",
+      "socialLogin": "",
+      "validation": ""
+    }
+  },
+  "button": {
+    "apply": "",
+    "back": "",
+    "cancel": "",
+    "close": "",
+    "confirm": "",
+    "continue": "",
+    "delete": "",
+    "done": "",
+    "edit": "",
+    "next": "",
+    "ok": "",
+    "refresh": "",
+    "retry": "",
+    "save": "",
+    "skip": ""
+  },
+  "error": {
+    "connectionError": "",
+    "contactSupport": "",
+    "critical": "",
+    "forbidden": "",
+    "general": "",
+    "network": "",
+    "notFound": "",
+    "serverError": "",
+    "timeout": "",
+    "tryAgain": "",
+    "unauthorized": "",
+    "validationError": ""
+  },
+  "feature": "",
+  "footer": {
+    "copyright": "",
+    "secure": "",
+    "version": ""
+  },
+  "getStarted": "",
+  "intro": {
+    "appTagline": "",
+    "feature": "",
+    "getStarted": "",
+    "introDescriptionFirst": "",
+    "introDescriptionSecond": "",
+    "introDescriptionThird": "",
+    "introTitleFirst": "",
+    "introTitleSecond": "",
+    "introTitleThird": "",
+    "onboarding": {
+      "page1": {
+        "subtitle": "",
+        "title": ""
+      },
+      "page2": {
+        "subtitle": ""
+      },
+      "page3": {
+        "subtitle": "",
+        "title": ""
+      },
+      "page4": "",
+      "page5": {
+        "title": ""
+      },
+      "page6": {
+        "subtitle": "",
+        "title": ""
+      }
+    },
+    "previous": ""
+  },
+  "loading": {
+    "checkingAuthentication": "",
+    "checkingConnectivity": "",
+    "checkingStorage": "",
+    "checkingSystemHealth": "",
+    "finalizingSetup": "",
+    "initializationWarnings": "",
+    "initializingApp": "",
+    "initializingHealth": "",
+    "loading": "",
+    "loadingPreferences": "",
+    "loadingProfile": "",
+    "offlineMode": "",
+    "offlineReady": "",
+    "optimizingImageLoading": "",
+    "optimizingStartup": "",
+    "performingHealthCheck": "",
+    "pleaseWait": "",
+    "preparingApp": "",
+    "processing": "",
+    "processingImage": "",
+    "ready": "",
+    "recoveringStorage": "",
+    "refreshingData": "",
+    "savingData": "",
+    "settingUpPerformance": "",
+    "systemHealthy": "",
+    "systemStatus": "",
+    "updatingSettings": "",
+    "uploadingImage": "",
+    "usingCachedHealth": "",
+    "validatingTokens": ""
+  },
+  "localization": {
+    "appLang": "",
+    "availableLanguages": "",
+    "currentLanguage": "",
+    "langChoose": "",
+    "languageChanged": "",
+    "languageError": "",
+    "languageSelection": {
+      "applyLanguage": "",
+      "changeLanguage": "",
+      "currentSelection": "",
+      "skipSelection": "",
+      "subtitle": "",
+      "title": ""
+    },
+    "languageSettings": "",
+    "selectLanguage": ""
+  },
+  "navigation": {
+    "dashboard": "",
+    "explore": "",
+    "help": "",
+    "home": "",
+    "notifications": "",
+    "search": "",
+    "settings": ""
+  },
+  "onboarding": {
+    "page1": {
+      "subtitle": "",
+      "title": ""
+    },
+    "page2": "",
+    "page3": {
+      "subtitle": ""
+    },
+    "page4": {
+      "subtitle": "",
+      "title": ""
+    },
+    "page5": {
+      "subtitle": "",
+      "title": ""
+    },
+    "page6": ""
+  },
+  "phase": {
+    "authentication": "",
+    "checkingAuth": "",
+    "checkingConnectivity": "",
+    "checkingStorage": "",
+    "connectivity": "",
+    "error": "",
+    "finalization": "",
+    "finalizingSetup": "",
+    "health": "",
+    "initializing": "",
+    "initializingHealth": "",
+    "loadingPreferences": "",
+    "optimizingImages": "",
+    "performance": "",
+    "preferences": "",
+    "ready": "",
+    "setupPerformance": "",
+    "storage": "",
+    "validatingTokens": ""
+  },
+  "previous": "",
+  "profile": {
+    "editProfile": "",
+    "email": "",
+    "firstName": "",
+    "lastName": "",
+    "location": "",
+    "name": "",
+    "phone": "",
+    "profileError": "",
+    "updateProfile": "",
+    "username": ""
+  },
+  "settingTitle": "",
+  "settings": {
+    "account": "",
+    "appearance": "",
+    "data": "",
+    "language": "",
+    "legal": "",
+    "logout": "",
+    "notifications": "",
+    "privacy": "",
+    "profile": "",
+    "security": "",
+    "storage": "",
+    "title": ""
+  },
+  "success": {
+    "applied": "",
+    "completed": "",
+    "confirmed": "",
+    "saved": "",
+    "updated": "",
+    "uploaded": ""
+  },
+  "theme": {
+    "dark": "",
+    "darkTheme": "",
+    "default": "",
+    "light": "",
+    "lightTheme": "",
+    "systemTheme": "",
+    "theme": "",
+    "themeChoose": "",
+    "themeDescription": ""
+  },
+  "validation": {
+    "email": "",
+    "invalidFormat": "",
+    "maxLength": "",
+    "passwordMismatch": "",
+    "phone": "",
+    "weakPassword": ""
+  },
+  "welcome": {
+    "and": "",
+    "features": "",
+    "getStarted": "",
+    "period": "",
+    "privacyPolicy": "",
+    "termsAgreement": "",
+    "termsOfService": "",
+    "title": ""
+  }
+}

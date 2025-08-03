@@ -6,14 +6,19 @@ import 'package:tailorapp/product/enum/route_enum.dart';
 class NavigationRoute {
   NavigationRoute._();
 
-  /// Navigate to home page
+  /// Navigate to home page (role-based via AuthWrapper)
   static void goHome(BuildContext context) {
-    context.go(RouteEnum.homePage.rawValue);
+    context.go(RouteEnum.auth.rawValue);
   }
 
   /// Navigate to introduction/onboarding
   static void goIntro(BuildContext context) {
     context.go(RouteEnum.intro.rawValue);
+  }
+
+  /// Navigate to welcome page
+  static void goWelcome(BuildContext context) {
+    context.go(RouteEnum.welcome.rawValue);
   }
 
   /// Navigate to settings
@@ -179,9 +184,9 @@ class NavigationRoute {
     context.push(RouteEnum.setting.rawValue);
   }
 
-  /// Logout and return to intro
+  /// Logout and return to welcome page
   static void logout(BuildContext context) {
-    clearAndGoTo(context, RouteEnum.intro.rawValue);
+    clearAndGoTo(context, RouteEnum.welcome.rawValue);
   }
 
   /// Error handling for navigation failures

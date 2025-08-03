@@ -1,0 +1,31 @@
+flowchart TD
+    A[Welcome Page] --> B[User clicks 'Get Started' button]
+    B --> C[showModalBottomSheet with Phone Number Input]
+    C --> D[User enters phone number with country code]
+    D --> E[User clicks 'Send Verification Code']
+    E --> F[Immediately show PIN Modal - NO OTP]
+    F --> G[User enters 6-digit PIN]
+    G --> H[User clicks 'Sign In']
+    H --> I[AuthCubit.signInWithPhoneAndPin called]
+    I --> J[AuthService creates email from phone]
+    J --> K[Try Firebase signInWithEmailAndPassword]
+    K --> L{User Exists?}
+    L -->|Yes| M[Sign In Successful]
+    L -->|No| N[Create new Firebase user]
+    N --> O[Create CustomerModel profile]
+    O --> P[Sign In Successful]
+    M --> Q[AuthState becomes AuthAuthenticated]
+    P --> Q
+    Q --> R[AuthWrapper detects authenticated state]
+    R --> S[Navigate to Home Page]
+    
+    T[Error Handling] --> U[Show error message in PIN modal]
+    K --> T
+    N --> T
+
+    style A fill:#e1f5fe
+    style F fill:#fff3e0
+    style S fill:#c8e6c9
+    style T fill:#ffcdd2
+    style J fill:#f3e5f5
+    style Q fill:#e8f5e8

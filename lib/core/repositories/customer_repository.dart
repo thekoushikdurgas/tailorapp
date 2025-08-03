@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tailorapp/core/models/customer_model.dart';
+import 'package:tailorapp/core/models/shared_models.dart';
 
 abstract class CustomerRepository {
   Future<CustomerModel?> getCustomer(String id);

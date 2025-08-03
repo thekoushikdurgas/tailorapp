@@ -5,7 +5,7 @@ class LocaleVariables {
 
   static final List<Locale> _localesList =
       ProjectLocales.localesMap.keys.toList();
-  static const String _localesPath = 'assets/translations';
+  static const String _localesPath = 'assets/translations/json';
   static const Locale _fallBackLocale = Locale('en', 'US');
 
   static List<DropdownMenuItem> localItems() {

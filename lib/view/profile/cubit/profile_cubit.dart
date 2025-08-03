@@ -1,7 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:tailorapp/core/models/shared_models.dart';
 import 'package:tailorapp/core/services/service_locator.dart';
-import 'package:tailorapp/core/models/customer_model.dart';
+import 'package:tailorapp/core/models/user_model.dart';
 import 'dart:io';
 
 // States
@@ -21,26 +22,26 @@ class ProfileLoading extends ProfileState {
 }
 
 class ProfileLoaded extends ProfileState {
-  final CustomerModel customer;
+  final UserModel user;
   final bool isEditing;
 
   const ProfileLoaded({
-    required this.customer,
+    required this.user,
     this.isEditing = false,
   });
 
   ProfileLoaded copyWith({
-    CustomerModel? customer,
+    UserModel? user,
     bool? isEditing,
   }) {
     return ProfileLoaded(
-      customer: customer ?? this.customer,
+      user: user ?? this.user,
       isEditing: isEditing ?? this.isEditing,
     );
   }
 
   @override
-  List<Object?> get props => [customer, isEditing];
+  List<Object?> get props => [user, isEditing];
 }
 
 class ProfileError extends ProfileState {
@@ -53,16 +54,16 @@ class ProfileError extends ProfileState {
 }
 
 class ProfileUpdated extends ProfileState {
-  final CustomerModel customer;
+  final UserModel user;
   final String message;
 
   const ProfileUpdated({
-    required this.customer,
+    required this.user,
     required this.message,
   });
 
   @override
-  List<Object?> get props => [customer, message];
+  List<Object?> get props => [user, message];
 }
 
 class ProfileImageUpdated extends ProfileState {
@@ -112,10 +113,9 @@ class ProfileCubit extends Cubit<ProfileState> {
     emit(const ProfileLoading());
 
     try {
-      final customer =
-          await ServiceLocator.customerRepository.getCustomer(userId);
-      if (customer != null) {
-        emit(ProfileLoaded(customer: customer));
+      final user = await ServiceLocator.userRepository.getUser(userId);
+      if (user != null) {
+        emit(ProfileLoaded(user: user));
       } else {
         emit(const ProfileError(message: 'Profile not found'));
       }
@@ -144,7 +144,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     String? phone,
     DateTime? dateOfBirth,
     String? gender,
-    CustomerAddress? address,
+    UserAddress? address,
   }) async {
     if (state is! ProfileLoaded) return;
 
@@ -152,28 +152,28 @@ class ProfileCubit extends Cubit<ProfileState> {
     emit(const ProfileLoading());
 
     try {
-      final updatedCustomer = currentState.customer.copyWith(
-        name: name ?? currentState.customer.name,
-        email: email ?? currentState.customer.email,
-        phone: phone ?? currentState.customer.phone,
-        dateOfBirth: dateOfBirth ?? currentState.customer.dateOfBirth,
-        gender: gender ?? currentState.customer.gender,
-        address: address ?? currentState.customer.address,
+      final updatedUser = currentState.user.copyWith(
+        name: name ?? currentState.user.name,
+        email: email ?? currentState.user.email,
+        phone: phone ?? currentState.user.phone,
+        dateOfBirth: dateOfBirth ?? currentState.user.dateOfBirth,
+        gender: gender ?? currentState.user.gender,
+        address: address ?? currentState.user.address,
         updatedAt: DateTime.now(),
       );
 
-      final savedCustomer = await ServiceLocator.customerRepository
-          .updateCustomer(updatedCustomer);
+      final savedUser =
+          await ServiceLocator.userRepository.updateUser(updatedUser);
 
       emit(
         ProfileUpdated(
-          customer: savedCustomer,
+          user: savedUser,
           message: 'Profile updated successfully',
         ),
       );
 
       // Return to loaded state
-      emit(ProfileLoaded(customer: savedCustomer, isEditing: false));
+      emit(ProfileLoaded(user: savedUser, isEditing: false));
     } catch (e) {
       emit(ProfileError(message: 'Failed to update profile: ${e.toString()}'));
     }
@@ -187,20 +187,19 @@ class ProfileCubit extends Cubit<ProfileState> {
 
     try {
       // Upload image to storage
-      final imageUrl =
-          await ServiceLocator.customerRepository.uploadProfileImage(
-        currentState.customer.id,
+      final imageUrl = await ServiceLocator.userRepository.uploadProfileImage(
+        currentState.user.id,
         imageFile,
       );
 
       // Update customer with new image URL
-      final updatedCustomer = currentState.customer.copyWith(
+      final updatedUser = currentState.user.copyWith(
         profileImageUrl: imageUrl,
         updatedAt: DateTime.now(),
       );
 
-      final savedCustomer = await ServiceLocator.customerRepository
-          .updateCustomer(updatedCustomer);
+      final savedUser =
+          await ServiceLocator.userRepository.updateUser(updatedUser);
 
       emit(
         ProfileImageUpdated(
@@ -210,7 +209,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       );
 
       // Return to loaded state
-      emit(ProfileLoaded(customer: savedCustomer));
+      emit(ProfileLoaded(user: savedUser));
     } catch (e) {
       emit(
         ProfileError(
@@ -227,13 +226,15 @@ class ProfileCubit extends Cubit<ProfileState> {
     emit(const ProfileLoading());
 
     try {
-      await ServiceLocator.customerRepository.updateMeasurements(
-        currentState.customer.id,
+      await ServiceLocator.userRepository.updateMeasurements(
+        currentState.user.id,
         measurements,
       );
 
-      final updatedCustomer = currentState.customer.copyWith(
-        measurements: measurements,
+      final updatedUser = currentState.user.copyWith(
+        customerData: currentState.user.customerData?.copyWith(
+          measurements: measurements,
+        ),
         updatedAt: DateTime.now(),
       );
 
@@ -245,7 +246,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       );
 
       // Return to loaded state
-      emit(ProfileLoaded(customer: updatedCustomer));
+      emit(ProfileLoaded(user: updatedUser));
     } catch (e) {
       emit(
         ProfileError(
@@ -262,13 +263,15 @@ class ProfileCubit extends Cubit<ProfileState> {
     emit(const ProfileLoading());
 
     try {
-      await ServiceLocator.customerRepository.updateStylePreferences(
-        currentState.customer.id,
+      await ServiceLocator.userRepository.updateStylePreferences(
+        currentState.user.id,
         preferences,
       );
 
-      final updatedCustomer = currentState.customer.copyWith(
-        stylePreferences: preferences,
+      final updatedUser = currentState.user.copyWith(
+        customerData: currentState.user.customerData?.copyWith(
+          stylePreferences: preferences,
+        ),
         updatedAt: DateTime.now(),
       );
 
@@ -280,7 +283,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       );
 
       // Return to loaded state
-      emit(ProfileLoaded(customer: updatedCustomer));
+      emit(ProfileLoaded(user: updatedUser));
     } catch (e) {
       emit(
         ProfileError(
@@ -290,30 +293,30 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
-  Future<void> updateAddress(CustomerAddress address) async {
+  Future<void> updateAddress(UserAddress address) async {
     if (state is! ProfileLoaded) return;
 
     final currentState = state as ProfileLoaded;
     emit(const ProfileLoading());
 
     try {
-      final updatedCustomer = currentState.customer.copyWith(
+      final updatedUser = currentState.user.copyWith(
         address: address,
         updatedAt: DateTime.now(),
       );
 
-      final savedCustomer = await ServiceLocator.customerRepository
-          .updateCustomer(updatedCustomer);
+      final savedUser =
+          await ServiceLocator.userRepository.updateUser(updatedUser);
 
       emit(
         ProfileUpdated(
-          customer: savedCustomer,
+          user: savedUser,
           message: 'Address updated successfully',
         ),
       );
 
       // Return to loaded state
-      emit(ProfileLoaded(customer: savedCustomer));
+      emit(ProfileLoaded(user: savedUser));
     } catch (e) {
       emit(ProfileError(message: 'Failed to update address: ${e.toString()}'));
     }
@@ -322,14 +325,13 @@ class ProfileCubit extends Cubit<ProfileState> {
   Future<void> refreshProfile(String userId) async {
     // Refresh without showing loading state
     try {
-      final customer =
-          await ServiceLocator.customerRepository.getCustomer(userId);
-      if (customer != null) {
+      final user = await ServiceLocator.userRepository.getUser(userId);
+      if (user != null) {
         if (state is ProfileLoaded) {
           final currentState = state as ProfileLoaded;
-          emit(currentState.copyWith(customer: customer));
+          emit(currentState.copyWith(user: user));
         } else {
-          emit(ProfileLoaded(customer: customer));
+          emit(ProfileLoaded(user: user));
         }
       }
     } catch (e) {
@@ -341,27 +343,17 @@ class ProfileCubit extends Cubit<ProfileState> {
     if (state is! ProfileLoaded) return;
 
     try {
-      await ServiceLocator.customerRepository.sendEmailVerification(email);
+      await ServiceLocator.userRepository.sendEmailVerification(email);
 
       // In a real app, this would trigger an email verification flow
       // For now, we'll just show a success message
       emit(
         ProfileUpdated(
-          customer: CustomerModel(
+          user: UserModel.customer(
             id: '',
             name: '',
-            email: '',
-            stylePreferences: const StylePreferences(
-              preferredStyles: [],
-              preferredColors: [],
-              preferredFabrics: [],
-              dislikedColors: [],
-              dislikedFabrics: [],
-              occasions: [],
-            ),
-            orderHistory: const [],
-            createdAt: DateTime.now(),
-            updatedAt: DateTime.now(),
+            email: email,
+            phone: '',
           ),
           message: 'Verification email sent',
         ),
@@ -379,25 +371,15 @@ class ProfileCubit extends Cubit<ProfileState> {
     emit(const ProfileLoading());
 
     try {
-      await ServiceLocator.customerRepository.deleteCustomer(userId);
+      await ServiceLocator.userRepository.deleteUser(userId);
 
       emit(
         ProfileUpdated(
-          customer: CustomerModel(
+          user: UserModel.customer(
             id: '',
             name: '',
             email: '',
-            stylePreferences: const StylePreferences(
-              preferredStyles: [],
-              preferredColors: [],
-              preferredFabrics: [],
-              dislikedColors: [],
-              dislikedFabrics: [],
-              occasions: [],
-            ),
-            orderHistory: const [],
-            createdAt: DateTime.now(),
-            updatedAt: DateTime.now(),
+            phone: '',
           ),
           message: 'Account deleted successfully',
         ),
@@ -417,26 +399,16 @@ class ProfileCubit extends Cubit<ProfileState> {
     if (state is! ProfileLoaded) return;
 
     try {
-      // final exportData = await ServiceLocator.customerRepository.exportCustomerData(userId);
+      // final exportData = await ServiceLocator.userRepository.exportCustomerData(userId);
 
       // In a real app, this would trigger a download or email with the data
       emit(
         ProfileUpdated(
-          customer: CustomerModel(
+          user: UserModel.customer(
             id: '',
             name: '',
             email: '',
-            stylePreferences: const StylePreferences(
-              preferredStyles: [],
-              preferredColors: [],
-              preferredFabrics: [],
-              dislikedColors: [],
-              dislikedFabrics: [],
-              occasions: [],
-            ),
-            orderHistory: const [],
-            createdAt: DateTime.now(),
-            updatedAt: DateTime.now(),
+            phone: '',
           ),
           message: 'Data export completed',
         ),

@@ -64,6 +64,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '168050874940',
     projectId: 'tailor-ai-52640',
     storageBucket: 'tailor-ai-52640.firebasestorage.app',
+    androidClientId:
+        '168050874940-9mhfckllsmure950cv2grnjt6iaepq83.apps.googleusercontent.com',
     iosClientId:
         '168050874940-58kjj9etom3bqranh077blbq9447dcc9.apps.googleusercontent.com',
     iosBundleId: 'com.durgas.basicRequirementsPackage',
@@ -75,6 +77,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '168050874940',
     projectId: 'tailor-ai-52640',
     storageBucket: 'tailor-ai-52640.firebasestorage.app',
+    androidClientId:
+        '168050874940-9mhfckllsmure950cv2grnjt6iaepq83.apps.googleusercontent.com',
     iosClientId:
         '168050874940-58kjj9etom3bqranh077blbq9447dcc9.apps.googleusercontent.com',
     iosBundleId: 'com.durgas.basicRequirementsPackage',

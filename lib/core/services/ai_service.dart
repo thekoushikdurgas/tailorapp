@@ -1,7 +1,8 @@
 // import 'dart:convert';
 import 'dart:typed_data';
 import 'package:tailorapp/core/models/ai_design_suggestion.dart';
-import 'package:tailorapp/core/models/customer_model.dart';
+import 'package:tailorapp/core/models/shared_models.dart';
+import 'package:tailorapp/core/models/user_model.dart';
 import 'package:tailorapp/core/models/garment_model.dart';
 
 abstract class AIService {

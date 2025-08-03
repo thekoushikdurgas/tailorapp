@@ -46,7 +46,7 @@ class ProjectLocales {
   static const Locale defaultLocale = Locale('en', 'US');
 
   /// Assets path for translation files
-  static const String translationsPath = 'assets/translations';
+  static const String translationsPath = 'assets/translations/json';
 
   /// Check if a locale is supported
   static bool isSupported(Locale locale) {

@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tailorapp/core/cubit/auth_cubit.dart';
 import 'package:tailorapp/view/auth/view/auth_loading_screen.dart';
-import 'package:tailorapp/view/auth/view/login_page.dart';
-import 'package:tailorapp/view/home/view/home_page.dart';
+import 'package:tailorapp/view/auth/view/welcome.dart';
+import 'package:tailorapp/view/customer/view/customer_home_screen.dart';
+import 'package:tailorapp/view/tailor/view/tailor_dashboard_screen.dart';
+import 'package:tailorapp/view/admin/view/super_admin_dashboard_screen.dart';
+import 'package:tailorapp/core/models/user_role.dart';
 
 class AuthWrapper extends StatelessWidget {
   const AuthWrapper({super.key});
@@ -22,10 +25,18 @@ class AuthWrapper extends StatelessWidget {
         if (state is AuthLoading) {
           return const AuthLoadingScreen();
         } else if (state is AuthAuthenticated) {
-          return const HomePage();
+          // Route user to appropriate dashboard based on their role
+          switch (state.userRole) {
+            case UserRole.customer:
+              return const CustomerHomeScreen();
+            case UserRole.tailor:
+              return const TailorDashboardScreen();
+            case UserRole.admin:
+              return const SuperAdminDashboardScreen();
+          }
         } else {
           // AuthUnauthenticated or AuthError
-          return const LoginPage();
+          return const WelcomePage();
         }
       },
     );

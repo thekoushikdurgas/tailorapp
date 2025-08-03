@@ -1,10 +1,26 @@
 Analyzing tailorapp...                                          
 
    info - Missing a required trailing comma - lib\core\localization\project_locales.dart:304:15 - require_trailing_commas
+   info - Missing a required trailing comma - lib\core\repositories\admin_repository.dart:451:49 - require_trailing_commas
+   info - Missing a required trailing comma - lib\core\repositories\admin_repository.dart:470:49 - require_trailing_commas
+   info - Missing a required trailing comma - lib\core\repositories\tailor_repository.dart:211:28 - require_trailing_commas
+   info - Missing a required trailing comma - lib\core\repositories\tailor_repository.dart:226:56 - require_trailing_commas
+   info - Missing a required trailing comma - lib\core\repositories\tailor_repository.dart:362:44 - require_trailing_commas
+warning - Unused import: 'package:tailorapp/core/models/user_model.dart' - lib\core\services\ai_service.dart:5:8 - unused_import
+   info - Missing a required trailing comma - lib\core\services\auth_service.dart:406:54 - require_trailing_commas
+   info - Missing a required trailing comma - lib\core\services\auth_service.dart:412:37 - require_trailing_commas
+warning - Unused import: 'package:tailorapp/core/models/user_model.dart' - lib\core\services\mlkit_service_impl.dart:4:8 - unused_import
 warning - The value of the field '_userGrowthData' isn't used - lib\view\admin\view\platform_analytics_insights_screen.dart:26:19 - unused_field
 warning - The value of the field '_orderVolumeData' isn't used - lib\view\admin\view\platform_analytics_insights_screen.dart:27:19 - unused_field
 warning - The value of the field '_selectedTimeRange' isn't used - lib\view\admin\view\super_admin_dashboard_screen.dart:20:10 - unused_field
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\view\auth\view\welcome.dart:65:40 - deprecated_member_use
+   info - Missing a required trailing comma - lib\view\auth\widgets\phone_auth_modals.dart:158:61 - require_trailing_commas
+   info - Missing a required trailing comma - lib\view\auth\widgets\phone_auth_modals.dart:525:71 - require_trailing_commas
+   info - Missing a required trailing comma - lib\view\auth\widgets\user_creation_modal.dart:350:69 - require_trailing_commas
+   info - Missing a required trailing comma - lib\view\auth\widgets\user_creation_modal.dart:431:69 - require_trailing_commas
+   info - Missing a required trailing comma - lib\view\auth\widgets\user_creation_modal.dart:506:53 - require_trailing_commas
 warning - Unused import: 'package:tailorapp/core/navigation/navigation_route.dart' - lib\view\customer\view\customer_home_screen.dart:4:8 - unused_import
+warning - The receiver can't be null, so the null-aware operator '?.' is unnecessary - lib\view\customer\view\customer_home_screen.dart:226:32 - invalid_null_aware_operator
 warning - Unused import: 'package:flutter_bloc/flutter_bloc.dart' - lib\view\customer\view\design_collaboration_hub_screen.dart:2:8 - unused_import
 warning - Unused import: 'package:tailorapp/core/cubit/auth_cubit.dart' - lib\view\customer\view\design_collaboration_hub_screen.dart:3:8 - unused_import
 warning - The value of the field '_isCollaborating' isn't used - lib\view\customer\view\design_collaboration_hub_screen.dart:29:14 - unused_field
@@ -17,61 +33,44 @@ warning - The value of the field '_priceRanges' isn't used - lib\view\customer\v
 warning - Unused import: 'package:flutter_bloc/flutter_bloc.dart' - lib\view\customer\view\size_profile_management_screen.dart:2:8 - unused_import
 warning - Unused import: 'package:tailorapp/core/cubit/auth_cubit.dart' - lib\view\customer\view\size_profile_management_screen.dart:3:8 - unused_import
 warning - Unused import: 'package:tailorapp/product/enum/route_enum.dart' - lib\view\customer\view\size_profile_management_screen.dart:4:8 - unused_import
-warning - Unused import: 'package:flutter_bloc/flutter_bloc.dart' - lib\view\customer\view\style_preference_setup_screen.dart:2:8 - unused_import
-warning - Unused import: 'package:tailorapp/core/cubit/auth_cubit.dart' - lib\view\customer\view\style_preference_setup_screen.dart:3:8 - unused_import
+warning - Unused import: 'package:tailorapp/core/services/ai_service.dart' - lib\view\customer\view\style_preference_setup_screen.dart:8:8 - unused_import
+   info - Missing a required trailing comma - lib\view\customer\view\style_preference_setup_screen.dart:326:60 - require_trailing_commas
+   info - Missing a required trailing comma - lib\view\customer\view\style_preference_setup_screen.dart:328:73 - require_trailing_commas
+   info - Missing a required trailing comma - lib\view\customer\view\style_preference_setup_screen.dart:330:62 - require_trailing_commas
+   info - Missing a required trailing comma - lib\view\customer\view\style_preference_setup_screen.dart:332:67 - require_trailing_commas
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\view\customer\view\style_preference_setup_screen.dart:373:58 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\view\customer\view\style_preference_setup_screen.dart:380:53 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\view\customer\view\style_preference_setup_screen.dart:402:57 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\view\customer\view\style_preference_setup_screen.dart:482:26 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\view\customer\view\style_preference_setup_screen.dart:597:47 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\view\customer\view\style_preference_setup_screen.dart:615:47 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\view\customer\view\style_preference_setup_screen.dart:699:52 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\view\customer\view\style_preference_setup_screen.dart:706:59 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\view\customer\view\style_preference_setup_screen.dart:720:59 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\view\customer\view\style_preference_setup_screen.dart:741:57 - deprecated_member_use
+   info - Missing a required trailing comma - lib\view\customer\view\style_preference_setup_screen.dart:962:66 - require_trailing_commas
+   info - Missing a required trailing comma - lib\view\customer\view\style_preference_setup_screen.dart:965:68 - require_trailing_commas
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\view\customer\view\style_preference_setup_screen.dart:1009:59 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\view\customer\view\style_preference_setup_screen.dart:1016:53 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\view\customer\view\style_preference_setup_screen.dart:1037:54 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\view\customer\view\style_preference_setup_screen.dart:1038:48 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\view\customer\view\style_preference_setup_screen.dart:1070:56 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\view\customer\view\style_preference_setup_screen.dart:1113:24 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\view\customer\view\style_preference_setup_screen.dart:1115:43 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - lib\view\customer\view\style_preference_setup_screen.dart:1505:37 - deprecated_member_use
+   info - Missing a required trailing comma - lib\view\customer\view\style_preference_setup_screen.dart:1573:71 - require_trailing_commas
+   info - Missing a required trailing comma - lib\view\customer\view\style_preference_setup_screen.dart:1593:84 - require_trailing_commas
+   info - Missing a required trailing comma - lib\view\customer\view\style_preference_setup_screen.dart:1606:89 - require_trailing_commas
+   info - Missing a required trailing comma - lib\view\customer\view\style_preference_setup_screen.dart:1724:75 - require_trailing_commas
+   info - Missing a required trailing comma - lib\view\customer\view\style_preference_setup_screen.dart:1757:38 - require_trailing_commas
+   info - Missing a required trailing comma - lib\view\customer\view\style_preference_setup_screen.dart:1760:76 - require_trailing_commas
 warning - Unused import: 'package:flutter_bloc/flutter_bloc.dart' - lib\view\customer\view\virtual_wardrobe_screen.dart:2:8 - unused_import
 warning - Unused import: 'package:tailorapp/core/cubit/auth_cubit.dart' - lib\view\customer\view\virtual_wardrobe_screen.dart:3:8 - unused_import
-warning - Unused import: 'package:easy_localization/easy_localization.dart' - lib\view\introduction\view\introduction_screen.dart:7:8 - unused_import
-  error - The getter 'intro_onboarding_page1_title' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:128:27 - undefined_getter
-  error - The getter 'intro_onboarding_page1_subtitle' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:129:30 - undefined_getter
-  error - The getter 'intro_onboarding_page2_title' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:145:27 - undefined_getter
-  error - The getter 'intro_onboarding_page2_subtitle' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:146:30 - undefined_getter
-  error - The getter 'intro_onboarding_page3_title' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:162:27 - undefined_getter
-  error - The getter 'intro_onboarding_page3_subtitle' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:163:30 - undefined_getter
-  error - The getter 'intro_onboarding_page4_title' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:179:27 - undefined_getter
-  error - The getter 'intro_onboarding_page4_subtitle' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:180:30 - undefined_getter
-  error - The getter 'intro_onboarding_page5_title' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:196:27 - undefined_getter
-  error - The getter 'intro_onboarding_page5_subtitle' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:197:30 - undefined_getter
-  error - The getter 'intro_onboarding_page6_title' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:213:27 - undefined_getter
-  error - The getter 'intro_onboarding_page6_subtitle' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:214:30 - undefined_getter
-  error - The getter 'button_skip' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:427:34 - undefined_getter
-  error - The getter 'intro_feature' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:658:47 - undefined_getter
-  error - The getter 'intro_previous' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:843:42 - undefined_getter
-  error - The getter 'intro_getStarted' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:891:46 - undefined_getter
-  error - The getter 'button_next' isn't defined for the type 'LocaleKeys' - lib\view\introduction\view\introduction_screen.dart:892:46 - undefined_getter
-  error - The getter 'localization_languageSelection_title' isn't defined for the type 'LocaleKeys' - lib\view\language_selection\view\language_selection_screen.dart:531:32 - undefined_getter
-  error - The getter 'localization_languageSelection_subtitle' isn't defined for the type 'LocaleKeys' - lib\view\language_selection\view\language_selection_screen.dart:541:32 - undefined_getter
-  error - The getter 'localization_availableLanguages' isn't defined for the type 'LocaleKeys' - lib\view\language_selection\view\language_selection_screen.dart:580:34 - undefined_getter
-  error - The getter 'localization_languageSelection_applyLanguage' isn't defined for the type 'LocaleKeys' - lib\view\language_selection\view\language_selection_screen.dart:880:32 - undefined_getter
-  error - The getter 'localization_languageSelection_skipSelection' isn't defined for the type 'LocaleKeys' - lib\view\language_selection\view\language_selection_screen.dart:940:32 - undefined_getter
-  error - The getter 'localization_languageChanged' isn't defined for the type 'LocaleKeys' - lib\view\language_selection\view\language_selection_screen.dart:1052:32 - undefined_getter
-  error - The getter 'localization_languageError' isn't defined for the type 'LocaleKeys' - lib\view\language_selection\view\language_selection_screen.dart:1121:32 - undefined_getter
-  error - The getter 'theme_theme' isn't defined for the type 'LocaleKeys' - lib\view\settings\view\setting_view.dart:22:31 - undefined_getter
-  error - The getter 'theme_themeChoose' isn't defined for the type 'LocaleKeys' - lib\view\settings\view\setting_view.dart:23:36 - undefined_getter
-  error - The getter 'localization_appLang' isn't defined for the type 'LocaleKeys' - lib\view\settings\view\setting_view.dart:29:31 - undefined_getter
-  error - The getter 'localization_langChoose' isn't defined for the type 'LocaleKeys' - lib\view\settings\view\setting_view.dart:30:36 - undefined_getter
-warning - Unused import: 'package:easy_localization/easy_localization.dart' - lib\view\settings\widgets\setting_appbar.dart:2:8 - unused_import
-  error - The getter 'settingTitle' isn't defined for the type 'LocaleKeys' - lib\view\settings\widgets\setting_appbar.dart:12:20 - undefined_getter
-  error - The getter 'theme_dark' isn't defined for the type 'LocaleKeys' - lib\view\settings\widgets\theme_change_dropdown.dart:42:20 - undefined_getter
-  error - The getter 'theme_light' isn't defined for the type 'LocaleKeys' - lib\view\settings\widgets\theme_change_dropdown.dart:58:20 - undefined_getter
-  error - The getter 'theme_default' isn't defined for the type 'LocaleKeys' - lib\view\settings\widgets\theme_change_dropdown.dart:74:20 - undefined_getter
-  error - The getter 'button_ok' isn't defined for the type 'LocaleKeys' - lib\view\settings\widgets\theme_change_dropdown.dart:106:20 - undefined_getter
-  error - The getter 'button_cancel' isn't defined for the type 'LocaleKeys' - lib\view\settings\widgets\theme_change_dropdown.dart:118:20 - undefined_getter
+warning - The receiver can't be null, so the null-aware operator '?.' is unnecessary - lib\view\home\view\home_page.dart:163:32 - invalid_null_aware_operator
+warning - The left operand can't be null, so the right operand is never executed - lib\view\profile\view\profile_page.dart:103:47 - dead_null_aware_expression
 warning - The value of the local variable 'refreshToken' isn't used - lib\view\splash\view-model\splash_view_model.dart:208:13 - unused_local_variable
 warning - Dead code - lib\view\splash\view-model\splash_view_model.dart:242:14 - dead_code
-warning - Unused import: 'package:easy_localization/easy_localization.dart' - lib\view\splash\view\splash_view.dart:4:8 - unused_import
-  error - The getter 'intro_appTagline' isn't defined for the type 'LocaleKeys' - lib\view\splash\view\splash_view.dart:247:22 - undefined_getter
-  error - The getter 'button_retry' isn't defined for the type 'LocaleKeys' - lib\view\splash\view\splash_view.dart:373:20 - undefined_getter
-  error - The getter 'error_critical' isn't defined for the type 'LocaleKeys' - lib\view\splash\view\splash_view.dart:400:34 - undefined_getter
-  error - The getter 'button_continue' isn't defined for the type 'LocaleKeys' - lib\view\splash\view\splash_view.dart:407:38 - undefined_getter
-warning - Unused import: 'package:easy_localization/easy_localization.dart' - lib\view\splash\widgets\splash_footer.dart:3:8 - unused_import
-  error - The getter 'footer_copyright' isn't defined for the type 'LocaleKeys' - lib\view\splash\widgets\splash_footer.dart:93:20 - undefined_getter
-  error - The getter 'footer_secure' isn't defined for the type 'LocaleKeys' - lib\view\splash\widgets\splash_footer.dart:126:18 - undefined_getter
-  error - The getter 'footer_version' isn't defined for the type 'LocaleKeys' - lib\view\splash\widgets\splash_footer.dart:161:37 - undefined_getter
-  error - The getter 'footer_copyright' isn't defined for the type 'LocaleKeys' - lib\view\splash\widgets\splash_footer.dart:220:31 - undefined_getter
 warning - The value of the field '_previousMessage' isn't used - lib\view\splash\widgets\splash_loading_text.dart:44:10 - unused_field
-  error - The getter 'loading_ready' isn't defined for the type 'LocaleKeys' - lib\view\splash\widgets\splash_loading_text.dart:256:29 - undefined_getter
-  error - The getter 'loading_initializingApp' isn't defined for the type 'LocaleKeys' - lib\view\splash\widgets\splash_loading_text.dart:261:29 - undefined_getter
 warning - Unused import: 'package:flutter_bloc/flutter_bloc.dart' - lib\view\tailor\view\customer_communication_hub_screen.dart:2:8 - unused_import
 warning - Unused import: 'package:tailorapp/core/cubit/auth_cubit.dart' - lib\view\tailor\view\customer_communication_hub_screen.dart:3:8 - unused_import
 warning - Unused import: 'package:flutter_bloc/flutter_bloc.dart' - lib\view\tailor\view\order_management_screen.dart:2:8 - unused_import
@@ -84,4 +83,5 @@ warning - The value of the field '_priorityOptions' isn't used - lib\view\tailor
 warning - The value of the field '_selectedPattern' isn't used - lib\view\tailor\view\pattern_creation_management_screen.dart:25:19 - unused_field
 warning - The value of the field '_selectedSize' isn't used - lib\view\tailor\view\pattern_creation_management_screen.dart:28:16 - unused_field
 warning - The value of the field '_sizeOptions' isn't used - lib\view\tailor\view\pattern_creation_management_screen.dart:41:22 - unused_field
+warning - Unused import: 'package:tailorapp/core/models/user_model.dart' - lib\view\virtual_fitting\view\virtual_fitting_page.dart:6:8 - unused_import
 

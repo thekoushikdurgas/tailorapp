@@ -216,31 +216,32 @@ class SplashCubit extends Cubit<SplashState> {
   String _determineNextRoute(AppStateModel appState) {
     DebugLogger.navigation('SplashCubit: Determining next route...');
 
-    // Step 1: Check intro completion status
-    if (!appState.isIntroWatched) {
-      DebugLogger.navigation(
-        'SplashCubit: → Introduction Screen (intro not completed)',
-      );
-      return RouteEnum.intro.rawValue;
-    }
+    return RouteEnum.welcome.rawValue;
+    // // Step 1: Check intro completion status
+    // if (!appState.isIntroWatched) {
+    //   DebugLogger.navigation(
+    //     'SplashCubit: → Introduction Screen (intro not completed)',
+    //   );
+    //   return RouteEnum.intro.rawValue;
+    // }
 
-    // Step 2: Check language selection status
-    if (!appState.isLanguageSelected) {
-      DebugLogger.navigation(
-        'SplashCubit: → Language Selection (language not selected)',
-      );
-      return RouteEnum.languageSelection.rawValue;
-    }
+    // // Step 2: Check language selection status
+    // if (!appState.isLanguageSelected) {
+    //   DebugLogger.navigation(
+    //     'SplashCubit: → Language Selection (language not selected)',
+    //   );
+    //   return RouteEnum.languageSelection.rawValue;
+    // }
 
-    // Step 3: Check authentication status
-    if (!appState.isLoggedIn) {
-      DebugLogger.navigation('SplashCubit: → Authentication (not logged in)');
-      return RouteEnum.login.rawValue;
-    }
+    // // Step 3: Check authentication status
+    // if (!appState.isLoggedIn) {
+    //   DebugLogger.navigation('SplashCubit: → Authentication (not logged in)');
+    //   return RouteEnum.welcome.rawValue;
+    // }
 
-    // Step 4: User is authenticated - go to home
-    DebugLogger.navigation('SplashCubit: → Home (authenticated user)');
-    return RouteEnum.homePage.rawValue;
+    // // Step 4: User is authenticated - go to home
+    // DebugLogger.navigation('SplashCubit: → Home (authenticated user)');
+    // return RouteEnum.homePage.rawValue;
   }
 
   /// Navigate to the determined route
@@ -282,8 +283,8 @@ class SplashCubit extends Cubit<SplashState> {
         DebugLogger.navigation('SplashCubit: Fallback → Language Selection');
         context.go(RouteEnum.languageSelection.rawValue);
       } else {
-        DebugLogger.navigation('SplashCubit: Fallback → Login Screen');
-        context.go(RouteEnum.login.rawValue);
+        DebugLogger.navigation('SplashCubit: Fallback → Welcome Screen');
+        context.go(RouteEnum.welcome.rawValue);
       }
     } catch (e) {
       DebugLogger.error('SplashCubit: Fallback navigation failed: $e');

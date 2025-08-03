@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:tailorapp/core/models/customer_model.dart';
+import 'package:tailorapp/core/models/user_model.dart';
 
 /// Model representing the current state of the application
 /// Used to determine navigation flow after splash screen initialization
@@ -7,7 +7,7 @@ class AppStateModel extends Equatable {
   final bool isIntroWatched;
   final bool isLanguageSelected;
   final bool isLoggedIn;
-  final CustomerModel? userData;
+  final UserModel? userData;
   final DateTime lastChecked;
 
   AppStateModel({
@@ -58,7 +58,7 @@ class AppStateModel extends Equatable {
     bool? isIntroWatched,
     bool? isLanguageSelected,
     bool? isLoggedIn,
-    CustomerModel? userData,
+    UserModel? userData,
     DateTime? lastChecked,
   }) {
     return AppStateModel(
@@ -87,9 +87,8 @@ class AppStateModel extends Equatable {
       isIntroWatched: map['isIntroWatched'] ?? false,
       isLanguageSelected: map['isLanguageSelected'] ?? false,
       isLoggedIn: map['isLoggedIn'] ?? false,
-      userData: map['userData'] != null
-          ? CustomerModel.fromJson(map['userData'])
-          : null,
+      userData:
+          map['userData'] != null ? UserModel.fromJson(map['userData']) : null,
       lastChecked: DateTime.fromMillisecondsSinceEpoch(
         map['lastChecked'] ?? DateTime.now().millisecondsSinceEpoch,
       ),

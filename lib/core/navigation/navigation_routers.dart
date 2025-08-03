@@ -9,6 +9,7 @@ import 'package:tailorapp/view/auth/view/auth_wrapper.dart';
 import 'package:tailorapp/view/auth/view/forgot_password_page.dart';
 import 'package:tailorapp/view/auth/view/login_page.dart';
 import 'package:tailorapp/view/auth/view/register_page.dart';
+import 'package:tailorapp/view/auth/view/welcome.dart';
 import 'package:tailorapp/view/common/view/notifications_center_screen.dart';
 import 'package:tailorapp/view/common/view/universal_support_screen.dart';
 import 'package:tailorapp/view/customer/view/customer_home_screen.dart';
@@ -74,13 +75,17 @@ class NavigationRouters {
       // Splash route - entry point for the app
       GoRoute(
         path: RouteEnum.splash.rawValue,
-        builder: (context, state) => const SplashView(),
+        builder: (context, state) => const SplashScreen(),
       ),
 
       // Auth routes
       GoRoute(
         path: RouteEnum.auth.rawValue,
         builder: (context, state) => const AuthWrapper(),
+      ),
+      GoRoute(
+        path: RouteEnum.welcome.rawValue,
+        builder: (context, state) => const WelcomePage(),
       ),
       GoRoute(
         path: RouteEnum.login.rawValue,

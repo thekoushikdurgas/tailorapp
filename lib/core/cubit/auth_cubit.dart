@@ -3,10 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:equatable/equatable.dart';
 import 'package:tailorapp/core/services/auth_service.dart';
-import 'package:tailorapp/core/models/customer_model.dart';
+import 'package:tailorapp/core/models/user_model.dart';
 import 'package:tailorapp/core/models/user_role.dart';
-import 'package:tailorapp/core/models/tailor_model.dart';
-import 'package:tailorapp/core/models/admin_model.dart';
 
 // States
 abstract class AuthState extends Equatable {
@@ -26,38 +24,23 @@ class AuthLoading extends AuthState {
 
 class AuthAuthenticated extends AuthState {
   final User user;
-  final UserRole userRole;
-  final CustomerModel? customerProfile;
-  final TailorModel? tailorProfile;
-  final AdminModel? adminProfile;
+  final UserModel userProfile;
 
   const AuthAuthenticated({
     required this.user,
-    required this.userRole,
-    this.customerProfile,
-    this.tailorProfile,
-    this.adminProfile,
+    required this.userProfile,
   });
 
   @override
   List<Object?> get props => [
         user,
-        userRole,
-        customerProfile,
-        tailorProfile,
-        adminProfile,
+        userProfile,
       ];
 
+  UserRole get userRole => userProfile.role;
+
   bool hasPermission(String permission) {
-    switch (userRole) {
-      case UserRole.customer:
-        return userRole.permissions.contains(permission);
-      case UserRole.tailor:
-        return userRole.permissions.contains(permission);
-      case UserRole.admin:
-        if (adminProfile?.isSuperAdmin == true) return true;
-        return userRole.permissions.contains(permission);
-    }
+    return userRole.permissions.contains(permission);
   }
 
   String get homeRoute => userRole.homeRoute;
@@ -115,41 +98,30 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> _handleUserAuthenticated(User user) async {
     try {
-      // Get user role from Firebase custom claims
-      final userRole = await _authService.getUserRole(user.uid);
+      // Get user profile from the new unified user service
+      final userProfile = await _authService.getCurrentUserProfile();
 
-      // Get role-specific profile based on user role
-      CustomerModel? customerProfile;
-      TailorModel? tailorProfile;
-      AdminModel? adminProfile;
-
-      switch (userRole) {
-        case UserRole.customer:
-          customerProfile = await _authService.getCurrentCustomerProfile();
-          break;
-        case UserRole.tailor:
-          tailorProfile = await _authService.getCurrentTailorProfile();
-          break;
-        case UserRole.admin:
-          adminProfile = await _authService.getCurrentAdminProfile();
-          break;
+      if (userProfile != null) {
+        emit(
+          AuthAuthenticated(
+            user: user,
+            userProfile: userProfile,
+          ),
+        );
+      } else {
+        // User not found in database, this shouldn't happen if auth flow is correct
+        emit(
+          const AuthError(
+            message: 'User profile not found. Please contact support.',
+            type: AuthErrorType.userNotFound,
+          ),
+        );
       }
-
-      emit(
-        AuthAuthenticated(
-          user: user,
-          userRole: userRole,
-          customerProfile: customerProfile,
-          tailorProfile: tailorProfile,
-          adminProfile: adminProfile,
-        ),
-      );
     } catch (e) {
-      // Default to customer role if role detection fails
       emit(
-        AuthAuthenticated(
-          user: user,
-          userRole: UserRole.customer,
+        AuthError(
+          message: 'Failed to load user profile: ${e.toString()}',
+          type: AuthErrorType.unknown,
         ),
       );
     }
@@ -333,30 +305,123 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> updateCustomerProfile(CustomerModel customer) async {
+  Future<void> updateUserProfile(UserModel userProfile) async {
     try {
-      await _authService.updateCustomerProfile(customer);
+      await _authService.updateUserProfile(userProfile);
 
-      // Update the current state with new customer profile
+      // Update the current state with new user profile
       final currentState = state;
       if (currentState is AuthAuthenticated) {
         emit(
           AuthAuthenticated(
             user: currentState.user,
-            userRole: currentState.userRole,
-            customerProfile: customer,
-            tailorProfile: currentState.tailorProfile,
-            adminProfile: currentState.adminProfile,
+            userProfile: userProfile,
           ),
         );
       }
     } catch (e) {
       emit(
         AuthError(
-          message: 'Failed to update customer profile: ${e.toString()}',
+          message: 'Failed to update user profile: ${e.toString()}',
           type: AuthErrorType.unknown,
         ),
       );
+    }
+  }
+
+  // Phone authentication methods
+  Future<void> verifyPhoneNumber(String phoneNumber) async {
+    emit(const AuthLoading());
+
+    final result = await _authService.verifyPhoneNumber(phoneNumber);
+
+    if (!result.isSuccess) {
+      emit(
+        AuthError(
+          message: result.error ?? 'Phone verification failed',
+          type: AuthErrorType.unknown,
+        ),
+      );
+    }
+    // Success case: verification ID is stored and PIN modal should be shown
+    // The verification ID will be passed to the next step
+  }
+
+  Future<void> signInWithPhoneAndPin(String phoneNumber, String pin) async {
+    emit(const AuthLoading());
+
+    final result = await _authService.signInWithPhoneAndPin(phoneNumber, pin);
+
+    if (!result.isSuccess && result.error != null) {
+      emit(
+        AuthError(
+          message: result.error!.message,
+          type: result.error!.type,
+        ),
+      );
+    }
+    // Success case is handled by the auth state stream
+  }
+
+  // Simplified phone authentication methods
+  Future<UserModel?> getUserByPhone(String phoneNumber) async {
+    try {
+      return await _authService.getUserByPhone(phoneNumber);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<void> signInWithPhoneAndPinDirect(String phoneNumber, String pin) async {
+    emit(const AuthLoading());
+
+    final result = await _authService.signInWithPhoneAndPinDirect(phoneNumber, pin);
+
+    if (!result.isSuccess && result.error != null) {
+      emit(
+        AuthError(
+          message: result.error!.message,
+          type: result.error!.type,
+        ),
+      );
+    }
+    // Success case is handled by the auth state stream
+  }
+
+  Future<void> createUserWithPhoneAndPin({
+    required String phoneNumber,
+    required String name,
+    required String email,
+    required String pin,
+    required UserRole role,
+  }) async {
+    emit(const AuthLoading());
+
+    final result = await _authService.createUserWithPhoneAndPin(
+      phoneNumber: phoneNumber,
+      name: name,
+      email: email,
+      pin: pin,
+      role: role,
+    );
+
+    if (!result.isSuccess && result.error != null) {
+      emit(
+        AuthError(
+          message: result.error!.message,
+          type: result.error!.type,
+        ),
+      );
+    }
+    // Success case is handled by the auth state stream
+  }
+
+  // Check if user exists by phone number
+  Future<bool> checkUserExists(String phoneNumber) async {
+    try {
+      return await _authService.checkUserExistsByPhone(phoneNumber);
+    } catch (e) {
+      return false;
     }
   }
 
@@ -371,10 +436,10 @@ class AuthCubit extends Cubit<AuthState> {
     return null;
   }
 
-  CustomerModel? get currentCustomerProfile {
+  UserModel? get currentUserProfile {
     final currentState = state;
     if (currentState is AuthAuthenticated) {
-      return currentState.customerProfile;
+      return currentState.userProfile;
     }
     return null;
   }

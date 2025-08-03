@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tailorapp/core/cubit/auth_cubit.dart';
-import 'package:tailorapp/core/models/customer_model.dart';
+import 'package:tailorapp/core/models/shared_models.dart';
 import 'package:tailorapp/core/models/garment_model.dart';
 import 'package:tailorapp/core/services/service_locator.dart';
 import 'package:tailorapp/core/navigation/navigation_route.dart';
@@ -123,9 +123,9 @@ class _MeasurementsPageState extends State<MeasurementsPage>
     try {
       final authState = context.read<AuthCubit>().state;
       if (authState is AuthAuthenticated) {
-        final customer = authState.customerProfile;
-        if (customer?.measurements != null) {
-          _currentMeasurements = customer!.measurements;
+        final user = authState.userProfile;
+        if (user.customerData?.measurements != null) {
+          _currentMeasurements = user.customerData!.measurements;
           _populateControllers();
           await _calculateRecommendations();
         }

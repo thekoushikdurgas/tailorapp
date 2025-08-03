@@ -74,6 +74,11 @@ class _IntroductionScreenState extends ConsumerState<IntroductionScreen>
   int currentPage = 0;
   bool _isInitialized = false;
   bool _isCompletingIntro = false; // Track intro completion state
+  bool _disposed = false; // Track disposal state
+
+  // Cache theme values to avoid accessing context during animations
+  LinearGradient? _cachedGradient;
+  Color? _cachedContrastingColor;
 
   @override
   void initState() {
@@ -232,26 +237,58 @@ class _IntroductionScreenState extends ConsumerState<IntroductionScreen>
   LinearGradient _getPageGradient(
     OnboardingPage page,
   ) {
+    // Safety check: Don't access context if widget is disposed
+    if (_disposed || !mounted) {
+      return _cachedGradient ??
+          const LinearGradient(colors: [Colors.blue, Colors.blueAccent]);
+    }
+
+    LinearGradient gradient;
     switch (page.statusType) {
       case 'primary':
-        return ThemeManager.of(context).primaryGradient;
+        gradient = ThemeManager.of(context).primaryGradient;
+        break;
       case 'success':
-        return ThemeManager.of(context).successGradient;
+        gradient = ThemeManager.of(context).successGradient;
+        break;
       case 'info':
-        return ThemeManager.of(context).infoGradient;
+        gradient = ThemeManager.of(context).infoGradient;
+        break;
       case 'warning':
-        return ThemeManager.of(context).warningGradient;
+        gradient = ThemeManager.of(context).warningGradient;
+        break;
       case 'error':
-        return ThemeManager.of(context).errorGradient;
+        gradient = ThemeManager.of(context).errorGradient;
+        break;
       case 'accent':
-        return ThemeManager.of(context).accent2Gradient;
+        gradient = ThemeManager.of(context).accent2Gradient;
+        break;
       case 'secondary':
-        return ThemeManager.of(context).secondaryGradient;
+        gradient = ThemeManager.of(context).secondaryGradient;
+        break;
       case 'verified':
-        return ThemeManager.of(context).accent3Gradient;
+        gradient = ThemeManager.of(context).accent3Gradient;
+        break;
       default:
-        return ThemeManager.of(context).primaryGradient;
+        gradient = ThemeManager.of(context).primaryGradient;
+        break;
     }
+
+    // Cache the gradient for future use
+    _cachedGradient = gradient;
+    return gradient;
+  }
+
+  /// Gets contrasting color with safety checks
+  Color _getContrastingColor(Color baseColor) {
+    // Safety check: Don't access context if widget is disposed
+    if (_disposed || !mounted) {
+      return _cachedContrastingColor ?? Colors.white;
+    }
+
+    final color = ThemeManager.of(context).getContrastingColor(baseColor);
+    _cachedContrastingColor = color;
+    return color;
   }
 
   void _initializeAnimations() {
@@ -318,10 +355,28 @@ class _IntroductionScreenState extends ConsumerState<IntroductionScreen>
 
   @override
   void dispose() {
+    DebugLogger.intro(
+      'IntroductionScreen: Disposing and stopping animations...',
+    );
+
+    // Mark as disposed to prevent context access
+    _disposed = true;
+
+    // Stop all animations before disposing
+    _fadeController.stop();
+    _slideController.stop();
+    _glowController.stop();
+
+    // Dispose controllers
     pageController.dispose();
     _fadeController.dispose();
     _slideController.dispose();
     _glowController.dispose();
+
+    // Clear cached values
+    _cachedGradient = null;
+    _cachedContrastingColor = null;
+
     super.dispose();
   }
 
@@ -458,6 +513,11 @@ class _IntroductionScreenState extends ConsumerState<IntroductionScreen>
               AnimatedBuilder(
                 animation: _glowAnimation,
                 builder: (context, child) {
+                  // Safety check: Don't build if widget is disposed or not mounted
+                  if (_disposed || !mounted) {
+                    return const SizedBox.shrink();
+                  }
+
                   return Container(
                     width: 28.w,
                     height: 28.w,
@@ -465,8 +525,7 @@ class _IntroductionScreenState extends ConsumerState<IntroductionScreen>
                       gradient: _getPageGradient(currentPageData),
                       borderRadius: BorderRadius.circular(14.r),
                       border: Border.all(
-                        color: ThemeManager.of(context)
-                            .getContrastingColor(currentPageData.color)
+                        color: _getContrastingColor(currentPageData.color)
                             .withValues(alpha: 0.3),
                         width: 2,
                       ),
@@ -477,8 +536,7 @@ class _IntroductionScreenState extends ConsumerState<IntroductionScreen>
                         style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.bold,
-                          color: ThemeManager.of(context)
-                              .getContrastingColor(currentPageData.color),
+                          color: _getContrastingColor(currentPageData.color),
                         ),
                       ),
                     ),
@@ -537,6 +595,11 @@ class _IntroductionScreenState extends ConsumerState<IntroductionScreen>
                 AnimatedBuilder(
                   animation: _glowAnimation,
                   builder: (context, child) {
+                    // Safety check: Don't build if widget is disposed or not mounted
+                    if (_disposed || !mounted) {
+                      return const SizedBox.shrink();
+                    }
+
                     return Container(
                       padding: EdgeInsets.all(6.w),
                       decoration: BoxDecoration(
@@ -1048,18 +1111,18 @@ class _IntroductionScreenState extends ConsumerState<IntroductionScreen>
       DebugLogger.auth('IntroductionScreen: Checking authentication status...');
       if (!HiveService.isLoggedIn()) {
         DebugLogger.info(
-          'IntroductionScreen: User not authenticated → Navigating to home screen',
+          'IntroductionScreen: User not authenticated → Navigating to welcome screen',
         );
         DebugLogger.navigation(
-          'IntroductionScreen: → Home Screen for authentication',
+          'IntroductionScreen: → Welcome Screen for authentication',
         );
 
         // Check if widget is still mounted before navigation
         if (context.mounted) {
-          context.go(RouteEnum.homePage.rawValue);
+          context.go(RouteEnum.welcome.rawValue);
         } else {
           DebugLogger.warning(
-            'IntroductionScreen: Widget unmounted, skipping navigation to home',
+            'IntroductionScreen: Widget unmounted, skipping navigation to welcome',
           );
         }
         return;

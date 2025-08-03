@@ -5,6 +5,7 @@ enum RouteEnum {
   setting,
   languageSelection,
   auth,
+  welcome,
   login,
   register,
   forgotPassword,
@@ -71,6 +72,8 @@ extension RouteEnumString on RouteEnum {
         return '/language-selection';
       case RouteEnum.auth:
         return '/auth';
+      case RouteEnum.welcome:
+        return '/auth/welcome';
       case RouteEnum.login:
         return '/auth/login';
       case RouteEnum.register:

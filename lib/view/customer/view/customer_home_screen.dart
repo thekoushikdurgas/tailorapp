@@ -223,7 +223,7 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
         String userName = 'there';
         if (state is AuthAuthenticated) {
           userName = state.user.displayName?.split(' ').first ??
-              state.customerProfile?.name.split(' ').first ??
+              state.userProfile?.name.split(' ').first ??
               'there';
         }
 

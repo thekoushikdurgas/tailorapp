@@ -18,7 +18,7 @@ import 'package:tailorapp/core/services/debug_logger.dart';
 /// - Lazy loading of theme data
 /// - Memory optimization and cache management
 class ThemeManager {
-  final BuildContext context;
+  final BuildContext? context;
   final ThemeData theme;
   final ColorScheme colorScheme;
   final bool isDarkMode;
@@ -32,7 +32,7 @@ class ThemeManager {
   static ThemeData? _darkThemeInstance;
 
   ThemeManager._(this.context)
-      : theme = Theme.of(context),
+      : theme = Theme.of(context!),
         colorScheme = Theme.of(context).colorScheme,
         isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
@@ -41,17 +41,37 @@ class ThemeManager {
   static BuildContext? _lastContext;
 
   factory ThemeManager.of(BuildContext context) {
-    // Reuse instance if context hasn't changed significantly
-    if (_instance != null &&
-        _lastContext != null &&
-        Theme.of(_lastContext!) == Theme.of(context)) {
+    try {
+      // Check if context is still valid/mounted
+      final theme = Theme.of(context);
+
+      // Reuse instance if context hasn't changed significantly
+      if (_instance != null &&
+          _lastContext != null &&
+          Theme.of(_lastContext!) == theme) {
+        return _instance!;
+      }
+
+      _instance = ThemeManager._(context);
+      _lastContext = context;
+      return _instance!;
+    } catch (e) {
+      // If context is deactivated, return cached instance or create fallback
+      if (_instance != null) {
+        return _instance!;
+      }
+      // Create a fallback instance with default theme
+      _instance = ThemeManager._fallback();
       return _instance!;
     }
-
-    _instance = ThemeManager._(context);
-    _lastContext = context;
-    return _instance!;
   }
+
+  /// Fallback constructor for when context is unavailable
+  ThemeManager._fallback()
+      : context = null, // Will not be used in fallback mode
+        theme = ThemeData.light(),
+        colorScheme = ThemeData.light().colorScheme,
+        isDarkMode = false;
 
   /// Clear cache when theme changes
   static void clearCache() {

@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:tailorapp/core/services/service_locator.dart';
-import 'package:tailorapp/core/models/customer_model.dart';
+import 'package:tailorapp/core/models/shared_models.dart';
 import 'package:tailorapp/core/models/garment_model.dart';
 
 // States

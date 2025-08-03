@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:tailorapp/core/services/debug_logger.dart';
-import 'package:tailorapp/core/models/customer_model.dart';
+import 'package:tailorapp/core/models/user_model.dart';
 import 'package:tailorapp/product/enum/route_enum.dart';
 
 /// Comprehensive HiveService for all local storage operations
@@ -310,22 +310,10 @@ class HiveService {
   // =============================================================================
 
   /// Save user data
-  static Future<void> saveUserData(CustomerModel user) async {
+  static Future<void> saveUserData(UserModel user) async {
     try {
       // Convert user model to map for storage
-      final userData = {
-        'id': user.id,
-        'name': user.name,
-        'email': user.email,
-        'phone': user.phone,
-        'profileImageUrl': user.profileImageUrl,
-        'dateOfBirth': user.dateOfBirth?.millisecondsSinceEpoch,
-        'gender': user.gender,
-        'isVerified': user.isVerified,
-        'createdAt': user.createdAt.millisecondsSinceEpoch,
-        'updatedAt': user.updatedAt.millisecondsSinceEpoch,
-        // Add other fields as needed
-      };
+      final userData = user.toJson();
 
       await _userBox.put('userData', userData);
       DebugLogger.user('User data saved for: ${user.name} (${user.email})');
@@ -336,36 +324,13 @@ class HiveService {
   }
 
   /// Get user data safely
-  static CustomerModel? getUserDataSafe() {
+  static UserModel? getUserDataSafe() {
     try {
       final userData = _userBox.get('userData');
       if (userData == null) return null;
 
-      // Convert map back to CustomerModel
-      // This is a simplified version - you may need to add more fields
-      return CustomerModel(
-        id: userData['id'] ?? '',
-        name: userData['name'] ?? '',
-        email: userData['email'] ?? '',
-        phone: userData['phone'],
-        profileImageUrl: userData['profileImageUrl'],
-        dateOfBirth: userData['dateOfBirth'] != null
-            ? DateTime.fromMillisecondsSinceEpoch(userData['dateOfBirth'])
-            : null,
-        gender: userData['gender'],
-        isVerified: userData['isVerified'] ?? false,
-        createdAt: DateTime.fromMillisecondsSinceEpoch(userData['createdAt']),
-        updatedAt: DateTime.fromMillisecondsSinceEpoch(userData['updatedAt']),
-        stylePreferences: const StylePreferences(
-          preferredStyles: [],
-          preferredColors: [],
-          preferredFabrics: [],
-          dislikedColors: [],
-          dislikedFabrics: [],
-          occasions: [],
-        ),
-        orderHistory: const [],
-      );
+      // Convert map back to UserModel
+      return UserModel.fromJson(Map<String, dynamic>.from(userData));
     } catch (e) {
       DebugLogger.error('Failed to get user data: $e');
       return null;
