@@ -42,7 +42,7 @@ class _OrdersPageState extends State<OrdersPage> with TickerProviderStateMixin {
       if (authState is AuthAuthenticated) {
         // Get orders from repository
         final orders = await ServiceLocator.orderRepository.getCustomerOrders(
-          authState.user.uid,
+          authState.user.id,
         );
 
         setState(() {
@@ -713,8 +713,7 @@ class _OrdersPageState extends State<OrdersPage> with TickerProviderStateMixin {
       // Update order status to cancelled
       await ServiceLocator.orderRepository.updateOrderStatus(
         order.id,
-        OrderStatus.cancelled,
-        'Order cancelled by customer',
+        OrderStatus.cancelled.value,
       );
 
       // Refresh orders list

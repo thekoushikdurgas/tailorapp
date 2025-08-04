@@ -285,7 +285,7 @@ class OrderCubit extends Cubit<OrderState> {
   ) async {
     try {
       await ServiceLocator.orderRepository
-          .updateOrderStatus(orderId, status, message);
+          .updateOrderStatus(orderId, status.value);
 
       // Reload order if currently viewing details
       if (state is OrderDetailsLoaded) {
@@ -373,8 +373,7 @@ class OrderCubit extends Cubit<OrderState> {
       // Update order payment status
       await ServiceLocator.orderRepository.updatePaymentStatus(
         orderId,
-        PaymentStatus.paid,
-        paymentId,
+        PaymentStatus.paid.value,
       );
 
       emit(
@@ -402,14 +401,12 @@ class OrderCubit extends Cubit<OrderState> {
     emit(const OrderLoading());
 
     try {
-      await ServiceLocator.orderRepository
-          .requestRefund(orderId, amount, reason);
+      await ServiceLocator.orderRepository.requestRefund(orderId);
 
       // Update payment status to refunded
       await ServiceLocator.orderRepository.updatePaymentStatus(
         orderId,
-        PaymentStatus.refunded,
-        null,
+        PaymentStatus.refunded.value,
       );
 
       emit(

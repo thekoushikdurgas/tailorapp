@@ -236,12 +236,7 @@ class SplashViewModel {
 
       // Simulate connectivity status
       const isConnected = true;
-
-      if (isConnected) {
-        DebugLogger.success('SplashViewModel: Connectivity check passed');
-      } else {
-        DebugLogger.warning('SplashViewModel: No network connectivity');
-      }
+      DebugLogger.success('SplashViewModel: Connectivity check passed');
 
       return isConnected;
     } catch (e) {

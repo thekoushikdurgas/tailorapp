@@ -6,12 +6,10 @@ class PatternCreationManagementScreen extends StatefulWidget {
   const PatternCreationManagementScreen({super.key});
 
   @override
-  State<PatternCreationManagementScreen> createState() =>
-      _PatternCreationManagementScreenState();
+  State<PatternCreationManagementScreen> createState() => _PatternCreationManagementScreenState();
 }
 
-class _PatternCreationManagementScreenState
-    extends State<PatternCreationManagementScreen>
+class _PatternCreationManagementScreenState extends State<PatternCreationManagementScreen>
     with TickerProviderStateMixin {
   late TabController _tabController;
   late AnimationController _createController;
@@ -25,7 +23,7 @@ class _PatternCreationManagementScreenState
   DigitalPattern? _selectedPattern;
   String _selectedFilter = 'All Patterns';
   String _selectedCategory = 'All';
-  final String _selectedSize = 'All Sizes';
+
   bool _isGridView = true;
   bool _isCreatingPattern = false;
 
@@ -36,17 +34,6 @@ class _PatternCreationManagementScreenState
     'Favorites',
     'Shared',
     'Templates',
-  ];
-
-  final List<String> _sizeOptions = [
-    'All Sizes',
-    'XS',
-    'S',
-    'M',
-    'L',
-    'XL',
-    'XXL',
-    'Custom',
   ];
 
   final List<String> _patternTypes = [
@@ -88,8 +75,7 @@ class _PatternCreationManagementScreenState
       20,
       (index) => DigitalPattern(
         id: 'PAT${(index + 1).toString().padLeft(3, '0')}',
-        name:
-            '${_patternTypes[index % _patternTypes.length]} Pattern ${index + 1}',
+        name: '${_patternTypes[index % _patternTypes.length]} Pattern ${index + 1}',
         description:
             'Professional ${_patternTypes[index % _patternTypes.length].toLowerCase()} pattern with detailed instructions',
         type: _patternTypes[index % _patternTypes.length],
@@ -103,8 +89,7 @@ class _PatternCreationManagementScreenState
             Colors.orange,
           ][index % 4],
         ),
-        difficulty:
-            PatternDifficulty.values[index % PatternDifficulty.values.length],
+        difficulty: PatternDifficulty.values[index % PatternDifficulty.values.length],
         sizes: ['S', 'M', 'L', 'XL'],
         materials: ['Cotton', 'Silk', 'Wool', 'Linen'][index % 4],
         estimatedTime: Duration(hours: 2 + (index % 6)),
@@ -158,8 +143,7 @@ class _PatternCreationManagementScreenState
         description: 'Ready-to-use pattern template',
         type: _patternTypes[index % _patternTypes.length],
         thumbnailUrl: 'https://picsum.photos/200/250?random=${index + 100}',
-        difficulty:
-            PatternDifficulty.values[index % PatternDifficulty.values.length],
+        difficulty: PatternDifficulty.values[index % PatternDifficulty.values.length],
         isPremium: index % 3 == 0,
         price: index % 3 == 0 ? 15.99 : 0.0,
         rating: 4.0 + (index % 2),
@@ -288,8 +272,7 @@ class _PatternCreationManagementScreenState
                       hintText: 'Search patterns...',
                       prefixIcon: Icon(Icons.search, color: Colors.grey),
                       border: InputBorder.none,
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     ),
                     onChanged: _searchPatterns,
                   ),
@@ -319,8 +302,7 @@ class _PatternCreationManagementScreenState
                 child: DropdownButtonFormField<String>(
                   value: _selectedFilter,
                   decoration: InputDecoration(
-                    contentPadding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide(color: Colors.grey[300]!),
@@ -346,8 +328,7 @@ class _PatternCreationManagementScreenState
                 child: DropdownButtonFormField<String>(
                   value: _selectedCategory,
                   decoration: InputDecoration(
-                    contentPadding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide(color: Colors.grey[300]!),
@@ -502,9 +483,7 @@ class _PatternCreationManagementScreenState
       onRefresh: () async {
         _loadPatterns();
       },
-      child: _isGridView
-          ? _buildPatternsGrid(filteredPatterns)
-          : _buildPatternsList(filteredPatterns),
+      child: _isGridView ? _buildPatternsGrid(filteredPatterns) : _buildPatternsList(filteredPatterns),
     );
   }
 
@@ -559,8 +538,7 @@ class _PatternCreationManagementScreenState
               child: Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  borderRadius:
-                      const BorderRadius.vertical(top: Radius.circular(12)),
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
                   gradient: LinearGradient(
                     colors: [
                       pattern.category.color,
@@ -615,12 +593,8 @@ class _PatternCreationManagementScreenState
                             shape: BoxShape.circle,
                           ),
                           child: Icon(
-                            pattern.isFavorite
-                                ? Icons.favorite
-                                : Icons.favorite_border,
-                            color: pattern.isFavorite
-                                ? Colors.red[600]
-                                : Colors.grey[600],
+                            pattern.isFavorite ? Icons.favorite : Icons.favorite_border,
+                            color: pattern.isFavorite ? Colors.red[600] : Colors.grey[600],
                             size: 16,
                           ),
                         ),
@@ -771,8 +745,7 @@ class _PatternCreationManagementScreenState
                             vertical: 4,
                           ),
                           decoration: BoxDecoration(
-                            color: _getDifficultyColor(pattern.difficulty)
-                                .withValues(alpha: 0.1),
+                            color: _getDifficultyColor(pattern.difficulty).withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(
@@ -805,8 +778,7 @@ class _PatternCreationManagementScreenState
                             vertical: 2,
                           ),
                           decoration: BoxDecoration(
-                            color:
-                                pattern.category.color.withValues(alpha: 0.1),
+                            color: pattern.category.color.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(6),
                           ),
                           child: Text(
@@ -906,18 +878,13 @@ class _PatternCreationManagementScreenState
                   IconButton(
                     onPressed: () => _toggleFavorite(pattern),
                     icon: Icon(
-                      pattern.isFavorite
-                          ? Icons.favorite
-                          : Icons.favorite_border,
-                      color: pattern.isFavorite
-                          ? Colors.red[600]
-                          : Colors.grey[600],
+                      pattern.isFavorite ? Icons.favorite : Icons.favorite_border,
+                      color: pattern.isFavorite ? Colors.red[600] : Colors.grey[600],
                     ),
                   ),
                   PopupMenuButton<String>(
                     icon: Icon(Icons.more_vert, color: Colors.grey[600]),
-                    onSelected: (action) =>
-                        _handlePatternAction(pattern, action),
+                    onSelected: (action) => _handlePatternAction(pattern, action),
                     itemBuilder: (context) => [
                       const PopupMenuItem(
                         value: 'edit',
@@ -987,15 +954,11 @@ class _PatternCreationManagementScreenState
               child: Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  borderRadius:
-                      const BorderRadius.vertical(top: Radius.circular(12)),
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
                   gradient: LinearGradient(
                     colors: [
-                      Colors.primaries[
-                          template.hashCode % Colors.primaries.length],
-                      Colors.primaries[
-                              template.hashCode % Colors.primaries.length]
-                          .withValues(alpha: 0.7),
+                      Colors.primaries[template.hashCode % Colors.primaries.length],
+                      Colors.primaries[template.hashCode % Colors.primaries.length].withValues(alpha: 0.7),
                     ],
                   ),
                 ),
@@ -1138,8 +1101,7 @@ class _PatternCreationManagementScreenState
   }
 
   Widget _buildCategoryCard(PatternCategory category) {
-    final patternsInCategory =
-        _patterns.where((p) => p.category.id == category.id).length;
+    final patternsInCategory = _patterns.where((p) => p.category.id == category.id).length;
 
     return Container(
       decoration: BoxDecoration(
@@ -1315,13 +1277,11 @@ class _PatternCreationManagementScreenState
     return _patterns.where((pattern) {
       // Apply filters based on selected options
       final filterMatch = _selectedFilter == 'All Patterns' ||
-          (_selectedFilter == 'My Patterns' &&
-              pattern.authorId == 'TAILOR001') ||
+          (_selectedFilter == 'My Patterns' && pattern.authorId == 'TAILOR001') ||
           (_selectedFilter == 'Favorites' && pattern.isFavorite) ||
           (_selectedFilter == 'Shared' && pattern.isPublic);
 
-      final categoryMatch = _selectedCategory == 'All' ||
-          pattern.category.name == _selectedCategory;
+      final categoryMatch = _selectedCategory == 'All' || pattern.category.name == _selectedCategory;
 
       return filterMatch && categoryMatch;
     }).toList();
@@ -1393,8 +1353,7 @@ class _PatternCreationManagementScreenState
       isScrollControlled: true,
       builder: (context) => DraggableScrollableSheet(
         expand: false,
-        builder: (context, scrollController) =>
-            _buildPatternDetailsSheet(pattern, scrollController),
+        builder: (context, scrollController) => _buildPatternDetailsSheet(pattern, scrollController),
       ),
     );
   }

@@ -27,6 +27,12 @@ lib\core\repositories\admin_repository.dart
 lib\core\repositories\customer_repository.dart
 lib\core\repositories\garment_repository.dart
 lib\core\repositories\order_repository.dart
+lib\core\repositories\supabase_admin_repository.dart
+lib\core\repositories\supabase_customer_repository.dart
+lib\core\repositories\supabase_garment_repository.dart
+lib\core\repositories\supabase_order_repository.dart
+lib\core\repositories\supabase_tailor_repository.dart
+lib\core\repositories\supabase_user_repository.dart
 lib\core\repositories\tailor_repository.dart
 lib\core\repositories\user_repository.dart
 lib\core\services\ai_service.dart
@@ -40,6 +46,7 @@ lib\core\services\production_gemini_service_impl.dart
 lib\core\services\production_openai_service_impl.dart
 lib\core\services\route_guard_service.dart
 lib\core\services\service_locator.dart
+lib\core\services\supabase_auth_service.dart
 lib\core\services\theme_manager.dart
 lib\core\theme\build-material-color\build_color.dart
 lib\core\theme\dark\dark_constants.dart
@@ -47,11 +54,11 @@ lib\core\theme\dark\dark_theme_custom.dart
 lib\core\theme\light\light_constants.dart
 lib\core\theme\light\light_theme_custom.dart
 lib\cubit_observer.dart
-lib\firebase_options.dart
 lib\main.dart
 lib\product\enum\intro_enums.dart
 lib\product\enum\route_enum.dart
 lib\product\lang\locale_keys.g.dart
+lib\supabase_options.dart
 lib\view\admin\view\platform_analytics_insights_screen.dart
 lib\view\admin\view\super_admin_dashboard_screen.dart
 lib\view\admin\view\user_management_roles_screen.dart
@@ -60,6 +67,7 @@ lib\view\auth\view\auth_loading_screen.dart
 lib\view\auth\view\auth_wrapper.dart
 lib\view\auth\view\forgot_password_page.dart
 lib\view\auth\view\login_page.dart
+lib\view\auth\view\pin_verification_page.dart
 lib\view\auth\view\register_page.dart
 lib\view\auth\view\welcome.dart
 lib\view\auth\widgets\country_picker_widget.dart

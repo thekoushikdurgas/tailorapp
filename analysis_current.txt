@@ -1,0 +1,36 @@
+Analyzing Tailorapp...
+
+warning - lib\core\repositories\supabase_order_repository.dart:185:28 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\core\repositories\supabase_tailor_repository.dart:139:16 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\core\repositories\supabase_tailor_repository.dart:154:16 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\core\repositories\supabase_tailor_repository.dart:169:29 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\core\repositories\supabase_tailor_repository.dart:205:29 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\core\repositories\supabase_tailor_repository.dart:248:16 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\core\repositories\supabase_tailor_repository.dart:260:16 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\core\repositories\supabase_tailor_repository.dart:297:16 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\core\repositories\supabase_tailor_repository.dart:303:38 - The left operand can't be null, so the right operand is never executed. Try removing the operator and the right operand. - dead_null_aware_expression
+warning - lib\core\repositories\supabase_tailor_repository.dart:316:16 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\core\repositories\supabase_tailor_repository.dart:324:63 - The left operand can't be null, so the right operand is never executed. Try removing the operator and the right operand. - dead_null_aware_expression
+warning - lib\core\repositories\supabase_tailor_repository.dart:360:29 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\view\admin\view\platform_analytics_insights_screen.dart:26:19 - The value of the field '_userGrowthData' isn't used. Try removing the field, or using it. - unused_field
+warning - lib\view\admin\view\platform_analytics_insights_screen.dart:27:19 - The value of the field '_orderVolumeData' isn't used. Try removing the field, or using it. - unused_field
+warning - lib\view\admin\view\super_admin_dashboard_screen.dart:20:10 - The value of the field '_selectedTimeRange' isn't used. Try removing the field, or using it. - unused_field
+warning - lib\view\customer\view\design_collaboration_hub_screen.dart:29:14 - The value of the field '_isCollaborating' isn't used. Try removing the field, or using it. - unused_field
+warning - lib\view\customer\view\fabric_selection_studio_screen.dart:52:22 - The value of the field '_priceRanges' isn't used. Try removing the field, or using it. - unused_field
+warning - lib\view\splash\view-model\splash_view_model.dart:242:14 - Dead code. Try removing the code, or fixing the code before it so that it can be reached. - dead_code
+warning - lib\view\splash\widgets\splash_loading_text.dart:44:10 - The value of the field '_previousMessage' isn't used. Try removing the field, or using it. - unused_field
+warning - lib\view\tailor\view\order_management_screen.dart:22:16 - The value of the field '_selectedStatus' isn't used. Try removing the field, or using it. - unused_field
+warning - lib\view\tailor\view\order_management_screen.dart:23:16 - The value of the field '_selectedPriority' isn't used. Try removing the field, or using it. - unused_field
+warning - lib\view\tailor\view\order_management_screen.dart:26:16 - The value of the field '_selectedOrder' isn't used. Try removing the field, or using it. - unused_field
+warning - lib\view\tailor\view\order_management_screen.dart:37:22 - The value of the field '_statusOptions' isn't used. Try removing the field, or using it. - unused_field
+warning - lib\view\tailor\view\order_management_screen.dart:46:22 - The value of the field '_priorityOptions' isn't used. Try removing the field, or using it. - unused_field
+warning - lib\view\tailor\view\pattern_creation_management_screen.dart:25:19 - The value of the field '_selectedPattern' isn't used. Try removing the field, or using it. - unused_field
+warning - lib\view\tailor\view\pattern_creation_management_screen.dart:28:16 - The value of the field '_selectedSize' isn't used. Try removing the field, or using it. - unused_field
+warning - lib\view\tailor\view\pattern_creation_management_screen.dart:41:22 - The value of the field '_sizeOptions' isn't used. Try removing the field, or using it. - unused_field
+   info - lib\core\repositories\supabase_garment_repository.dart:213:51 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - lib\core\repositories\supabase_tailor_repository.dart:339:44 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - lib\core\repositories\supabase_tailor_repository.dart:441:48 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - lib\core\repositories\supabase_tailor_repository.dart:447:65 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - lib\core\repositories\supabase_tailor_repository.dart:453:45 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+
+32 issues found.

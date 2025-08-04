@@ -18,8 +18,7 @@ class _OrderManagementScreenState extends State<OrderManagementScreen> with Tick
   final TextEditingController _searchController = TextEditingController();
 
   String _selectedFilter = 'All Orders';
-  final String _selectedStatus = 'All Status';
-  final String _selectedPriority = 'All Priority';
+
   bool _isGridView = false;
   List<TailorOrder> _orders = [];
   TailorOrder? _selectedOrder;
@@ -31,23 +30,6 @@ class _OrderManagementScreenState extends State<OrderManagementScreen> with Tick
     'Ready for Delivery',
     'Completed',
     'Overdue',
-  ];
-
-  final List<String> _statusOptions = [
-    'All Status',
-    'Received',
-    'In Progress',
-    'Pending Approval',
-    'Ready',
-    'Delivered',
-  ];
-
-  final List<String> _priorityOptions = [
-    'All Priority',
-    'Low',
-    'Medium',
-    'High',
-    'Urgent',
   ];
 
   @override

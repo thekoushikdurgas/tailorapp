@@ -14,7 +14,8 @@ class VirtualFittingPage extends StatefulWidget {
   State<VirtualFittingPage> createState() => _VirtualFittingPageState();
 }
 
-class _VirtualFittingPageState extends State<VirtualFittingPage> with TickerProviderStateMixin {
+class _VirtualFittingPageState extends State<VirtualFittingPage>
+    with TickerProviderStateMixin {
   CameraController? _cameraController;
   List<CameraDescription>? _cameras;
   bool _isCameraInitialized = false;
@@ -275,7 +276,8 @@ class _VirtualFittingPageState extends State<VirtualFittingPage> with TickerProv
           if (_showMeasurementGuide && _poses.isNotEmpty) _buildPoseOverlay(),
 
           // Basic Measurement Guide
-          if (_showMeasurementGuide && _poses.isEmpty) _buildMeasurementOverlay(),
+          if (_showMeasurementGuide && _poses.isEmpty)
+            _buildMeasurementOverlay(),
 
           // Measurement Instructions
           Positioned(
@@ -563,7 +565,8 @@ class _VirtualFittingPageState extends State<VirtualFittingPage> with TickerProv
                     ),
                   )
                 : const Icon(Icons.camera),
-            label: Text(_isProcessingMeasurements ? 'Processing...' : 'Capture'),
+            label:
+                Text(_isProcessingMeasurements ? 'Processing...' : 'Capture'),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blue[600],
               foregroundColor: Colors.white,
@@ -668,10 +671,12 @@ class _VirtualFittingPageState extends State<VirtualFittingPage> with TickerProv
                       width: 80,
                       height: 80,
                       decoration: BoxDecoration(
-                        color: (garment['color'] as Color).withValues(alpha: 0.1),
+                        color:
+                            (garment['color'] as Color).withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
-                          color: (garment['color'] as Color).withValues(alpha: 0.3),
+                          color: (garment['color'] as Color)
+                              .withValues(alpha: 0.3),
                         ),
                       ),
                       child: Icon(
@@ -1044,7 +1049,8 @@ class _VirtualFittingPageState extends State<VirtualFittingPage> with TickerProv
         _measurements['waist'] = 32.0 + (DateTime.now().millisecond % 4);
         _measurements['hip'] = 36.0 + (DateTime.now().millisecond % 3);
         _measurements['shoulder'] = 16.0 + (DateTime.now().millisecond % 2);
-        _measurements['height'] = 68.0 + (DateTime.now().millisecond % 6); // inches
+        _measurements['height'] =
+            68.0 + (DateTime.now().millisecond % 6); // inches
       });
     }
 
@@ -1060,7 +1066,8 @@ class _VirtualFittingPageState extends State<VirtualFittingPage> with TickerProv
         lastUpdated: DateTime.now(),
       );
 
-      final recommendations = await ServiceLocator.mlKitService.calculateSizeRecommendations(
+      final recommendations =
+          await ServiceLocator.mlKitService.calculateSizeRecommendations(
         measurements: bodyMeasurements,
         garmentType: GarmentType.shirt,
       );
@@ -1097,12 +1104,14 @@ class _VirtualFittingPageState extends State<VirtualFittingPage> with TickerProv
           rightShoulder.x,
           rightShoulder.y,
         );
-        measurements['shoulder'] = (shoulderWidth * 0.025).clamp(14.0, 20.0); // Convert to inches approx
+        measurements['shoulder'] = (shoulderWidth * 0.025)
+            .clamp(14.0, 20.0); // Convert to inches approx
       }
 
       // Calculate chest (estimate based on shoulder width)
       if (measurements['shoulder'] != null) {
-        measurements['chest'] = (measurements['shoulder']! * 2.2).clamp(32.0, 50.0);
+        measurements['chest'] =
+            (measurements['shoulder']! * 2.2).clamp(32.0, 50.0);
       }
 
       // Calculate waist (estimate based on hip width)
@@ -1125,7 +1134,8 @@ class _VirtualFittingPageState extends State<VirtualFittingPage> with TickerProv
           leftAnkle.x,
           leftAnkle.y,
         );
-        measurements['height'] = (bodyHeight * 0.01).clamp(60.0, 78.0); // Convert to inches approx
+        measurements['height'] =
+            (bodyHeight * 0.01).clamp(60.0, 78.0); // Convert to inches approx
       }
     } catch (e) {
       debugPrint('Measurement calculation error: $e');
@@ -1313,7 +1323,10 @@ class PoseOverlayPainter extends CustomPainter {
       final endLandmark = pose.landmarks[connection[1]];
 
       if (startLandmark != null && endLandmark != null) {
-        if (startLandmark.x >= 0 && startLandmark.y >= 0 && endLandmark.x >= 0 && endLandmark.y >= 0) {
+        if (startLandmark.x >= 0 &&
+            startLandmark.y >= 0 &&
+            endLandmark.x >= 0 &&
+            endLandmark.y >= 0) {
           canvas.drawLine(
             Offset(startLandmark.x, startLandmark.y),
             Offset(endLandmark.x, endLandmark.y),

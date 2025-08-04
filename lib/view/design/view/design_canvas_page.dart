@@ -923,7 +923,7 @@ class _DesignCanvasPageState extends State<DesignCanvasPage> {
       final authState = context.read<AuthCubit>().state;
       String userId = 'guest';
       if (authState is AuthAuthenticated) {
-        userId = authState.user.uid;
+        userId = authState.user.id;
       }
 
       // Create design prompt

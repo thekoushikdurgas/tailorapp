@@ -96,7 +96,8 @@ class AIServiceImpl implements AIService {
       }
 
       // Sort by confidence score
-      suggestions.sort((a, b) => b.confidenceScore.compareTo(a.confidenceScore));
+      suggestions
+          .sort((a, b) => b.confidenceScore.compareTo(a.confidenceScore));
 
       return suggestions;
     } catch (e) {

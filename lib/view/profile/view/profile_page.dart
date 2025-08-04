@@ -164,7 +164,9 @@ class _ProfilePageState extends State<ProfilePage> {
       final updatedCustomer = _user!.copyWith(
         name: _nameController.text.trim(),
         email: _emailController.text.trim(),
-        phone: _phoneController.text.trim().isNotEmpty ? _phoneController.text.trim() : null,
+        phone: _phoneController.text.trim().isNotEmpty
+            ? _phoneController.text.trim()
+            : null,
         updatedAt: DateTime.now(),
       );
 
@@ -405,7 +407,9 @@ class _ProfilePageState extends State<ProfilePage> {
               _buildStatCard('Designs', '8'),
               _buildStatCard(
                 'Member Since',
-                _user != null ? '${DateTime.now().difference(_user!.createdAt).inDays} days' : 'N/A',
+                _user != null
+                    ? '${DateTime.now().difference(_user!.createdAt).inDays} days'
+                    : 'N/A',
               ),
             ],
           ),

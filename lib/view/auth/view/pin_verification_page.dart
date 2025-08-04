@@ -18,7 +18,8 @@ class PinVerificationPage extends StatefulWidget {
   State<PinVerificationPage> createState() => _PinVerificationPageState();
 }
 
-class _PinVerificationPageState extends State<PinVerificationPage> with TickerProviderStateMixin {
+class _PinVerificationPageState extends State<PinVerificationPage>
+    with TickerProviderStateMixin {
   final _pinController = TextEditingController();
   final _focusNode = FocusNode();
 
@@ -150,7 +151,8 @@ class _PinVerificationPageState extends State<PinVerificationPage> with TickerPr
                     ),
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(
-                      color: Theme.of(context).primaryColor.withValues(alpha: 0.2),
+                      color:
+                          Theme.of(context).primaryColor.withValues(alpha: 0.2),
                     ),
                   ),
                   child: Row(
@@ -159,7 +161,9 @@ class _PinVerificationPageState extends State<PinVerificationPage> with TickerPr
                         radius: 30,
                         backgroundColor: Theme.of(context).primaryColor,
                         child: Text(
-                          widget.userProfile.name.isNotEmpty ? widget.userProfile.name[0].toUpperCase() : '?',
+                          widget.userProfile.name.isNotEmpty
+                              ? widget.userProfile.name[0].toUpperCase()
+                              : '?',
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 24,
@@ -230,7 +234,9 @@ class _PinVerificationPageState extends State<PinVerificationPage> with TickerPr
                           prefixIcon: const Icon(Icons.lock_outline),
                           suffixIcon: IconButton(
                             icon: Icon(
-                              _obscurePin ? Icons.visibility_off : Icons.visibility,
+                              _obscurePin
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
                             ),
                             onPressed: () {
                               setState(() {
@@ -276,7 +282,8 @@ class _PinVerificationPageState extends State<PinVerificationPage> with TickerPr
                             height: 24,
                             child: CircularProgressIndicator(
                               strokeWidth: 2,
-                              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                              valueColor:
+                                  AlwaysStoppedAnimation<Color>(Colors.white),
                             ),
                           )
                         : const Text(

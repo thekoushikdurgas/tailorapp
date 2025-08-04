@@ -72,7 +72,9 @@ class TailorDashboardScreen extends StatelessWidget {
       builder: (context, state) {
         String tailorName = 'Tailor';
         if (state is AuthAuthenticated) {
-          tailorName = state.user.displayName?.split(' ').first ?? 'Tailor';
+          tailorName =
+              (state.user.userMetadata?['name'] as String?)?.split(' ').first ??
+                  'Tailor';
         }
 
         return Container(

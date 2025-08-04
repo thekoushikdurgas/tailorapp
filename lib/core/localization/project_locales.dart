@@ -261,7 +261,9 @@ class ProjectLocales {
 
   /// Get Indian languages only
   static List<Locale> getIndianLanguages() {
-    return supportedLocales.where((locale) => locale.countryCode == 'IN').toList();
+    return supportedLocales
+        .where((locale) => locale.countryCode == 'IN')
+        .toList();
   }
 
   /// Get total number of supported languages
@@ -302,13 +304,20 @@ class ProjectLocales {
               ].contains(l.languageCode),
             )
             .length,
-        'Dravidian': getIndianLanguages().where((l) => ['te', 'kn', 'ta', 'ml'].contains(l.languageCode)).length,
-        'Sino-Tibetan': getIndianLanguages().where((l) => ['brx', 'mni'].contains(l.languageCode)).length,
-        'Austroasiatic': getIndianLanguages().where((l) => ['sat'].contains(l.languageCode)).length,
+        'Dravidian': getIndianLanguages()
+            .where((l) => ['te', 'kn', 'ta', 'ml'].contains(l.languageCode))
+            .length,
+        'Sino-Tibetan': getIndianLanguages()
+            .where((l) => ['brx', 'mni'].contains(l.languageCode))
+            .length,
+        'Austroasiatic': getIndianLanguages()
+            .where((l) => ['sat'].contains(l.languageCode))
+            .length,
         'Germanic': 1,
       },
       'scripts': {
-        'Devanagari': 8, // Hindi, Marathi, Bodo, Dogri, Konkani, Maithili, Nepali, Sanskrit
+        'Devanagari':
+            8, // Hindi, Marathi, Bodo, Dogri, Konkani, Maithili, Nepali, Sanskrit
         'Bengali-Assamese': 2, // Bengali, Assamese
         'Telugu': 1,
         'Tamil': 1,
@@ -369,7 +378,8 @@ class ProjectLocales {
 
       // Check all locales have proper country codes
       for (final locale in supportedLocales) {
-        if (locale.languageCode.isEmpty || locale.countryCode?.isEmpty == true) {
+        if (locale.languageCode.isEmpty ||
+            locale.countryCode?.isEmpty == true) {
           return false;
         }
       }

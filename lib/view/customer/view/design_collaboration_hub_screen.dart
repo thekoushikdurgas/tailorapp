@@ -24,7 +24,7 @@ class _DesignCollaborationHubScreenState extends State<DesignCollaborationHubScr
   List<CollaborationComment> _comments = [];
   List<DesignVersion> _versions = [];
   String _selectedTool = 'select';
-  final bool _isCollaborating = false;
+
   bool _isLiveSession = false;
   List<Collaborator> _activeCollaborators = [];
 

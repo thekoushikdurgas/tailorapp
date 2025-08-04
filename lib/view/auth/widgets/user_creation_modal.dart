@@ -163,7 +163,8 @@ class _UserCreationModalState extends State<UserCreationModal> {
                     if (value == null || value.trim().isEmpty) {
                       return 'Please enter your email';
                     }
-                    if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
+                    if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                        .hasMatch(value)) {
                       return 'Please enter a valid email';
                     }
                     return null;
@@ -235,7 +236,9 @@ class _UserCreationModalState extends State<UserCreationModal> {
                     prefixIcon: const Icon(Icons.lock_outline),
                     suffixIcon: IconButton(
                       icon: Icon(
-                        _obscureConfirmPin ? Icons.visibility_off : Icons.visibility,
+                        _obscureConfirmPin
+                            ? Icons.visibility_off
+                            : Icons.visibility,
                       ),
                       onPressed: () {
                         setState(() {
@@ -281,7 +284,8 @@ class _UserCreationModalState extends State<UserCreationModal> {
                             height: 24,
                             child: CircularProgressIndicator(
                               strokeWidth: 2,
-                              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                              valueColor:
+                                  AlwaysStoppedAnimation<Color>(Colors.white),
                             ),
                           )
                         : const Text(
@@ -316,17 +320,22 @@ class _UserCreationModalState extends State<UserCreationModal> {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           border: Border.all(
-            color: isSelected ? Theme.of(context).primaryColor : Colors.grey[300]!,
+            color:
+                isSelected ? Theme.of(context).primaryColor : Colors.grey[300]!,
             width: isSelected ? 2 : 1,
           ),
           borderRadius: BorderRadius.circular(12),
-          color: isSelected ? Theme.of(context).primaryColor.withValues(alpha: 0.05) : null,
+          color: isSelected
+              ? Theme.of(context).primaryColor.withValues(alpha: 0.05)
+              : null,
         ),
         child: Row(
           children: [
             Icon(
               _getRoleIcon(role),
-              color: isSelected ? Theme.of(context).primaryColor : Colors.grey[600],
+              color: isSelected
+                  ? Theme.of(context).primaryColor
+                  : Colors.grey[600],
               size: 24,
             ),
             const SizedBox(width: 12),
@@ -339,7 +348,9 @@ class _UserCreationModalState extends State<UserCreationModal> {
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
-                      color: isSelected ? Theme.of(context).primaryColor : Colors.black,
+                      color: isSelected
+                          ? Theme.of(context).primaryColor
+                          : Colors.black,
                     ),
                   ),
                   Text(

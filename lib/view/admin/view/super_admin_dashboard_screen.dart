@@ -8,12 +8,10 @@ class SuperAdminDashboardScreen extends StatefulWidget {
   const SuperAdminDashboardScreen({super.key});
 
   @override
-  State<SuperAdminDashboardScreen> createState() =>
-      _SuperAdminDashboardScreenState();
+  State<SuperAdminDashboardScreen> createState() => _SuperAdminDashboardScreenState();
 }
 
-class _SuperAdminDashboardScreenState extends State<SuperAdminDashboardScreen>
-    with TickerProviderStateMixin {
+class _SuperAdminDashboardScreenState extends State<SuperAdminDashboardScreen> with TickerProviderStateMixin {
   late TabController _tabController;
   late AnimationController _pulseController;
 
@@ -138,9 +136,7 @@ class _SuperAdminDashboardScreenState extends State<SuperAdminDashboardScreen>
                     'Live',
                     style: TextStyle(
                       fontSize: 12,
-                      color: _isRealTimeMode
-                          ? Colors.green[600]
-                          : Colors.grey[600],
+                      color: _isRealTimeMode ? Colors.green[600] : Colors.grey[600],
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -154,9 +150,8 @@ class _SuperAdminDashboardScreenState extends State<SuperAdminDashboardScreen>
         PopupMenuButton<String>(
           icon: Icon(Icons.date_range, color: Colors.grey[600]),
           onSelected: (value) => setState(() => _selectedTimeRange = value),
-          itemBuilder: (context) => _timeRanges
-              .map((range) => PopupMenuItem(value: range, child: Text(range)))
-              .toList(),
+          itemBuilder: (context) =>
+              _timeRanges.map((range) => PopupMenuItem(value: range, child: Text(range))).toList(),
         ),
 
         // System alerts
@@ -691,8 +686,7 @@ class _SuperAdminDashboardScreenState extends State<SuperAdminDashboardScreen>
         ],
       ),
       child: Column(
-        children:
-            activities.map((activity) => _buildActivityItem(activity)).toList(),
+        children: activities.map((activity) => _buildActivityItem(activity)).toList(),
       ),
     );
   }
@@ -1203,8 +1197,7 @@ class _SuperAdminDashboardScreenState extends State<SuperAdminDashboardScreen>
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Bulk Actions'),
-        content:
-            const Text('Perform bulk operations on users, orders, or content.'),
+        content: const Text('Perform bulk operations on users, orders, or content.'),
         actions: [
           TextButton(
             onPressed: () => context.pop(),

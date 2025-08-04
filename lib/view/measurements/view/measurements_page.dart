@@ -1297,7 +1297,7 @@ class _MeasurementsPageState extends State<MeasurementsPage>
       final authState = context.read<AuthCubit>().state;
       if (authState is AuthAuthenticated) {
         await ServiceLocator.customerRepository.updateMeasurements(
-          authState.user.uid,
+          authState.user.id,
           measurements,
         );
       }

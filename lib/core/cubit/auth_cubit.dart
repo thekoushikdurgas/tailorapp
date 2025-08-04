@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:equatable/equatable.dart';
 import 'package:tailorapp/core/services/auth_service.dart';
 import 'package:tailorapp/core/models/user_model.dart';
@@ -338,8 +338,8 @@ class AuthCubit extends Cubit<AuthState> {
     if (!result.isSuccess) {
       emit(
         AuthError(
-          message: result.error ?? 'Phone verification failed',
-          type: AuthErrorType.unknown,
+          message: result.error?.message ?? 'Phone verification failed',
+          type: result.error?.type ?? AuthErrorType.unknown,
         ),
       );
     }
@@ -372,10 +372,14 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> signInWithPhoneAndPinDirect(String phoneNumber, String pin) async {
+  Future<void> signInWithPhoneAndPinDirect(
+    String phoneNumber,
+    String pin,
+  ) async {
     emit(const AuthLoading());
 
-    final result = await _authService.signInWithPhoneAndPinDirect(phoneNumber, pin);
+    final result =
+        await _authService.signInWithPhoneAndPinDirect(phoneNumber, pin);
 
     if (!result.isSuccess && result.error != null) {
       emit(
@@ -444,9 +448,9 @@ class AuthCubit extends Cubit<AuthState> {
     return null;
   }
 
-  String? get currentUserId => currentUser?.uid;
+  String? get currentUserId => currentUser?.id;
 
-  bool get isEmailVerified => currentUser?.emailVerified ?? false;
+  bool get isEmailVerified => currentUser?.emailConfirmedAt != null;
 
   // Clear error state
   void clearError() {

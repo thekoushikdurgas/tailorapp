@@ -113,11 +113,12 @@ class HomePage extends StatelessWidget {
                       color: Colors.blue[100],
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: state is AuthAuthenticated && state.user.photoURL != null
+                    child: state is AuthAuthenticated &&
+                            state.user.userMetadata?['avatar_url'] != null
                         ? ClipRRect(
                             borderRadius: BorderRadius.circular(12),
                             child: Image.network(
-                              state.user.photoURL!,
+                              state.user.userMetadata!['avatar_url'] as String,
                               fit: BoxFit.cover,
                               errorBuilder: (context, error, stackTrace) {
                                 return Icon(
@@ -158,7 +159,9 @@ class HomePage extends StatelessWidget {
       builder: (context, state) {
         String userName = 'there';
         if (state is AuthAuthenticated) {
-          userName = state.user.displayName?.split(' ').first ?? state.userProfile.name.split(' ').first;
+          userName =
+              (state.user.userMetadata?['name'] as String?)?.split(' ').first ??
+                  state.userProfile.name.split(' ').first;
         }
 
         return Column(

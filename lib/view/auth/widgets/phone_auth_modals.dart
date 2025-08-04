@@ -207,15 +207,18 @@ class _PhoneNumberInputModalState extends State<PhoneNumberInputModal> {
                               fillColor: Colors.grey[50],
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
-                                borderSide: BorderSide(color: Colors.grey[200]!),
+                                borderSide:
+                                    BorderSide(color: Colors.grey[200]!),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
-                                borderSide: BorderSide(color: Colors.grey[200]!),
+                                borderSide:
+                                    BorderSide(color: Colors.grey[200]!),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
-                                borderSide: BorderSide(color: Colors.blue[600]!),
+                                borderSide:
+                                    BorderSide(color: Colors.blue[600]!),
                               ),
                               errorBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
@@ -280,7 +283,8 @@ class _PhoneNumberInputModalState extends State<PhoneNumberInputModal> {
                               width: 20,
                               child: CircularProgressIndicator(
                                 strokeWidth: 2,
-                                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                valueColor:
+                                    AlwaysStoppedAnimation<Color>(Colors.white),
                               ),
                             )
                           : const Text(
@@ -319,11 +323,13 @@ class _PhoneNumberInputModalState extends State<PhoneNumberInputModal> {
 
   void _handleContinue() async {
     if (_formKey.currentState!.validate()) {
-      final fullPhoneNumber = _selectedCountry.code + _phoneController.text.trim();
+      final fullPhoneNumber =
+          _selectedCountry.code + _phoneController.text.trim();
 
       try {
         // Check if user exists with this phone number
-        final userProfile = await context.read<AuthCubit>().getUserByPhone(fullPhoneNumber);
+        final userProfile =
+            await context.read<AuthCubit>().getUserByPhone(fullPhoneNumber);
 
         // Check if widget is still mounted before using context
         if (!mounted) return;
@@ -384,8 +390,10 @@ class PinVerificationModal extends StatefulWidget {
 class _PinVerificationModalState extends State<PinVerificationModal> {
   final _formKey = GlobalKey<FormState>();
   final _pinController = TextEditingController();
-  final List<TextEditingController> _pinControllers = List.generate(6, (index) => TextEditingController());
-  final List<FocusNode> _pinFocusNodes = List.generate(6, (index) => FocusNode());
+  final List<TextEditingController> _pinControllers =
+      List.generate(6, (index) => TextEditingController());
+  final List<FocusNode> _pinFocusNodes =
+      List.generate(6, (index) => FocusNode());
 
   @override
   void dispose() {
@@ -528,11 +536,13 @@ class _PinVerificationModalState extends State<PinVerificationModal> {
                               fillColor: Colors.grey[50],
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
-                                borderSide: BorderSide(color: Colors.grey[200]!),
+                                borderSide:
+                                    BorderSide(color: Colors.grey[200]!),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
-                                borderSide: BorderSide(color: Colors.grey[200]!),
+                                borderSide:
+                                    BorderSide(color: Colors.grey[200]!),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
@@ -628,7 +638,8 @@ class _PinVerificationModalState extends State<PinVerificationModal> {
                               width: 20,
                               child: CircularProgressIndicator(
                                 strokeWidth: 2,
-                                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                valueColor:
+                                    AlwaysStoppedAnimation<Color>(Colors.white),
                               ),
                             )
                           : const Text(

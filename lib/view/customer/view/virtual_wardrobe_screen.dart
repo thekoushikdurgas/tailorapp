@@ -11,7 +11,8 @@ class VirtualWardrobeScreen extends StatefulWidget {
   State<VirtualWardrobeScreen> createState() => _VirtualWardrobeScreenState();
 }
 
-class _VirtualWardrobeScreenState extends State<VirtualWardrobeScreen> with TickerProviderStateMixin {
+class _VirtualWardrobeScreenState extends State<VirtualWardrobeScreen>
+    with TickerProviderStateMixin {
   late TabController _tabController;
   late AnimationController _rotationController;
   late AnimationController _scaleController;
@@ -184,7 +185,9 @@ class _VirtualWardrobeScreenState extends State<VirtualWardrobeScreen> with Tick
                           child: Container(
                             padding: const EdgeInsets.symmetric(vertical: 12),
                             decoration: BoxDecoration(
-                              color: _is3DView ? Colors.blue[600] : Colors.transparent,
+                              color: _is3DView
+                                  ? Colors.blue[600]
+                                  : Colors.transparent,
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Row(
@@ -192,14 +195,18 @@ class _VirtualWardrobeScreenState extends State<VirtualWardrobeScreen> with Tick
                               children: [
                                 Icon(
                                   Icons.view_in_ar,
-                                  color: _is3DView ? Colors.white : Colors.grey[600],
+                                  color: _is3DView
+                                      ? Colors.white
+                                      : Colors.grey[600],
                                   size: 18,
                                 ),
                                 const SizedBox(width: 8),
                                 Text(
                                   '3D View',
                                   style: TextStyle(
-                                    color: _is3DView ? Colors.white : Colors.grey[600],
+                                    color: _is3DView
+                                        ? Colors.white
+                                        : Colors.grey[600],
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -214,7 +221,9 @@ class _VirtualWardrobeScreenState extends State<VirtualWardrobeScreen> with Tick
                           child: Container(
                             padding: const EdgeInsets.symmetric(vertical: 12),
                             decoration: BoxDecoration(
-                              color: !_is3DView ? Colors.blue[600] : Colors.transparent,
+                              color: !_is3DView
+                                  ? Colors.blue[600]
+                                  : Colors.transparent,
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Row(
@@ -222,14 +231,18 @@ class _VirtualWardrobeScreenState extends State<VirtualWardrobeScreen> with Tick
                               children: [
                                 Icon(
                                   Icons.grid_view,
-                                  color: !_is3DView ? Colors.white : Colors.grey[600],
+                                  color: !_is3DView
+                                      ? Colors.white
+                                      : Colors.grey[600],
                                   size: 18,
                                 ),
                                 const SizedBox(width: 8),
                                 Text(
                                   'Grid View',
                                   style: TextStyle(
-                                    color: !_is3DView ? Colors.white : Colors.grey[600],
+                                    color: !_is3DView
+                                        ? Colors.white
+                                        : Colors.grey[600],
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -254,7 +267,8 @@ class _VirtualWardrobeScreenState extends State<VirtualWardrobeScreen> with Tick
                 child: DropdownButtonFormField<String>(
                   value: _selectedCategory,
                   decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide(color: Colors.grey[300]!),
@@ -280,7 +294,8 @@ class _VirtualWardrobeScreenState extends State<VirtualWardrobeScreen> with Tick
                 child: DropdownButtonFormField<String>(
                   value: _selectedSeason,
                   decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide(color: Colors.grey[300]!),
@@ -567,7 +582,8 @@ class _VirtualWardrobeScreenState extends State<VirtualWardrobeScreen> with Tick
   }
 
   Widget _buildItemGrid(String category) {
-    final items = _wardrobeItems.where((item) => item.category == category).toList();
+    final items =
+        _wardrobeItems.where((item) => item.category == category).toList();
 
     return GridView.builder(
       padding: const EdgeInsets.all(16),
@@ -638,7 +654,8 @@ class _VirtualWardrobeScreenState extends State<VirtualWardrobeScreen> with Tick
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: item.color.withValues(alpha: 0.3),
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+                  borderRadius:
+                      const BorderRadius.vertical(top: Radius.circular(12)),
                 ),
                 child: Stack(
                   children: [
@@ -867,8 +884,10 @@ class _VirtualWardrobeScreenState extends State<VirtualWardrobeScreen> with Tick
   // Helper methods
   List<WardrobeItem> _getFilteredItems() {
     return _wardrobeItems.where((item) {
-      final categoryMatch = _selectedCategory == 'All' || item.category == _selectedCategory;
-      final seasonMatch = _selectedSeason == 'All Seasons' || item.season == _selectedSeason;
+      final categoryMatch =
+          _selectedCategory == 'All' || item.category == _selectedCategory;
+      final seasonMatch =
+          _selectedSeason == 'All Seasons' || item.season == _selectedSeason;
       return categoryMatch && seasonMatch;
     }).toList();
   }
@@ -1083,7 +1102,10 @@ class WardrobeItem {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || other is WardrobeItem && runtimeType == other.runtimeType && id == other.id;
+      identical(this, other) ||
+      other is WardrobeItem &&
+          runtimeType == other.runtimeType &&
+          id == other.id;
 
   @override
   int get hashCode => id.hashCode;

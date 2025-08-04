@@ -47,14 +47,6 @@ class _FabricSelectionStudioScreenState extends State<FabricSelectionStudioScree
     'Blends',
   ];
 
-  final List<String> _priceRanges = [
-    'All Prices',
-    '\$0-\$50',
-    '\$50-\$100',
-    '\$100-\$200',
-    '\$200+',
-  ];
-
   final List<String> _sustainabilityOptions = [
     'All',
     'Organic',

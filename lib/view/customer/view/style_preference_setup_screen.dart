@@ -14,10 +14,12 @@ class StylePreferenceSetupScreen extends StatefulWidget {
   const StylePreferenceSetupScreen({super.key});
 
   @override
-  State<StylePreferenceSetupScreen> createState() => _StylePreferenceSetupScreenState();
+  State<StylePreferenceSetupScreen> createState() =>
+      _StylePreferenceSetupScreenState();
 }
 
-class _StylePreferenceSetupScreenState extends State<StylePreferenceSetupScreen> {
+class _StylePreferenceSetupScreenState
+    extends State<StylePreferenceSetupScreen> {
   int _currentStep = 0;
   final PageController _pageController = PageController();
   bool _isLoading = false;
@@ -183,7 +185,9 @@ class _StylePreferenceSetupScreenState extends State<StylePreferenceSetupScreen>
                   height: 4,
                   margin: EdgeInsets.only(right: index < 5 ? 8 : 0),
                   decoration: BoxDecoration(
-                    color: index <= _currentStep ? Colors.blue[600] : Colors.grey[300],
+                    color: index <= _currentStep
+                        ? Colors.blue[600]
+                        : Colors.grey[300],
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -255,7 +259,8 @@ class _StylePreferenceSetupScreenState extends State<StylePreferenceSetupScreen>
                       color: isSelected ? Colors.blue[600] : Colors.white,
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                        color: isSelected ? Colors.blue[600]! : Colors.grey[300]!,
+                        color:
+                            isSelected ? Colors.blue[600]! : Colors.grey[300]!,
                         width: 2,
                       ),
                     ),
@@ -370,7 +375,8 @@ class _StylePreferenceSetupScreenState extends State<StylePreferenceSetupScreen>
                       color: isSelected ? Colors.blue[50] : Colors.white,
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
-                        color: isSelected ? Colors.blue[600]! : Colors.grey[300]!,
+                        color:
+                            isSelected ? Colors.blue[600]! : Colors.grey[300]!,
                         width: isSelected ? 2 : 1,
                       ),
                       boxShadow: isSelected
@@ -399,7 +405,9 @@ class _StylePreferenceSetupScreenState extends State<StylePreferenceSetupScreen>
                               width: 48,
                               height: 48,
                               decoration: BoxDecoration(
-                                color: isSelected ? Colors.blue[600] : Colors.grey[100],
+                                color: isSelected
+                                    ? Colors.blue[600]
+                                    : Colors.grey[100],
                                 borderRadius: BorderRadius.circular(12),
                                 boxShadow: [
                                   BoxShadow(
@@ -411,7 +419,9 @@ class _StylePreferenceSetupScreenState extends State<StylePreferenceSetupScreen>
                               ),
                               child: Icon(
                                 _getBodyTypeIcon(bodyType),
-                                color: isSelected ? Colors.white : Colors.grey[600],
+                                color: isSelected
+                                    ? Colors.white
+                                    : Colors.grey[600],
                                 size: 24,
                               ),
                             ),
@@ -445,7 +455,8 @@ class _StylePreferenceSetupScreenState extends State<StylePreferenceSetupScreen>
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
-                            color: isSelected ? Colors.blue[800] : Colors.black87,
+                            color:
+                                isSelected ? Colors.blue[800] : Colors.black87,
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -663,7 +674,8 @@ class _StylePreferenceSetupScreenState extends State<StylePreferenceSetupScreen>
                 const SizedBox(height: 12),
                 Expanded(
                   child: GridView.builder(
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 4,
                       crossAxisSpacing: 12,
                       mainAxisSpacing: 12,
@@ -689,7 +701,8 @@ class _StylePreferenceSetupScreenState extends State<StylePreferenceSetupScreen>
                             color: color,
                             borderRadius: BorderRadius.circular(16),
                             border: Border.all(
-                              color: isSelected ? Colors.black : Colors.grey[300]!,
+                              color:
+                                  isSelected ? Colors.black : Colors.grey[300]!,
                               width: isSelected ? 3 : 1,
                             ),
                             boxShadow: isSelected
@@ -702,7 +715,8 @@ class _StylePreferenceSetupScreenState extends State<StylePreferenceSetupScreen>
                                   ]
                                 : [
                                     BoxShadow(
-                                      color: Colors.black.withValues(alpha: 0.1),
+                                      color:
+                                          Colors.black.withValues(alpha: 0.1),
                                       blurRadius: 4,
                                       offset: const Offset(0, 2),
                                     ),
@@ -716,7 +730,8 @@ class _StylePreferenceSetupScreenState extends State<StylePreferenceSetupScreen>
                                     width: 32,
                                     height: 32,
                                     decoration: BoxDecoration(
-                                      color: Colors.white.withValues(alpha: 0.9),
+                                      color:
+                                          Colors.white.withValues(alpha: 0.9),
                                       shape: BoxShape.circle,
                                     ),
                                     child: const Icon(
@@ -879,7 +894,9 @@ class _StylePreferenceSetupScreenState extends State<StylePreferenceSetupScreen>
                         color: isSelected ? Colors.purple[50] : Colors.white,
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
-                          color: isSelected ? Colors.purple[600]! : Colors.grey[300]!,
+                          color: isSelected
+                              ? Colors.purple[600]!
+                              : Colors.grey[300]!,
                           width: 2,
                         ),
                       ),
@@ -887,7 +904,9 @@ class _StylePreferenceSetupScreenState extends State<StylePreferenceSetupScreen>
                         children: [
                           Icon(
                             _getOccasionIcon(occasion),
-                            color: isSelected ? Colors.purple[600] : Colors.grey[600],
+                            color: isSelected
+                                ? Colors.purple[600]
+                                : Colors.grey[600],
                             size: 24,
                           ),
                           const SizedBox(width: 16),
@@ -897,7 +916,9 @@ class _StylePreferenceSetupScreenState extends State<StylePreferenceSetupScreen>
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
-                                color: isSelected ? Colors.purple[800] : Colors.black87,
+                                color: isSelected
+                                    ? Colors.purple[800]
+                                    : Colors.black87,
                               ),
                             ),
                           ),
@@ -998,13 +1019,15 @@ class _StylePreferenceSetupScreenState extends State<StylePreferenceSetupScreen>
                       color: isSelected ? Colors.green[600] : Colors.white,
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
-                        color: isSelected ? Colors.green[600]! : Colors.grey[300]!,
+                        color:
+                            isSelected ? Colors.green[600]! : Colors.grey[300]!,
                         width: isSelected ? 2 : 1,
                       ),
                       boxShadow: isSelected
                           ? [
                               BoxShadow(
-                                color: Colors.green[200]!.withValues(alpha: 0.5),
+                                color:
+                                    Colors.green[200]!.withValues(alpha: 0.5),
                                 blurRadius: 8,
                                 spreadRadius: 2,
                               ),
@@ -1042,7 +1065,9 @@ class _StylePreferenceSetupScreenState extends State<StylePreferenceSetupScreen>
                               children: [
                                 Icon(
                                   _getFabricIcon(fabric),
-                                  color: isSelected ? Colors.white : Colors.grey[700],
+                                  color: isSelected
+                                      ? Colors.white
+                                      : Colors.grey[700],
                                   size: 32,
                                 ),
                                 const SizedBox(height: 8),
@@ -1051,7 +1076,9 @@ class _StylePreferenceSetupScreenState extends State<StylePreferenceSetupScreen>
                                   style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w600,
-                                    color: isSelected ? Colors.white : Colors.black87,
+                                    color: isSelected
+                                        ? Colors.white
+                                        : Colors.black87,
                                   ),
                                   textAlign: TextAlign.center,
                                 ),
@@ -1060,7 +1087,9 @@ class _StylePreferenceSetupScreenState extends State<StylePreferenceSetupScreen>
                                   _getFabricDescription(fabric),
                                   style: TextStyle(
                                     fontSize: 10,
-                                    color: isSelected ? Colors.white.withValues(alpha: 0.9) : Colors.grey[600],
+                                    color: isSelected
+                                        ? Colors.white.withValues(alpha: 0.9)
+                                        : Colors.grey[600],
                                   ),
                                   textAlign: TextAlign.center,
                                   maxLines: 2,
@@ -1490,10 +1519,12 @@ class _StylePreferenceSetupScreenState extends State<StylePreferenceSetupScreen>
         throw Exception('User not authenticated');
       }
 
-      final userId = authState.user.uid;
+      final userId = authState.user.id;
 
       // Convert color selections to hex strings for storage
-      final colorStrings = _selectedColors.map((color) => '#${color.value.toRadixString(16).substring(2)}').toList();
+      final colorStrings = _selectedColors
+          .map((color) => '#${color.toARGB32().toRadixString(16).substring(2)}')
+          .toList();
 
       // Create style preferences object
       final stylePreferences = StylePreferences(
@@ -1574,7 +1605,9 @@ class _StylePreferenceSetupScreenState extends State<StylePreferenceSetupScreen>
       if (_selectedColors.isNotEmpty) {
         final colorAnalysis = await aiService.generateColorPalette(
           garmentType: 'general',
-          occasion: _selectedOccasions.isNotEmpty ? _selectedOccasions.first : 'casual',
+          occasion: _selectedOccasions.isNotEmpty
+              ? _selectedOccasions.first
+              : 'casual',
           preferredColors: preferences.preferredColors,
         );
 
@@ -1646,10 +1679,16 @@ class _StylePreferenceSetupScreenState extends State<StylePreferenceSetupScreen>
 
     // Analyze color preferences
     final hasNeutrals = _selectedColors.any(
-      (color) => color == Colors.black || color == Colors.white || color == Colors.grey[600],
+      (color) =>
+          color == Colors.black ||
+          color == Colors.white ||
+          color == Colors.grey[600],
     );
     final hasBrights = _selectedColors.any(
-      (color) => color == Colors.red[600] || color == Colors.blue[600] || color == Colors.green[600],
+      (color) =>
+          color == Colors.red[600] ||
+          color == Colors.blue[600] ||
+          color == Colors.green[600],
     );
 
     if (hasNeutrals) dnaComponents.add('NT');
@@ -1669,7 +1708,9 @@ class _StylePreferenceSetupScreenState extends State<StylePreferenceSetupScreen>
     }
 
     // Create final DNA string
-    return dnaComponents.isEmpty ? 'VERSATILE-CLASSIC' : dnaComponents.join('-');
+    return dnaComponents.isEmpty
+        ? 'VERSATILE-CLASSIC'
+        : dnaComponents.join('-');
   }
 
   Future<void> _generateInitialRecommendations(
@@ -1681,11 +1722,14 @@ class _StylePreferenceSetupScreenState extends State<StylePreferenceSetupScreen>
 
       // Create a design prompt based on preferences
       final prompt = DesignPrompt(
-        userInput: 'Create personalized designs based on style preferences setup',
+        userInput:
+            'Create personalized designs based on style preferences setup',
         stylePreferences: _selectedStyles,
         preferredColors: preferences.preferredColors,
-        occasion: _selectedOccasions.isNotEmpty ? _selectedOccasions.first : 'casual',
-        bodyMeasurements: null, // Will be filled later when measurements are taken
+        occasion:
+            _selectedOccasions.isNotEmpty ? _selectedOccasions.first : 'casual',
+        bodyMeasurements:
+            null, // Will be filled later when measurements are taken
         budget: _budgetRange ?? 'medium',
         additionalRequirements: {
           'bodyType': _selectedBodyType,

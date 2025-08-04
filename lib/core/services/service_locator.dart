@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tailorapp/core/services/ai_service.dart';
 import 'package:tailorapp/core/services/gemini_service_impl.dart';
@@ -9,12 +9,19 @@ import 'package:tailorapp/core/services/mlkit_service_impl.dart';
 import 'package:tailorapp/core/services/production_gemini_service_impl.dart';
 import 'package:tailorapp/core/services/production_openai_service_impl.dart';
 import 'package:tailorapp/core/services/auth_service.dart';
+import 'package:tailorapp/core/services/supabase_auth_service.dart';
 import 'package:tailorapp/core/repositories/customer_repository.dart';
 import 'package:tailorapp/core/repositories/tailor_repository.dart';
 import 'package:tailorapp/core/repositories/admin_repository.dart';
 import 'package:tailorapp/core/repositories/user_repository.dart';
 import 'package:tailorapp/core/repositories/order_repository.dart';
 import 'package:tailorapp/core/repositories/garment_repository.dart';
+import 'package:tailorapp/core/repositories/supabase_user_repository.dart';
+import 'package:tailorapp/core/repositories/supabase_customer_repository.dart';
+import 'package:tailorapp/core/repositories/supabase_tailor_repository.dart';
+import 'package:tailorapp/core/repositories/supabase_admin_repository.dart';
+import 'package:tailorapp/core/repositories/supabase_order_repository.dart';
+import 'package:tailorapp/core/repositories/supabase_garment_repository.dart';
 
 final GetIt serviceLocator = GetIt.instance;
 
@@ -31,42 +38,42 @@ class ServiceLocator {
   }
 
   static void _setupRepositories() {
-    // Register repository implementations
+    // Register Supabase repository implementations
     serviceLocator.registerLazySingleton<UserRepository>(
-      () => FirebaseUserRepository(),
+      () => SupabaseUserRepository(),
     );
 
     serviceLocator.registerLazySingleton<CustomerRepository>(
-      () => FirebaseCustomerRepository(),
+      () => SupabaseCustomerRepository(),
     );
 
     serviceLocator.registerLazySingleton<TailorRepository>(
-      () => FirebaseTailorRepository(),
+      () => SupabaseTailorRepository(),
     );
 
     serviceLocator.registerLazySingleton<AdminRepository>(
-      () => FirebaseAdminRepository(),
+      () => SupabaseAdminRepository(),
     );
 
     serviceLocator.registerLazySingleton<OrderRepository>(
-      () => FirebaseOrderRepository(),
+      () => SupabaseOrderRepository(),
     );
 
     serviceLocator.registerLazySingleton<GarmentRepository>(
-      () => FirebaseGarmentRepository(),
+      () => SupabaseGarmentRepository(),
     );
   }
 
   static void _setupAuthServices() {
-    // Register Firebase Auth instance
-    serviceLocator.registerLazySingleton<FirebaseAuth>(
-      () => FirebaseAuth.instance,
+    // Register Supabase client instance
+    serviceLocator.registerLazySingleton<SupabaseClient>(
+      () => Supabase.instance.client,
     );
 
-    // Register auth service implementation
+    // Register Supabase auth service implementation
     serviceLocator.registerLazySingleton<AuthService>(
-      () => FirebaseAuthService(
-        firebaseAuth: serviceLocator<FirebaseAuth>(),
+      () => SupabaseAuthService(
+        supabaseClient: serviceLocator<SupabaseClient>(),
         userRepository: serviceLocator<UserRepository>(),
       ),
     );
