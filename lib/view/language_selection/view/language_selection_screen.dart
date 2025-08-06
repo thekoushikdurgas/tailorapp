@@ -37,7 +37,8 @@ class LanguageSelectionScreen extends StatefulWidget {
   const LanguageSelectionScreen({super.key});
 
   @override
-  State<LanguageSelectionScreen> createState() => _LanguageSelectionScreenState();
+  State<LanguageSelectionScreen> createState() =>
+      _LanguageSelectionScreenState();
 }
 
 class _LanguageSelectionScreenState extends State<LanguageSelectionScreen>
@@ -159,11 +160,13 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen>
   }
 
   /// Build content based on current state
-  Widget _buildStateContent(BuildContext context, LanguageSelectionState state) {
+  Widget _buildStateContent(
+      BuildContext context, LanguageSelectionState state) {
     return switch (state) {
       LanguageSelectionLoading() => _buildLoadingState(),
       LanguageSelectionLoaded(:final data) => _buildLoadedState(context, data),
-      LanguageSelectionApplying(:final data) => _buildLoadedState(context, data),
+      LanguageSelectionApplying(:final data) =>
+        _buildLoadedState(context, data),
       LanguageSelectionApplied(:final data) => _buildLoadedState(context, data),
       LanguageSelectionError(:final message) => _buildErrorState(message),
       LanguageSelectionInitial() => _buildLoadingState(),
@@ -254,7 +257,8 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen>
   }
 
   /// Build action buttons based on state
-  Widget _buildActionButtons(BuildContext context, LanguageSelectionState state) {
+  Widget _buildActionButtons(
+      BuildContext context, LanguageSelectionState state) {
     final isApplying = state is LanguageSelectionApplying;
     final hasSelection = switch (state) {
       LanguageSelectionLoaded(:final data) => data.selectedLanguage != null,

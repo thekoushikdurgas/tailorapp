@@ -87,7 +87,14 @@ lib\view\introduction\model\page_model.dart
 lib\view\introduction\view-model\intro_pages.dart
 lib\view\introduction\view\introduction_screen.dart
 lib\view\introduction\widgets\dots_decoration.dart
+lib\view\language_selection\cubit\language_selection_cubit.dart
+lib\view\language_selection\model\language_selection_model.dart
+lib\view\language_selection\view-model\language_selection_view_model.dart
 lib\view\language_selection\view\language_selection_screen.dart
+lib\view\language_selection\widgets\language_action_buttons.dart
+lib\view\language_selection\widgets\language_item_widget.dart
+lib\view\language_selection\widgets\language_list_widget.dart
+lib\view\language_selection\widgets\language_selection_header.dart
 lib\view\measurements\cubit\measurements_cubit.dart
 lib\view\measurements\view\measurements_page.dart
 lib\view\order_details\view\order_details_page.dart

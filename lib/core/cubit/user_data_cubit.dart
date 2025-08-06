@@ -118,7 +118,12 @@ class UserDataCubit extends Cubit<UserDataState> {
   // ==========================================================================
 
   /// Load user data by ID
-  Future<void> loadUser(String userId) async {
+  Future<void> loadUser(String? userId) async {
+    if (userId == null) {
+      emit(const UserDataEmpty());
+      return;
+    }
+
     if (state is UserDataLoading) return;
 
     emit(const UserDataLoading());
@@ -217,7 +222,7 @@ class UserDataCubit extends Cubit<UserDataState> {
   /// Refresh current user data
   Future<void> refreshUser() async {
     if (_currentUserId != null) {
-      await loadUser(_currentUserId!);
+      await loadUser(_currentUserId);
     }
   }
 

@@ -14,6 +14,8 @@ Author: AI Assistant for TailorAI
 Version: 1.0.0
 """
 
+import lib.transport
+import lib.session
 import json
 import os
 import sys

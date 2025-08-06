@@ -316,9 +316,11 @@ class LanguageSelectionViewModel {
   String getUserFriendlyErrorMessage(String errorMessage) {
     if (errorMessage.contains('storage') || errorMessage.contains('save')) {
       return 'Unable to save language preference. Please try again.';
-    } else if (errorMessage.contains('network') || errorMessage.contains('connection')) {
+    } else if (errorMessage.contains('network') ||
+        errorMessage.contains('connection')) {
       return 'Network error. Please check your connection and try again.';
-    } else if (errorMessage.contains('locale') || errorMessage.contains('localization')) {
+    } else if (errorMessage.contains('locale') ||
+        errorMessage.contains('localization')) {
       return 'Language change failed. Please restart the app.';
     } else {
       return 'An unexpected error occurred. Please try again.';
@@ -327,7 +329,8 @@ class LanguageSelectionViewModel {
 
   /// Calculate animation delays for staggered animations
   Duration getAnimationDelay(int index, {int itemsPerGroup = 3}) {
-    return Duration(milliseconds: (index * 150) + (index ~/ itemsPerGroup * 100));
+    return Duration(
+        milliseconds: (index * 150) + (index ~/ itemsPerGroup * 100));
   }
 
   /// Check if device supports haptic feedback
@@ -363,5 +366,6 @@ class LanguageSelectionViewModel {
 
 /// Navigation Service for global context access
 class NavigationService {
-  static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  static final GlobalKey<NavigatorState> navigatorKey =
+      GlobalKey<NavigatorState>();
 }

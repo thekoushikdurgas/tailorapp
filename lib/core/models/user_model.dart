@@ -48,7 +48,7 @@ class UserModel extends Equatable {
 
     return UserModel(
       id: json['id'] as String,
-      name: json['name'] as String,
+      name: json['full_name'] as String? ?? json['name'] as String,
       email: json['email'] as String,
       phone: json['phone'] as String,
       profileImageUrl: json['profileImageUrl'] as String?,
@@ -60,19 +60,29 @@ class UserModel extends Equatable {
       address: json['address'] != null
           ? UserAddress.fromJson(json['address'] as Map<String, dynamic>)
           : null,
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      updatedAt: DateTime.parse(json['updatedAt'] as String),
-      isVerified: json['isVerified'] as bool? ?? false,
-      isActive: json['isActive'] as bool? ?? true,
+      createdAt: DateTime.parse(
+          json['created_at'] as String? ?? json['createdAt'] as String),
+      updatedAt: DateTime.parse(
+          json['updated_at'] as String? ?? json['updatedAt'] as String),
+      isVerified: json['email_verified'] as bool? ??
+          json['isVerified'] as bool? ??
+          false,
+      isActive: json['is_active'] as bool? ?? json['isActive'] as bool? ?? true,
       metadata: json['metadata'] as Map<String, dynamic>?,
-      customerData: role == UserRole.customer && json['customerData'] != null
-          ? CustomerData.fromJson(json['customerData'] as Map<String, dynamic>)
+      customerData: role == UserRole.customer &&
+              (json['customer_data'] ?? json['customerData']) != null
+          ? CustomerData.fromJson((json['customer_data'] ??
+              json['customerData']) as Map<String, dynamic>)
           : null,
-      tailorData: role == UserRole.tailor && json['tailorData'] != null
-          ? TailorData.fromJson(json['tailorData'] as Map<String, dynamic>)
+      tailorData: role == UserRole.tailor &&
+              (json['tailor_data'] ?? json['tailorData']) != null
+          ? TailorData.fromJson((json['tailor_data'] ?? json['tailorData'])
+              as Map<String, dynamic>)
           : null,
-      adminData: role == UserRole.admin && json['adminData'] != null
-          ? AdminData.fromJson(json['adminData'] as Map<String, dynamic>)
+      adminData: role == UserRole.admin &&
+              (json['admin_data'] ?? json['adminData']) != null
+          ? AdminData.fromJson(
+              (json['admin_data'] ?? json['adminData']) as Map<String, dynamic>)
           : null,
     );
   }
@@ -80,7 +90,7 @@ class UserModel extends Equatable {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'name': name,
+      'full_name': name, // Map to full_name for database compatibility
       'email': email,
       'phone': phone,
       'profileImageUrl': profileImageUrl,
@@ -88,14 +98,23 @@ class UserModel extends Equatable {
       'gender': gender,
       'role': role.value,
       'address': address?.toJson(),
-      'createdAt': createdAt.toIso8601String(),
-      'updatedAt': updatedAt.toIso8601String(),
-      'isVerified': isVerified,
-      'isActive': isActive,
+      'created_at': createdAt
+          .toIso8601String(), // Map to created_at for database compatibility
+      'updated_at': updatedAt
+          .toIso8601String(), // Map to updated_at for database compatibility
+      'email_verified':
+          isVerified, // Map to email_verified for database compatibility
+      'is_active': isActive, // Map to is_active for database compatibility
       'metadata': metadata,
-      if (customerData != null) 'customerData': customerData!.toJson(),
-      if (tailorData != null) 'tailorData': tailorData!.toJson(),
-      if (adminData != null) 'adminData': adminData!.toJson(),
+      if (customerData != null)
+        'customer_data': customerData!
+            .toJson(), // Map to customer_data for database compatibility
+      if (tailorData != null)
+        'tailor_data': tailorData!
+            .toJson(), // Map to tailor_data for database compatibility
+      if (adminData != null)
+        'admin_data':
+            adminData!.toJson(), // Map to admin_data for database compatibility
     };
   }
 
