@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import 'package:tailorapp/core/icons/prbal_icons.dart';
-import 'package:tailorapp/core/services/theme_manager.dart';
+import 'package:tailorapp/core/theme/theme_manager.dart';
 
 /// Reusable loading animation widget for splash screen
 ///

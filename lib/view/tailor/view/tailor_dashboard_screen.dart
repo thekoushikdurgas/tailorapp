@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tailorapp/core/cubit/auth_cubit.dart';
+import 'package:tailorapp/core/cubit/user_data_cubit.dart';
 import 'package:tailorapp/product/enum/route_enum.dart';
 import 'package:go_router/go_router.dart';
 
@@ -68,13 +68,11 @@ class TailorDashboardScreen extends StatelessWidget {
   }
 
   Widget _buildWelcomeSection(BuildContext context) {
-    return BlocBuilder<AuthCubit, AuthState>(
+    return BlocBuilder<UserDataCubit, UserDataState>(
       builder: (context, state) {
         String tailorName = 'Tailor';
-        if (state is AuthAuthenticated) {
-          tailorName =
-              (state.user.userMetadata?['name'] as String?)?.split(' ').first ??
-                  'Tailor';
+        if (state is UserDataLoaded) {
+          tailorName = state.user.name.split(' ').first;
         }
 
         return Container(

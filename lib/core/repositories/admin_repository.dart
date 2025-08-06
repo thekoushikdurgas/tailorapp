@@ -47,12 +47,14 @@ class AdminRepositoryImpl implements AdminRepository {
   final SupabaseClient _supabase;
   final String _table = 'admins';
 
-  AdminRepositoryImpl({SupabaseClient? supabase}) : _supabase = supabase ?? Supabase.instance.client;
+  AdminRepositoryImpl({SupabaseClient? supabase})
+      : _supabase = supabase ?? Supabase.instance.client;
 
   @override
   Future<AdminModel?> getAdmin(String id) async {
     try {
-      final response = await _supabase.from(_table).select().eq('id', id).maybeSingle();
+      final response =
+          await _supabase.from(_table).select().eq('id', id).maybeSingle();
 
       if (response == null) {
         return null;
@@ -72,7 +74,8 @@ class AdminRepositoryImpl implements AdminRepository {
       data['created_at'] = DateTime.now().toIso8601String();
       data['updated_at'] = DateTime.now().toIso8601String();
 
-      final response = await _supabase.from(_table).insert(data).select().single();
+      final response =
+          await _supabase.from(_table).insert(data).select().single();
 
       return AdminModel.fromJson(response);
     } catch (e) {
@@ -87,7 +90,12 @@ class AdminRepositoryImpl implements AdminRepository {
       data.remove('id'); // Remove ID from update data
       data['updated_at'] = DateTime.now().toIso8601String();
 
-      final response = await _supabase.from(_table).update(data).eq('id', admin.id).select().single();
+      final response = await _supabase
+          .from(_table)
+          .update(data)
+          .eq('id', admin.id)
+          .select()
+          .single();
 
       return AdminModel.fromJson(response);
     } catch (e) {
@@ -107,7 +115,11 @@ class AdminRepositoryImpl implements AdminRepository {
   @override
   Future<List<AdminModel>> searchAdmins(String query) async {
     try {
-      final response = await _supabase.from(_table).select().ilike('name', '%$query%').limit(20);
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .ilike('name', '%$query%')
+          .limit(20);
 
       return response.map((json) => AdminModel.fromJson(json)).toList();
     } catch (e) {
@@ -118,7 +130,11 @@ class AdminRepositoryImpl implements AdminRepository {
   @override
   Future<AdminModel?> getAdminByEmail(String email) async {
     try {
-      final response = await _supabase.from(_table).select().eq('email', email).maybeSingle();
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .eq('email', email)
+          .maybeSingle();
 
       if (response == null) {
         return null;
@@ -178,8 +194,11 @@ class AdminRepositoryImpl implements AdminRepository {
   @override
   Future<List<AdminModel>> getAdminsByRole(AdminRole role) async {
     try {
-      final response =
-          await _supabase.from(_table).select().eq('role', role.toString()).order('created_at', ascending: false);
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .eq('role', role.toString())
+          .order('created_at', ascending: false);
 
       return response.map((json) => AdminModel.fromJson(json)).toList();
     } catch (e) {
@@ -190,8 +209,11 @@ class AdminRepositoryImpl implements AdminRepository {
   @override
   Future<List<AdminModel>> getActiveAdmins() async {
     try {
-      final response =
-          await _supabase.from(_table).select().eq('is_active', true).order('created_at', ascending: false);
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .eq('is_active', true)
+          .order('created_at', ascending: false);
 
       return response.map((json) => AdminModel.fromJson(json)).toList();
     } catch (e) {
@@ -308,7 +330,11 @@ class AdminRepositoryImpl implements AdminRepository {
   @override
   Future<List<AdminModel>> getRecentAdmins(int limit) async {
     try {
-      final response = await _supabase.from(_table).select().order('created_at', ascending: false).limit(limit);
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .order('created_at', ascending: false)
+          .limit(limit);
 
       return response.map((json) => AdminModel.fromJson(json)).toList();
     } catch (e) {
@@ -320,14 +346,22 @@ class AdminRepositoryImpl implements AdminRepository {
   Future<Map<String, dynamic>> getAdminStats() async {
     try {
       // Get total admins
-      final totalAdmins = await _supabase.from(_table).select('*').count(CountOption.exact);
+      final totalAdmins =
+          await _supabase.from(_table).select('*').count(CountOption.exact);
 
       // Get active admins
-      final activeAdmins = await _supabase.from(_table).select('*').eq('is_active', true).count(CountOption.exact);
+      final activeAdmins = await _supabase
+          .from(_table)
+          .select('*')
+          .eq('is_active', true)
+          .count(CountOption.exact);
 
       // Get super admins
-      final superAdmins =
-          await _supabase.from(_table).select('*').eq('role', AdminRole.superAdmin.toString()).count(CountOption.exact);
+      final superAdmins = await _supabase
+          .from(_table)
+          .select('*')
+          .eq('role', AdminRole.superAdmin.toString())
+          .count(CountOption.exact);
 
       return {
         'total_admins': totalAdmins.count,
@@ -380,7 +414,8 @@ class AdminRepositoryImpl implements AdminRepository {
       final admin = await getAdmin(adminId);
       if (admin == null) return;
 
-      final updatedPermissions = admin.permissions.where((p) => p != permission).toList();
+      final updatedPermissions =
+          admin.permissions.where((p) => p != permission).toList();
       await updateAdminPermissions(adminId, updatedPermissions);
     } catch (e) {
       throw AdminRepositoryException('Failed to revoke admin permission: $e');

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tailorapp/core/cubit/auth_cubit.dart';
+import 'package:tailorapp/core/cubit/user_data_cubit.dart';
 import 'package:tailorapp/core/models/shared_models.dart';
 import 'package:tailorapp/core/models/ai_design_suggestion.dart';
 import 'package:tailorapp/core/models/garment_model.dart';
@@ -1514,12 +1514,12 @@ class _StylePreferenceSetupScreenState
 
     try {
       // Get current user from auth cubit
-      final authState = context.read<AuthCubit>().state;
-      if (authState is! AuthAuthenticated) {
+      final userDataState = context.read<UserDataCubit>().state;
+      if (userDataState is! UserDataLoaded) {
         throw Exception('User not authenticated');
       }
 
-      final userId = authState.user.id;
+      final userId = userDataState.user.id;
 
       // Convert color selections to hex strings for storage
       final colorStrings = _selectedColors

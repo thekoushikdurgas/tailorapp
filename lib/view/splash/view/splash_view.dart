@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:tailorapp/core/services/theme_manager.dart';
+import 'package:tailorapp/core/theme/theme_manager.dart';
 import 'package:tailorapp/core/services/debug_logger.dart';
-import 'package:tailorapp/core/cubit/auth_cubit.dart';
+import 'package:tailorapp/core/cubit/user_data_cubit.dart';
 import 'package:tailorapp/view/splash/cubit/splash_cubit.dart';
 import 'package:tailorapp/view/splash/view-model/splash_view_model.dart';
 import 'package:tailorapp/view/splash/widgets/splash_loading_animation.dart';
@@ -531,7 +531,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => SplashCubit(
-        authCubit: context.read<AuthCubit>(),
+        userDataCubit: context.read<UserDataCubit>(),
       ),
       child: const SplashView(),
     );

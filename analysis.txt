@@ -3,19 +3,6 @@ Analyzing tailorapp...
 warning - The value of the field '_userGrowthData' isn't used - lib\view\admin\view\platform_analytics_insights_screen.dart:26:19 - unused_field
 warning - The value of the field '_orderVolumeData' isn't used - lib\view\admin\view\platform_analytics_insights_screen.dart:27:19 - unused_field
 warning - The value of the field '_selectedTimeRange' isn't used - lib\view\admin\view\super_admin_dashboard_screen.dart:20:10 - unused_field
-   info - Missing a required trailing comma - lib\view\splash\cubit\splash_cubit.dart:193:67 - require_trailing_commas
-   info - Missing a required trailing comma - lib\view\splash\cubit\splash_cubit.dart:200:77 - require_trailing_commas
-   info - Missing a required trailing comma - lib\view\splash\cubit\splash_cubit.dart:312:66 - require_trailing_commas
-   info - Missing a required trailing comma - lib\view\splash\cubit\splash_cubit.dart:330:65 - require_trailing_commas
-   info - Missing a required trailing comma - lib\view\splash\cubit\splash_cubit.dart:357:65 - require_trailing_commas
-   info - Missing a required trailing comma - lib\view\splash\view-model\splash_view_model.dart:196:73 - require_trailing_commas
-   info - Missing a required trailing comma - lib\view\splash\view-model\splash_view_model.dart:200:95 - require_trailing_commas
-   info - Missing a required trailing comma - lib\view\splash\view-model\splash_view_model.dart:204:71 - require_trailing_commas
-   info - Missing a required trailing comma - lib\view\splash\view-model\splash_view_model.dart:243:81 - require_trailing_commas
-   info - Missing a required trailing comma - lib\view\splash\view-model\splash_view_model.dart:247:69 - require_trailing_commas
-   info - Missing a required trailing comma - lib\view\splash\view-model\splash_view_model.dart:250:73 - require_trailing_commas
-  error - The element type 'String?' can't be assigned to the map value type 'Object' - lib\view\splash\view-model\splash_view_model.dart:369:28 - map_value_type_not_assignable
-  error - The element type 'String?' can't be assigned to the map value type 'Object' - lib\view\splash\view-model\splash_view_model.dart:370:30 - map_value_type_not_assignable
 warning - The value of the field '_selectedOrder' isn't used - lib\view\tailor\view\order_management_screen.dart:25:16 - unused_field
 warning - The value of the field '_selectedPattern' isn't used - lib\view\tailor\view\pattern_creation_management_screen.dart:25:19 - unused_field
 

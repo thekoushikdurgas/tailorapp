@@ -9,7 +9,7 @@ import 'package:tailorapp/core/icons/prbal_icons.dart';
 import 'package:tailorapp/core/mixins/theme_aware_mixin.dart';
 import 'package:tailorapp/core/services/debug_logger.dart';
 import 'package:tailorapp/core/services/hive_service.dart';
-import 'package:tailorapp/core/services/theme_manager.dart';
+import 'package:tailorapp/core/theme/theme_manager.dart';
 import 'package:tailorapp/product/enum/route_enum.dart';
 import 'package:tailorapp/product/lang/locale_keys.g.dart';
 

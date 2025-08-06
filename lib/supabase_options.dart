@@ -9,10 +9,7 @@
 /// 3. Replace the values below with your actual credentials
 /// 4. Run the SQL schema from supabase_database_schema.sql
 class SupabaseConfig {
-  // TODO: Replace with your actual Supabase project URL
   static const String supabaseUrl = 'https://qpyrgcqpqxoaarifogfx.supabase.co';
-
-  // TODO: Replace with your actual Supabase anon key
   static const String supabaseAnonKey =
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFweXJnY3FwcXhvYWFyaWZvZ2Z4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI4NjYxMjgsImV4cCI6MjA2ODQ0MjEyOH0.g9sF7Dz6i9jmcpTpzj8mzOIixNpJ_ZTJ7ExjEpT1hco';
 

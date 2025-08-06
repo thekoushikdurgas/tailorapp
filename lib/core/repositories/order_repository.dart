@@ -34,12 +34,14 @@ class OrderRepositoryImpl implements OrderRepository {
   final SupabaseClient _supabase;
   final String _table = 'orders';
 
-  OrderRepositoryImpl({SupabaseClient? supabase}) : _supabase = supabase ?? Supabase.instance.client;
+  OrderRepositoryImpl({SupabaseClient? supabase})
+      : _supabase = supabase ?? Supabase.instance.client;
 
   @override
   Future<OrderModel?> getOrder(String id) async {
     try {
-      final response = await _supabase.from(_table).select().eq('id', id).maybeSingle();
+      final response =
+          await _supabase.from(_table).select().eq('id', id).maybeSingle();
 
       if (response == null) {
         return null;
@@ -59,7 +61,8 @@ class OrderRepositoryImpl implements OrderRepository {
       data['created_at'] = DateTime.now().toIso8601String();
       data['updated_at'] = DateTime.now().toIso8601String();
 
-      final response = await _supabase.from(_table).insert(data).select().single();
+      final response =
+          await _supabase.from(_table).insert(data).select().single();
 
       return OrderModel.fromJson(response);
     } catch (e) {
@@ -74,7 +77,12 @@ class OrderRepositoryImpl implements OrderRepository {
       data.remove('id'); // Remove ID from update data
       data['updated_at'] = DateTime.now().toIso8601String();
 
-      final response = await _supabase.from(_table).update(data).eq('id', order.id).select().single();
+      final response = await _supabase
+          .from(_table)
+          .update(data)
+          .eq('id', order.id)
+          .select()
+          .single();
 
       return OrderModel.fromJson(response);
     } catch (e) {
@@ -94,8 +102,11 @@ class OrderRepositoryImpl implements OrderRepository {
   @override
   Future<List<OrderModel>> getCustomerOrders(String customerId) async {
     try {
-      final response =
-          await _supabase.from(_table).select().eq('customer_id', customerId).order('created_at', ascending: false);
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .eq('customer_id', customerId)
+          .order('created_at', ascending: false);
 
       return response.map((json) => OrderModel.fromJson(json)).toList();
     } catch (e) {
@@ -106,7 +117,11 @@ class OrderRepositoryImpl implements OrderRepository {
   @override
   Future<List<OrderModel>> getOrdersByStatus(String status) async {
     try {
-      final response = await _supabase.from(_table).select().eq('status', status).order('created_at', ascending: false);
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .eq('status', status)
+          .order('created_at', ascending: false);
 
       return response.map((json) => OrderModel.fromJson(json)).toList();
     } catch (e) {
@@ -117,7 +132,11 @@ class OrderRepositoryImpl implements OrderRepository {
   @override
   Future<List<OrderModel>> getRecentOrders(int limit) async {
     try {
-      final response = await _supabase.from(_table).select().order('created_at', ascending: false).limit(limit);
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .order('created_at', ascending: false)
+          .limit(limit);
 
       return response.map((json) => OrderModel.fromJson(json)).toList();
     } catch (e) {
@@ -178,7 +197,11 @@ class OrderRepositoryImpl implements OrderRepository {
 
   @override
   Stream<OrderModel> watchOrder(String id) {
-    return _supabase.from(_table).stream(primaryKey: ['id']).eq('id', id).map((List<Map<String, dynamic>> data) {
+    return _supabase
+        .from(_table)
+        .stream(primaryKey: ['id'])
+        .eq('id', id)
+        .map((List<Map<String, dynamic>> data) {
           if (data.isNotEmpty) {
             return OrderModel.fromJson(data.first);
           }
@@ -238,7 +261,11 @@ class OrderRepositoryImpl implements OrderRepository {
   Future<void> addOrderNote(String orderId, String note) async {
     try {
       // First get current notes
-      final response = await _supabase.from(_table).select('notes').eq('id', orderId).single();
+      final response = await _supabase
+          .from(_table)
+          .select('notes')
+          .eq('id', orderId)
+          .single();
 
       final currentNotes = List<String>.from(response['notes'] ?? []);
       currentNotes.add(note);
@@ -280,19 +307,28 @@ class OrderRepositoryImpl implements OrderRepository {
   Future<Map<String, dynamic>> getOrderStats() async {
     try {
       // Get total orders
-      final totalOrders = await _supabase.from(_table).select('*').count(CountOption.exact);
+      final totalOrders =
+          await _supabase.from(_table).select('*').count(CountOption.exact);
 
       // Get orders by status
-      final pendingOrders = await _supabase.from(_table).select('*').eq('status', 'pending').count(CountOption.exact);
+      final pendingOrders = await _supabase
+          .from(_table)
+          .select('*')
+          .eq('status', 'pending')
+          .count(CountOption.exact);
 
-      final completedOrders =
-          await _supabase.from(_table).select('*').eq('status', 'delivered').count(CountOption.exact);
+      final completedOrders = await _supabase
+          .from(_table)
+          .select('*')
+          .eq('status', 'delivered')
+          .count(CountOption.exact);
 
       return {
         'total_orders': totalOrders.count,
         'pending_orders': pendingOrders.count,
         'completed_orders': completedOrders.count,
-        'in_progress_orders': totalOrders.count - pendingOrders.count - completedOrders.count,
+        'in_progress_orders':
+            totalOrders.count - pendingOrders.count - completedOrders.count,
       };
     } catch (e) {
       throw OrderRepositoryException('Failed to get order stats: $e');
@@ -319,8 +355,11 @@ class OrderRepositoryImpl implements OrderRepository {
   @override
   Future<List<OrderModel>> getOrdersByCustomer(String customerId) async {
     try {
-      final response =
-          await _supabase.from(_table).select().eq('customer_id', customerId).order('created_at', ascending: false);
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .eq('customer_id', customerId)
+          .order('created_at', ascending: false);
 
       return response.map((json) => OrderModel.fromJson(json)).toList();
     } catch (e) {
@@ -331,8 +370,11 @@ class OrderRepositoryImpl implements OrderRepository {
   @override
   Future<List<OrderModel>> getOrdersByTailor(String tailorId) async {
     try {
-      final response =
-          await _supabase.from(_table).select().eq('tailor_id', tailorId).order('created_at', ascending: false);
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .eq('tailor_id', tailorId)
+          .order('created_at', ascending: false);
 
       return response.map((json) => OrderModel.fromJson(json)).toList();
     } catch (e) {

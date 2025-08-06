@@ -5,7 +5,7 @@ import 'package:tailorapp/view/design/widgets/fabric_selector.dart';
 import 'package:tailorapp/view/design/widgets/color_palette_widget.dart';
 import 'package:tailorapp/core/services/service_locator.dart';
 import 'package:tailorapp/core/models/ai_design_suggestion.dart';
-import 'package:tailorapp/core/cubit/auth_cubit.dart';
+import 'package:tailorapp/core/cubit/user_data_cubit.dart';
 import 'package:tailorapp/core/navigation/navigation_route.dart';
 
 class DesignCanvasPage extends StatefulWidget {
@@ -920,10 +920,10 @@ class _DesignCanvasPageState extends State<DesignCanvasPage> {
 
     try {
       // Get current user from auth
-      final authState = context.read<AuthCubit>().state;
+      final userDataState = context.read<UserDataCubit>().state;
       String userId = 'guest';
-      if (authState is AuthAuthenticated) {
-        userId = authState.user.id;
+      if (userDataState is UserDataLoaded) {
+        userId = userDataState.user.id;
       }
 
       // Create design prompt

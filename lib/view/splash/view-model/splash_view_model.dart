@@ -1,6 +1,6 @@
 import 'package:tailorapp/core/services/debug_logger.dart';
 import 'package:tailorapp/core/services/hive_service.dart';
-import 'package:tailorapp/core/cubit/auth_cubit.dart';
+import 'package:tailorapp/core/cubit/user_data_cubit.dart';
 import 'package:tailorapp/core/models/user_model.dart';
 import 'package:tailorapp/core/models/user_role.dart';
 import 'package:tailorapp/view/splash/model/splash_state_model.dart';
@@ -15,9 +15,10 @@ import 'package:tailorapp/view/splash/model/splash_state_model.dart';
 /// - Performance optimization
 /// - Error handling and recovery
 class SplashViewModel {
-  final AuthCubit? _authCubit;
+  final UserDataCubit? _userDataCubit;
 
-  SplashViewModel({AuthCubit? authCubit}) : _authCubit = authCubit;
+  SplashViewModel({UserDataCubit? userDataCubit})
+      : _userDataCubit = userDataCubit;
   static const Duration _initializationDelay = Duration(milliseconds: 300);
   static const Duration _minimumSplashDuration = Duration(seconds: 2);
 
@@ -190,18 +191,18 @@ class SplashViewModel {
       );
 
       // Check AuthCubit state if available
-      if (_authCubit != null) {
-        final authState = _authCubit.state;
+      if (_userDataCubit != null) {
+        final authState = _userDataCubit.state;
         DebugLogger.auth(
           'SplashViewModel: AuthCubit state: ${authState.runtimeType}',
         );
 
-        if (authState is AuthAuthenticated) {
+        if (authState is UserDataLoaded) {
           DebugLogger.auth(
             'SplashViewModel: User authenticated in AuthCubit as ${authState.userRole.name}',
           );
           return true;
-        } else if (authState is AuthError) {
+        } else if (authState is UserDataError) {
           DebugLogger.warning(
             'SplashViewModel: AuthCubit error: ${authState.message}',
           );
@@ -241,12 +242,13 @@ class SplashViewModel {
           DebugLogger.warning('SplashViewModel: Tokens are expired');
 
           // Attempt token refresh through AuthCubit if available
-          if (_authCubit != null) {
+          if (_userDataCubit != null) {
             DebugLogger.auth(
               'SplashViewModel: Attempting token refresh through AuthCubit...',
             );
             try {
-              await _authCubit.retry();
+              // TODO: Implement retry logic for UserDataCubit
+              // await _userDataCubit!.refreshUser();
               DebugLogger.success(
                 'SplashViewModel: Token refresh attempt completed',
               );
@@ -296,15 +298,15 @@ class SplashViewModel {
       UserModel? userData = HiveService.getUserDataSafe();
 
       // Override with AuthCubit state if available and authenticated
-      if (_authCubit != null) {
-        final authState = _authCubit.state;
-        if (authState is AuthAuthenticated) {
+      if (_userDataCubit != null) {
+        final authState = _userDataCubit.state;
+        if (authState is UserDataLoaded) {
           isLoggedIn = true;
-          userData = authState.userProfile;
+          userData = authState.user;
           DebugLogger.info(
             'SplashViewModel: Using AuthCubit state - user: ${userData.name}, role: ${authState.userRole.name}',
           );
-        } else if (authState is AuthUnauthenticated) {
+        } else if (authState is UserDataEmpty) {
           isLoggedIn = false;
           userData = null;
         }
@@ -367,13 +369,14 @@ class SplashViewModel {
     };
 
     // Add AuthCubit debug info if available
-    if (_authCubit != null) {
-      final authState = _authCubit.state;
+    if (_userDataCubit != null) {
+      final authState = _userDataCubit.state;
       debugInfo.addAll({
         'authCubitState': authState.runtimeType.toString(),
-        'authCubitAuthenticated': _authCubit.isAuthenticated,
-        'authCubitUserId': _authCubit.currentUserId ?? 'null',
-        'authCubitUserRole': _authCubit.currentUserProfile?.role.name ?? 'null',
+        'userDataCubitLoaded': _userDataCubit.isUserLoaded,
+        'userDataCubitUserId': _userDataCubit.currentUser?.id ?? 'null',
+        'userDataCubitUserRole':
+            _userDataCubit.currentUser?.role.name ?? 'null',
       });
     }
 

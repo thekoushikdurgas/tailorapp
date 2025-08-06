@@ -55,7 +55,8 @@ class CustomerRepositoryImpl implements CustomerRepository {
 
         return CustomerModel.fromJson(response.first);
       } else {
-        final response = await _supabase.from(_table).select().eq('id', id).maybeSingle();
+        final response =
+            await _supabase.from(_table).select().eq('id', id).maybeSingle();
 
         if (response == null) {
           return null;
@@ -84,7 +85,8 @@ class CustomerRepositoryImpl implements CustomerRepository {
 
         return CustomerModel.fromJson(response);
       } else {
-        final response = await _supabase.from(_table).insert(data).select().single();
+        final response =
+            await _supabase.from(_table).insert(data).select().single();
 
         return CustomerModel.fromJson(response);
       }
@@ -100,7 +102,12 @@ class CustomerRepositoryImpl implements CustomerRepository {
       data.remove('id'); // Remove ID from update data
       data['updated_at'] = DateTime.now().toIso8601String();
 
-      final response = await _supabase.from(_table).update(data).eq('id', customer.id).select().single();
+      final response = await _supabase
+          .from(_table)
+          .update(data)
+          .eq('id', customer.id)
+          .select()
+          .single();
 
       return CustomerModel.fromJson(response);
     } catch (e) {
@@ -120,7 +127,11 @@ class CustomerRepositoryImpl implements CustomerRepository {
   @override
   Future<List<CustomerModel>> searchCustomers(String query) async {
     try {
-      final response = await _supabase.from(_table).select().ilike('name', '%$query%').limit(20);
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .ilike('name', '%$query%')
+          .limit(20);
 
       return response.map((json) => CustomerModel.fromJson(json)).toList();
     } catch (e) {
@@ -131,7 +142,11 @@ class CustomerRepositoryImpl implements CustomerRepository {
   @override
   Future<CustomerModel?> getCustomerByEmail(String email) async {
     try {
-      final response = await _supabase.from(_table).select().eq('email', email).maybeSingle();
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .eq('email', email)
+          .maybeSingle();
 
       if (response == null) {
         return null;
@@ -178,7 +193,11 @@ class CustomerRepositoryImpl implements CustomerRepository {
   @override
   Future<List<CustomerModel>> getRecentCustomers(int limit) async {
     try {
-      final response = await _supabase.from(_table).select().order('created_at', ascending: false).limit(limit);
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .order('created_at', ascending: false)
+          .limit(limit);
 
       return response.map((json) => CustomerModel.fromJson(json)).toList();
     } catch (e) {

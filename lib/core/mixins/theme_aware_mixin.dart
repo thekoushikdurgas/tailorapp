@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tailorapp/core/services/theme_manager.dart';
+import 'package:tailorapp/core/theme/theme_manager.dart';
 
 /// Mixin that provides theme-aware functionality to widgets
 ///

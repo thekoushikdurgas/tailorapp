@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tailorapp/core/models/order_model.dart';
 import 'package:tailorapp/core/models/garment_model.dart';
-import 'package:tailorapp/core/cubit/auth_cubit.dart';
+import 'package:tailorapp/core/cubit/user_data_cubit.dart';
 import 'package:tailorapp/core/services/service_locator.dart';
 import 'package:tailorapp/core/navigation/navigation_route.dart';
 
@@ -38,11 +38,11 @@ class _OrdersPageState extends State<OrdersPage> with TickerProviderStateMixin {
     setState(() => _isLoading = true);
 
     try {
-      final authState = context.read<AuthCubit>().state;
-      if (authState is AuthAuthenticated) {
+      final userDataState = context.read<UserDataCubit>().state;
+      if (userDataState is UserDataLoaded) {
         // Get orders from repository
         final orders = await ServiceLocator.orderRepository.getCustomerOrders(
-          authState.user.id,
+          userDataState.user.id,
         );
 
         setState(() {

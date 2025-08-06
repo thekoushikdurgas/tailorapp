@@ -32,12 +32,14 @@ class UserRepositoryImpl implements UserRepository {
   final SupabaseClient _supabase;
   final String _table = 'users';
 
-  UserRepositoryImpl({SupabaseClient? supabase}) : _supabase = supabase ?? Supabase.instance.client;
+  UserRepositoryImpl({SupabaseClient? supabase})
+      : _supabase = supabase ?? Supabase.instance.client;
 
   @override
   Future<UserModel?> getUser(String id) async {
     try {
-      final response = await _supabase.from(_table).select().eq('id', id).maybeSingle();
+      final response =
+          await _supabase.from(_table).select().eq('id', id).maybeSingle();
 
       if (response == null) {
         return null;
@@ -52,7 +54,11 @@ class UserRepositoryImpl implements UserRepository {
   @override
   Future<UserModel?> getUserByPhone(String phone) async {
     try {
-      final response = await _supabase.from(_table).select().eq('phone', phone).maybeSingle();
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .eq('phone', phone)
+          .maybeSingle();
 
       if (response == null) {
         return null;
@@ -67,7 +73,11 @@ class UserRepositoryImpl implements UserRepository {
   @override
   Future<UserModel?> getUserByEmail(String email) async {
     try {
-      final response = await _supabase.from(_table).select().eq('email', email).maybeSingle();
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .eq('email', email)
+          .maybeSingle();
 
       if (response == null) {
         return null;
@@ -87,7 +97,8 @@ class UserRepositoryImpl implements UserRepository {
       data['created_at'] = DateTime.now().toIso8601String();
       data['updated_at'] = DateTime.now().toIso8601String();
 
-      final response = await _supabase.from(_table).insert(data).select().single();
+      final response =
+          await _supabase.from(_table).insert(data).select().single();
 
       return UserModel.fromJson(response);
     } catch (e) {
@@ -102,7 +113,12 @@ class UserRepositoryImpl implements UserRepository {
       data.remove('id'); // Remove ID from update data
       data['updated_at'] = DateTime.now().toIso8601String();
 
-      final response = await _supabase.from(_table).update(data).eq('id', user.id).select().single();
+      final response = await _supabase
+          .from(_table)
+          .update(data)
+          .eq('id', user.id)
+          .select()
+          .single();
 
       return UserModel.fromJson(response);
     } catch (e) {
@@ -122,7 +138,11 @@ class UserRepositoryImpl implements UserRepository {
   @override
   Future<List<UserModel>> searchUsers(String query) async {
     try {
-      final response = await _supabase.from(_table).select().ilike('name', '%$query%').limit(20);
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .ilike('name', '%$query%')
+          .limit(20);
 
       return response.map((json) => UserModel.fromJson(json)).toList();
     } catch (e) {
@@ -169,7 +189,11 @@ class UserRepositoryImpl implements UserRepository {
   @override
   Future<List<UserModel>> getRecentUsers(int limit) async {
     try {
-      final response = await _supabase.from(_table).select().order('created_at', ascending: false).limit(limit);
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .order('created_at', ascending: false)
+          .limit(limit);
 
       return response.map((json) => UserModel.fromJson(json)).toList();
     } catch (e) {

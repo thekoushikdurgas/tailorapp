@@ -66,12 +66,14 @@ class TailorRepositoryImpl implements TailorRepository {
   final SupabaseClient _supabase;
   final String _table = 'tailors';
 
-  TailorRepositoryImpl({SupabaseClient? supabase}) : _supabase = supabase ?? Supabase.instance.client;
+  TailorRepositoryImpl({SupabaseClient? supabase})
+      : _supabase = supabase ?? Supabase.instance.client;
 
   @override
   Future<TailorModel?> getTailor(String id) async {
     try {
-      final response = await _supabase.from(_table).select().eq('id', id).maybeSingle();
+      final response =
+          await _supabase.from(_table).select().eq('id', id).maybeSingle();
 
       if (response == null) {
         return null;
@@ -91,7 +93,8 @@ class TailorRepositoryImpl implements TailorRepository {
       data['created_at'] = DateTime.now().toIso8601String();
       data['updated_at'] = DateTime.now().toIso8601String();
 
-      final response = await _supabase.from(_table).insert(data).select().single();
+      final response =
+          await _supabase.from(_table).insert(data).select().single();
 
       return TailorModel.fromJson(response);
     } catch (e) {
@@ -106,7 +109,12 @@ class TailorRepositoryImpl implements TailorRepository {
       data.remove('id'); // Remove ID from update data
       data['updated_at'] = DateTime.now().toIso8601String();
 
-      final response = await _supabase.from(_table).update(data).eq('id', tailor.id).select().single();
+      final response = await _supabase
+          .from(_table)
+          .update(data)
+          .eq('id', tailor.id)
+          .select()
+          .single();
 
       return TailorModel.fromJson(response);
     } catch (e) {
@@ -126,7 +134,11 @@ class TailorRepositoryImpl implements TailorRepository {
   @override
   Future<List<TailorModel>> searchTailors(String query) async {
     try {
-      final response = await _supabase.from(_table).select().ilike('name', '%$query%').limit(20);
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .ilike('name', '%$query%')
+          .limit(20);
 
       return response.map((json) => TailorModel.fromJson(json)).toList();
     } catch (e) {
@@ -137,7 +149,11 @@ class TailorRepositoryImpl implements TailorRepository {
   @override
   Future<TailorModel?> getTailorByEmail(String email) async {
     try {
-      final response = await _supabase.from(_table).select().eq('email', email).maybeSingle();
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .eq('email', email)
+          .maybeSingle();
 
       if (response == null) {
         return null;
@@ -214,7 +230,10 @@ class TailorRepositoryImpl implements TailorRepository {
     String specialization,
   ) async {
     try {
-      final response = await _supabase.from(_table).select().contains('specializations', [specialization]).order(
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .contains('specializations', [specialization]).order(
         'created_at',
         ascending: false,
       );
@@ -230,7 +249,11 @@ class TailorRepositoryImpl implements TailorRepository {
   @override
   Future<List<TailorModel>> getRecentTailors(int limit) async {
     try {
-      final response = await _supabase.from(_table).select().order('created_at', ascending: false).limit(limit);
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .order('created_at', ascending: false)
+          .limit(limit);
 
       return response.map((json) => TailorModel.fromJson(json)).toList();
     } catch (e) {
@@ -241,8 +264,11 @@ class TailorRepositoryImpl implements TailorRepository {
   @override
   Future<List<TailorModel>> getActiveTailors() async {
     try {
-      final response =
-          await _supabase.from(_table).select().eq('is_active', true).order('created_at', ascending: false);
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .eq('is_active', true)
+          .order('created_at', ascending: false);
 
       return response.map((json) => TailorModel.fromJson(json)).toList();
     } catch (e) {
@@ -253,8 +279,11 @@ class TailorRepositoryImpl implements TailorRepository {
   @override
   Future<List<TailorModel>> getVerifiedTailors() async {
     try {
-      final response =
-          await _supabase.from(_table).select().eq('is_verified', true).order('created_at', ascending: false);
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .eq('is_verified', true)
+          .order('created_at', ascending: false);
 
       return response.map((json) => TailorModel.fromJson(json)).toList();
     } catch (e) {
@@ -352,7 +381,8 @@ class TailorRepositoryImpl implements TailorRepository {
       final tailor = await getTailor(tailorId);
       if (tailor == null) return;
 
-      final updatedCertifications = tailor.certifications.where((cert) => cert != certification).toList();
+      final updatedCertifications =
+          tailor.certifications.where((cert) => cert != certification).toList();
 
       await _supabase.from(_table).update({
         'certifications': updatedCertifications,
@@ -372,10 +402,14 @@ class TailorRepositoryImpl implements TailorRepository {
     try {
       // For now, implement a simple location-based search
       // In a real implementation, you would use geospatial queries
-      final response = await _supabase.from(_table).select().order('created_at', ascending: false);
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .order('created_at', ascending: false);
 
       // Filter by distance in-memory (placeholder implementation)
-      final tailors = response.map((json) => TailorModel.fromJson(json)).toList();
+      final tailors =
+          response.map((json) => TailorModel.fromJson(json)).toList();
 
       // Return all tailors for now - implement proper geospatial filtering later
       return tailors;

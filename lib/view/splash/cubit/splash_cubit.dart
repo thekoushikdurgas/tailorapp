@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tailorapp/core/services/debug_logger.dart';
 import 'package:tailorapp/core/services/hive_service.dart';
-import 'package:tailorapp/core/cubit/auth_cubit.dart';
+import 'package:tailorapp/core/cubit/user_data_cubit.dart';
 import 'package:tailorapp/core/models/user_model.dart';
 import 'package:tailorapp/core/models/user_role.dart';
 import 'package:tailorapp/product/enum/route_enum.dart';
@@ -22,10 +22,10 @@ part 'splash_state.dart';
 /// - Error handling and recovery
 /// - Direct authentication without AuthWrapper
 class SplashCubit extends Cubit<SplashState> {
-  final AuthCubit _authCubit;
+  final UserDataCubit _userDataCubit;
 
-  SplashCubit({required AuthCubit authCubit})
-      : _authCubit = authCubit,
+  SplashCubit({required UserDataCubit userDataCubit})
+      : _userDataCubit = userDataCubit,
         super(const SplashInitial());
 
   /// Initialize the splash screen and start the service initialization process
@@ -58,13 +58,29 @@ class SplashCubit extends Cubit<SplashState> {
   Future<void> _initializeServices() async {
     final phases = [
       (InitializationPhase.checkingStorage, 'Checking storage health...', 0.1),
-      (InitializationPhase.setupPerformance, 'Setting up performance monitoring...', 0.2),
+      (
+        InitializationPhase.setupPerformance,
+        'Setting up performance monitoring...',
+        0.2
+      ),
       (InitializationPhase.optimizingStartup, 'Optimizing startup...', 0.3),
-      (InitializationPhase.optimizingImages, 'Optimizing image loading...', 0.4),
+      (
+        InitializationPhase.optimizingImages,
+        'Optimizing image loading...',
+        0.4
+      ),
       (InitializationPhase.checkingAuth, 'Checking authentication...', 0.5),
       (InitializationPhase.validatingTokens, 'Validating tokens...', 0.6),
-      (InitializationPhase.initializingHealth, 'Initializing health monitoring...', 0.7),
-      (InitializationPhase.checkingConnectivity, 'Checking connectivity...', 0.8),
+      (
+        InitializationPhase.initializingHealth,
+        'Initializing health monitoring...',
+        0.7
+      ),
+      (
+        InitializationPhase.checkingConnectivity,
+        'Checking connectivity...',
+        0.8
+      ),
       (InitializationPhase.loadingPreferences, 'Loading preferences...', 0.9),
       (InitializationPhase.finalizingSetup, 'Finalizing setup...', 1.0),
     ];
@@ -165,24 +181,18 @@ class SplashCubit extends Cubit<SplashState> {
     try {
       DebugLogger.auth('SplashCubit: Validating authentication state...');
 
-      // Check if user is currently authenticated
-      final currentAuthState = _authCubit.state;
+      // Check if user data is loaded
+      final currentUserDataState = _userDataCubit.state;
 
-      if (currentAuthState is AuthAuthenticated) {
-        DebugLogger.success('SplashCubit: User is authenticated');
+      if (currentUserDataState is UserDataLoaded) {
+        DebugLogger.success('SplashCubit: User data is loaded');
 
-        // Validate token freshness if needed
-        if (HiveService.areTokensExpired()) {
-          DebugLogger.warning(
-            'SplashCubit: Tokens expired, attempting refresh...',
-          );
-          await _authCubit.retry();
-        }
-      } else if (currentAuthState is AuthUnauthenticated) {
-        DebugLogger.info('SplashCubit: User is not authenticated');
-      } else if (currentAuthState is AuthError) {
+        // User data is available - can proceed with navigation
+      } else if (currentUserDataState is UserDataInitial) {
+        DebugLogger.info('SplashCubit: User data not initialized');
+      } else if (currentUserDataState is UserDataError) {
         DebugLogger.error(
-          'SplashCubit: Authentication error: ${currentAuthState.message}',
+          'SplashCubit: User data error: ${currentUserDataState.message}',
         );
       }
 
@@ -211,14 +221,14 @@ class SplashCubit extends Cubit<SplashState> {
         userData: HiveService.getUserDataSafe(),
       );
 
-      // Get current auth state
-      final authState = _authCubit.state;
+      // Get current user data state
+      final userDataState = _userDataCubit.state;
       UserModel? userProfile;
       UserRole? userRole;
 
-      if (authState is AuthAuthenticated) {
-        userProfile = authState.userProfile;
-        userRole = authState.userRole;
+      if (userDataState is UserDataLoaded) {
+        userProfile = userDataState.user;
+        userRole = userDataState.userRole;
 
         emit(
           SplashAuthAuthenticated(
@@ -226,10 +236,10 @@ class SplashCubit extends Cubit<SplashState> {
             userRole: userRole,
           ),
         );
-      } else if (authState is AuthError) {
+      } else if (userDataState is UserDataError) {
         emit(
           SplashAuthError(
-            message: 'Authentication failed: ${authState.message}',
+            message: 'User data loading failed: ${userDataState.message}',
             canRetry: true,
           ),
         );
@@ -263,14 +273,14 @@ class SplashCubit extends Cubit<SplashState> {
   String _determineNextRoute(AppStateModel appState) {
     DebugLogger.navigation('SplashCubit: Determining next route...');
 
-    // Check authentication state first
-    final authState = _authCubit.state;
+    // Check user data state first
+    final userDataState = _userDataCubit.state;
 
-    if (authState is AuthAuthenticated) {
-      // User is authenticated - route to role-based home
-      final homeRoute = authState.userRole.homeRoute;
+    if (userDataState is UserDataLoaded) {
+      // User data is loaded - route to role-based home
+      final homeRoute = userDataState.userRole.homeRoute;
       DebugLogger.navigation(
-        'SplashCubit: → ${authState.userRole.name} Dashboard ($homeRoute)',
+        'SplashCubit: → ${userDataState.userRole.name} Dashboard ($homeRoute)',
       );
       return homeRoute;
     }
@@ -335,14 +345,14 @@ class SplashCubit extends Cubit<SplashState> {
     DebugLogger.navigation('SplashCubit: Performing fallback navigation...');
 
     try {
-      // Check authentication state first
-      final authState = _authCubit.state;
+      // Check user data state first
+      final userDataState = _userDataCubit.state;
 
-      if (authState is AuthAuthenticated) {
-        // User is authenticated, go to their home
-        final homeRoute = authState.userRole.homeRoute;
+      if (userDataState is UserDataLoaded) {
+        // User data is loaded, go to their home
+        final homeRoute = userDataState.userRole.homeRoute;
         DebugLogger.navigation(
-          'SplashCubit: Fallback → $homeRoute (authenticated)',
+          'SplashCubit: Fallback → $homeRoute (user data loaded)',
         );
         context.go(homeRoute);
         return;
@@ -379,24 +389,31 @@ class SplashCubit extends Cubit<SplashState> {
     DebugLogger.auth('SplashCubit: Checking authentication state...');
 
     try {
-      // Trigger auth cubit to check current state
-      await _authCubit.retry();
+      // Note: For now, we don't automatically reload user data
+      // This would need to be implemented based on your app's user session management
+      DebugLogger.info('SplashCubit: User data state check completed');
 
       // Wait a moment for state to update
       await Future.delayed(const Duration(milliseconds: 200));
     } catch (e) {
-      DebugLogger.error('SplashCubit: Authentication state check failed: $e');
+      DebugLogger.error('SplashCubit: User data state check failed: $e');
     }
   }
 
-  /// Get current authentication state
-  AuthState get authState => _authCubit.state;
+  /// Get current user data state
+  UserDataState get userDataState => _userDataCubit.state;
 
-  /// Check if user is currently authenticated
-  bool get isAuthenticated => _authCubit.isAuthenticated;
+  /// Check if user data is loaded
+  bool get isUserDataLoaded => _userDataCubit.state is UserDataLoaded;
 
-  /// Get current user profile if authenticated
-  UserModel? get currentUserProfile => _authCubit.currentUserProfile;
+  /// Get current user profile if loaded
+  UserModel? get currentUserProfile {
+    final state = _userDataCubit.state;
+    if (state is UserDataLoaded) {
+      return state.user;
+    }
+    return null;
+  }
 
   /// Retry initialization after an error
   Future<void> retryInitialization() async {

@@ -267,7 +267,10 @@ class UserDataCubit extends Cubit<UserDataState> {
     final currentState = state;
     if (currentState is UserDataLoaded) {
       final currentMetadata = currentState.user.metadata ?? {};
-      final updatedMetadata = {...currentMetadata, 'onboarding_completed': true};
+      final updatedMetadata = {
+        ...currentMetadata,
+        'onboarding_completed': true,
+      };
       final updatedUser = currentState.user.copyWith(metadata: updatedMetadata);
       await updateUser(updatedUser);
     }
@@ -404,6 +407,26 @@ class UserDataCubit extends Cubit<UserDataState> {
     } catch (e) {
       DebugLogger.error('Failed to search users by email: $e');
       return [];
+    }
+  }
+
+  /// Search users by phone number
+  Future<UserModel?> getUserByPhone(String phone) async {
+    try {
+      final users = await _databaseService.select(
+        table: 'users',
+        filters: {'phone': phone},
+        limit: 1,
+      );
+
+      if (users.isEmpty) {
+        return null;
+      }
+
+      return UserModel.fromJson(users.first);
+    } catch (e) {
+      DebugLogger.error('Failed to search user by phone: $e');
+      return null;
     }
   }
 

@@ -8,7 +8,6 @@ import 'package:tailorapp/core/services/openai_service_impl.dart';
 import 'package:tailorapp/core/services/mlkit_service_impl.dart';
 import 'package:tailorapp/core/services/production_gemini_service_impl.dart';
 import 'package:tailorapp/core/services/production_openai_service_impl.dart';
-// Removed auth service imports - using database-only approach
 import 'package:tailorapp/core/services/supabase_database_service.dart';
 import 'package:tailorapp/core/cubit/user_data_cubit.dart';
 import 'package:tailorapp/core/repositories/customer_repository.dart';
@@ -17,12 +16,6 @@ import 'package:tailorapp/core/repositories/admin_repository.dart';
 import 'package:tailorapp/core/repositories/user_repository.dart';
 import 'package:tailorapp/core/repositories/order_repository.dart';
 import 'package:tailorapp/core/repositories/garment_repository.dart';
-import 'package:tailorapp/core/repositories/supabase_user_repository.dart';
-import 'package:tailorapp/core/repositories/supabase_customer_repository.dart';
-import 'package:tailorapp/core/repositories/supabase_tailor_repository.dart';
-import 'package:tailorapp/core/repositories/supabase_admin_repository.dart';
-import 'package:tailorapp/core/repositories/supabase_order_repository.dart';
-import 'package:tailorapp/core/repositories/supabase_garment_repository.dart';
 
 final GetIt serviceLocator = GetIt.instance;
 
@@ -44,27 +37,27 @@ class ServiceLocator {
   static void _setupRepositories() {
     // Register Supabase repository implementations
     serviceLocator.registerLazySingleton<UserRepository>(
-      () => SupabaseUserRepository(),
+      () => UserRepositoryImpl(),
     );
 
     serviceLocator.registerLazySingleton<CustomerRepository>(
-      () => SupabaseCustomerRepository(),
+      () => CustomerRepositoryImpl(),
     );
 
     serviceLocator.registerLazySingleton<TailorRepository>(
-      () => SupabaseTailorRepository(),
+      () => TailorRepositoryImpl(),
     );
 
     serviceLocator.registerLazySingleton<AdminRepository>(
-      () => SupabaseAdminRepository(),
+      () => AdminRepositoryImpl(),
     );
 
     serviceLocator.registerLazySingleton<OrderRepository>(
-      () => SupabaseOrderRepository(),
+      () => OrderRepositoryImpl(),
     );
 
     serviceLocator.registerLazySingleton<GarmentRepository>(
-      () => SupabaseGarmentRepository(),
+      () => GarmentRepositoryImpl(),
     );
   }
 
@@ -150,11 +143,16 @@ class ServiceLocator {
 
   // Helper methods to get repositories
   static UserRepository get userRepository => serviceLocator<UserRepository>();
-  static CustomerRepository get customerRepository => serviceLocator<CustomerRepository>();
-  static TailorRepository get tailorRepository => serviceLocator<TailorRepository>();
-  static AdminRepository get adminRepository => serviceLocator<AdminRepository>();
-  static OrderRepository get orderRepository => serviceLocator<OrderRepository>();
-  static GarmentRepository get garmentRepository => serviceLocator<GarmentRepository>();
+  static CustomerRepository get customerRepository =>
+      serviceLocator<CustomerRepository>();
+  static TailorRepository get tailorRepository =>
+      serviceLocator<TailorRepository>();
+  static AdminRepository get adminRepository =>
+      serviceLocator<AdminRepository>();
+  static OrderRepository get orderRepository =>
+      serviceLocator<OrderRepository>();
+  static GarmentRepository get garmentRepository =>
+      serviceLocator<GarmentRepository>();
 
   // Mock service setup for development/testing
   static void setupMockServices() {
@@ -253,7 +251,8 @@ class MockGeminiService implements GeminiService {
     return [
       {
         'title': 'AI Classic Business Shirt',
-        'description': 'A professionally tailored shirt perfect for business environments.',
+        'description':
+            'A professionally tailored shirt perfect for business environments.',
         'garmentType': 'shirt',
         'colors': ['Navy', 'White', 'Light Blue'],
         'fabrics': ['Cotton', 'Cotton Blend'],
@@ -269,7 +268,8 @@ class MockGeminiService implements GeminiService {
       },
       {
         'title': 'Modern Casual Shirt',
-        'description': 'Contemporary design with a relaxed fit for everyday comfort.',
+        'description':
+            'Contemporary design with a relaxed fit for everyday comfort.',
         'garmentType': 'shirt',
         'colors': ['Light Blue', 'Grey', 'White'],
         'fabrics': ['Linen', 'Cotton'],
@@ -341,7 +341,8 @@ class MockOpenAIService implements OpenAIService {
     return [
       {
         'title': 'Refined Professional',
-        'description': 'Elevated business attire with premium details and exceptional fit.',
+        'description':
+            'Elevated business attire with premium details and exceptional fit.',
         'garmentType': 'shirt',
         'colors': ['Crisp White', 'Navy'],
         'fabrics': ['Premium Cotton', 'Supima Cotton'],

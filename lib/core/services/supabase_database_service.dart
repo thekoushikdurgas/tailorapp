@@ -12,7 +12,8 @@ import 'package:tailorapp/core/services/debug_logger.dart';
 class SupabaseDatabaseService {
   final SupabaseClient _client;
 
-  SupabaseDatabaseService({SupabaseClient? client}) : _client = client ?? Supabase.instance.client;
+  SupabaseDatabaseService({SupabaseClient? client})
+      : _client = client ?? Supabase.instance.client;
 
   /// Get the Supabase client instance
   SupabaseClient get client => _client;
@@ -31,7 +32,7 @@ class SupabaseDatabaseService {
     int? limit,
   }) async {
     try {
-      var query = _client.from(table).select(columns);
+      dynamic query = _client.from(table).select(columns);
 
       // Apply filters
       if (filters != null) {
@@ -53,7 +54,9 @@ class SupabaseDatabaseService {
       }
 
       final response = await query;
-      DebugLogger.service('Select from $table successful: ${response.length} records');
+      DebugLogger.service(
+        'Select from $table successful: ${response.length} records',
+      );
       return List<Map<String, dynamic>>.from(response);
     } catch (e) {
       DebugLogger.error('Error selecting from $table: $e');
@@ -132,7 +135,11 @@ class SupabaseDatabaseService {
     String? onConflict,
   }) async {
     try {
-      final response = await _client.from(table).upsert(data, onConflict: onConflict).select().single();
+      final response = await _client
+          .from(table)
+          .upsert(data, onConflict: onConflict)
+          .select()
+          .single();
 
       DebugLogger.service('Upsert into $table successful');
       return response;
@@ -153,7 +160,7 @@ class SupabaseDatabaseService {
     Map<String, dynamic>? filters,
   }) {
     try {
-      var stream = _client.from(table).stream(primaryKey: [primaryKey]);
+      dynamic stream = _client.from(table).stream(primaryKey: [primaryKey]);
 
       // Apply filters if provided
       if (filters != null) {
@@ -274,7 +281,8 @@ class SupabaseDatabaseService {
     int expiresIn = 3600, // 1 hour default
   }) async {
     try {
-      final signedUrl = await _client.storage.from(bucket).createSignedUrl(path, expiresIn);
+      final signedUrl =
+          await _client.storage.from(bucket).createSignedUrl(path, expiresIn);
 
       DebugLogger.service('Signed URL created for $bucket/$path');
       return signedUrl;
@@ -291,7 +299,8 @@ class SupabaseDatabaseService {
   /// Execute custom SQL query
   Future<List<Map<String, dynamic>>> executeQuery(String query) async {
     try {
-      final response = await _client.rpc('execute_sql', params: {'query': query});
+      final response =
+          await _client.rpc('execute_sql', params: {'query': query});
       DebugLogger.service('Custom query executed successfully');
       return List<Map<String, dynamic>>.from(response);
     } catch (e) {

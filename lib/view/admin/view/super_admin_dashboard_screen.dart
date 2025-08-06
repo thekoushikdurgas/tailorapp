@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tailorapp/core/cubit/auth_cubit.dart';
+import 'package:tailorapp/core/cubit/user_data_cubit.dart';
 import 'package:tailorapp/product/enum/route_enum.dart';
 import 'package:go_router/go_router.dart';
 
@@ -8,10 +8,12 @@ class SuperAdminDashboardScreen extends StatefulWidget {
   const SuperAdminDashboardScreen({super.key});
 
   @override
-  State<SuperAdminDashboardScreen> createState() => _SuperAdminDashboardScreenState();
+  State<SuperAdminDashboardScreen> createState() =>
+      _SuperAdminDashboardScreenState();
 }
 
-class _SuperAdminDashboardScreenState extends State<SuperAdminDashboardScreen> with TickerProviderStateMixin {
+class _SuperAdminDashboardScreenState extends State<SuperAdminDashboardScreen>
+    with TickerProviderStateMixin {
   late TabController _tabController;
   late AnimationController _pulseController;
 
@@ -136,7 +138,9 @@ class _SuperAdminDashboardScreenState extends State<SuperAdminDashboardScreen> w
                     'Live',
                     style: TextStyle(
                       fontSize: 12,
-                      color: _isRealTimeMode ? Colors.green[600] : Colors.grey[600],
+                      color: _isRealTimeMode
+                          ? Colors.green[600]
+                          : Colors.grey[600],
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -150,8 +154,9 @@ class _SuperAdminDashboardScreenState extends State<SuperAdminDashboardScreen> w
         PopupMenuButton<String>(
           icon: Icon(Icons.date_range, color: Colors.grey[600]),
           onSelected: (value) => setState(() => _selectedTimeRange = value),
-          itemBuilder: (context) =>
-              _timeRanges.map((range) => PopupMenuItem(value: range, child: Text(range))).toList(),
+          itemBuilder: (context) => _timeRanges
+              .map((range) => PopupMenuItem(value: range, child: Text(range)))
+              .toList(),
         ),
 
         // System alerts
@@ -179,7 +184,7 @@ class _SuperAdminDashboardScreenState extends State<SuperAdminDashboardScreen> w
         ),
 
         // Admin profile
-        BlocBuilder<AuthCubit, AuthState>(
+        BlocBuilder<UserDataCubit, UserDataState>(
           builder: (context, state) {
             return Padding(
               padding: const EdgeInsets.only(right: 16),
@@ -686,7 +691,8 @@ class _SuperAdminDashboardScreenState extends State<SuperAdminDashboardScreen> w
         ],
       ),
       child: Column(
-        children: activities.map((activity) => _buildActivityItem(activity)).toList(),
+        children:
+            activities.map((activity) => _buildActivityItem(activity)).toList(),
       ),
     );
   }
@@ -1197,7 +1203,8 @@ class _SuperAdminDashboardScreenState extends State<SuperAdminDashboardScreen> w
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Bulk Actions'),
-        content: const Text('Perform bulk operations on users, orders, or content.'),
+        content:
+            const Text('Perform bulk operations on users, orders, or content.'),
         actions: [
           TextButton(
             onPressed: () => context.pop(),

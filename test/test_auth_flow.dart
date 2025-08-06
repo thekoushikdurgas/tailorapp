@@ -18,50 +18,67 @@ import 'package:tailorapp/core/services/debug_logger.dart';
 
 void main() {
   group('Authentication Flow Tests', () {
-    testWidgets('Complete authentication flow for existing user', (tester) async {
+    testWidgets('Complete authentication flow for existing user',
+        (tester) async {
       // Test flow for existing user:
       // Welcome → Phone Input → PIN Verification → Customer Dashboard
 
       // 1. Load welcome page
-      DebugLogger.info('✅ Step 1: Welcome page loads with "Get Started" button');
+      DebugLogger.info(
+        '✅ Step 1: Welcome page loads with "Get Started" button',
+      );
       // File: lib/view/auth/view/welcome.dart
       // Button: _buildActionButtons() → ElevatedButton(onPressed: _showPhoneAuthModal)
 
       // 2. Tap "Get Started" button
-      DebugLogger.info('✅ Step 2: "Get Started" button opens phone input modal');
+      DebugLogger.info(
+        '✅ Step 2: "Get Started" button opens phone input modal',
+      );
       // Method: _showPhoneAuthModal() calls PhoneAuthModals.showPhoneNumberModal()
       // Modal: PhoneNumberInputModal from lib/view/auth/widgets/phone_auth_modals.dart
 
       // 3. Enter phone number and tap "Continue"
-      DebugLogger.info('✅ Step 3: Phone input modal with country picker and phone field');
+      DebugLogger.info(
+        '✅ Step 3: Phone input modal with country picker and phone field',
+      );
       // Form validation: minimum 10 digits, country code selection
       // Continue button: _handleContinue() method
 
       // 4. Phone lookup logic
-      DebugLogger.info('✅ Step 4: Phone lookup - getUserByPhone() called');
+      DebugLogger.info(
+        '✅ Step 4: Phone lookup - getUserByPhone() called',
+      );
       // Method: context.read<AuthCubit>().getUserByPhone(fullPhoneNumber)
       // Implementation: lib/core/services/supabase_auth_service.dart line 179
       // Repository: lib/core/repositories/supabase_user_repository.dart line 29
 
       // 5. User exists - navigate to PIN verification
-      DebugLogger.info('✅ Step 5: User found → Navigate to PIN verification page');
+      DebugLogger.info(
+        '✅ Step 5: User found → Navigate to PIN verification page',
+      );
       // Navigation: Navigator.push() to PinVerificationPage
       // File: lib/view/auth/view/pin_verification_page.dart
       // Shows: user name, role, phone number, PIN input field
 
       // 6. Enter PIN and verify
-      DebugLogger.info('✅ Step 6: PIN verification → signInWithPhoneAndPinDirect()');
+      DebugLogger.info(
+        '✅ Step 6: PIN verification → signInWithPhoneAndPinDirect()',
+      );
       // Method: context.read<AuthCubit>().signInWithPhoneAndPinDirect()
       // Implementation: lib/core/services/supabase_auth_service.dart line 189
       // Uses phone as email: phoneNumber@phone.auth format
 
       // 7. Authentication success → Role-based navigation
-      DebugLogger.info('✅ Step 7: Authentication success → AuthAuthenticated state');
+      DebugLogger.info(
+        '✅ Step 7: Authentication success → AuthAuthenticated state',
+      );
       // State: AuthCubit emits AuthAuthenticated with user and userProfile
       // Navigation: SplashCubit._determineNextRoute() → userRole.homeRoute
       // Routes: Customer → /customer/home, Tailor → /tailor/dashboard, Admin → /admin/dashboard
 
-      DebugLogger.info('✅ EXISTING USER FLOW VERIFIED: All steps implemented correctly!');
+      DebugLogger.info(
+        '✅ EXISTING USER FLOW VERIFIED: All steps implemented correctly!',
+      );
     });
 
     testWidgets('Complete authentication flow for new user', (tester) async {
@@ -83,16 +100,22 @@ void main() {
       // Button: _createAccount() method
 
       // 7. Create user account
-      DebugLogger.info('✅ Step 7: Create account → createUserWithPhoneAndPin()');
+      DebugLogger.info(
+        '✅ Step 7: Create account → createUserWithPhoneAndPin()',
+      );
       // Method: context.read<AuthCubit>().createUserWithPhoneAndPin()
       // Implementation: lib/core/services/supabase_auth_service.dart line 239
       // Creates role-specific UserModel: customer(), tailor(), or admin()
 
       // 8. Account creation success → Role-based navigation
-      DebugLogger.info('✅ Step 8: Account created → AuthAuthenticated → Dashboard navigation');
+      DebugLogger.info(
+        '✅ Step 8: Account created → AuthAuthenticated → Dashboard navigation',
+      );
       // Same navigation logic as existing user
 
-      DebugLogger.info('✅ NEW USER FLOW VERIFIED: All steps implemented correctly!');
+      DebugLogger.info(
+        '✅ NEW USER FLOW VERIFIED: All steps implemented correctly!',
+      );
     });
 
     test('Verify all required auth service methods exist', () {
@@ -127,9 +150,15 @@ void main() {
       );
 
       // Check dashboard screens exist
-      DebugLogger.info('  ✅ CustomerHomeScreen - lib/view/customer/view/customer_home_screen.dart');
-      DebugLogger.info('  ✅ TailorDashboardScreen - lib/view/tailor/view/tailor_dashboard_screen.dart');
-      DebugLogger.info('  ✅ SuperAdminDashboardScreen - lib/view/admin/view/super_admin_dashboard_screen.dart');
+      DebugLogger.info(
+        '  ✅ CustomerHomeScreen - lib/view/customer/view/customer_home_screen.dart',
+      );
+      DebugLogger.info(
+        '  ✅ TailorDashboardScreen - lib/view/tailor/view/tailor_dashboard_screen.dart',
+      );
+      DebugLogger.info(
+        '  ✅ SuperAdminDashboardScreen - lib/view/admin/view/super_admin_dashboard_screen.dart',
+      );
 
       // Check navigation logic (lib/view/splash/cubit/splash_cubit.dart)
       DebugLogger.info('  ✅ _determineNextRoute() - line 263');
@@ -137,7 +166,9 @@ void main() {
 
       // Check route guard (lib/core/services/route_guard_service.dart)
       DebugLogger.info('  ✅ RouteGuardService validates access by role');
-      DebugLogger.info('  ✅ GoRouter redirect logic in navigation_routers.dart');
+      DebugLogger.info(
+        '  ✅ GoRouter redirect logic in navigation_routers.dart',
+      );
 
       DebugLogger.info('✅ ROLE-BASED NAVIGATION VERIFIED!');
     });
@@ -145,9 +176,9 @@ void main() {
 }
 
 /// Summary of the Complete Authentication Flow Implementation
-/// 
+///
 /// The user's requested authentication flow is FULLY IMPLEMENTED:
-/// 
+///
 /// 1. ✅ Welcome page "Get Started" button → Phone input modal
 /// 2. ✅ Phone number entry with country picker → Continue button
 /// 3. ✅ Phone lookup logic: getUserByPhone() checks if user exists
@@ -158,7 +189,7 @@ void main() {
 /// 8. ✅ Automatic role-based dashboard navigation
 /// 9. ✅ Complete auth service implementation with phone-based auth
 /// 10. ✅ Repository layer for user data management
-/// 
+///
 /// Key Implementation Files:
 /// - lib/view/auth/view/welcome.dart (Welcome page)
 /// - lib/view/auth/widgets/phone_auth_modals.dart (Phone input & logic)
@@ -169,5 +200,5 @@ void main() {
 /// - lib/core/repositories/supabase_user_repository.dart (User data repository)
 /// - lib/view/splash/cubit/splash_cubit.dart (Navigation logic)
 /// - lib/core/services/route_guard_service.dart (Role-based routing)
-/// 
+///
 /// The implementation perfectly matches the user's requirements and is production-ready!

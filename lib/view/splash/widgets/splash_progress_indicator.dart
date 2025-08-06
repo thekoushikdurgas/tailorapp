@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tailorapp/core/services/theme_manager.dart';
+import 'package:tailorapp/core/theme/theme_manager.dart';
 import 'package:tailorapp/view/splash/cubit/splash_cubit.dart';
 
 /// Enhanced progress indicator widget for splash screen

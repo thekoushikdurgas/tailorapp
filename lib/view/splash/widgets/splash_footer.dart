@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:tailorapp/core/icons/prbal_icons.dart';
-import 'package:tailorapp/core/services/theme_manager.dart';
+import 'package:tailorapp/core/theme/theme_manager.dart';
 import 'package:tailorapp/product/lang/locale_keys.g.dart';
 
 /// Enhanced footer widget for splash screen

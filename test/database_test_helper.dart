@@ -1,7 +1,6 @@
+import 'dart:typed_data';
 import 'package:tailorapp/core/services/supabase_database_service.dart';
 import 'package:tailorapp/core/services/debug_logger.dart';
-import 'package:tailorapp/core/models/user_model.dart';
-import 'package:tailorapp/core/models/user_role.dart';
 
 /// Helper class to test database operations
 ///
@@ -10,7 +9,8 @@ import 'package:tailorapp/core/models/user_role.dart';
 class DatabaseTestHelper {
   final SupabaseDatabaseService _databaseService;
 
-  DatabaseTestHelper({required SupabaseDatabaseService databaseService}) : _databaseService = databaseService;
+  DatabaseTestHelper({required SupabaseDatabaseService databaseService})
+      : _databaseService = databaseService;
 
   /// Run comprehensive database tests
   Future<bool> runAllTests() async {
@@ -55,7 +55,7 @@ class DatabaseTestHelper {
       DebugLogger.service('🔌 Testing database connection...');
 
       // Try to query a system table
-      final result = await _databaseService.select(
+      await _databaseService.select(
         table: 'information_schema.tables',
         columns: 'table_name',
         limit: 1,
@@ -81,7 +81,9 @@ class DatabaseTestHelper {
         table: testTableName,
         limit: 5,
       );
-      DebugLogger.service('✅ SELECT operation successful - found ${countries.length} countries');
+      DebugLogger.service(
+        '✅ SELECT operation successful - found ${countries.length} countries',
+      );
 
       // Test if we have sample data
       if (countries.isEmpty) {
@@ -167,10 +169,12 @@ class DatabaseTestHelper {
       );
 
       // Listen for a short time to verify subscription works
-      subscription.take(1).timeout(
-            const Duration(seconds: 5),
-            onTimeout: () => <Map<String, dynamic>>[],
-          );
+      try {
+        await subscription.take(1).timeout(const Duration(seconds: 5)).first;
+      } catch (e) {
+        // Handle timeout gracefully
+        DebugLogger.warning('Subscription timeout or error: $e');
+      }
 
       DebugLogger.service('✅ Real-time subscription test completed');
       return true;
@@ -191,7 +195,7 @@ class DatabaseTestHelper {
       final testFileName = 'test_${DateTime.now().millisecondsSinceEpoch}.txt';
 
       // Convert string to bytes
-      final fileBytes = testContent.codeUnits;
+      final fileBytes = Uint8List.fromList(testContent.codeUnits);
 
       final publicUrl = await _databaseService.uploadFile(
         bucket: 'avatars', // Using avatars bucket from schema
@@ -221,7 +225,9 @@ class DatabaseTestHelper {
 
       return true;
     } catch (e) {
-      DebugLogger.warning('⚠️ File storage test failed (may not be configured): $e');
+      DebugLogger.warning(
+        '⚠️ File storage test failed (may not be configured): $e',
+      );
       // Don't fail entire test for storage issues
       return true;
     }
@@ -286,11 +292,14 @@ class DatabaseTestHelper {
       });
 
       final totalTables = tableStatus.length;
-      final existingTables = tableStatus.values.where((exists) => exists).length;
+      final existingTables =
+          tableStatus.values.where((exists) => exists).length;
 
       DebugLogger.service('=== SUMMARY ===');
       DebugLogger.service('Tables: $existingTables/$totalTables');
-      DebugLogger.service('Overall Status: ${(connectionOk && crudOk && userOpsOk) ? '✅ PASSED' : '❌ FAILED'}');
+      DebugLogger.service(
+        'Overall Status: ${(connectionOk && crudOk && userOpsOk) ? '✅ PASSED' : '❌ FAILED'}',
+      );
       DebugLogger.service('========================');
     } catch (e) {
       DebugLogger.error('Failed to generate test report: $e');

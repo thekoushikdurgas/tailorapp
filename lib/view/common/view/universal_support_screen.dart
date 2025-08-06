@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tailorapp/core/cubit/auth_cubit.dart';
+import 'package:tailorapp/core/cubit/user_data_cubit.dart';
 import 'package:tailorapp/core/models/user_role.dart';
 import 'package:go_router/go_router.dart';
 
@@ -57,10 +57,10 @@ class _UniversalSupportScreenState extends State<UniversalSupportScreen>
   }
 
   void _loadUserRole() {
-    final authState = context.read<AuthCubit>().state;
-    if (authState is AuthAuthenticated) {
+    final userDataState = context.read<UserDataCubit>().state;
+    if (userDataState is UserDataLoaded) {
       setState(() {
-        _userRole = authState.userRole;
+        _userRole = userDataState.userRole;
       });
     }
   }

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tailorapp/core/navigation/navigation_route.dart';
 import 'package:tailorapp/core/models/user_model.dart';
 import 'package:tailorapp/core/models/shared_models.dart';
-import 'package:tailorapp/core/cubit/auth_cubit.dart';
+import 'package:tailorapp/core/cubit/user_data_cubit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
@@ -1046,7 +1046,7 @@ class _ProfilePageState extends State<ProfilePage> {
           TextButton(
             onPressed: () {
               Navigator.pop(context);
-              context.read<AuthCubit>().signOut();
+              context.read<UserDataCubit>().clearUser();
             },
             style: TextButton.styleFrom(
               foregroundColor: Colors.red[600],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tailorapp/core/cubit/auth_cubit.dart';
+import 'package:tailorapp/core/cubit/user_data_cubit.dart';
 import 'package:tailorapp/core/models/shared_models.dart';
 import 'package:tailorapp/core/models/garment_model.dart';
 import 'package:tailorapp/core/services/service_locator.dart';
@@ -121,9 +121,9 @@ class _MeasurementsPageState extends State<MeasurementsPage>
     setState(() => _isLoading = true);
 
     try {
-      final authState = context.read<AuthCubit>().state;
-      if (authState is AuthAuthenticated) {
-        final user = authState.userProfile;
+      final userDataState = context.read<UserDataCubit>().state;
+      if (userDataState is UserDataLoaded) {
+        final user = userDataState.user;
         if (user.customerData?.measurements != null) {
           _currentMeasurements = user.customerData!.measurements;
           _populateControllers();
@@ -1294,10 +1294,10 @@ class _MeasurementsPageState extends State<MeasurementsPage>
       );
 
       // Save to repository
-      final authState = context.read<AuthCubit>().state;
-      if (authState is AuthAuthenticated) {
+      final userDataState = context.read<UserDataCubit>().state;
+      if (userDataState is UserDataLoaded) {
         await ServiceLocator.customerRepository.updateMeasurements(
-          authState.user.id,
+          userDataState.user.id,
           measurements,
         );
       }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tailorapp/core/cubit/auth_cubit.dart';
+import 'package:tailorapp/core/cubit/user_data_cubit.dart';
 // import 'package:tailorapp/core/navigation/navigation_route.dart';
 import 'package:tailorapp/product/enum/route_enum.dart';
 import 'package:go_router/go_router.dart';
@@ -162,7 +162,7 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
               onTap: () {
                 context.push(RouteEnum.profile.rawValue);
               },
-              child: BlocBuilder<AuthCubit, AuthState>(
+              child: BlocBuilder<UserDataCubit, UserDataState>(
                 builder: (context, state) {
                   return Container(
                     width: 44,
@@ -171,12 +171,12 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
                       color: Colors.blue[100],
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: state is AuthAuthenticated &&
-                            state.user.userMetadata?['avatar_url'] != null
+                    child: state is UserDataLoaded &&
+                            state.user.profileImageUrl?.isNotEmpty == true
                         ? ClipRRect(
                             borderRadius: BorderRadius.circular(12),
                             child: Image.network(
-                              state.user.userMetadata!['avatar_url'] as String,
+                              state.user.profileImageUrl!,
                               fit: BoxFit.cover,
                               errorBuilder: (context, error, stackTrace) {
                                 return Icon(
@@ -218,13 +218,11 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
       weatherSuggestion = 'Evening calls for elegant designs';
     }
 
-    return BlocBuilder<AuthCubit, AuthState>(
+    return BlocBuilder<UserDataCubit, UserDataState>(
       builder: (context, state) {
         String userName = 'there';
-        if (state is AuthAuthenticated) {
-          userName =
-              (state.user.userMetadata?['name'] as String?)?.split(' ').first ??
-                  state.userProfile.name.split(' ').first;
+        if (state is UserDataLoaded) {
+          userName = state.user.name.split(' ').first;
         }
 
         return Container(

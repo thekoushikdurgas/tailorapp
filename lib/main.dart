@@ -22,7 +22,8 @@ Future<void> main() async {
   );
 
   await LocaleVariables._init();
-  await HiveService.init(); // This replaces ThemeCaching.init() and IntroCaching.init()
+  await HiveService
+      .init(); // This replaces ThemeCaching.init() and IntroCaching.init()
 
   // Setup production services - database only (no auth)
   await ServiceLocator.setupServiceLocator();

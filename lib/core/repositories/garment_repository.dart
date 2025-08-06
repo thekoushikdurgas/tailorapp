@@ -34,12 +34,14 @@ class GarmentRepositoryImpl implements GarmentRepository {
   final SupabaseClient _supabase;
   final String _table = 'garments';
 
-  GarmentRepositoryImpl({SupabaseClient? supabase}) : _supabase = supabase ?? Supabase.instance.client;
+  GarmentRepositoryImpl({SupabaseClient? supabase})
+      : _supabase = supabase ?? Supabase.instance.client;
 
   @override
   Future<GarmentModel?> getGarment(String id) async {
     try {
-      final response = await _supabase.from(_table).select().eq('id', id).maybeSingle();
+      final response =
+          await _supabase.from(_table).select().eq('id', id).maybeSingle();
 
       if (response == null) {
         return null;
@@ -59,7 +61,8 @@ class GarmentRepositoryImpl implements GarmentRepository {
       data['created_at'] = DateTime.now().toIso8601String();
       data['updated_at'] = DateTime.now().toIso8601String();
 
-      final response = await _supabase.from(_table).insert(data).select().single();
+      final response =
+          await _supabase.from(_table).insert(data).select().single();
 
       return GarmentModel.fromJson(response);
     } catch (e) {
@@ -74,7 +77,12 @@ class GarmentRepositoryImpl implements GarmentRepository {
       data.remove('id'); // Remove ID from update data
       data['updated_at'] = DateTime.now().toIso8601String();
 
-      final response = await _supabase.from(_table).update(data).eq('id', garment.id).select().single();
+      final response = await _supabase
+          .from(_table)
+          .update(data)
+          .eq('id', garment.id)
+          .select()
+          .single();
 
       return GarmentModel.fromJson(response);
     } catch (e) {
@@ -94,8 +102,11 @@ class GarmentRepositoryImpl implements GarmentRepository {
   @override
   Future<List<GarmentModel>> getGarmentsByType(GarmentType type) async {
     try {
-      final response =
-          await _supabase.from(_table).select().eq('type', type.toString()).order('created_at', ascending: false);
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .eq('type', type.toString())
+          .order('created_at', ascending: false);
 
       return response.map((json) => GarmentModel.fromJson(json)).toList();
     } catch (e) {
@@ -106,8 +117,11 @@ class GarmentRepositoryImpl implements GarmentRepository {
   @override
   Future<List<GarmentModel>> getGarmentsByStatus(GarmentStatus status) async {
     try {
-      final response =
-          await _supabase.from(_table).select().eq('status', status.toString()).order('created_at', ascending: false);
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .eq('status', status.toString())
+          .order('created_at', ascending: false);
 
       return response.map((json) => GarmentModel.fromJson(json)).toList();
     } catch (e) {
@@ -118,7 +132,11 @@ class GarmentRepositoryImpl implements GarmentRepository {
   @override
   Future<List<GarmentModel>> searchGarments(String query) async {
     try {
-      final response = await _supabase.from(_table).select().ilike('name', '%$query%').limit(20);
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .ilike('name', '%$query%')
+          .limit(20);
 
       return response.map((json) => GarmentModel.fromJson(json)).toList();
     } catch (e) {
@@ -129,7 +147,11 @@ class GarmentRepositoryImpl implements GarmentRepository {
   @override
   Future<List<GarmentModel>> getRecentGarments(int limit) async {
     try {
-      final response = await _supabase.from(_table).select().order('created_at', ascending: false).limit(limit);
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .order('created_at', ascending: false)
+          .limit(limit);
 
       return response.map((json) => GarmentModel.fromJson(json)).toList();
     } catch (e) {
@@ -176,8 +198,11 @@ class GarmentRepositoryImpl implements GarmentRepository {
   @override
   Future<List<GarmentModel>> getGarmentsByCustomer(String customerId) async {
     try {
-      final response =
-          await _supabase.from(_table).select().eq('customer_id', customerId).order('created_at', ascending: false);
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .eq('customer_id', customerId)
+          .order('created_at', ascending: false);
 
       return response.map((json) => GarmentModel.fromJson(json)).toList();
     } catch (e) {
@@ -189,7 +214,11 @@ class GarmentRepositoryImpl implements GarmentRepository {
 
   @override
   Stream<GarmentModel> watchGarment(String id) {
-    return _supabase.from(_table).stream(primaryKey: ['id']).eq('id', id).map((List<Map<String, dynamic>> data) {
+    return _supabase
+        .from(_table)
+        .stream(primaryKey: ['id'])
+        .eq('id', id)
+        .map((List<Map<String, dynamic>> data) {
           if (data.isNotEmpty) {
             return GarmentModel.fromJson(data.first);
           }
@@ -200,8 +229,11 @@ class GarmentRepositoryImpl implements GarmentRepository {
   @override
   Future<List<GarmentModel>> getGarmentsByCategory(String category) async {
     try {
-      final response =
-          await _supabase.from(_table).select().eq('category', category).order('created_at', ascending: false);
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .eq('category', category)
+          .order('created_at', ascending: false);
 
       return response.map((json) => GarmentModel.fromJson(json)).toList();
     } catch (e) {
@@ -214,8 +246,11 @@ class GarmentRepositoryImpl implements GarmentRepository {
   @override
   Future<List<GarmentModel>> getFeaturedGarments() async {
     try {
-      final response =
-          await _supabase.from(_table).select().eq('is_featured', true).order('created_at', ascending: false);
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .eq('is_featured', true)
+          .order('created_at', ascending: false);
 
       return response.map((json) => GarmentModel.fromJson(json)).toList();
     } catch (e) {
@@ -227,7 +262,11 @@ class GarmentRepositoryImpl implements GarmentRepository {
   Future<void> addGarmentTag(String garmentId, String tag) async {
     try {
       // First get current tags
-      final response = await _supabase.from(_table).select('tags').eq('id', garmentId).single();
+      final response = await _supabase
+          .from(_table)
+          .select('tags')
+          .eq('id', garmentId)
+          .single();
 
       final currentTags = List<String>.from(response['tags'] ?? []);
       if (!currentTags.contains(tag)) {
@@ -247,7 +286,11 @@ class GarmentRepositoryImpl implements GarmentRepository {
   Future<void> removeGarmentTag(String garmentId, String tag) async {
     try {
       // First get current tags
-      final response = await _supabase.from(_table).select('tags').eq('id', garmentId).single();
+      final response = await _supabase
+          .from(_table)
+          .select('tags')
+          .eq('id', garmentId)
+          .single();
 
       final currentTags = List<String>.from(response['tags'] ?? []);
       currentTags.remove(tag);
@@ -281,8 +324,11 @@ class GarmentRepositoryImpl implements GarmentRepository {
   @override
   Future<List<GarmentModel>> getGarmentsByTailor(String tailorId) async {
     try {
-      final response =
-          await _supabase.from(_table).select().eq('tailor_id', tailorId).order('created_at', ascending: false);
+      final response = await _supabase
+          .from(_table)
+          .select()
+          .eq('tailor_id', tailorId)
+          .order('created_at', ascending: false);
 
       return response.map((json) => GarmentModel.fromJson(json)).toList();
     } catch (e) {
@@ -295,7 +341,8 @@ class GarmentRepositoryImpl implements GarmentRepository {
     try {
       // For now, return a placeholder URL
       // In a real implementation, you would upload to Supabase Storage
-      final fileName = 'garment_${garmentId}_${DateTime.now().millisecondsSinceEpoch}.jpg';
+      final fileName =
+          'garment_${garmentId}_${DateTime.now().millisecondsSinceEpoch}.jpg';
 
       // Placeholder implementation - replace with actual Supabase Storage upload
       final imageUrl = 'https://placeholder.example.com/images/$fileName';

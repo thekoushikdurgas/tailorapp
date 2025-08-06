@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:tailorapp/core/services/theme_manager.dart';
+import 'package:tailorapp/core/theme/theme_manager.dart';
 import 'package:tailorapp/view/splash/cubit/splash_cubit.dart';
 import 'package:tailorapp/product/lang/locale_keys.g.dart';
 

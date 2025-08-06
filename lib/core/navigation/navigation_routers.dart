@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tailorapp/core/cubit/auth_cubit.dart';
+import 'package:tailorapp/core/cubit/user_data_cubit.dart';
 import 'package:tailorapp/core/services/route_guard_service.dart';
 import 'package:tailorapp/view/admin/view/platform_analytics_insights_screen.dart';
 import 'package:tailorapp/view/admin/view/super_admin_dashboard_screen.dart';
@@ -46,9 +46,9 @@ class NavigationRouters {
     // Start with splash screen instead of bypassing it
     initialLocation: RouteEnum.splash.rawValue,
     redirect: (context, state) {
-      final authState = context.read<AuthCubit>().state;
-      final isAuthenticated = authState is AuthAuthenticated;
-      final userRole = isAuthenticated ? authState.userRole : null;
+      final userDataState = context.read<UserDataCubit>().state;
+      final isAuthenticated = userDataState is UserDataLoaded;
+      final userRole = isAuthenticated ? userDataState.userRole : null;
       final currentPath = state.fullPath ?? '/';
 
       // Allow splash screen to always load first
