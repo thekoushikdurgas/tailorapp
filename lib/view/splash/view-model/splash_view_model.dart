@@ -247,8 +247,7 @@ class SplashViewModel {
               'SplashViewModel: Attempting token refresh through AuthCubit...',
             );
             try {
-              // TODO: Implement retry logic for UserDataCubit
-              // await _userDataCubit!.refreshUser();
+              await _userDataCubit.refreshUser();
               DebugLogger.success(
                 'SplashViewModel: Token refresh attempt completed',
               );

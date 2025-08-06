@@ -65,7 +65,9 @@ class LanguageItemWidget extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
               decoration: BoxDecoration(
                 color: language.isSelected
-                    ? ThemeManager.of(context).primaryColor.withValues(alpha: 0.1)
+                    ? ThemeManager.of(context)
+                        .primaryColor
+                        .withValues(alpha: 0.1)
                     : ThemeManager.of(context).surfaceColor,
                 borderRadius: BorderRadius.circular(16.r),
                 border: Border.all(
@@ -77,7 +79,9 @@ class LanguageItemWidget extends StatelessWidget {
                 boxShadow: language.isSelected
                     ? [
                         BoxShadow(
-                          color: ThemeManager.of(context).primaryColor.withValues(alpha: 0.1),
+                          color: ThemeManager.of(context)
+                              .primaryColor
+                              .withValues(alpha: 0.1),
                           blurRadius: 8,
                           offset: const Offset(0, 2),
                         ),
@@ -138,7 +142,9 @@ class LanguageItemWidget extends StatelessWidget {
           style: TextStyle(
             fontSize: 16.sp,
             fontWeight: FontWeight.w600,
-            color: language.isSelected ? ThemeManager.of(context).primaryColor : ThemeManager.of(context).textPrimary,
+            color: language.isSelected
+                ? ThemeManager.of(context).primaryColor
+                : ThemeManager.of(context).textPrimary,
           ),
         ),
         SizedBox(height: 4.h),
@@ -198,9 +204,13 @@ class LanguageItemWidget extends StatelessWidget {
       height: 24.h,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: language.isSelected ? ThemeManager.of(context).primaryColor : Colors.transparent,
+        color: language.isSelected
+            ? ThemeManager.of(context).primaryColor
+            : Colors.transparent,
         border: Border.all(
-          color: language.isSelected ? ThemeManager.of(context).primaryColor : ThemeManager.of(context).textTertiary,
+          color: language.isSelected
+              ? ThemeManager.of(context).primaryColor
+              : ThemeManager.of(context).textTertiary,
           width: 2,
         ),
       ),

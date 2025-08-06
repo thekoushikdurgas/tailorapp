@@ -77,7 +77,9 @@ class LanguageActionButtons extends StatelessWidget {
           onTap: isEnabled && !isApplying ? onApply : null,
           borderRadius: BorderRadius.circular(16.r),
           child: Center(
-            child: isApplying ? _buildLoadingIndicator() : _buildApplyButtonContent(context),
+            child: isApplying
+                ? _buildLoadingIndicator()
+                : _buildApplyButtonContent(context),
           ),
         ),
       ),
@@ -91,7 +93,8 @@ class LanguageActionButtons extends StatelessWidget {
       children: [
         Icon(
           Prbal.check,
-          color: isEnabled ? Colors.white : ThemeManager.of(context).textTertiary,
+          color:
+              isEnabled ? Colors.white : ThemeManager.of(context).textTertiary,
           size: 20.sp,
         ),
         SizedBox(width: 12.w),
@@ -101,7 +104,9 @@ class LanguageActionButtons extends StatelessWidget {
             style: TextStyle(
               fontSize: 16.sp,
               fontWeight: FontWeight.w600,
-              color: isEnabled ? Colors.white : ThemeManager.of(context).textTertiary,
+              color: isEnabled
+                  ? Colors.white
+                  : ThemeManager.of(context).textTertiary,
             ),
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
@@ -160,18 +165,22 @@ class LanguageActionButtons extends StatelessWidget {
               children: [
                 Icon(
                   Prbal.arrowRight,
-                  color: !isApplying ? ThemeManager.of(context).textSecondary : ThemeManager.of(context).textTertiary,
+                  color: !isApplying
+                      ? ThemeManager.of(context).textSecondary
+                      : ThemeManager.of(context).textTertiary,
                   size: 20.sp,
                 ),
                 SizedBox(width: 12.w),
                 Flexible(
                   child: Text(
-                    LocaleKeys.localization_languageSelection_skipSelection.tr(),
+                    LocaleKeys.localization_languageSelection_skipSelection
+                        .tr(),
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w600,
-                      color:
-                          !isApplying ? ThemeManager.of(context).textSecondary : ThemeManager.of(context).textTertiary,
+                      color: !isApplying
+                          ? ThemeManager.of(context).textSecondary
+                          : ThemeManager.of(context).textTertiary,
                     ),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,

@@ -32,7 +32,9 @@ class LanguageSelectionHeader extends StatelessWidget {
                 gradient: ThemeManager.of(context).primaryGradient,
                 borderRadius: BorderRadius.circular(16.r),
                 border: Border.all(
-                  color: ThemeManager.of(context).primaryColor.withValues(alpha: 0.3),
+                  color: ThemeManager.of(context)
+                      .primaryColor
+                      .withValues(alpha: 0.3),
                   width: 2,
                 ),
               ),
