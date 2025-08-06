@@ -1,5 +1,5 @@
 -- Row Level Security (RLS) Policies for TailorApp
--- Equivalent to Firebase Firestore security rules
+-- Comprehensive security policies for the tailoring platform
 
 -- Enable RLS on all tables
 ALTER TABLE USERS ENABLE ROW LEVEL SECURITY;
@@ -47,11 +47,11 @@ CREATE POLICY "Customers can view own profile" ON CUSTOMERS
     FOR SELECT USING (
         AUTH.UID() IN (
     SELECT
-         ID
+                  ID
     FROM
-         USERS
+                  USERS
     WHERE
-         USERS.ID = CUSTOMERS.USER_ID
+                  USERS.ID = CUSTOMERS.USER_ID
 )
     );
 
@@ -59,11 +59,11 @@ CREATE POLICY "Customers can update own profile" ON CUSTOMERS
     FOR UPDATE USING (
         AUTH.UID() IN (
     SELECT
-         ID
+                  ID
     FROM
-         USERS
+                  USERS
     WHERE
-         USERS.ID = CUSTOMERS.USER_ID
+                  USERS.ID = CUSTOMERS.USER_ID
 )
     );
 
@@ -71,11 +71,11 @@ CREATE POLICY "Customers can insert own profile" ON CUSTOMERS
     FOR INSERT WITH CHECK (
         AUTH.UID() IN (
     SELECT
-         ID
+                  ID
     FROM
-         USERS
+                  USERS
     WHERE
-         USERS.ID = CUSTOMERS.USER_ID
+                  USERS.ID = CUSTOMERS.USER_ID
 )
     );
 
@@ -85,19 +85,19 @@ CREATE POLICY "Users can view own orders" ON ORDERS
     FOR SELECT USING (
         AUTH.UID() IN (
     SELECT
-         USER_ID
+                  USER_ID
     FROM
-         CUSTOMERS
+                  CUSTOMERS
     WHERE
-         CUSTOMERS.ID = ORDERS.CUSTOMER_ID
+                  CUSTOMERS.ID = ORDERS.CUSTOMER_ID
 ) OR
         AUTH.UID() IN (
     SELECT
-         USER_ID
+                  USER_ID
     FROM
-         TAILORS
+                  TAILORS
     WHERE
-         TAILORS.ID = ORDERS.TAILOR_ID
+                  TAILORS.ID = ORDERS.TAILOR_ID
 )
     );
 
@@ -105,19 +105,19 @@ CREATE POLICY "Users can update own orders" ON ORDERS
     FOR UPDATE USING (
         AUTH.UID() IN (
     SELECT
-         USER_ID
+                  USER_ID
     FROM
-         CUSTOMERS
+                  CUSTOMERS
     WHERE
-         CUSTOMERS.ID = ORDERS.CUSTOMER_ID
+                  CUSTOMERS.ID = ORDERS.CUSTOMER_ID
 ) OR
         AUTH.UID() IN (
     SELECT
-         USER_ID
+                  USER_ID
     FROM
-         TAILORS
+                  TAILORS
     WHERE
-         TAILORS.ID = ORDERS.TAILOR_ID
+                  TAILORS.ID = ORDERS.TAILOR_ID
 )
     );
 
@@ -125,11 +125,11 @@ CREATE POLICY "Users can create orders" ON ORDERS
     FOR INSERT WITH CHECK (
         AUTH.UID() IN (
     SELECT
-         USER_ID
+                  USER_ID
     FROM
-         CUSTOMERS
+                  CUSTOMERS
     WHERE
-         CUSTOMERS.ID = ORDERS.CUSTOMER_ID
+                  CUSTOMERS.ID = ORDERS.CUSTOMER_ID
 )
     );
 
@@ -139,11 +139,11 @@ CREATE POLICY "Users can view own garments" ON GARMENTS
     FOR SELECT USING (
         AUTH.UID() IN (
     SELECT
-         USER_ID
+                  USER_ID
     FROM
-         CUSTOMERS
+                  CUSTOMERS
     WHERE
-         CUSTOMERS.ID = GARMENTS.CUSTOMER_ID
+                  CUSTOMERS.ID = GARMENTS.CUSTOMER_ID
 )
     );
 
@@ -151,11 +151,11 @@ CREATE POLICY "Users can update own garments" ON GARMENTS
     FOR UPDATE USING (
         AUTH.UID() IN (
     SELECT
-         USER_ID
+                  USER_ID
     FROM
-         CUSTOMERS
+                  CUSTOMERS
     WHERE
-         CUSTOMERS.ID = GARMENTS.CUSTOMER_ID
+                  CUSTOMERS.ID = GARMENTS.CUSTOMER_ID
 )
     );
 
@@ -163,11 +163,11 @@ CREATE POLICY "Users can create garments" ON GARMENTS
     FOR INSERT WITH CHECK (
         AUTH.UID() IN (
     SELECT
-         USER_ID
+                  USER_ID
     FROM
-         CUSTOMERS
+                  CUSTOMERS
     WHERE
-         CUSTOMERS.ID = GARMENTS.CUSTOMER_ID
+                  CUSTOMERS.ID = GARMENTS.CUSTOMER_ID
 )
     );
 
@@ -177,11 +177,11 @@ CREATE POLICY "Users can view own ai_suggestions" ON AI_SUGGESTIONS
     FOR SELECT USING (
         AUTH.UID() IN (
     SELECT
-         USER_ID
+                  USER_ID
     FROM
-         CUSTOMERS
+                  CUSTOMERS
     WHERE
-         CUSTOMERS.ID = AI_SUGGESTIONS.CUSTOMER_ID
+                  CUSTOMERS.ID = AI_SUGGESTIONS.CUSTOMER_ID
 )
     );
 
@@ -189,11 +189,11 @@ CREATE POLICY "Users can update own ai_suggestions" ON AI_SUGGESTIONS
     FOR UPDATE USING (
         AUTH.UID() IN (
     SELECT
-         USER_ID
+                  USER_ID
     FROM
-         CUSTOMERS
+                  CUSTOMERS
     WHERE
-         CUSTOMERS.ID = AI_SUGGESTIONS.CUSTOMER_ID
+                  CUSTOMERS.ID = AI_SUGGESTIONS.CUSTOMER_ID
 )
     );
 
@@ -201,11 +201,11 @@ CREATE POLICY "Users can create ai_suggestions" ON AI_SUGGESTIONS
     FOR INSERT WITH CHECK (
         AUTH.UID() IN (
     SELECT
-         USER_ID
+                  USER_ID
     FROM
-         CUSTOMERS
+                  CUSTOMERS
     WHERE
-         CUSTOMERS.ID = AI_SUGGESTIONS.CUSTOMER_ID
+                  CUSTOMERS.ID = AI_SUGGESTIONS.CUSTOMER_ID
 )
     );
 
@@ -215,11 +215,11 @@ CREATE POLICY "Users can view own measurements" ON MEASUREMENTS
     FOR SELECT USING (
         AUTH.UID() IN (
     SELECT
-         USER_ID
+                  USER_ID
     FROM
-         CUSTOMERS
+                  CUSTOMERS
     WHERE
-         CUSTOMERS.ID = MEASUREMENTS.CUSTOMER_ID
+                  CUSTOMERS.ID = MEASUREMENTS.CUSTOMER_ID
 )
     );
 
@@ -227,11 +227,11 @@ CREATE POLICY "Users can update own measurements" ON MEASUREMENTS
     FOR UPDATE USING (
         AUTH.UID() IN (
     SELECT
-         USER_ID
+                  USER_ID
     FROM
-         CUSTOMERS
+                  CUSTOMERS
     WHERE
-         CUSTOMERS.ID = MEASUREMENTS.CUSTOMER_ID
+                  CUSTOMERS.ID = MEASUREMENTS.CUSTOMER_ID
 )
     );
 
@@ -239,11 +239,11 @@ CREATE POLICY "Users can create measurements" ON MEASUREMENTS
     FOR INSERT WITH CHECK (
         AUTH.UID() IN (
     SELECT
-         USER_ID
+                  USER_ID
     FROM
-         CUSTOMERS
+                  CUSTOMERS
     WHERE
-         CUSTOMERS.ID = MEASUREMENTS.CUSTOMER_ID
+                  CUSTOMERS.ID = MEASUREMENTS.CUSTOMER_ID
 )
     );
 
@@ -256,11 +256,11 @@ CREATE POLICY "Admins can modify fabrics" ON FABRICS
     FOR ALL USING (
         AUTH.UID() IN (
     SELECT
-         USER_ID
+                  USER_ID
     FROM
-         ADMINS
+                  ADMINS
     WHERE
-         ADMINS.USER_ID = AUTH.UID()
+                  ADMINS.USER_ID = AUTH.UID()
 )
     );
 
@@ -284,11 +284,11 @@ CREATE POLICY "Tailors can update own profile" ON TAILORS
     FOR UPDATE USING (
         AUTH.UID() IN (
     SELECT
-         ID
+                  ID
     FROM
-         USERS
+                  USERS
     WHERE
-         USERS.ID = TAILORS.USER_ID
+                  USERS.ID = TAILORS.USER_ID
 )
     );
 
@@ -296,11 +296,11 @@ CREATE POLICY "Tailors can insert own profile" ON TAILORS
     FOR INSERT WITH CHECK (
         AUTH.UID() IN (
     SELECT
-         ID
+                  ID
     FROM
-         USERS
+                  USERS
     WHERE
-         USERS.ID = TAILORS.USER_ID
+                  USERS.ID = TAILORS.USER_ID
 )
     );
 
@@ -310,11 +310,11 @@ CREATE POLICY "Admins can view admin profiles" ON ADMINS
     FOR SELECT USING (
         AUTH.UID() IN (
     SELECT
-         USER_ID
+                  USER_ID
     FROM
-         ADMINS
+                  ADMINS
     WHERE
-         ADMINS.USER_ID = AUTH.UID()
+                  ADMINS.USER_ID = AUTH.UID()
 )
     );
 
@@ -322,11 +322,11 @@ CREATE POLICY "Admins can update own profile" ON ADMINS
     FOR UPDATE USING (
         AUTH.UID() IN (
     SELECT
-         ID
+                  ID
     FROM
-         USERS
+                  USERS
     WHERE
-         USERS.ID = ADMINS.USER_ID
+                  USERS.ID = ADMINS.USER_ID
 )
     );
 
@@ -334,11 +334,11 @@ CREATE POLICY "Admins can insert own profile" ON ADMINS
     FOR INSERT WITH CHECK (
         AUTH.UID() IN (
     SELECT
-         ID
+                  ID
     FROM
-         USERS
+                  USERS
     WHERE
-         USERS.ID = ADMINS.USER_ID
+                  USERS.ID = ADMINS.USER_ID
 )
     );
 
@@ -364,11 +364,11 @@ CREATE POLICY "Users can view chat messages" ON CHAT_MESSAGES
     FOR SELECT USING (
         AUTH.UID() IN (
     SELECT
-         UNNEST(PARTICIPANTS)
+                  UNNEST(PARTICIPANTS)
     FROM
-         CHATS
+                  CHATS
     WHERE
-         CHATS.ID = CHAT_MESSAGES.CHAT_ID
+                  CHATS.ID = CHAT_MESSAGES.CHAT_ID
 )
     );
 
@@ -377,11 +377,11 @@ CREATE POLICY "Users can create chat messages" ON CHAT_MESSAGES
         AUTH.UID() = SENDER_ID AND
         AUTH.UID() IN (
     SELECT
-         UNNEST(PARTICIPANTS)
+                  UNNEST(PARTICIPANTS)
     FROM
-         CHATS
+                  CHATS
     WHERE
-         CHATS.ID = CHAT_MESSAGES.CHAT_ID
+                  CHATS.ID = CHAT_MESSAGES.CHAT_ID
 )
     );
 
@@ -407,11 +407,11 @@ CREATE POLICY "Admins can view activity logs" ON ADMIN_ACTIVITY_LOGS
     FOR SELECT USING (
         AUTH.UID() IN (
     SELECT
-         USER_ID
+                  USER_ID
     FROM
-         ADMINS
+                  ADMINS
     WHERE
-         ADMINS.USER_ID = AUTH.UID()
+                  ADMINS.USER_ID = AUTH.UID()
 )
     );
 

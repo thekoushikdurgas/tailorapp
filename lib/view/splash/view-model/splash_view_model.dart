@@ -1,5 +1,8 @@
 import 'package:tailorapp/core/services/debug_logger.dart';
 import 'package:tailorapp/core/services/hive_service.dart';
+import 'package:tailorapp/core/cubit/auth_cubit.dart';
+import 'package:tailorapp/core/models/user_model.dart';
+import 'package:tailorapp/core/models/user_role.dart';
 import 'package:tailorapp/view/splash/model/splash_state_model.dart';
 
 /// Splash Screen View Model - Business Logic Layer
@@ -7,10 +10,14 @@ import 'package:tailorapp/view/splash/model/splash_state_model.dart';
 /// **RESPONSIBILITIES:**
 /// - Service initialization coordination
 /// - Health checks and system validation
-/// - Authentication state management
+/// - Authentication state management and validation
+/// - Role-based navigation logic
 /// - Performance optimization
 /// - Error handling and recovery
 class SplashViewModel {
+  final AuthCubit? _authCubit;
+
+  SplashViewModel({AuthCubit? authCubit}) : _authCubit = authCubit;
   static const Duration _initializationDelay = Duration(milliseconds: 300);
   static const Duration _minimumSplashDuration = Duration(seconds: 2);
 
@@ -182,6 +189,25 @@ class SplashViewModel {
         'SplashViewModel: User data available: ${userData != null}',
       );
 
+      // Check AuthCubit state if available
+      if (_authCubit != null) {
+        final authState = _authCubit.state;
+        DebugLogger.auth(
+          'SplashViewModel: AuthCubit state: ${authState.runtimeType}',
+        );
+
+        if (authState is AuthAuthenticated) {
+          DebugLogger.auth(
+            'SplashViewModel: User authenticated in AuthCubit as ${authState.userRole.name}',
+          );
+          return true;
+        } else if (authState is AuthError) {
+          DebugLogger.warning(
+            'SplashViewModel: AuthCubit error: ${authState.message}',
+          );
+        }
+      }
+
       if (isLoggedIn && userData != null) {
         // Validate authentication tokens if available
         await _validateAuthenticationTokens();
@@ -213,7 +239,23 @@ class SplashViewModel {
         // Check if tokens are expired
         if (HiveService.areTokensExpired()) {
           DebugLogger.warning('SplashViewModel: Tokens are expired');
-          // Add token refresh logic here
+
+          // Attempt token refresh through AuthCubit if available
+          if (_authCubit != null) {
+            DebugLogger.auth(
+              'SplashViewModel: Attempting token refresh through AuthCubit...',
+            );
+            try {
+              await _authCubit.retry();
+              DebugLogger.success(
+                'SplashViewModel: Token refresh attempt completed',
+              );
+            } catch (refreshError) {
+              DebugLogger.error(
+                'SplashViewModel: Token refresh failed: $refreshError',
+              );
+            }
+          }
         } else {
           DebugLogger.success('SplashViewModel: Tokens are valid');
         }
@@ -245,16 +287,34 @@ class SplashViewModel {
     }
   }
 
-  /// Get current application state
+  /// Get current application state including authentication
   AppStateModel getCurrentAppState() {
     try {
       DebugLogger.info('SplashViewModel: Getting current app state...');
 
+      bool isLoggedIn = HiveService.isLoggedIn();
+      UserModel? userData = HiveService.getUserDataSafe();
+
+      // Override with AuthCubit state if available and authenticated
+      if (_authCubit != null) {
+        final authState = _authCubit.state;
+        if (authState is AuthAuthenticated) {
+          isLoggedIn = true;
+          userData = authState.userProfile;
+          DebugLogger.info(
+            'SplashViewModel: Using AuthCubit state - user: ${userData.name}, role: ${authState.userRole.name}',
+          );
+        } else if (authState is AuthUnauthenticated) {
+          isLoggedIn = false;
+          userData = null;
+        }
+      }
+
       final appState = AppStateModel(
         isIntroWatched: HiveService.isIntroWatched(),
         isLanguageSelected: HiveService.isLanguageSelected(),
-        isLoggedIn: HiveService.isLoggedIn(),
-        userData: HiveService.getUserDataSafe(),
+        isLoggedIn: isLoggedIn,
+        userData: userData,
         lastChecked: DateTime.now(),
       );
 
@@ -296,7 +356,7 @@ class SplashViewModel {
 
   /// Get debug information for troubleshooting
   Map<String, dynamic> getDebugInfo() {
-    return {
+    final debugInfo = {
       'startTime': _startTime.toIso8601String(),
       'elapsedTime': DateTime.now().difference(_startTime).inMilliseconds,
       'storageInfo': HiveService.getStorageInfo(),
@@ -305,6 +365,19 @@ class SplashViewModel {
       'isLoggedIn': HiveService.isLoggedIn(),
       'hasUserData': HiveService.getUserDataSafe() != null,
     };
+
+    // Add AuthCubit debug info if available
+    if (_authCubit != null) {
+      final authState = _authCubit.state;
+      debugInfo.addAll({
+        'authCubitState': authState.runtimeType.toString(),
+        'authCubitAuthenticated': _authCubit.isAuthenticated,
+        'authCubitUserId': _authCubit.currentUserId ?? 'null',
+        'authCubitUserRole': _authCubit.currentUserProfile?.role.name ?? 'null',
+      });
+    }
+
+    return debugInfo;
   }
 
   /// Handle initialization errors

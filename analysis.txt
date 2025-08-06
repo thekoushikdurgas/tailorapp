@@ -1,41 +1,21 @@
 Analyzing tailorapp...                                          
 
-warning - The method doesn't override an inherited method - lib\core\repositories\supabase_garment_repository.dart:75:30 - override_on_non_overriding_member
-warning - The method doesn't override an inherited method - lib\core\repositories\supabase_garment_repository.dart:90:30 - override_on_non_overriding_member
-warning - The method doesn't override an inherited method - lib\core\repositories\supabase_garment_repository.dart:150:30 - override_on_non_overriding_member
-warning - The method doesn't override an inherited method - lib\core\repositories\supabase_garment_repository.dart:188:24 - override_on_non_overriding_member
-   info - Missing a required trailing comma - lib\core\repositories\supabase_garment_repository.dart:213:51 - require_trailing_commas
-warning - The method doesn't override an inherited method - lib\core\repositories\supabase_order_repository.dart:171:22 - override_on_non_overriding_member
-warning - The method doesn't override an inherited method - lib\core\repositories\supabase_order_repository.dart:185:28 - override_on_non_overriding_member
-warning - The method doesn't override an inherited method - lib\core\repositories\supabase_tailor_repository.dart:124:16 - override_on_non_overriding_member
-warning - The method doesn't override an inherited method - lib\core\repositories\supabase_tailor_repository.dart:139:16 - override_on_non_overriding_member
-warning - The method doesn't override an inherited method - lib\core\repositories\supabase_tailor_repository.dart:154:16 - override_on_non_overriding_member
-warning - The method doesn't override an inherited method - lib\core\repositories\supabase_tailor_repository.dart:169:29 - override_on_non_overriding_member
-warning - The method doesn't override an inherited method - lib\core\repositories\supabase_tailor_repository.dart:205:29 - override_on_non_overriding_member
-warning - The method doesn't override an inherited method - lib\core\repositories\supabase_tailor_repository.dart:248:16 - override_on_non_overriding_member
-warning - The method doesn't override an inherited method - lib\core\repositories\supabase_tailor_repository.dart:260:16 - override_on_non_overriding_member
-warning - The method doesn't override an inherited method - lib\core\repositories\supabase_tailor_repository.dart:297:16 - override_on_non_overriding_member
-warning - The left operand can't be null, so the right operand is never executed - lib\core\repositories\supabase_tailor_repository.dart:303:38 - dead_null_aware_expression
-warning - The method doesn't override an inherited method - lib\core\repositories\supabase_tailor_repository.dart:316:16 - override_on_non_overriding_member
-warning - The left operand can't be null, so the right operand is never executed - lib\core\repositories\supabase_tailor_repository.dart:324:63 - dead_null_aware_expression
-   info - Missing a required trailing comma - lib\core\repositories\supabase_tailor_repository.dart:339:44 - require_trailing_commas
-warning - The method doesn't override an inherited method - lib\core\repositories\supabase_tailor_repository.dart:360:29 - override_on_non_overriding_member
-   info - Missing a required trailing comma - lib\core\repositories\supabase_tailor_repository.dart:441:48 - require_trailing_commas
-   info - Missing a required trailing comma - lib\core\repositories\supabase_tailor_repository.dart:447:65 - require_trailing_commas
-   info - Missing a required trailing comma - lib\core\repositories\supabase_tailor_repository.dart:453:45 - require_trailing_commas
 warning - The value of the field '_userGrowthData' isn't used - lib\view\admin\view\platform_analytics_insights_screen.dart:26:19 - unused_field
 warning - The value of the field '_orderVolumeData' isn't used - lib\view\admin\view\platform_analytics_insights_screen.dart:27:19 - unused_field
 warning - The value of the field '_selectedTimeRange' isn't used - lib\view\admin\view\super_admin_dashboard_screen.dart:20:10 - unused_field
-warning - The value of the field '_isCollaborating' isn't used - lib\view\customer\view\design_collaboration_hub_screen.dart:29:14 - unused_field
-warning - The value of the field '_priceRanges' isn't used - lib\view\customer\view\fabric_selection_studio_screen.dart:52:22 - unused_field
-warning - Dead code - lib\view\splash\view-model\splash_view_model.dart:242:14 - dead_code
-warning - The value of the field '_previousMessage' isn't used - lib\view\splash\widgets\splash_loading_text.dart:44:10 - unused_field
-warning - The value of the field '_selectedStatus' isn't used - lib\view\tailor\view\order_management_screen.dart:22:16 - unused_field
-warning - The value of the field '_selectedPriority' isn't used - lib\view\tailor\view\order_management_screen.dart:23:16 - unused_field
-warning - The value of the field '_selectedOrder' isn't used - lib\view\tailor\view\order_management_screen.dart:26:16 - unused_field
-warning - The value of the field '_statusOptions' isn't used - lib\view\tailor\view\order_management_screen.dart:37:22 - unused_field
-warning - The value of the field '_priorityOptions' isn't used - lib\view\tailor\view\order_management_screen.dart:46:22 - unused_field
+   info - Missing a required trailing comma - lib\view\splash\cubit\splash_cubit.dart:193:67 - require_trailing_commas
+   info - Missing a required trailing comma - lib\view\splash\cubit\splash_cubit.dart:200:77 - require_trailing_commas
+   info - Missing a required trailing comma - lib\view\splash\cubit\splash_cubit.dart:312:66 - require_trailing_commas
+   info - Missing a required trailing comma - lib\view\splash\cubit\splash_cubit.dart:330:65 - require_trailing_commas
+   info - Missing a required trailing comma - lib\view\splash\cubit\splash_cubit.dart:357:65 - require_trailing_commas
+   info - Missing a required trailing comma - lib\view\splash\view-model\splash_view_model.dart:196:73 - require_trailing_commas
+   info - Missing a required trailing comma - lib\view\splash\view-model\splash_view_model.dart:200:95 - require_trailing_commas
+   info - Missing a required trailing comma - lib\view\splash\view-model\splash_view_model.dart:204:71 - require_trailing_commas
+   info - Missing a required trailing comma - lib\view\splash\view-model\splash_view_model.dart:243:81 - require_trailing_commas
+   info - Missing a required trailing comma - lib\view\splash\view-model\splash_view_model.dart:247:69 - require_trailing_commas
+   info - Missing a required trailing comma - lib\view\splash\view-model\splash_view_model.dart:250:73 - require_trailing_commas
+  error - The element type 'String?' can't be assigned to the map value type 'Object' - lib\view\splash\view-model\splash_view_model.dart:369:28 - map_value_type_not_assignable
+  error - The element type 'String?' can't be assigned to the map value type 'Object' - lib\view\splash\view-model\splash_view_model.dart:370:30 - map_value_type_not_assignable
+warning - The value of the field '_selectedOrder' isn't used - lib\view\tailor\view\order_management_screen.dart:25:16 - unused_field
 warning - The value of the field '_selectedPattern' isn't used - lib\view\tailor\view\pattern_creation_management_screen.dart:25:19 - unused_field
-warning - The value of the field '_selectedSize' isn't used - lib\view\tailor\view\pattern_creation_management_screen.dart:28:16 - unused_field
-warning - The value of the field '_sizeOptions' isn't used - lib\view\tailor\view\pattern_creation_management_screen.dart:41:22 - unused_field
 

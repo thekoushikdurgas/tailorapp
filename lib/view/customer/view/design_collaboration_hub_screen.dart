@@ -8,10 +8,12 @@ class DesignCollaborationHubScreen extends StatefulWidget {
   const DesignCollaborationHubScreen({super.key});
 
   @override
-  State<DesignCollaborationHubScreen> createState() => _DesignCollaborationHubScreenState();
+  State<DesignCollaborationHubScreen> createState() =>
+      _DesignCollaborationHubScreenState();
 }
 
-class _DesignCollaborationHubScreenState extends State<DesignCollaborationHubScreen> with TickerProviderStateMixin {
+class _DesignCollaborationHubScreenState
+    extends State<DesignCollaborationHubScreen> with TickerProviderStateMixin {
   late TabController _tabController;
   late AnimationController _pulseController;
   late AnimationController _collaborationController;
@@ -121,7 +123,8 @@ class _DesignCollaborationHubScreenState extends State<DesignCollaborationHubScr
         id: 'COMMENT$index',
         authorId: index % 2 == 0 ? 'CUSTOMER001' : _selectedProject!.tailorId,
         authorName: index % 2 == 0 ? 'You' : _selectedProject!.tailorName,
-        content: 'Comment ${index + 1}: This looks great! What do you think about adjusting the sleeve length?',
+        content:
+            'Comment ${index + 1}: This looks great! What do you think about adjusting the sleeve length?',
         timestamp: DateTime.now().subtract(Duration(hours: index)),
         position: DesignPosition(50.0 + (index * 20), 100.0 + (index * 15)),
         isResolved: index % 3 == 0,
@@ -166,7 +169,8 @@ class _DesignCollaborationHubScreenState extends State<DesignCollaborationHubScr
     );
 
     // Set active collaborators
-    _activeCollaborators = _selectedProject!.collaborators.where((c) => c.isOnline).toList();
+    _activeCollaborators =
+        _selectedProject!.collaborators.where((c) => c.isOnline).toList();
 
     setState(() {});
   }
@@ -203,7 +207,9 @@ class _DesignCollaborationHubScreenState extends State<DesignCollaborationHubScr
 
                 // Design workspace
                 Expanded(
-                  child: _selectedProject != null ? _buildDesignWorkspace() : _buildEmptyState(),
+                  child: _selectedProject != null
+                      ? _buildDesignWorkspace()
+                      : _buildEmptyState(),
                 ),
               ],
             ),
@@ -254,9 +260,11 @@ class _DesignCollaborationHubScreenState extends State<DesignCollaborationHubScr
               animation: _pulseController,
               builder: (context, child) {
                 return Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: Colors.red[600]!.withValues(alpha: 0.7 + _pulseController.value * 0.3),
+                    color: Colors.red[600]!
+                        .withValues(alpha: 0.7 + _pulseController.value * 0.3),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(
@@ -429,7 +437,8 @@ class _DesignCollaborationHubScreenState extends State<DesignCollaborationHubScr
             gradient: LinearGradient(
               colors: [
                 Colors.primaries[project.hashCode % Colors.primaries.length],
-                Colors.primaries[project.hashCode % Colors.primaries.length].withValues(alpha: 0.7),
+                Colors.primaries[project.hashCode % Colors.primaries.length]
+                    .withValues(alpha: 0.7),
               ],
             ),
           ),
@@ -461,9 +470,11 @@ class _DesignCollaborationHubScreenState extends State<DesignCollaborationHubScr
             Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
-                    color: _getStatusColor(project.status).withValues(alpha: 0.1),
+                    color:
+                        _getStatusColor(project.status).withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(
@@ -487,7 +498,8 @@ class _DesignCollaborationHubScreenState extends State<DesignCollaborationHubScr
             ),
           ],
         ),
-        trailing: project.collaborators.any((c) => c.isOnline && c.role == CollaboratorRole.tailor)
+        trailing: project.collaborators
+                .any((c) => c.isOnline && c.role == CollaboratorRole.tailor)
             ? Container(
                 width: 8,
                 height: 8,
@@ -546,7 +558,8 @@ class _DesignCollaborationHubScreenState extends State<DesignCollaborationHubScr
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color: _getStatusColor(_selectedProject!.status).withValues(alpha: 0.1),
+                        color: _getStatusColor(_selectedProject!.status)
+                            .withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
@@ -579,9 +592,11 @@ class _DesignCollaborationHubScreenState extends State<DesignCollaborationHubScr
                 onPressed: _startVideoCall,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green[600],
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 ),
-                icon: const Icon(Icons.video_call, color: Colors.white, size: 16),
+                icon:
+                    const Icon(Icons.video_call, color: Colors.white, size: 16),
                 label: const Text(
                   'Video Call',
                   style: TextStyle(color: Colors.white, fontSize: 12),
@@ -692,10 +707,16 @@ class _DesignCollaborationHubScreenState extends State<DesignCollaborationHubScr
 
                   // Collaboration cursors
                   if (_isLiveSession)
-                    ..._activeCollaborators.where((c) => c.id != 'CUSTOMER001').map(
+                    ..._activeCollaborators
+                        .where((c) => c.id != 'CUSTOMER001')
+                        .map(
                           (collaborator) => Positioned(
-                            left: 100 + (_activeCollaborators.indexOf(collaborator) * 50),
-                            top: 200 + (_activeCollaborators.indexOf(collaborator) * 30),
+                            left: 100 +
+                                (_activeCollaborators.indexOf(collaborator) *
+                                    50),
+                            top: 200 +
+                                (_activeCollaborators.indexOf(collaborator) *
+                                    30),
                             child: _buildCollaboratorCursor(collaborator),
                           ),
                         ),
@@ -877,11 +898,14 @@ class _DesignCollaborationHubScreenState extends State<DesignCollaborationHubScr
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(12)),
                 gradient: LinearGradient(
                   colors: [
-                    Colors.primaries[version.hashCode % Colors.primaries.length],
-                    Colors.primaries[version.hashCode % Colors.primaries.length].withValues(alpha: 0.7),
+                    Colors
+                        .primaries[version.hashCode % Colors.primaries.length],
+                    Colors.primaries[version.hashCode % Colors.primaries.length]
+                        .withValues(alpha: 0.7),
                   ],
                 ),
               ),
@@ -1046,7 +1070,9 @@ class _DesignCollaborationHubScreenState extends State<DesignCollaborationHubScr
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: comment.isResolved ? Colors.green[100] : Colors.orange[100],
+                  color: comment.isResolved
+                      ? Colors.green[100]
+                      : Colors.orange[100],
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
@@ -1054,7 +1080,9 @@ class _DesignCollaborationHubScreenState extends State<DesignCollaborationHubScr
                   style: TextStyle(
                     fontSize: 10,
                     fontWeight: FontWeight.bold,
-                    color: comment.isResolved ? Colors.green[600] : Colors.orange[600],
+                    color: comment.isResolved
+                        ? Colors.green[600]
+                        : Colors.orange[600],
                   ),
                 ),
               ),
@@ -1235,7 +1263,8 @@ class _DesignCollaborationHubScreenState extends State<DesignCollaborationHubScr
           ]),
           const SizedBox(height: 16),
           _buildDetailCard('Collaborators', [
-            ..._selectedProject!.collaborators.map((collaborator) => _buildCollaboratorRow(collaborator)),
+            ..._selectedProject!.collaborators
+                .map((collaborator) => _buildCollaboratorRow(collaborator)),
           ]),
           const SizedBox(height: 16),
           _buildDetailCard('Project Settings', [
@@ -1551,7 +1580,8 @@ class _DesignCollaborationHubScreenState extends State<DesignCollaborationHubScr
                 padding: const EdgeInsets.all(12),
               ),
               icon: const Icon(Icons.download, color: Colors.white),
-              label: const Text('Export', style: TextStyle(color: Colors.white)),
+              label:
+                  const Text('Export', style: TextStyle(color: Colors.white)),
             ),
           ),
           const SizedBox(height: 12),
@@ -1959,7 +1989,10 @@ class DesignProject {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || other is DesignProject && runtimeType == other.runtimeType && id == other.id;
+      identical(this, other) ||
+      other is DesignProject &&
+          runtimeType == other.runtimeType &&
+          id == other.id;
 }
 
 class Collaborator {
@@ -2039,7 +2072,10 @@ class DesignVersion {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || other is DesignVersion && runtimeType == other.runtimeType && id == other.id;
+      identical(this, other) ||
+      other is DesignVersion &&
+          runtimeType == other.runtimeType &&
+          id == other.id;
 }
 
 class DesignPosition {

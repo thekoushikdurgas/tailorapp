@@ -41,7 +41,6 @@ class _SplashLoadingTextState extends State<SplashLoadingText>
   late Animation<double> _pulseAnimation;
 
   String _currentMessage = '';
-  String _previousMessage = '';
 
   @override
   void initState() {
@@ -114,8 +113,6 @@ class _SplashLoadingTextState extends State<SplashLoadingText>
   }
 
   Future<void> _updateMessage() async {
-    _previousMessage = _currentMessage;
-
     // Fade out current message
     await _fadeController.reverse();
 
@@ -245,6 +242,30 @@ class SplashStateText extends StatelessWidget {
         currentPhase: loadingState.phase,
         isComplete: loadingState.phase == InitializationPhase.ready,
       );
+    } else if (state is SplashAuthLoading) {
+      final authLoadingState = state as SplashAuthLoading;
+      return SplashLoadingText(
+        message: authLoadingState.message,
+        currentPhase: InitializationPhase.checkingAuth,
+        isComplete: false,
+      );
+    } else if (state is SplashAuthAuthenticated) {
+      final authState = state as SplashAuthAuthenticated;
+      return SplashLoadingText(
+        message: 'Welcome back, ${authState.userProfile.name}!',
+        isComplete: false,
+      );
+    } else if (state is SplashAuthUnauthenticated) {
+      return const SplashLoadingText(
+        message: 'Preparing welcome experience...',
+        isComplete: false,
+      );
+    } else if (state is SplashAuthError) {
+      final authErrorState = state as SplashAuthError;
+      return SplashLoadingText(
+        message: authErrorState.message,
+        hasError: true,
+      );
     } else if (state is SplashError) {
       final errorState = state as SplashError;
       return SplashLoadingText(
@@ -252,8 +273,12 @@ class SplashStateText extends StatelessWidget {
         hasError: true,
       );
     } else if (state is SplashNavigationReady) {
+      final navState = state as SplashNavigationReady;
+      final message = navState.isAuthenticated
+          ? 'Launching your dashboard...'
+          : LocaleKeys.loading_ready.tr();
       return SplashLoadingText(
-        message: LocaleKeys.loading_ready.tr(),
+        message: message,
         isComplete: true,
       );
     } else {

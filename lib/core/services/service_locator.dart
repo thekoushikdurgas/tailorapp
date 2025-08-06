@@ -8,8 +8,9 @@ import 'package:tailorapp/core/services/openai_service_impl.dart';
 import 'package:tailorapp/core/services/mlkit_service_impl.dart';
 import 'package:tailorapp/core/services/production_gemini_service_impl.dart';
 import 'package:tailorapp/core/services/production_openai_service_impl.dart';
-import 'package:tailorapp/core/services/auth_service.dart';
-import 'package:tailorapp/core/services/supabase_auth_service.dart';
+// Removed auth service imports - using database-only approach
+import 'package:tailorapp/core/services/supabase_database_service.dart';
+import 'package:tailorapp/core/cubit/user_data_cubit.dart';
 import 'package:tailorapp/core/repositories/customer_repository.dart';
 import 'package:tailorapp/core/repositories/tailor_repository.dart';
 import 'package:tailorapp/core/repositories/admin_repository.dart';
@@ -27,11 +28,14 @@ final GetIt serviceLocator = GetIt.instance;
 
 class ServiceLocator {
   static Future<void> setupServiceLocator() async {
+    // Database Services
+    _setupDatabaseServices();
+
     // Repositories
     _setupRepositories();
 
-    // Authentication Services
-    _setupAuthServices();
+    // State Management (Cubits)
+    _setupStateManagement();
 
     // AI Services
     _setupAIServices();
@@ -64,17 +68,25 @@ class ServiceLocator {
     );
   }
 
-  static void _setupAuthServices() {
-    // Register Supabase client instance
+  static void _setupDatabaseServices() {
+    // Register Supabase client instance for database operations only
     serviceLocator.registerLazySingleton<SupabaseClient>(
       () => Supabase.instance.client,
     );
 
-    // Register Supabase auth service implementation
-    serviceLocator.registerLazySingleton<AuthService>(
-      () => SupabaseAuthService(
-        supabaseClient: serviceLocator<SupabaseClient>(),
-        userRepository: serviceLocator<UserRepository>(),
+    // Register Supabase database service
+    serviceLocator.registerLazySingleton<SupabaseDatabaseService>(
+      () => SupabaseDatabaseService(
+        client: serviceLocator<SupabaseClient>(),
+      ),
+    );
+  }
+
+  static void _setupStateManagement() {
+    // Register User Data Cubit (replacement for auth cubit)
+    serviceLocator.registerFactory<UserDataCubit>(
+      () => UserDataCubit(
+        databaseService: serviceLocator<SupabaseDatabaseService>(),
       ),
     );
   }
@@ -138,16 +150,11 @@ class ServiceLocator {
 
   // Helper methods to get repositories
   static UserRepository get userRepository => serviceLocator<UserRepository>();
-  static CustomerRepository get customerRepository =>
-      serviceLocator<CustomerRepository>();
-  static TailorRepository get tailorRepository =>
-      serviceLocator<TailorRepository>();
-  static AdminRepository get adminRepository =>
-      serviceLocator<AdminRepository>();
-  static OrderRepository get orderRepository =>
-      serviceLocator<OrderRepository>();
-  static GarmentRepository get garmentRepository =>
-      serviceLocator<GarmentRepository>();
+  static CustomerRepository get customerRepository => serviceLocator<CustomerRepository>();
+  static TailorRepository get tailorRepository => serviceLocator<TailorRepository>();
+  static AdminRepository get adminRepository => serviceLocator<AdminRepository>();
+  static OrderRepository get orderRepository => serviceLocator<OrderRepository>();
+  static GarmentRepository get garmentRepository => serviceLocator<GarmentRepository>();
 
   // Mock service setup for development/testing
   static void setupMockServices() {
@@ -246,8 +253,7 @@ class MockGeminiService implements GeminiService {
     return [
       {
         'title': 'AI Classic Business Shirt',
-        'description':
-            'A professionally tailored shirt perfect for business environments.',
+        'description': 'A professionally tailored shirt perfect for business environments.',
         'garmentType': 'shirt',
         'colors': ['Navy', 'White', 'Light Blue'],
         'fabrics': ['Cotton', 'Cotton Blend'],
@@ -263,8 +269,7 @@ class MockGeminiService implements GeminiService {
       },
       {
         'title': 'Modern Casual Shirt',
-        'description':
-            'Contemporary design with a relaxed fit for everyday comfort.',
+        'description': 'Contemporary design with a relaxed fit for everyday comfort.',
         'garmentType': 'shirt',
         'colors': ['Light Blue', 'Grey', 'White'],
         'fabrics': ['Linen', 'Cotton'],
@@ -336,8 +341,7 @@ class MockOpenAIService implements OpenAIService {
     return [
       {
         'title': 'Refined Professional',
-        'description':
-            'Elevated business attire with premium details and exceptional fit.',
+        'description': 'Elevated business attire with premium details and exceptional fit.',
         'garmentType': 'shirt',
         'colors': ['Crisp White', 'Navy'],
         'fabrics': ['Premium Cotton', 'Supima Cotton'],

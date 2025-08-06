@@ -119,25 +119,25 @@ Future<void> _performNavigation() async {
 
 ### **First-Time Users**
 
-```
+```txt
 App Launch → Splash Screen → Introduction → Language Selection → Authentication → Dashboard
 ```
 
 ### **Returning Users (Intro Completed)**
 
-```
+```txt
 App Launch → Splash Screen → Language Selection → Authentication → Dashboard
 ```
 
 ### **Returning Users (Language Selected)**
 
-```
+```txt
 App Launch → Splash Screen → Authentication → Dashboard
 ```
 
 ### **Authenticated Users**
 
-```
+```txt
 App Launch → Splash Screen → Dashboard (Role-based via router)
 ```
 
@@ -230,7 +230,7 @@ App Launch → Splash Screen → Dashboard (Role-based via router)
 ### **Debug Information**
 
 - All navigation decisions are logged via `DebugLogger`
-- Search for `'SplashScreen:'` in logs for splash-specific information
+- Search for `SplashScreen` in logs for splash-specific information
 - Router redirect logs provide additional navigation context
 
 ## 🎉 **Conclusion**

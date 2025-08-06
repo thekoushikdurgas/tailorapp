@@ -4,7 +4,16 @@ import 'package:tailorapp/core/models/user_role.dart';
 import 'package:tailorapp/core/repositories/user_repository.dart';
 import 'package:tailorapp/core/services/debug_logger.dart';
 import 'package:tailorapp/core/services/auth_service.dart';
+import 'package:tailorapp/supabase_options.dart';
 
+/// Supabase authentication service for TailorApp
+///
+/// Provides comprehensive authentication functionality including:
+/// - Email/password authentication
+/// - Phone-based authentication with PIN
+/// - OAuth providers (Google, Apple, etc.)
+/// - User profile management
+/// - Role-based access control
 class SupabaseAuthService implements AuthService {
   final supabase.SupabaseClient _supabase;
   final UserRepository _userRepository;
@@ -16,8 +25,7 @@ class SupabaseAuthService implements AuthService {
         _userRepository = userRepository;
 
   @override
-  Stream<supabase.User?> get authStateChanges =>
-      _supabase.auth.onAuthStateChange.map((data) => data.session?.user);
+  Stream<supabase.User?> get authStateChanges => _supabase.auth.onAuthStateChange.map((data) => data.session?.user);
 
   @override
   supabase.User? get currentUser => _supabase.auth.currentUser;
@@ -68,7 +76,7 @@ class SupabaseAuthService implements AuthService {
           name: name,
           email: email,
           phone: response.user!.phone ?? '',
-          isVerified: false,
+          isVerified: response.user!.emailConfirmedAt != null,
         );
 
         await _userRepository.createUser(userProfile);
@@ -89,7 +97,7 @@ class SupabaseAuthService implements AuthService {
     try {
       await _supabase.auth.signInWithOAuth(
         supabase.OAuthProvider.google,
-        redirectTo: 'com.durgas.tailorapp://auth/callback',
+        redirectTo: SupabaseConfig.redirectUrl,
       );
 
       // Wait for auth state change
@@ -313,8 +321,7 @@ class SupabaseAuthService implements AuthService {
   Future<void> updatePin(String newPin) async {
     final user = currentUser;
     if (user != null) {
-      await _supabase.auth
-          .updateUser(supabase.UserAttributes(password: newPin));
+      await _supabase.auth.updateUser(supabase.UserAttributes(password: newPin));
     } else {
       throw Exception('No authenticated user');
     }

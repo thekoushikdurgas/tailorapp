@@ -1,5 +1,5 @@
 -- Supabase Database Schema for TailorApp
--- Migration from Firebase Firestore to Supabase PostgreSQL
+-- Complete database schema for the AI-powered tailoring platform
 
 -- Create storage bucket for avatars/profile images
 INSERT INTO STORAGE.BUCKETS (

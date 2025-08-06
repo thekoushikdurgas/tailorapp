@@ -49,5 +49,17 @@
 		<true/>
 		<key>UIStatusBarHidden</key>
 		<false/>
+		<!-- Deep link configuration for Supabase OAuth -->
+		<key>CFBundleURLTypes</key>
+		<array>
+			<dict>
+				<key>CFBundleURLName</key>
+				<string>com.durgas.tailorapp</string>
+				<key>CFBundleURLSchemes</key>
+				<array>
+					<string>com.durgas.tailorapp</string>
+				</array>
+			</dict>
+		</array>
 	</dict>
 </plist>

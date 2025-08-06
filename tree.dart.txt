@@ -64,11 +64,7 @@ lib\view\admin\view\super_admin_dashboard_screen.dart
 lib\view\admin\view\user_management_roles_screen.dart
 lib\view\ai_suggestions\view\ai_suggestions_page.dart
 lib\view\auth\view\auth_loading_screen.dart
-lib\view\auth\view\auth_wrapper.dart
-lib\view\auth\view\forgot_password_page.dart
-lib\view\auth\view\login_page.dart
 lib\view\auth\view\pin_verification_page.dart
-lib\view\auth\view\register_page.dart
 lib\view\auth\view\welcome.dart
 lib\view\auth\widgets\country_picker_widget.dart
 lib\view\auth\widgets\phone_auth_modals.dart

@@ -8,10 +8,12 @@ class PlatformAnalyticsInsightsScreen extends StatefulWidget {
   const PlatformAnalyticsInsightsScreen({super.key});
 
   @override
-  State<PlatformAnalyticsInsightsScreen> createState() => _PlatformAnalyticsInsightsScreenState();
+  State<PlatformAnalyticsInsightsScreen> createState() =>
+      _PlatformAnalyticsInsightsScreenState();
 }
 
-class _PlatformAnalyticsInsightsScreenState extends State<PlatformAnalyticsInsightsScreen>
+class _PlatformAnalyticsInsightsScreenState
+    extends State<PlatformAnalyticsInsightsScreen>
     with TickerProviderStateMixin {
   late TabController _tabController;
   late AnimationController _refreshController;
@@ -281,43 +283,50 @@ class _PlatformAnalyticsInsightsScreenState extends State<PlatformAnalyticsInsig
         severity: InsightSeverity.high,
         timestamp: DateTime.now().subtract(const Duration(hours: 2)),
         actionable: true,
-        recommendation: 'Consider expanding premium service marketing to capture additional growth.',
+        recommendation:
+            'Consider expanding premium service marketing to capture additional growth.',
         metrics: ['revenue', 'orders'],
         confidence: 0.89,
       ),
       PlatformInsight(
         id: 'INS002',
         title: 'Customer Acquisition Cost Optimization',
-        description: 'CAC has decreased by 15% while maintaining quality, indicating improved marketing efficiency.',
+        description:
+            'CAC has decreased by 15% while maintaining quality, indicating improved marketing efficiency.',
         category: InsightCategory.efficiency,
         severity: InsightSeverity.medium,
         timestamp: DateTime.now().subtract(const Duration(hours: 6)),
         actionable: true,
-        recommendation: 'Reallocate budget from underperforming channels to optimize further.',
+        recommendation:
+            'Reallocate budget from underperforming channels to optimize further.',
         metrics: ['users', 'conversion'],
         confidence: 0.76,
       ),
       PlatformInsight(
         id: 'INS003',
         title: 'Seasonal Demand Pattern Detected',
-        description: 'Analytics show a 40% increase in formal wear orders, likely due to upcoming wedding season.',
+        description:
+            'Analytics show a 40% increase in formal wear orders, likely due to upcoming wedding season.',
         category: InsightCategory.trend,
         severity: InsightSeverity.medium,
         timestamp: DateTime.now().subtract(const Duration(hours: 12)),
         actionable: true,
-        recommendation: 'Prepare inventory and tailor capacity for increased formal wear demand.',
+        recommendation:
+            'Prepare inventory and tailor capacity for increased formal wear demand.',
         metrics: ['orders'],
         confidence: 0.82,
       ),
       PlatformInsight(
         id: 'INS004',
         title: 'Geographic Expansion Opportunity',
-        description: 'Organic search traffic from Mexico and Brazil has increased 200% with minimal conversion.',
+        description:
+            'Organic search traffic from Mexico and Brazil has increased 200% with minimal conversion.',
         category: InsightCategory.opportunity,
         severity: InsightSeverity.low,
         timestamp: DateTime.now().subtract(const Duration(days: 1)),
         actionable: true,
-        recommendation: 'Consider localization and market entry strategy for Latin America.',
+        recommendation:
+            'Consider localization and market entry strategy for Latin America.',
         metrics: ['users'],
         confidence: 0.68,
       ),
@@ -329,12 +338,14 @@ class _PlatformAnalyticsInsightsScreenState extends State<PlatformAnalyticsInsig
       PerformanceAlert(
         id: 'ALERT001',
         title: 'Server Response Time Spike',
-        description: 'Average response time increased to 850ms (threshold: 500ms)',
+        description:
+            'Average response time increased to 850ms (threshold: 500ms)',
         severity: AlertSeverity.high,
         timestamp: DateTime.now().subtract(const Duration(minutes: 15)),
         isResolved: false,
         affectedMetrics: ['user_experience', 'conversion'],
-        recommendedAction: 'Scale server resources or optimize database queries',
+        recommendedAction:
+            'Scale server resources or optimize database queries',
       ),
       PerformanceAlert(
         id: 'ALERT002',
@@ -344,7 +355,8 @@ class _PlatformAnalyticsInsightsScreenState extends State<PlatformAnalyticsInsig
         timestamp: DateTime.now().subtract(const Duration(hours: 2)),
         isResolved: false,
         affectedMetrics: ['orders', 'satisfaction'],
-        recommendedAction: 'Trigger automatic reorders for critical inventory items',
+        recommendedAction:
+            'Trigger automatic reorders for critical inventory items',
       ),
     ];
   }
@@ -372,7 +384,8 @@ class _PlatformAnalyticsInsightsScreenState extends State<PlatformAnalyticsInsig
           _buildControlsBar(),
 
           // Performance alerts
-          if (_performanceAlerts.where((a) => !a.isResolved).isNotEmpty) _buildAlertsBar(),
+          if (_performanceAlerts.where((a) => !a.isResolved).isNotEmpty)
+            _buildAlertsBar(),
 
           // Tab bar
           _buildTabBar(),
@@ -420,7 +433,9 @@ class _PlatformAnalyticsInsightsScreenState extends State<PlatformAnalyticsInsig
             animation: _refreshController,
             builder: (context, child) {
               return Transform.rotate(
-                angle: _isRealTimeMode ? _refreshController.value * 2 * 3.14159 : 0,
+                angle: _isRealTimeMode
+                    ? _refreshController.value * 2 * 3.14159
+                    : 0,
                 child: Icon(
                   _isRealTimeMode ? Icons.sync : Icons.sync_disabled,
                   color: _isRealTimeMode ? Colors.green[600] : Colors.grey[600],
@@ -480,7 +495,8 @@ class _PlatformAnalyticsInsightsScreenState extends State<PlatformAnalyticsInsig
                   value: _selectedTimeRange,
                   decoration: InputDecoration(
                     labelText: 'Time Range',
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -510,7 +526,8 @@ class _PlatformAnalyticsInsightsScreenState extends State<PlatformAnalyticsInsig
                   value: _selectedComparison,
                   decoration: InputDecoration(
                     labelText: 'Compare To',
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -575,7 +592,8 @@ class _PlatformAnalyticsInsightsScreenState extends State<PlatformAnalyticsInsig
   }
 
   Widget _buildAlertsBar() {
-    final activeAlerts = _performanceAlerts.where((a) => !a.isResolved).toList();
+    final activeAlerts =
+        _performanceAlerts.where((a) => !a.isResolved).toList();
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
@@ -704,7 +722,9 @@ class _PlatformAnalyticsInsightsScreenState extends State<PlatformAnalyticsInsig
   }
 
   Widget _buildKPICard(AnalyticsMetric metric) {
-    final progressToTarget = metric.target != null ? (metric.value / metric.target!).clamp(0.0, 1.0) : 0.0;
+    final progressToTarget = metric.target != null
+        ? (metric.value / metric.target!).clamp(0.0, 1.0)
+        : 0.0;
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -739,19 +759,29 @@ class _PlatformAnalyticsInsightsScreenState extends State<PlatformAnalyticsInsig
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
                   color: metric.isGood
-                      ? (metric.trend == MetricTrend.up ? Colors.green[100] : Colors.red[100])
-                      : (metric.trend == MetricTrend.up ? Colors.red[100] : Colors.green[100]),
+                      ? (metric.trend == MetricTrend.up
+                          ? Colors.green[100]
+                          : Colors.red[100])
+                      : (metric.trend == MetricTrend.up
+                          ? Colors.red[100]
+                          : Colors.green[100]),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(
-                      metric.trend == MetricTrend.up ? Icons.trending_up : Icons.trending_down,
+                      metric.trend == MetricTrend.up
+                          ? Icons.trending_up
+                          : Icons.trending_down,
                       size: 12,
                       color: metric.isGood
-                          ? (metric.trend == MetricTrend.up ? Colors.green[600] : Colors.red[600])
-                          : (metric.trend == MetricTrend.up ? Colors.red[600] : Colors.green[600]),
+                          ? (metric.trend == MetricTrend.up
+                              ? Colors.green[600]
+                              : Colors.red[600])
+                          : (metric.trend == MetricTrend.up
+                              ? Colors.red[600]
+                              : Colors.green[600]),
                     ),
                     const SizedBox(width: 2),
                     Text(
@@ -760,8 +790,12 @@ class _PlatformAnalyticsInsightsScreenState extends State<PlatformAnalyticsInsig
                         fontSize: 10,
                         fontWeight: FontWeight.bold,
                         color: metric.isGood
-                            ? (metric.trend == MetricTrend.up ? Colors.green[600] : Colors.red[600])
-                            : (metric.trend == MetricTrend.up ? Colors.red[600] : Colors.green[600]),
+                            ? (metric.trend == MetricTrend.up
+                                ? Colors.green[600]
+                                : Colors.red[600])
+                            : (metric.trend == MetricTrend.up
+                                ? Colors.red[600]
+                                : Colors.green[600]),
                       ),
                     ),
                   ],
@@ -1086,7 +1120,8 @@ class _PlatformAnalyticsInsightsScreenState extends State<PlatformAnalyticsInsig
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: _getInsightCategoryColor(insight.category).withValues(alpha: 0.3),
+          color:
+              _getInsightCategoryColor(insight.category).withValues(alpha: 0.3),
         ),
         boxShadow: [
           BoxShadow(
@@ -1104,7 +1139,8 @@ class _PlatformAnalyticsInsightsScreenState extends State<PlatformAnalyticsInsig
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: _getInsightCategoryColor(insight.category).withValues(alpha: 0.1),
+                  color: _getInsightCategoryColor(insight.category)
+                      .withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
@@ -1499,7 +1535,8 @@ class _PlatformAnalyticsInsightsScreenState extends State<PlatformAnalyticsInsig
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Analytics Settings'),
-        content: const Text('Configure analytics preferences and data sources.'),
+        content:
+            const Text('Configure analytics preferences and data sources.'),
         actions: [
           TextButton(
             onPressed: () => context.pop(),
@@ -1562,7 +1599,8 @@ class _PlatformAnalyticsInsightsScreenState extends State<PlatformAnalyticsInsig
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Create Custom Alert'),
-        content: const Text('Configure custom performance alerts and thresholds.'),
+        content:
+            const Text('Configure custom performance alerts and thresholds.'),
         actions: [
           TextButton(
             onPressed: () => context.pop(),
@@ -1716,7 +1754,8 @@ class LineChartPainter extends CustomPainter {
 
     for (int i = 0; i < data.length; i++) {
       final x = (i / (data.length - 1)) * size.width;
-      final y = size.height - ((data[i].value - minValue) / valueRange) * size.height;
+      final y =
+          size.height - ((data[i].value - minValue) / valueRange) * size.height;
 
       if (i == 0) {
         path.moveTo(x, y);

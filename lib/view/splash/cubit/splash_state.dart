@@ -8,6 +8,56 @@ abstract class SplashState extends Equatable {
   List<Object?> get props => [];
 }
 
+/// Authentication-related states
+abstract class SplashAuthState extends SplashState {
+  const SplashAuthState();
+}
+
+/// State when checking authentication status
+class SplashAuthLoading extends SplashAuthState {
+  final String message;
+
+  const SplashAuthLoading({this.message = 'Checking authentication...'});
+
+  @override
+  List<Object?> get props => [message];
+}
+
+/// State when user is authenticated
+class SplashAuthAuthenticated extends SplashAuthState {
+  final UserModel userProfile;
+  final UserRole userRole;
+
+  const SplashAuthAuthenticated({
+    required this.userProfile,
+    required this.userRole,
+  });
+
+  @override
+  List<Object?> get props => [userProfile, userRole];
+
+  String get homeRoute => userRole.homeRoute;
+}
+
+/// State when user is not authenticated
+class SplashAuthUnauthenticated extends SplashAuthState {
+  const SplashAuthUnauthenticated();
+}
+
+/// State when authentication check fails
+class SplashAuthError extends SplashAuthState {
+  final String message;
+  final bool canRetry;
+
+  const SplashAuthError({
+    required this.message,
+    this.canRetry = true,
+  });
+
+  @override
+  List<Object?> get props => [message, canRetry];
+}
+
 /// Initial state when splash screen is first loaded
 class SplashInitial extends SplashState {
   const SplashInitial();
@@ -38,18 +88,31 @@ class SplashLoading extends SplashState {
 class SplashNavigationReady extends SplashState {
   final AppStateModel appState;
   final String nextRoute;
+  final UserModel? userProfile;
+  final UserRole? userRole;
 
   const SplashNavigationReady({
     required this.appState,
     required this.nextRoute,
+    this.userProfile,
+    this.userRole,
   });
 
   @override
-  List<Object?> get props => [appState, nextRoute];
+  List<Object?> get props => [appState, nextRoute, userProfile, userRole];
+
+  bool get isAuthenticated => userProfile != null;
+
+  String get targetRoute {
+    if (isAuthenticated && userRole != null) {
+      return userRole!.homeRoute;
+    }
+    return nextRoute;
+  }
 
   @override
   String toString() {
-    return 'SplashNavigationReady(nextRoute: $nextRoute, appState: $appState)';
+    return 'SplashNavigationReady(nextRoute: $nextRoute, targetRoute: $targetRoute, appState: $appState, isAuthenticated: $isAuthenticated)';
   }
 }
 

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:tailorapp/core/services/theme_manager.dart';
 import 'package:tailorapp/core/services/debug_logger.dart';
+import 'package:tailorapp/core/cubit/auth_cubit.dart';
 import 'package:tailorapp/view/splash/cubit/splash_cubit.dart';
 import 'package:tailorapp/view/splash/view-model/splash_view_model.dart';
 import 'package:tailorapp/view/splash/widgets/splash_loading_animation.dart';
@@ -166,9 +167,21 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
       DebugLogger.navigation(
         'SplashView: Navigation ready, waiting for minimum duration...',
       );
+      DebugLogger.navigation(
+        'SplashView: Target route: ${state.targetRoute} (authenticated: ${state.isAuthenticated})',
+      );
 
       // Ensure minimum splash duration before navigation
       _handleNavigation(context);
+    } else if (state is SplashAuthAuthenticated) {
+      DebugLogger.auth(
+        'SplashView: User authenticated as ${state.userRole.name}',
+      );
+    } else if (state is SplashAuthUnauthenticated) {
+      DebugLogger.auth('SplashView: User not authenticated');
+    } else if (state is SplashAuthError) {
+      DebugLogger.error('SplashView: Auth error: ${state.message}');
+      _showAuthErrorDialog(context, state);
     } else if (state is SplashError) {
       DebugLogger.error('SplashView: Error state received: ${state.message}');
       _showErrorDialog(context, state);
@@ -293,11 +306,31 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
         currentPhase: state.phase,
         isComplete: state.phase == InitializationPhase.ready,
       );
+    } else if (state is SplashAuthLoading) {
+      return const SplashProgressIndicator(
+        progress: 0.8,
+        currentPhase: InitializationPhase.checkingAuth,
+        isComplete: false,
+      );
+    } else if (state is SplashAuthAuthenticated) {
+      return const SplashProgressIndicator(
+        progress: 0.95,
+        currentPhase: InitializationPhase.finalizingSetup,
+        isComplete: false,
+      );
+    } else if (state is SplashAuthUnauthenticated) {
+      return const SplashProgressIndicator(
+        progress: 0.9,
+        currentPhase: InitializationPhase.loadingPreferences,
+        isComplete: false,
+      );
     } else if (state is SplashNavigationReady) {
       return const SplashProgressIndicator(
         progress: 1.0,
         isComplete: true,
       );
+    } else if (state is SplashAuthError) {
+      return _buildAuthErrorSection(context, state);
     } else if (state is SplashError) {
       return _buildErrorSection(context, state);
     } else {
@@ -390,6 +423,82 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
     );
   }
 
+  /// Build authentication error section
+  Widget _buildAuthErrorSection(BuildContext context, SplashAuthError state) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Auth error indicator
+        Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: 16.w,
+            vertical: 12.h,
+          ),
+          decoration: BoxDecoration(
+            gradient: ThemeManager.of(context).warningGradient.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(12.r),
+            border: Border.all(
+              color:
+                  ThemeManager.of(context).warningColor.withValues(alpha: 0.3),
+              width: 1,
+            ),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.account_circle_outlined,
+                size: 16.sp,
+                color: ThemeManager.of(context).warningColor,
+              ),
+              SizedBox(width: 8.w),
+              Expanded(
+                child: Text(
+                  'Authentication issue: ${state.message}',
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w500,
+                    color: ThemeManager.of(context).warningColor,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        // Retry button (if retryable)
+        if (state.canRetry) ...[
+          SizedBox(height: 12.h),
+          _buildRetryButton(context),
+        ],
+      ],
+    );
+  }
+
+  /// Show authentication error dialog
+  void _showAuthErrorDialog(BuildContext context, SplashAuthError state) {
+    if (!state.canRetry) {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => AlertDialog(
+          title: const Text('Authentication Error'),
+          content: Text(state.message),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                context.read<SplashCubit>().performFallbackNavigation(context);
+              },
+              child: const Text('Continue as Guest'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+
   /// Show error dialog for critical errors
   void _showErrorDialog(BuildContext context, SplashError state) {
     if (!state.canRetry) {
@@ -402,6 +511,7 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
           actions: [
             TextButton(
               onPressed: () {
+                Navigator.of(context).pop();
                 context.read<SplashCubit>().performFallbackNavigation(context);
               },
               child: Text(LocaleKeys.button_continue.tr()),
@@ -420,7 +530,9 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SplashCubit(),
+      create: (context) => SplashCubit(
+        authCubit: context.read<AuthCubit>(),
+      ),
       child: const SplashView(),
     );
   }

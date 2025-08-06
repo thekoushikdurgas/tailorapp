@@ -1,11 +1,10 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:tailorapp/app.dart';
 import 'package:tailorapp/core/cubit/theme_cubit.dart';
+import 'package:tailorapp/core/cubit/user_data_cubit.dart';
 import 'package:tailorapp/core/services/hive_service.dart';
 import 'package:tailorapp/core/localization/project_locales.dart';
 import 'package:tailorapp/core/services/service_locator.dart';
-import 'package:tailorapp/core/cubit/auth_cubit.dart';
-import 'package:tailorapp/core/services/auth_service.dart';
 import 'package:tailorapp/cubit_observer.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -16,17 +15,16 @@ part 'core/localization/localization.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize Supabase
+  // Initialize Supabase for database operations only
   await Supabase.initialize(
     url: SupabaseConfig.supabaseUrl,
     anonKey: SupabaseConfig.supabaseAnonKey,
   );
 
   await LocaleVariables._init();
-  await HiveService
-      .init(); // This replaces ThemeCaching.init() and IntroCaching.init()
+  await HiveService.init(); // This replaces ThemeCaching.init() and IntroCaching.init()
 
-  // Setup production services with authentication
+  // Setup production services - database only (no auth)
   await ServiceLocator.setupServiceLocator();
 
   Bloc.observer = CubitObserver();
@@ -42,9 +40,7 @@ Future<void> main() async {
             create: (context) => ThemeCubit(),
           ),
           BlocProvider(
-            create: (context) => AuthCubit(
-              authService: serviceLocator<AuthService>(),
-            ),
+            create: (context) => serviceLocator<UserDataCubit>(),
           ),
         ],
         child: const MyApp(),

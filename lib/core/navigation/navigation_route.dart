@@ -6,9 +6,10 @@ import 'package:tailorapp/product/enum/route_enum.dart';
 class NavigationRoute {
   NavigationRoute._();
 
-  /// Navigate to home page (role-based via AuthWrapper)
+  /// Navigate to home page (role-based - determined by authentication state)
   static void goHome(BuildContext context) {
-    context.go(RouteEnum.auth.rawValue);
+    // This will be handled by splash screen navigation logic
+    context.go(RouteEnum.splash.rawValue);
   }
 
   /// Navigate to introduction/onboarding

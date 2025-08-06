@@ -6,9 +6,9 @@ enum RouteEnum {
   languageSelection,
   auth,
   welcome,
-  login,
-  register,
-  forgotPassword,
+  // login,
+  // register,
+  // forgotPassword,
   unifiedAuth,
   universalSupport,
   notificationsCenter,
@@ -74,12 +74,12 @@ extension RouteEnumString on RouteEnum {
         return '/auth';
       case RouteEnum.welcome:
         return '/auth/welcome';
-      case RouteEnum.login:
-        return '/auth/login';
-      case RouteEnum.register:
-        return '/auth/register';
-      case RouteEnum.forgotPassword:
-        return '/auth/forgot-password';
+      // case RouteEnum.login:
+      //   return '/auth/login';
+      // case RouteEnum.register:
+      //   return '/auth/register';
+      // case RouteEnum.forgotPassword:
+      //   return '/auth/forgot-password';
       case RouteEnum.unifiedAuth:
         return '/unified-auth';
       case RouteEnum.universalSupport:

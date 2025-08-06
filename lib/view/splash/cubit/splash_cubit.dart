@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tailorapp/core/services/debug_logger.dart';
 import 'package:tailorapp/core/services/hive_service.dart';
+import 'package:tailorapp/core/cubit/auth_cubit.dart';
+import 'package:tailorapp/core/models/user_model.dart';
+import 'package:tailorapp/core/models/user_role.dart';
 import 'package:tailorapp/product/enum/route_enum.dart';
 import 'package:tailorapp/view/splash/model/splash_state_model.dart';
 
@@ -13,12 +16,17 @@ part 'splash_state.dart';
 ///
 /// **RESPONSIBILITIES:**
 /// - Service initialization and health checks
-/// - Authentication state validation
-/// - Navigation flow management
+/// - Authentication state validation and management
+/// - Role-based navigation flow management
 /// - Loading state updates
 /// - Error handling and recovery
+/// - Direct authentication without AuthWrapper
 class SplashCubit extends Cubit<SplashState> {
-  SplashCubit() : super(const SplashInitial());
+  final AuthCubit _authCubit;
+
+  SplashCubit({required AuthCubit authCubit})
+      : _authCubit = authCubit,
+        super(const SplashInitial());
 
   /// Initialize the splash screen and start the service initialization process
   Future<void> initializeSplash() async {
@@ -50,29 +58,13 @@ class SplashCubit extends Cubit<SplashState> {
   Future<void> _initializeServices() async {
     final phases = [
       (InitializationPhase.checkingStorage, 'Checking storage health...', 0.1),
-      (
-        InitializationPhase.setupPerformance,
-        'Setting up performance monitoring...',
-        0.2
-      ),
+      (InitializationPhase.setupPerformance, 'Setting up performance monitoring...', 0.2),
       (InitializationPhase.optimizingStartup, 'Optimizing startup...', 0.3),
-      (
-        InitializationPhase.optimizingImages,
-        'Optimizing image loading...',
-        0.4
-      ),
+      (InitializationPhase.optimizingImages, 'Optimizing image loading...', 0.4),
       (InitializationPhase.checkingAuth, 'Checking authentication...', 0.5),
       (InitializationPhase.validatingTokens, 'Validating tokens...', 0.6),
-      (
-        InitializationPhase.initializingHealth,
-        'Initializing health monitoring...',
-        0.7
-      ),
-      (
-        InitializationPhase.checkingConnectivity,
-        'Checking connectivity...',
-        0.8
-      ),
+      (InitializationPhase.initializingHealth, 'Initializing health monitoring...', 0.7),
+      (InitializationPhase.checkingConnectivity, 'Checking connectivity...', 0.8),
       (InitializationPhase.loadingPreferences, 'Loading preferences...', 0.9),
       (InitializationPhase.finalizingSetup, 'Finalizing setup...', 1.0),
     ];
@@ -171,7 +163,29 @@ class SplashCubit extends Cubit<SplashState> {
   /// Validate and refresh authentication if needed
   Future<void> _validateAndRefreshAuthentication() async {
     try {
-      // Add token validation logic here
+      DebugLogger.auth('SplashCubit: Validating authentication state...');
+
+      // Check if user is currently authenticated
+      final currentAuthState = _authCubit.state;
+
+      if (currentAuthState is AuthAuthenticated) {
+        DebugLogger.success('SplashCubit: User is authenticated');
+
+        // Validate token freshness if needed
+        if (HiveService.areTokensExpired()) {
+          DebugLogger.warning(
+            'SplashCubit: Tokens expired, attempting refresh...',
+          );
+          await _authCubit.retry();
+        }
+      } else if (currentAuthState is AuthUnauthenticated) {
+        DebugLogger.info('SplashCubit: User is not authenticated');
+      } else if (currentAuthState is AuthError) {
+        DebugLogger.error(
+          'SplashCubit: Authentication error: ${currentAuthState.message}',
+        );
+      }
+
       DebugLogger.info('SplashCubit: Authentication validation completed');
     } catch (e, stackTrace) {
       DebugLogger.error('SplashCubit: Authentication validation error: $e');
@@ -186,6 +200,10 @@ class SplashCubit extends Cubit<SplashState> {
     );
 
     try {
+      // Check authentication state first
+      emit(const SplashAuthLoading(message: 'Verifying authentication...'));
+      await _checkAuthenticationState();
+
       final appState = AppStateModel(
         isIntroWatched: HiveService.isIntroWatched(),
         isLanguageSelected: HiveService.isLanguageSelected(),
@@ -193,10 +211,39 @@ class SplashCubit extends Cubit<SplashState> {
         userData: HiveService.getUserDataSafe(),
       );
 
+      // Get current auth state
+      final authState = _authCubit.state;
+      UserModel? userProfile;
+      UserRole? userRole;
+
+      if (authState is AuthAuthenticated) {
+        userProfile = authState.userProfile;
+        userRole = authState.userRole;
+
+        emit(
+          SplashAuthAuthenticated(
+            userProfile: userProfile,
+            userRole: userRole,
+          ),
+        );
+      } else if (authState is AuthError) {
+        emit(
+          SplashAuthError(
+            message: 'Authentication failed: ${authState.message}',
+            canRetry: true,
+          ),
+        );
+        return;
+      } else {
+        emit(const SplashAuthUnauthenticated());
+      }
+
       emit(
         SplashNavigationReady(
           appState: appState,
           nextRoute: _determineNextRoute(appState),
+          userProfile: userProfile,
+          userRole: userRole,
         ),
       );
     } catch (e, stackTrace) {
@@ -212,36 +259,45 @@ class SplashCubit extends Cubit<SplashState> {
     }
   }
 
-  /// Determine the next route based on app state
+  /// Determine the next route based on app state and authentication
   String _determineNextRoute(AppStateModel appState) {
     DebugLogger.navigation('SplashCubit: Determining next route...');
 
+    // Check authentication state first
+    final authState = _authCubit.state;
+
+    if (authState is AuthAuthenticated) {
+      // User is authenticated - route to role-based home
+      final homeRoute = authState.userRole.homeRoute;
+      DebugLogger.navigation(
+        'SplashCubit: → ${authState.userRole.name} Dashboard ($homeRoute)',
+      );
+      return homeRoute;
+    }
+
+    // User is not authenticated - check onboarding status
+
+    // Step 1: Check intro completion status
+    if (!appState.isIntroWatched) {
+      DebugLogger.navigation(
+        'SplashCubit: → Introduction Screen (intro not completed)',
+      );
+      return RouteEnum.intro.rawValue;
+    }
+
+    // Step 2: Check language selection status
+    if (!appState.isLanguageSelected) {
+      DebugLogger.navigation(
+        'SplashCubit: → Language Selection (language not selected)',
+      );
+      return RouteEnum.languageSelection.rawValue;
+    }
+
+    // Step 3: User needs authentication
+    DebugLogger.navigation(
+      'SplashCubit: → Welcome Screen (authentication required)',
+    );
     return RouteEnum.welcome.rawValue;
-    // // Step 1: Check intro completion status
-    // if (!appState.isIntroWatched) {
-    //   DebugLogger.navigation(
-    //     'SplashCubit: → Introduction Screen (intro not completed)',
-    //   );
-    //   return RouteEnum.intro.rawValue;
-    // }
-
-    // // Step 2: Check language selection status
-    // if (!appState.isLanguageSelected) {
-    //   DebugLogger.navigation(
-    //     'SplashCubit: → Language Selection (language not selected)',
-    //   );
-    //   return RouteEnum.languageSelection.rawValue;
-    // }
-
-    // // Step 3: Check authentication status
-    // if (!appState.isLoggedIn) {
-    //   DebugLogger.navigation('SplashCubit: → Authentication (not logged in)');
-    //   return RouteEnum.welcome.rawValue;
-    // }
-
-    // // Step 4: User is authenticated - go to home
-    // DebugLogger.navigation('SplashCubit: → Home (authenticated user)');
-    // return RouteEnum.homePage.rawValue;
   }
 
   /// Navigate to the determined route
@@ -249,13 +305,17 @@ class SplashCubit extends Cubit<SplashState> {
     final currentState = state;
 
     if (currentState is SplashNavigationReady) {
+      final targetRoute = currentState.targetRoute;
+
       DebugLogger.navigation(
-        'SplashCubit: Navigating to: ${currentState.nextRoute}',
+        'SplashCubit: Navigating to: $targetRoute (isAuthenticated: ${currentState.isAuthenticated})',
       );
 
       try {
-        context.go(currentState.nextRoute);
-        DebugLogger.success('SplashCubit: Navigation successful');
+        context.go(targetRoute);
+        DebugLogger.success(
+          'SplashCubit: Navigation successful to $targetRoute',
+        );
       } catch (e, stackTrace) {
         DebugLogger.error('SplashCubit: Navigation failed: $e');
         DebugLogger.debug('SplashCubit: Stack trace: $stackTrace');
@@ -275,6 +335,19 @@ class SplashCubit extends Cubit<SplashState> {
     DebugLogger.navigation('SplashCubit: Performing fallback navigation...');
 
     try {
+      // Check authentication state first
+      final authState = _authCubit.state;
+
+      if (authState is AuthAuthenticated) {
+        // User is authenticated, go to their home
+        final homeRoute = authState.userRole.homeRoute;
+        DebugLogger.navigation(
+          'SplashCubit: Fallback → $homeRoute (authenticated)',
+        );
+        context.go(homeRoute);
+        return;
+      }
+
       // Try to navigate based on basic state checks
       if (!HiveService.isIntroWatched()) {
         DebugLogger.navigation('SplashCubit: Fallback → Introduction Screen');
@@ -300,6 +373,30 @@ class SplashCubit extends Cubit<SplashState> {
       }
     }
   }
+
+  /// Check authentication state explicitly
+  Future<void> _checkAuthenticationState() async {
+    DebugLogger.auth('SplashCubit: Checking authentication state...');
+
+    try {
+      // Trigger auth cubit to check current state
+      await _authCubit.retry();
+
+      // Wait a moment for state to update
+      await Future.delayed(const Duration(milliseconds: 200));
+    } catch (e) {
+      DebugLogger.error('SplashCubit: Authentication state check failed: $e');
+    }
+  }
+
+  /// Get current authentication state
+  AuthState get authState => _authCubit.state;
+
+  /// Check if user is currently authenticated
+  bool get isAuthenticated => _authCubit.isAuthenticated;
+
+  /// Get current user profile if authenticated
+  UserModel? get currentUserProfile => _authCubit.currentUserProfile;
 
   /// Retry initialization after an error
   Future<void> retryInitialization() async {

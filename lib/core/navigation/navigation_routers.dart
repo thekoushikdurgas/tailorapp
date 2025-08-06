@@ -5,10 +5,8 @@ import 'package:tailorapp/view/admin/view/platform_analytics_insights_screen.dar
 import 'package:tailorapp/view/admin/view/super_admin_dashboard_screen.dart';
 import 'package:tailorapp/view/admin/view/user_management_roles_screen.dart';
 import 'package:tailorapp/view/ai_suggestions/view/ai_suggestions_page.dart';
-import 'package:tailorapp/view/auth/view/auth_wrapper.dart';
-import 'package:tailorapp/view/auth/view/forgot_password_page.dart';
-import 'package:tailorapp/view/auth/view/login_page.dart';
-import 'package:tailorapp/view/auth/view/register_page.dart';
+
+//
 import 'package:tailorapp/view/auth/view/welcome.dart';
 import 'package:tailorapp/view/common/view/notifications_center_screen.dart';
 import 'package:tailorapp/view/common/view/universal_support_screen.dart';
@@ -78,27 +76,19 @@ class NavigationRouters {
         builder: (context, state) => const SplashScreen(),
       ),
 
-      // Auth routes
-      GoRoute(
-        path: RouteEnum.auth.rawValue,
-        builder: (context, state) => const AuthWrapper(),
-      ),
+      // // Auth routes
+      // GoRoute(
+      //   path: RouteEnum.auth.rawValue,
+      //   builder: (context, state) => const AuthWrapper(),
+      // ),
       GoRoute(
         path: RouteEnum.welcome.rawValue,
         builder: (context, state) => const WelcomePage(),
       ),
-      GoRoute(
-        path: RouteEnum.login.rawValue,
-        builder: (context, state) => const LoginPage(),
-      ),
-      GoRoute(
-        path: RouteEnum.register.rawValue,
-        builder: (context, state) => const RegisterPage(),
-      ),
-      GoRoute(
-        path: RouteEnum.forgotPassword.rawValue,
-        builder: (context, state) => const ForgotPasswordPage(),
-      ),
+      // GoRoute(
+      //   path: RouteEnum.forgotPassword.rawValue,
+      //   builder: (context, state) => const ForgotPasswordPage(),
+      // ),
 
       // Language Selection route
       GoRoute(

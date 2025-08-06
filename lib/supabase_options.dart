@@ -1,41 +1,29 @@
 // Supabase configuration for TailorApp
-// Replace these with your actual Supabase project URL and anon key
-import 'package:flutter/foundation.dart'
-    show defaultTargetPlatform, kIsWeb, TargetPlatform;
+// Database-only configuration without authentication
 
-/// Configuration class for Supabase connection
+/// Configuration class for Supabase database connection
+///
+/// To set up your Supabase project:
+/// 1. Go to https://supabase.com and create a new project
+/// 2. Get your project URL and anon key from Settings > API
+/// 3. Replace the values below with your actual credentials
+/// 4. Run the SQL schema from supabase_database_schema.sql
 class SupabaseConfig {
-  // Supabase project URL
+  // TODO: Replace with your actual Supabase project URL
   static const String supabaseUrl = 'https://qpyrgcqpqxoaarifogfx.supabase.co';
 
-  // Supabase anon key
+  // TODO: Replace with your actual Supabase anon key
   static const String supabaseAnonKey =
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFweXJnY3FwcXhvYWFyaWZvZ2Z4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI4NjYxMjgsImV4cCI6MjA2ODQ0MjEyOH0.g9sF7Dz6i9jmcpTpzj8mzOIixNpJ_ZTJ7ExjEpT1hco';
 
-  /// Deep link configuration for authentication redirects
-  static String get redirectUrl {
-    if (kIsWeb) {
-      return 'https://your-app-domain.com/auth/callback';
-    }
+  // Database configuration
+  static const String defaultSchema = 'public';
 
-    switch (defaultTargetPlatform) {
-      case TargetPlatform.android:
-        return 'com.durgas.tailorapp://auth/callback';
-      case TargetPlatform.iOS:
-        return 'com.durgas.tailorapp://auth/callback';
-      case TargetPlatform.macOS:
-        return 'com.durgas.tailorapp://auth/callback';
-      case TargetPlatform.windows:
-        return 'com.durgas.tailorapp://auth/callback';
-      case TargetPlatform.linux:
-        throw UnsupportedError(
-          'SupabaseConfig has not been configured for linux - '
-          'you can configure this based on your app requirements.',
-        );
-      default:
-        throw UnsupportedError(
-          'SupabaseConfig is not supported for this platform.',
-        );
-    }
-  }
+  // Storage bucket names
+  static const String avatarsBucket = 'avatars';
+  static const String garmentImagesBucket = 'garment-images';
+  static const String fabricSamplesBucket = 'fabric-samples';
+  static const String patternFilesBucket = 'pattern-files';
+  static const String orderDocumentsBucket = 'order-documents';
+  static const String chatAttachmentsBucket = 'chat-attachments';
 }
